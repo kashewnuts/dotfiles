@@ -1,0 +1,30 @@
+" 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
+"colorscheme evening " (GUI使用時)
+" 画面のカラーテーマを変更する (次行の先頭の " を削除すれば有効になる)
+colorscheme adrian" (GUI使用時)
+
+hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue " 全角スペースの定義
+match ZenkakuSpace /　/       " 全角スペースの色を変更
+
+" フォント設定:
+"set guifont=ＭＳ_ゴシック:h11:cSHIFTJIS
+
+" Hack #120: gVim でウィンドウの位置とサイズを記憶する
+let g:save_window_file = expand('~/.vimwinpos')
+augroup SaveWindow
+  autocmd!
+  autocmd VimLeavePre * call s:save_window()
+  function! s:save_window()
+    let options = [
+      ¥ 'set columns=' . &columns,
+      ¥ 'set lines=' . &lines,
+      ¥ 'winpos ' . getwinposx() . ' ' . getwinposy(),
+      ¥ ]
+    call writefile(options, g:save_window_file)
+  endfunction
+augroup END
+
+if filereadable(g:save_window_file)
+  execute 'source' g:save_window_file
+endif
+
