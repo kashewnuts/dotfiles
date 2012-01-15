@@ -14,21 +14,23 @@ command! -bar -bang -nargs=? -complete=file Scouter
 set nocompatible
 filetype off
 
-set rtp+=~/dotfiles/vimfiles/vundle.git/
-call vundle#rc()
+if has('vim_starting')
+    set runtimepath+=~/dotfiles/vimfiles/neobundle.vim/
+    call neobundle#rc(expand('~/.bundle'))
+endif
 
 "githubにあるプラグイン
-Bundle 'basyura/bitly.vim'
-Bundle 'basyura/twibill.vim'
-Bundle 'basyura/TweetVim'
-Bundle 'h1mesuke/unite-outline'
-Bundle 'mattn/webapi-vim'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimshell'
-Bundle 'thinca/vim-quickrun'
-Bundle 'thinca/vim-ref'
-Bundle 'tyru/open-browser.vim'
+NeoBundle 'basyura/bitly.vim'
+NeoBundle 'basyura/twibill.vim'
+NeoBundle 'basyura/TweetVim'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimshell'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'tyru/open-browser.vim'
 "Bundle 'mrtazz/simplenote.vim'
 
 filetype plugin indent on
