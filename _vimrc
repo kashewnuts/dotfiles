@@ -58,3 +58,5 @@ let g:quickrun_config={'*': {'split': ''}} " 横分割をするようにする
 " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
 set splitbelow
 set splitright
+
+set ambiwidth=double "文脈依存の文字幅を正常に表示する
