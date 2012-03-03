@@ -1,4 +1,4 @@
-"Vundle設定
+"NeoBundle設定
 set nocompatible
 filetype off
 
