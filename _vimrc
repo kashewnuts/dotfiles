@@ -1,15 +1,3 @@
-"Vim戦闘力計測
-function! Scouter(file, ...)
-  let pat = '^\s*$\|^\s*"'
-  let lines = readfile(a:file)
-  if !a:0 || !a:1
-    let lines = split(substitute(join(lines, "\n"), '\n\s*\\', '', 'g'), "\n")
-  endif
-  return len(filter(lines,'v:val !~ pat'))
-endfunction
-command! -bar -bang -nargs=? -complete=file Scouter
-\        echo Scouter(empty(<q-args>) ? $MYVIMRC : expand(<q-args>), <bang>0)
-
 "Vundle設定
 set nocompatible
 filetype off
@@ -28,14 +16,18 @@ NeoBundle 'mattn/webapi-vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimproc'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'thinca/vim-ref'
+NeoBundle 'Shougo/vinarise'
 NeoBundle 'tyru/open-browser.vim'
-"Bundle 'mrtazz/simplenote.vim'
 
 filetype plugin indent on
 
+syntax on "シンタックスハイライトを有効にする
 set encoding=utf8 "デフォルトの文字コード
+set ambiwidth=double "文脈依存の文字幅を正常に表示する
 set expandtab "タブをスペースに展開する(noexpandtab:展開しない)
 set number " 行番号を非表示 (nonumber:非表示)
 set tabstop=4 " タブの画面上での幅
@@ -59,4 +51,22 @@ let g:quickrun_config={'*': {'split': ''}} " 横分割をするようにする
 set splitbelow
 set splitright
 
-set ambiwidth=double "文脈依存の文字幅を正常に表示する
+hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue " 全角スペースの定義
+match ZenkakuSpace /　/       " 全角スペースの色を変更
+
+"ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
+nnoremap <silent> <S-Left>  :5wincmd <<CR>
+nnoremap <silent> <S-Right> :5wincmd ><CR>
+nnoremap <silent> <S-Up>    :5wincmd -<CR>
+nnoremap <silent> <S-Down>  :5wincmd +<CR>
+
+"検索結果に移動したとき、その位置を画面の中央にします。
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" vimprocを使用できるようにします。
+let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/proc.so'
