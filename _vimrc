@@ -62,6 +62,32 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+"()を自動補完
+inoremap ( ()<ESC>i
+inoremap <expr> ) ClosePair(')')
+
+"{}を自動補完
+inoremap { {}<ESC>i
+inoremap <expr> } ClosePair('}')
+
+"[]を自動補完
+inoremap [ []<ESC>i
+inoremap <expr> ] ClosePair(']')
+
+"<>を自動補完
+inoremap < <><ESC>i
+inoremap <expr> > ClosePair('>')
+
+" pair close checker.
+" from othree vimrc ( http://github.com/othree/rc/blob/master/osx/.vimrc )
+function ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endf
+
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd FileType python :inoremap # X#
 autocmd FileType python :set textwidth=80 "桁数の制限
