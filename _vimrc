@@ -13,6 +13,7 @@ NeoBundle 'basyura/twibill.vim'
 NeoBundle 'basyura/TweetVim'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'mattn/webapi-vim'
+NeoBundle 'osyo-manga/neocomplcache-clang_complete'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimshell'
@@ -22,6 +23,9 @@ NeoBundle 'thinca/vim-guicolorscheme'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'Shougo/vinarise'
 NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle 'vim-scripts/c.vim'
+
 
 filetype plugin indent on
 
@@ -62,21 +66,21 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-"()を自動補完
-inoremap ( ()<ESC>i
-inoremap <expr> ) ClosePair(')')
-
-"{}を自動補完
-inoremap { {}<ESC>i
-inoremap <expr> } ClosePair('}')
-
-"[]を自動補完
-inoremap [ []<ESC>i
-inoremap <expr> ] ClosePair(']')
-
-"<>を自動補完
-inoremap < <><ESC>i
-inoremap <expr> > ClosePair('>')
+""()を自動補完
+"inoremap ( ()<ESC>i
+"inoremap <expr> ) ClosePair(')')
+"
+""{}を自動補完
+"inoremap { {}<ESC>i
+"inoremap <expr> } ClosePair('}')
+"
+""[]を自動補完
+"inoremap [ []<ESC>i
+"inoremap <expr> ] ClosePair(']')
+"
+""<>を自動補完
+"inoremap < <><ESC>i
+"inoremap <expr> > ClosePair('>')
 
 " pair close checker.
 " from othree vimrc ( http://github.com/othree/rc/blob/master/osx/.vimrc )
@@ -105,3 +109,11 @@ let g:quickrun_config={'*': {'split': ''}} " 横分割をするようにする
 " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
 set splitbelow
 set splitright
+
+" neocomplcache-clang_complete が正しく動作するために必要な各プラグインの設定
+
+" neocomplcache
+let g:neocomplcache_force_overwrite_completefunc=1
+
+" clang_complete
+let g:clang_complete_auto=1

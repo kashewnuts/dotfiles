@@ -41,8 +41,12 @@ highlight Normal                  guibg=Black      guifg=Green
 highlight Cursor                  guibg=Grey70     guifg=White
 "highlight NonText                 guibg=Grey80
 highlight NonText                 guibg=black
-highlight StatusLine     gui=bold guibg=DarkGrey   guifg=Orange
-highlight StatusLineNC            guibg=DarkGrey   guifg=Orange
+highlight StatusLine     gui=bold guibg=LightGrey   guifg=Orange
+"highlight StatusLine     gui=bold guibg=Black   guifg=Orange
+"highlight StatusLine     gui=bold guibg=DarkGrey   guifg=Orange
+highlight StatusLineNC            guibg=LightGrey   guifg=Orange
+"highlight StatusLineNC            guibg=Black   guifg=Orange
+"highlight StatusLineNC            guibg=DarkGrey   guifg=Orange
 
 highlight Comment    term=bold      ctermfg=LightGrey                  guifg=#d1ddff
 highlight Constant   term=underline ctermfg=White                      guifg=#ffa0a0
