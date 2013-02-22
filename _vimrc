@@ -1,4 +1,6 @@
+"--------------------------------------------------
 "NeoBundle設定
+"--------------------------------------------------
 set nocompatible
 filetype off
 
@@ -7,27 +9,35 @@ if has('vim_starting')
     call neobundle#rc(expand('~/.bundle'))
 endif
 
+" pathogen互換機能
+NeoBundleLocal ~/.vim/bundle_manual
+
+"--------------------------------------------------
 "githubにあるプラグイン
-"NeoBundle 'basyura/bitly.vim'
-"NeoBundle 'basyura/twibill.vim'
-"NeoBundle 'basyura/TweetVim'
-"NeoBundle 'h1mesuke/unite-outline'
-"NeoBundle 'mattn/webapi-vim'
+"--------------------------------------------------
+NeoBundle 'jmcantrell/vim-virtualenv'
+"NeoBundle 'lambdalisue/vim-django-support'
 "NeoBundle 'osyo-manga/neocomplcache-clang_complete'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vimproc'
+"NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'cygwin'  : 'make -f make_cygwin.mak',
+      \     'mac'     : 'make -f make_mac.mak',
+      \     'unix'    : 'make -f make_unix.mak',
+      \    },
+      \ }
 NeoBundle 'thinca/vim-quickrun'
-"NeoBundle 'thinca/vim-guicolorscheme'
 "NeoBundle 'thinca/vim-ref'
-NeoBundle 'Shougo/vinarise'
-"NeoBundle 'tyru/open-browser.vim'
+"NeoBundle 'Shougo/vinarise'
 "NeoBundle 'Rip-Rip/clang_complete'
 "NeoBundle 'vim-scripts/c.vim'
 
+"--------------------------------------------------
+" common
+"--------------------------------------------------
 filetype plugin indent on
-
 syntax on "シンタックスハイライトを有効にする
 set encoding=utf8 "デフォルトの文字コード
 set ambiwidth=double "文脈依存の文字幅を正常に表示する
@@ -45,7 +55,7 @@ set backupdir=$HOME/vimbackup "バックアップファイルを作るディレ�
 set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
 
 autocmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
-"autocmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
+autocmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
 
 " 全角スペースの定義
 hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue
@@ -57,7 +67,7 @@ nnoremap <silent> <S-Right> :5wincmd ><CR>
 nnoremap <silent> <S-Up>    :5wincmd -<CR>
 nnoremap <silent> <S-Down>  :5wincmd +<CR>
 
-"検索結果に移動したとき、その位置を画面の中央にします。
+"検索結果に移動したとき、その位置を画面の中央にする。
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
@@ -65,8 +75,10 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+"--------------------------------------------------
 " pair close checker.
 " from othree vimrc ( http://github.com/othree/rc/blob/master/osx/.vimrc )
+"--------------------------------------------------
 function ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
         return "\<Right>"
@@ -80,32 +92,46 @@ autocmd FileType python :inoremap # X#
 autocmd FileType python :set textwidth=80 "桁数の制限
 autocmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
 
-" 1 ページあたりのツイート取得件数
-let g:tweetvim_tweet_per_page = 50
-" タイムラインにリツイートを含める
-let g:tweetvim_include_rts    = 1
-" ツイート時間の表示・非表示設定 (少しでも表示時間を速くしたい場合)
-let g:tweetvim_display_time   = 1
+"--------------------------------------------------
+" jedi設定
+"--------------------------------------------------
+let g:jedi#auto_initialization = 1
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#rename_command = "<leader>R"
+let g:jedi#popup_on_dot = 1
+autocmd FileType python let b:did_ftplugin = 1
 
-"let g:neocomplcache_enable_at_startup = 1 "neocomplecacheを有効化
 
+"--------------------------------------------------
+" IndentGuides設定
+"--------------------------------------------------
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#121212 ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626 ctermbg=235
+
+"--------------------------------------------------
+" quickrun設定
+"--------------------------------------------------
 let g:quickrun_config={'*': {'split': ''}} " 横分割をするようにする
 " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
 set splitbelow
 set splitright
 
-" neocomplcache-clang_complete が正しく動作するために必要な各プラグインの設定
+"" neocomplcache-clang_complete が正しく動作するために必要な各プラグインの設定
 
-" neocomplcache
-let g:neocomplcache_force_overwrite_completefunc=1
+"" neocomplcache
+"let g:neocomplcache_force_overwrite_completefunc=1
 
-" clang_complete
-let g:clang_complete_auto=1
+"" clang_complete
+"let g:clang_complete_auto=1
 
-"autocmd BufRead /tmp/crontab.* :set nobackup nowritebackup
-"
+autocmd BufRead /tmp/crontab.* :set nobackup nowritebackup
 
-"---------- neocomplecache設定 ----------
+
+"--------------------------------------------------
+"neocomplecache設定
+"--------------------------------------------------
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0

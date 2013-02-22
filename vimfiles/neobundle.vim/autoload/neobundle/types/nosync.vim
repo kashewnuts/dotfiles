@@ -1,7 +1,7 @@
 "=============================================================================
-" FILE: neobundle/log.vim
+" FILE: nosync.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 04 Nov 2011.
+" Last Modified: 23 Oct 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,19 +27,26 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! unite#sources#neobundle_log#define() "{{{
-  return s:source
+function! neobundle#types#nosync#define() "{{{
+  return s:type
 endfunction"}}}
 
-let s:source = {
-      \ 'name' : 'neobundle/log',
-      \ 'description' : 'print previous neobundle install logs',
+let s:type = {
+      \ 'name' : 'nosync',
       \ }
 
-function! s:source.gather_candidates(args, context) "{{{
-  return map(copy(neobundle#installer#get_log()), "{
-        \ 'word' : v:val,
-        \ }")
+function! s:type.detect(path, opts) "{{{
+  " No auto detect.
+  return {}
+endfunction"}}}
+function! s:type.get_sync_command(bundle) "{{{
+  return ''
+endfunction"}}}
+function! s:type.get_revision_number_command(bundle) "{{{
+  return ''
+endfunction"}}}
+function! s:type.get_revision_lock_command(bundle) "{{{
+  return ''
 endfunction"}}}
 
 let &cpo = s:save_cpo

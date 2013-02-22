@@ -1,7 +1,7 @@
 "=============================================================================
-" FILE: neobundle/log.vim
-" AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 04 Nov 2011.
+" FILE: syntax/recipe.vim
+" AUTHOR: Shougo Matsushita <Shougo.Matsu@gmail.com>
+" Last Modified: 15 Sep 2010
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,22 +27,31 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! unite#sources#neobundle_log#define() "{{{
-  return s:source
-endfunction"}}}
+if version < 700
+  syntax clear
+elseif exists('b:current_syntax')
+  finish
+endif
 
-let s:source = {
-      \ 'name' : 'neobundle/log',
-      \ 'description' : 'print previous neobundle install logs',
-      \ }
+syntax region  recipeString    start=+"+  skip=+\\\\\|\\"+  end=+"+  contains=recipeEscape
+syntax region  recipeString    start=+'+  skip=+\\\\\|\\"+  end=+'+
 
-function! s:source.gather_candidates(args, context) "{{{
-  return map(copy(neobundle#installer#get_log()), "{
-        \ 'word' : v:val,
-        \ }")
-endfunction"}}}
+syntax match   recipeEscape    '\\["\\/bfnrt]' contained
+syntax match   recipeEscape    '\\u\x\{4}' contained
+
+syntax match   recipeNumber    '-\?\<\%(0\|[1-9]\d*\)\%(\.\d\+\)\?\>'
+
+syntax match   recipeBraces    '[{}\[\]]'
+syntax match   recipeComment   '^\s*#.*$'
+
+
+highlight def link recipeString             String
+highlight def link recipeEscape             Special
+highlight def link recipeNumber             Number
+highlight def link recipeBraces             Operator
+highlight def link recipeComment            Comment
+
+let b:current_syntax = 'recipe'
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-
-" vim: foldmethod=marker

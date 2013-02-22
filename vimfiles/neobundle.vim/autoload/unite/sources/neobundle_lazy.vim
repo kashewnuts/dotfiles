@@ -1,7 +1,7 @@
 "=============================================================================
-" FILE: neobundle/log.vim
+" FILE: neobundle_lazy.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 04 Nov 2011.
+" Last Modified: 30 Aug 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,20 +27,49 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! unite#sources#neobundle_log#define() "{{{
+function! unite#sources#neobundle_lazy#define() "{{{
   return s:source
 endfunction"}}}
 
 let s:source = {
-      \ 'name' : 'neobundle/log',
-      \ 'description' : 'print previous neobundle install logs',
+      \ 'name' : 'neobundle/lazy',
+      \ 'description' : 'candidates from lazy bundles',
+      \ 'action_table' : {},
+      \ 'default_action' : 'source',
       \ }
 
 function! s:source.gather_candidates(args, context) "{{{
-  return map(copy(neobundle#installer#get_log()), "{
-        \ 'word' : v:val,
-        \ }")
+  let _ = []
+  for bundle in filter(copy(neobundle#config#get_neobundles()),
+        \ '!neobundle#config#is_sourced(v:val.name)')
+    let name = substitute(bundle.orig_name,
+        \  '^\%(https\?\|git\)://\%(github.com/\)\?', '', '')
+    let dict = {
+        \ 'word' : name,
+        \ 'kind' : 'neobundle',
+        \ 'action__path' : bundle.path,
+        \ 'action__directory' : bundle.path,
+        \ 'action__bundle' : bundle,
+        \ 'action__bundle_name' : bundle.name,
+        \ 'source__uri' : bundle.uri,
+        \ }
+    call add(_, dict)
+  endfor
+
+  return _
 endfunction"}}}
+
+" Actions "{{{
+let s:source.action_table.source = {
+      \ 'description' : 'source bundles',
+      \ 'is_selectable' : 1,
+      \ 'is_invalidate_cache' : 1,
+      \ }
+function! s:source.action_table.source.func(candidates) "{{{
+  call call('neobundle#config#source',
+        \ map(copy(a:candidates), 'v:val.action__bundle_name'))
+endfunction"}}}
+"}}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

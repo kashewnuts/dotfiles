@@ -1,7 +1,7 @@
 "=============================================================================
-" FILE: neobundle/log.vim
+" FILE: svn.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 04 Nov 2011.
+" Last Modified: 23 Oct 2012.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,19 +27,55 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! unite#sources#neobundle_log#define() "{{{
-  return s:source
+function! neobundle#types#svn#define() "{{{
+  return s:type
 endfunction"}}}
 
-let s:source = {
-      \ 'name' : 'neobundle/log',
-      \ 'description' : 'print previous neobundle install logs',
+let s:type = {
+      \ 'name' : 'svn',
       \ }
 
-function! s:source.gather_candidates(args, context) "{{{
-  return map(copy(neobundle#installer#get_log()), "{
-        \ 'word' : v:val,
-        \ }")
+function! s:type.detect(path, opts) "{{{
+  let type = ''
+
+  if a:path =~# '\<\%(file\|https\?\|svn\)://'
+        \ && a:path =~? '[/.]svn[/.]'
+    let uri = a:path
+    let name = split(uri, '/')[-1]
+
+    let type = 'svn'
+  endif
+
+  return type == '' ?  {} :
+        \ { 'name': name, 'uri': uri, 'type' : type }
+endfunction"}}}
+function! s:type.get_sync_command(bundle) "{{{
+  if !executable('svn')
+    return 'E: svn command is not installed.'
+  endif
+
+  if !isdirectory(a:bundle.path)
+    let cmd = 'svn checkout'
+    let cmd .= printf(' %s "%s"', a:bundle.uri, a:bundle.path)
+  else
+    let cmd = 'svn up'
+  endif
+
+  return cmd
+endfunction"}}}
+function! s:type.get_revision_number_command(bundle) "{{{
+  if !executable('svn')
+    return ''
+  endif
+
+  return 'svn info'
+endfunction"}}}
+function! s:type.get_revision_lock_command(bundle) "{{{
+  if !executable('svn') || a:bundle.rev == ''
+    return ''
+  endif
+
+  return 'svn up -r ' . a:bundle.rev
 endfunction"}}}
 
 let &cpo = s:save_cpo

@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: neobundle/install.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
-" Last Modified: 06 Jan 2012.
+" Last Modified: 02 Feb 2013.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
@@ -27,78 +27,83 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! unite#sources#neobundle_install#define()"{{{
-  return unite#util#has_vimproc() ? s:source : {}
+function! unite#sources#neobundle_install#define() "{{{
+  return [s:source_install, s:source_update]
 endfunction"}}}
 
-let s:source = {
+let s:source_install = {
       \ 'name' : 'neobundle/install',
       \ 'description' : 'install bundles',
       \ 'hooks' : {},
       \ }
 
-function! s:source.hooks.on_init(args, context)"{{{
-  let bundle_names = filter(copy(a:args), 'v:val != "!"')
-  let a:context.source__bundles = empty(bundle_names) ?
-        \ neobundle#config#get_neobundles() :
-        \ neobundle#config#search(bundle_names)
-  let a:context.source__synced_bundles = []
+function! s:source_install.hooks.on_init(args, context) "{{{
+  let bundle_names = filter(copy(a:args), "v:val != '!'")
   let a:context.source__bang =
         \ index(a:args, '!') >= 0 || !empty(bundle_names)
-  let a:context.source__number = 0
-  let a:context.source__process = {}
-  let a:context.source__output = ''
+  let a:context.source__not_fuzzy = 0
 
-  if !a:context.source__bang
-    let a:context.source__bundles = filter(copy(a:context.source__bundles),
-          \ "!isdirectory(neobundle#util#expand(v:val.path))")
-  endif
+  call s:init(a:context, bundle_names)
 
-  let a:context.source__max_bundles =
-        \ len(a:context.source__bundles)
-
-  call neobundle#installer#clear_log()
-endfunction"}}}
-function! s:source.hooks.on_close(args, context)"{{{
-  if !empty(a:context.source__process)
-    call a:context.source__process.waitpid()
-  endif
-endfunction"}}}
-
-function! s:source.gather_candidates(args, context)"{{{
   if empty(a:context.source__bundles)
     let a:context.is_async = 0
     call neobundle#installer#log(
           \ '[neobundle/install] Bundles not found.', 1)
+    call neobundle#installer#log(
+          \ '[neobundle/install] You may use wrong bundle name.', 1)
   endif
-  return []
 endfunction"}}}
 
-function! s:source.async_gather_candidates(args, context)"{{{
-  if !empty(a:context.source__process)
-    call s:check_output(a:context)
-    return []
+function! s:source_install.hooks.on_close(args, context) "{{{
+  if !empty(a:context.source__processes)
+    for process in a:context.source__processes
+      call process.proc.waitpid()
+    endfor
   endif
+endfunction"}}}
 
+function! s:source_install.async_gather_candidates(args, context) "{{{
   if a:context.source__number < a:context.source__max_bundles
-    call s:sync(
-          \ a:context.source__bundles[a:context.source__number],
-          \ a:context, 0)
+    while a:context.source__number < a:context.source__max_bundles
+        \ && len(a:context.source__processes) <
+        \      g:neobundle#install_max_processes
+      call neobundle#installer#sync(
+            \ a:context.source__bundles[a:context.source__number],
+            \ a:context, 1)
+    endwhile
+  endif
+
+  if !empty(a:context.source__processes)
+    for process in a:context.source__processes
+      call neobundle#installer#check_output(a:context, process, 1)
+    endfor
+
+    " Filter eof processes.
+    call filter(a:context.source__processes, '!v:val.eof')
+
     return []
   endif
 
+  let messages = []
   if empty(a:context.source__synced_bundles)
-    let messages = ['[neobundle/install] No new bundles installed.']
+    let messages += ['[neobundle/install] No new bundles installed.']
   else
-    let messages = ['[neobundle/install] Installed bundles:']
+    let messages += ['[neobundle/install] Installed/Updated bundles:']
           \ + map(copy(a:context.source__synced_bundles),
           \        'v:val.name')
   endif
 
+  if !empty(a:context.source__errored_bundles)
+    let messages += ['[neobundle/install] Errored bundles:']
+          \ + map(copy(a:context.source__errored_bundles),
+          \        'v:val.name')
+    call neobundle#installer#log(
+          \ 'Please read error message log by :message command.')
+  endif
+
   call neobundle#installer#log(messages, 1)
-  call neobundle#installer#helptags(
+  call neobundle#installer#update(
         \ a:context.source__synced_bundles)
-  call neobundle#config#reload(a:context.source__synced_bundles)
 
   let a:context.is_async = 0
 
@@ -107,80 +112,59 @@ function! s:source.async_gather_candidates(args, context)"{{{
   return []
 endfunction"}}}
 
-function! s:source.complete(args, context, arglead, cmdline, cursorpos)"{{{
-    return ['!'] + map(neobundle#config#get_neobundles(), 'v:val.name')
+function! s:source_install.complete(args, context, arglead, cmdline, cursorpos) "{{{
+  return ['!'] +
+        \ neobundle#complete_bundles(a:arglead, a:cmdline, a:cursorpos)
 endfunction"}}}
 
-function! s:sync(bundle, context, is_revision)
-  let cwd = getcwd()
+let s:source_update = deepcopy(s:source_install)
+let s:source_update.name = 'neobundle/update'
+let s:source_update.description = 'update bundles'
 
-  let [cmd, message] =
-        \ neobundle#installer#get_{a:is_revision ? 'revision' : 'sync'}_command(
-        \ a:context.source__bang, a:bundle,
-        \ a:context.source__number+1, a:context.source__max_bundles)
-  call neobundle#installer#log('[neobundle/install] ' . message, 1)
+function! s:source_update.hooks.on_init(args, context) "{{{
+  let a:context.source__bang =
+        \ index(a:args, 'all') >= 0 ? 2 : 1
+  let a:context.source__not_fuzzy = index(a:args, '!') >= 0
+  let bundle_names = filter(copy(a:args), "v:val !=# 'all'")
+  call s:init(a:context, bundle_names)
+endfunction"}}}
 
-  if cmd == ''
-    " Skipped.
-    let a:context.source__process = {}
-    let a:context.source__output = ''
-    let a:context.source__number += 1
-    return
+function! s:init(context, bundle_names)
+  let a:context.source__synced_bundles = []
+  let a:context.source__errored_bundles = []
+
+  let a:context.source__processes = []
+
+  let a:context.source__number = 0
+
+  let a:context.source__bundles = !a:context.source__bang ?
+        \ neobundle#get_not_installed_bundles(a:bundle_names) :
+        \ empty(a:bundle_names) ?
+        \ neobundle#config#get_neobundles() :
+        \ a:context.source__not_fuzzy ?
+        \ neobundle#config#search(a:bundle_names) :
+        \ neobundle#config#fuzzy_search(a:bundle_names)
+  if a:context.source__bang == 1
+    call neobundle#installer#_load_install_info(a:context.source__bundles)
   endif
 
-  let a:context.source__process = vimproc#pgroup_open(cmd, 0, 2)
-  let a:context.source__revision_locked = a:is_revision
+  for bundle in filter(copy(a:context.source__bundles),
+        \ 'v:val.uri !=# v:val.installed_uri')
+    " Reinstall.
 
-  " Close handles.
-  call a:context.source__process.stdin.close()
-  call a:context.source__process.stderr.close()
+    " Save info.
+    let arg = bundle.orig_arg
 
-  if getcwd() !=# cwd
-    lcd `=cwd`
-  endif
-endfunction
+    " Remove.
+    call neobundle#installer#clean(1, bundle.name)
 
-function! s:check_output(context)
-  let stdout = a:context.source__process.stdout
-  let a:context.source__output .= stdout.read(-1, 300)
-  if stdout.eof
-    let [cond, status] = a:context.source__process.waitpid()
-    let num = a:context.source__number+1
-    let max = a:context.source__max_bundles
-    let bundle = a:context.source__bundles[a:context.source__number]
+    call call('neobundle#config#bundle', [arg])
+  endfor
 
-    if status
-      call neobundle#installer#log(
-            \ printf('[neobundle/install] (%'.len(max).'d/%d): %s',
-            \ num, max, 'Error'), 1)
-      call neobundle#installer#error(split(a:context.source__output, '\n'))
-    elseif a:context.source__revision_locked
-      call neobundle#installer#log(
-            \ printf('[neobundle/install] (%'.len(max).'d/%d): %s',
-            \ num, max, 'Locked'), 1)
-    elseif a:context.source__output =~ 'up-to-date\|up to date'
-      call neobundle#installer#log(
-            \ printf('[neobundle/install] (%'.len(max).'d/%d): %s',
-            \ num, max, 'Skipped'), 1)
-    else
-      call neobundle#installer#log(
-            \ printf('[neobundle/install] (%'.len(max).'d/%d): %s',
-            \ num, max, 'Updated'), 1)
-      call add(a:context.source__synced_bundles,
-            \ bundle)
-    endif
+  let a:context.source__max_bundles =
+        \ len(a:context.source__bundles)
 
-    if !status && get(bundle, 'rev', '') != ''
-          \ && !a:context.source__revision_locked
-      " Lock revision.
-      call s:sync(bundle, a:context, 1)
-      return
-    endif
-
-    let a:context.source__process = {}
-    let a:context.source__output = ''
-    let a:context.source__number += 1
-  endif
+  call neobundle#installer#clear_log()
 endfunction
 
 let &cpo = s:save_cpo
