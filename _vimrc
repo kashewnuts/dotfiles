@@ -16,7 +16,6 @@ NeoBundleLocal ~/.vim/bundle_manual
 "githubにあるプラグイン
 "--------------------------------------------------
 NeoBundle 'jmcantrell/vim-virtualenv'
-"NeoBundle 'lambdalisue/vim-django-support'
 "NeoBundle 'osyo-manga/neocomplcache-clang_complete'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
