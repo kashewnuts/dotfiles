@@ -1,2 +1,5 @@
 /vimfiles/bundle/
 .gitmodules
+.DS_Store
+.hg/
+.hgignore
