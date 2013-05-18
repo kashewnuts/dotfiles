@@ -1,16 +1,16 @@
 "--------------------------------------------------
 "NeoBundle設定
 "--------------------------------------------------
-set nocompatible
-filetype off
+set nocompatible                      " Be iMproved
 
 if has('vim_starting')
     set runtimepath+=~/dotfiles/vimfiles/neobundle.vim/
-    call neobundle#rc(expand('~/.bundle'))
 endif
 
-" pathogen互換機能
-NeoBundleLocal ~/.vim/bundle_manual
+call neobundle#rc(expand('~/.bundle'))
+
+NeoBundleFetch 'Shougo/neobundle.vim' " Let NeoBundle manage NeoBundle
+NeoBundleLocal ~/.vim/bundle_manual   " pathogen互換機能
 
 "--------------------------------------------------
 "githubにあるプラグイン
@@ -44,11 +44,13 @@ NeoBundleLazy 'thinca/vim-quickrun'
 "NeoBundleLazy 'Rip-Rip/clang_complete'
 "NeoBundleLazy 'vim-scripts/c.vim'
 "NeoBundleLazy 'tyru/open-browser.vim'
+"
+filetype plugin indent on             " Required!
+NeoBundleCheck                        " Installation check.
 
 "--------------------------------------------------
 " common
 "--------------------------------------------------
-filetype plugin indent on
 syntax on "シンタックスハイライトを有効にする
 set encoding=utf8 "デフォルトの文字コード
 set ambiwidth=double "文脈依存の文字幅を正常に表示する
