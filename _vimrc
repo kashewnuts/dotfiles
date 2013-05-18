@@ -8,9 +8,10 @@ if has('vim_starting')
 endif
 
 call neobundle#rc(expand('~/.bundle'))
-
-NeoBundleFetch 'Shougo/neobundle.vim' " Let NeoBundle manage NeoBundle
-NeoBundleLocal ~/.vim/bundle_manual   " pathogen互換機能
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+" pathogen互換機能
+NeoBundleLocal ~/.vim/bundle_manual
 
 "--------------------------------------------------
 "githubにあるプラグイン
@@ -36,6 +37,11 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 NeoBundleLazy 'thinca/vim-quickrun'
+NeoBundleLazy 'thinca/vim-scouter', {
+\   'autoload' : {
+\       'commands' : [ "Scouter" ]
+\   }
+\}
 
 "NeoBundleLazy 'osyo-manga/neocomplcache-clang_complete'
 "NeoBundleLazy 'Shougo/vimshell'
@@ -44,7 +50,7 @@ NeoBundleLazy 'thinca/vim-quickrun'
 "NeoBundleLazy 'Rip-Rip/clang_complete'
 "NeoBundleLazy 'vim-scripts/c.vim'
 "NeoBundleLazy 'tyru/open-browser.vim'
-"
+
 filetype plugin indent on             " Required!
 NeoBundleCheck                        " Installation check.
 
