@@ -1,5 +1,5 @@
 "--------------------------------------------------
-"NeoBundle設定
+"NeoBundle 設定
 "--------------------------------------------------
 set nocompatible                      " Be iMproved
 
@@ -14,16 +14,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundleLocal ~/.vim/bundle_manual
 
 "--------------------------------------------------
-"githubにあるプラグイン
+"github にあるプラグイン
 "--------------------------------------------------
-
-NeoBundleLazy 'mjbrownie/vim-htmldjango_omnicomplete', {
-\   "autoload" : { "filetypes" : ["htmldjango"] }
-\}
-NeoBundleLazy 'jmcantrell/vim-virtualenv', {
-\   "autoload" : { "filetypes" : ["python"] }
-\}
-NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache.git'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'honza/vim-snippets'
 NeoBundleLazy "Shougo/unite.vim", {
 \   'autoload' : {
 \       'commands' : [ "Unite" ]
@@ -36,11 +31,30 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix'    : 'make -f make_unix.mak',
       \    },
       \ }
+NeoBundleLazy 'Shougo/vimfiler', {
+\   'autoload' : {
+\       'commands' : [ "VimFiler" ]
+\   }
+\}
+NeoBundleLazy 'Shougo/vimshell', {
+\   'autoload' : {
+\       'commands' : [ "VimShell" ]
+\   }
+\}
 NeoBundleLazy 'thinca/vim-quickrun'
 NeoBundleLazy 'thinca/vim-scouter', {
 \   'autoload' : {
 \       'commands' : [ "Scouter" ]
 \   }
+\}
+NeoBundleLazy 'mjbrownie/vim-htmldjango_omnicomplete', {
+\   "autoload" : { "filetypes" : ["htmldjango"] }
+\}
+NeoBundleLazy 'jmcantrell/vim-virtualenv', {
+\   "autoload" : { "filetypes" : ["python"] }
+\}
+NeoBundleLazy 'Rykka/riv.vim', {
+\   "autoload" : { "filetypes" : ["rst"] }
 \}
 
 "NeoBundleLazy 'osyo-manga/neocomplcache-clang_complete'
@@ -70,6 +84,7 @@ set smarttab
 set smartindent "新しい行を作ったときに高度な自動インデントを行う
 set showmatch "閉じ括弧が入力されたとき、対応する括弧を表示する
 set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
+set list listchars=tab:>-,trail:_ " タブと行末の空白文字を可視化
 
 "set directory=$HOME/vimbackup "スワップファイル用のディレクトリ
 "set backupdir=$HOME/vimbackup "バックアップファイルを作るディレクトリ
@@ -95,14 +110,6 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-"" neocomplcache-clang_complete が正しく動作するために必要な各プラグインの設定
-
-"" neocomplcache
-"let g:neocomplcache_force_overwrite_completefunc=1
-
-"" clang_complete
-"let g:clang_complete_auto=1
-
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd FileType python :inoremap # X#
 autocmd FileType python :set textwidth=80 "桁数の制限
@@ -121,7 +128,7 @@ function ClosePair(char)
 endf
 
 "--------------------------------------------------
-" IndentGuides設定
+" IndentGuides 設定
 "--------------------------------------------------
 let s:bundle = neobundle#get("vim-indent-guides")
 function! s:bundle.hooks.on_source(bundle)
@@ -133,13 +140,13 @@ endfunction
 unlet s:bundle
 
 "--------------------------------------------------
-" jedi設定
+" jedi 設定
 "--------------------------------------------------
 let s:bundle = neobundle#get("jedi-vim")
 function! s:bundle.hooks.on_source(bundle)
     let g:jedi#auto_initialization = 1
     let g:jedi#auto_vim_configuration = 0
-    let g:jedi#rename_command = "<leader>R"
+    let g:jedi#rename_command = "<leader>??????"
     let g:jedi#popup_on_dot = 1
     let g:jedi#show_function_definition = 0
     autocmd FileType python let b:did_ftplugin = 1
@@ -147,7 +154,7 @@ endfunction
 unlet s:bundle
 
 "--------------------------------------------------
-" vim-htmldjango_omnicomplete設定
+" vim-htmldjango_omnicomplete 設定
 "--------------------------------------------------
 let s:bundle = neobundle#get("vim-htmldjango_omnicomplete")
 function! s:bundle.hooks.on_source(bundle)
@@ -158,7 +165,7 @@ endfunction
 unlet s:bundle
 
 "--------------------------------------------------
-" quickrun設定
+" quickrun 設定
 "--------------------------------------------------
 let s:bundle = neobundle#get("vim-quickrun")
 function! s:bundle.hooks.on_source(bundle)
@@ -170,50 +177,52 @@ endfunction
 unlet s:bundle
 
 "--------------------------------------------------
-"neocomplecache設定
+" neocomplecache 設定
 "--------------------------------------------------
-
 let s:bundle = neobundle#get("neocomplcache")
 function! s:bundle.hooks.on_source(bundle)
-" Disable AutoComplPop.
+    "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+    " Disable AutoComplPop.
     let g:acp_enableAtStartup = 0
     " Use neocomplcache.
     let g:neocomplcache_enable_at_startup = 1
     " Use smartcase.
     let g:neocomplcache_enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplcache_min_syntax_length = 3
+    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+    " Enable heavy features.
     " Use camel case completion.
     let g:neocomplcache_enable_camel_case_completion = 1
     " Use underbar completion.
     let g:neocomplcache_enable_underbar_completion = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplcache_min_syntax_length = 3
-    let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
     " Define dictionary.
     let g:neocomplcache_dictionary_filetype_lists = {
         \ 'default' : '',
         \ 'vimshell' : $HOME.'/.vimshell_hist',
         \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+            \ }
 
     " Define keyword.
     if !exists('g:neocomplcache_keyword_patterns')
-      let g:neocomplcache_keyword_patterns = {}
+        let g:neocomplcache_keyword_patterns = {}
     endif
     let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
     " Plugin key-mappings.
-    imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-    smap <C-k>     <Plug>(neocomplcache_snippets_expand)
     inoremap <expr><C-g>     neocomplcache#undo_completion()
     inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-    " SuperTab like snippets behavior.
-    "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-
     " Recommended key-mappings.
     " <CR>: close popup and save indent.
-    inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+      return neocomplcache#smart_close_popup() . "\<CR>"
+      " For no inserting <CR> key.
+      "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+    endfunction
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     " <C-h>, <BS>: close popup and delete backword char.
@@ -221,6 +230,18 @@ function! s:bundle.hooks.on_source(bundle)
     inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplcache#close_popup()
     inoremap <expr><C-e>  neocomplcache#cancel_popup()
+    " Close popup by <Space>.
+    "inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+
+    " For cursor moving in insert mode(Not recommended)
+    "inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
+    "inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+    "inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
+    "inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
+    " Or set this.
+    "let g:neocomplcache_enable_cursor_hold_i = 1
+    " Or set this.
+    "let g:neocomplcache_enable_insert_char_pre = 1
 
     " AutoComplPop like behavior.
     "let g:neocomplcache_enable_auto_select = 1
@@ -229,8 +250,7 @@ function! s:bundle.hooks.on_source(bundle)
     "set completeopt+=longest
     "let g:neocomplcache_enable_auto_select = 1
     "let g:neocomplcache_disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<TAB>"
-    "inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
     " Enable omni completion.
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -243,10 +263,75 @@ function! s:bundle.hooks.on_source(bundle)
     if !exists('g:neocomplcache_omni_patterns')
       let g:neocomplcache_omni_patterns = {}
     endif
-    let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-    "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
     let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-    let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+    let g:neocomplcache_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    let g:neocomplcache_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+    " For perlomni.vim setting.
+    " https://github.com/c9s/perlomni.vim
+    let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+endfunction
+unlet s:bundle
+
+"--------------------------------------------------
+" neosnippet 設定
+"--------------------------------------------------
+let s:bundle = neobundle#get("neosnippet")
+function! s:bundle.hooks.on_source(bundle)
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)"
+    \: "\<TAB>"
+
+    " For snippet_complete marker.
+    if has('conceal')
+      set conceallevel=2 concealcursor=i
+    endif
+
+    " Enable snipMate compatibility feature.
+    let g:neosnippet#enable_snipmate_compatibility = 1
+
+    " Tell Neosnippet about the other snippets
+    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+endfunction
+unlet s:bundle
+
+"--------------------------------------------------
+" VimFiler 設定
+"--------------------------------------------------
+let s:bundle = neobundle#get("vimfiler")
+function! s:bundle.hooks.on_source(bundle)
+    let g:vimfiler_as_default_explorer = 1
+    let g:vimfiler_safe_mode_by_default = 0
+endfunction
+unlet s:bundle
+
+"--------------------------------------------------
+" neocomplcache-clang_complete 設定
+"--------------------------------------------------
+"let s:bundle = neobundle#get("neocomplcache-clang_complete")
+"function! s:bundle.hooks.on_source(bundle)
+"    " neocomplcache
+"    let g:neocomplcache_force_overwrite_completefunc=1
+"
+"    " clang_complete
+"    let g:clang_complete_auto=1
+"endfunction
+"unlet s:bundle
+
+"--------------------------------------------------
+" riv.vim 設定
+"--------------------------------------------------
+let s:bundle = neobundle#get("riv.vim")
+function! s:bundle.hooks.on_source(bundle)
+    let g:riv_fold_auto_update = 0
 endfunction
 unlet s:bundle
