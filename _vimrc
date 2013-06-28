@@ -26,7 +26,7 @@ NeoBundle "Shougo/vimproc", {
             \   "mac"       : "make -f make_mac.mak",
             \   "unix"      : "make -f make_unix.mak",
             \ }}
-NeoBundleLazy "Shougo/neocomplcache", {
+NeoBundleLazy "Shougo/neocomplcache.vim", {
             \ "autoload": {
             \   "insert": 1,
             \ }}
@@ -68,9 +68,7 @@ NeoBundleLazy 'jmcantrell/vim-virtualenv', {
             \                                 "jinja", "htmljinja"]
             \                }
             \}
-NeoBundleLazy 'Rykka/riv.vim', {
-            \   "autoload" : { "filetypes" : ["rst"] }
-            \}
+NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
 
 "NeoBundleLazy 'osyo-manga/neocomplcache-clang_complete'
 "NeoBundleLazy 'Shougo/vimshell'
@@ -104,8 +102,7 @@ set list listchars=tab:>-,trail:_ " タブと行末の空白文字を可視化
 set noswapfile
 set nobackup
 set nowritebackup
-autocmd BufRead /tmp/crontab.* :set nobackup nowritebackup
-
+"autocmd BufRead /tmp/crontab.*
 autocmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
 
@@ -139,7 +136,6 @@ function ClosePair(char)
         return a:char
     endif
 endf
-
 
 "--------------------------------------------------
 " IndentGuides 設定
@@ -194,7 +190,7 @@ unlet s:bundle
 "--------------------------------------------------
 " neocomplecache 設定
 "--------------------------------------------------
-let s:bundle = neobundle#get("neocomplcache")
+let s:bundle = neobundle#get("neocomplcache.vim")
 function! s:bundle.hooks.on_source(bundle)
     "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
     " Disable AutoComplPop.
@@ -326,27 +322,5 @@ let s:bundle = neobundle#get("vimfiler")
 function! s:bundle.hooks.on_source(bundle)
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_safe_mode_by_default = 0
-endfunction
-unlet s:bundle
-
-"--------------------------------------------------
-" neocomplcache-clang_complete 設定
-"--------------------------------------------------
-"let s:bundle = neobundle#get("neocomplcache-clang_complete")
-"function! s:bundle.hooks.on_source(bundle)
-"    " neocomplcache
-"    let g:neocomplcache_force_overwrite_completefunc=1
-"
-"    " clang_complete
-"    let g:clang_complete_auto=1
-"endfunction
-"unlet s:bundle
-
-"--------------------------------------------------
-" riv.vim 設定
-"--------------------------------------------------
-let s:bundle = neobundle#get("riv.vim")
-function! s:bundle.hooks.on_source(bundle)
-    let g:riv_fold_auto_update = 0
 endfunction
 unlet s:bundle
