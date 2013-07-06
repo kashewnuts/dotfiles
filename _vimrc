@@ -69,6 +69,7 @@ NeoBundleLazy 'jmcantrell/vim-virtualenv', {
             \                }
             \}
 NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
+NeoBundle 'akira-hamada/friendly-grep.vim'
 
 filetype plugin indent on             " Required!
 NeoBundleCheck                        " Installation check.
@@ -76,6 +77,8 @@ NeoBundleCheck                        " Installation check.
 "--------------------------------------------------
 " common
 "--------------------------------------------------
+" autocmdのリセット
+autocmd!
 syntax on "シンタックスハイライトを有効にする
 set encoding=utf8 "デフォルトの文字コード
 set ambiwidth=double "文脈依存の文字幅を正常に表示する
@@ -128,7 +131,7 @@ match ZenkakuSpace /　/
 " pair close checker.
 " from othree vimrc ( http://github.com/othree/rc/blob/master/osx/.vimrc )
 "--------------------------------------------------
-function ClosePair(char)
+function! s:ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
         return "\<Right>"
     else
@@ -187,15 +190,15 @@ endfunction
 unlet s:bundle
 
 "--------------------------------------------------
-" neocomplecache 設定
+" neocomplcache 設定
 "--------------------------------------------------
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
 let s:bundle = neobundle#get("neocomplcache.vim")
 function! s:bundle.hooks.on_source(bundle)
     "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
     " Disable AutoComplPop.
     let g:acp_enableAtStartup = 0
-    " Use neocomplcache.
-    let g:neocomplcache_enable_at_startup = 1
     " Use smartcase.
     let g:neocomplcache_enable_smart_case = 1
     " Set minimum syntax keyword length.
@@ -321,5 +324,42 @@ let s:bundle = neobundle#get("vimfiler")
 function! s:bundle.hooks.on_source(bundle)
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_safe_mode_by_default = 0
+endfunction
+unlet s:bundle
+
+"--------------------------------------------------
+" friendly-grep.vim 設定
+"--------------------------------------------------
+let s:bundle = neobundle#get("friendly-grep.vim")
+function! s:bundle.hooks.on_source(bundle)
+    nnoremap <C-g> <ESC>:FriendlyGrep<CR>
+
+    " 一つ前の結果へジャンプ
+    nnoremap <LEFT> :cprevious<CR>
+    " 次の結果へジャンプ
+    nnoremap <RIGHT> :cnext<CR>
+    " 最初の結果へジャンプ
+    nnoremap <UP> :<C-u>cfirst<CR>
+    " 最後の結果へジャンプ
+    nnoremap <DOWN> :<C-u>clast<CR>
+
+    let g:friendlygrep_target_dir = '/Users/KashunYoshida/'
+    " よく検索するディレクトリあるいはファイル名を登録出来ます。
+    " 上記だと '/Users/KashunYoshida' が検索対象入力時に毎回入力済みになる。
+    " (デフォルトは空)
+
+    let g:friendlygrep_recursively = 1
+    " 毎回「再帰検索する?」と聞かれるのがウザい場合は
+    " これを設定すると聞いてこなくなります。
+    " 1 : 常に再帰検索
+    " 0 : 常に非再帰検索
+    " (デフォルトはnull、毎回聞いてきます)
+
+    let g:friendlygrep_display_result_in = 'tab'
+    " 検索結果の開き方を指定出来ます。
+    " 'tab' : 新規タブに表示
+    " 'split' : 現在のウィンドウを横分割して上に表示 (デフォルト)
+    " 'vsplit' : 現在のウィンドウを縦分割して左に表示
+    " 'quickfix' : 現在のウィンドウにquickfixリストと共に表示
 endfunction
 unlet s:bundle
