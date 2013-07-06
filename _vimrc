@@ -7,7 +7,7 @@ if has('vim_starting')
     set runtimepath+=~/dotfiles/vimfiles/neobundle.vim/
 endif
 
-call neobundle#rc(expand('~/.bundle'))
+call neobundle#rc(expand('~/.vim/bundle'))
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 " pathogen互換機能
@@ -53,7 +53,7 @@ NeoBundleLazy 'Shougo/vimshell', {
             \}
 NeoBundleLazy "thinca/vim-quickrun", {
             \ "autoload": {
-            \   "mappings": [['nxo', '<Plug>(quickrun)']]
+            \       'commands' : [ "Quickrun" ]
             \ }}
 NeoBundleLazy 'thinca/vim-scouter', {
             \   'autoload' : {
@@ -69,14 +69,6 @@ NeoBundleLazy 'jmcantrell/vim-virtualenv', {
             \                }
             \}
 NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
-
-"NeoBundleLazy 'osyo-manga/neocomplcache-clang_complete'
-"NeoBundleLazy 'Shougo/vimshell'
-"NeoBundleLazy 'thinca/vim-ref'
-"NeoBundleLazy 'Shougo/vinarise'
-"NeoBundleLazy 'Rip-Rip/clang_complete'
-"NeoBundleLazy 'vim-scripts/c.vim'
-"NeoBundleLazy 'tyru/open-browser.vim'
 
 filetype plugin indent on             " Required!
 NeoBundleCheck                        " Installation check.
@@ -98,13 +90,21 @@ set smartindent "新しい行を作ったときに高度な自動インデント
 set showmatch "閉じ括弧が入力されたとき、対応する括弧を表示する
 set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
 set list listchars=tab:>-,trail:_ " タブと行末の空白文字を可視化
+set nowritebackup
+" OSのクリップボードを使用する
+set clipboard+=unnamed
+set clipboard+=autoselect
 
+" バックアップファイルを生成しない
 set noswapfile
 set nobackup
-set nowritebackup
-"autocmd BufRead /tmp/crontab.*
 autocmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
+
+" 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
+autocmd FileType python :inoremap # X#
+autocmd FileType python :set textwidth=80 "桁数の制限
+autocmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
 
 "ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
@@ -120,10 +120,9 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
-autocmd FileType python :inoremap # X#
-autocmd FileType python :set textwidth=80 "桁数の制限
-autocmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
+match ZenkakuSpace /　/
 
 "--------------------------------------------------
 " pair close checker.

@@ -8,10 +8,6 @@ set guioptions-=T
 " メニューバーを非表示にする
 set guioptions-=m
 
-" 全角スペースの定義
-hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue
-match ZenkakuSpace /　/       " 全角スペースの色を変更
-
 "--------------------------------------------------
 " 背景透過設定
 "--------------------------------------------------
