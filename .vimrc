@@ -10,7 +10,7 @@
 "--------------------------------------------------
 set nocompatible                      " Be iMproved
 if has('vim_starting')
-    set runtimepath+=~/dotfiles/.vim/neobundle.vim/
+    set runtimepath+=~/dotfiles/.vim/neobundle.vim.git/
 endif
 call neobundle#rc(expand('~/.vim/bundle'))
 
