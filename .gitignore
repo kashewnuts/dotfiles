@@ -3,3 +3,5 @@
 .hgignore
 .vim/bundle/
 .vim/bundle_manual/
+.vim/bundle/.neobundle/install_info
+.vim/bundle/.neobundle/.netrwhist
