@@ -4,7 +4,7 @@ My dotfiles
 Setup
 -----
 
-case github.com
+Case github.com
 ~~~~~~~~~~~~~~~
 
 .. code-block:: bash
@@ -12,7 +12,7 @@ case github.com
     git clone https://github.com/kashewnuts/dotfiles ~/dotfiles
     ~/dotfiles/setup.sh
 
-case bitbuket.org
+Case bitbuket.org
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
