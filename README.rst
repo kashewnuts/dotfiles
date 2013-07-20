@@ -4,7 +4,13 @@ My dotfiles
 Setup
 -----
 
+
 .. code-block:: bash
 
-    git clone https://github.com/kashewnuts/dotfiles.git ~/dotfiles
+    (case github.com)
+    git clone https://github.com/kashewnuts/dotfiles ~/dotfiles
+    ~/dotfiles/setup.sh
+
+    (case bitbuket.org)
+    hg clone https://github.com/kashewnuts/dotfiles ~/dotfiles
     ~/dotfiles/setup.sh
