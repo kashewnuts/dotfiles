@@ -3,5 +3,5 @@
 .hg/
 
 # vim
-.vim/*
-!/.vim/colors
+.vim/bundle/
+.vim/bundle_manual/
