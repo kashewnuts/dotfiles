@@ -1,18 +1,18 @@
 [submodule "/Users/KashunYoshida/.vim/bundle/vim-quickrun"]
-	path = /Users/KashunYoshida/.vim/bundle/vim-quickrun
+	path = .vim/bundle/vim-quickrun
 	url = git://github.com/thinca/vim-quickrun.git
-[submodule ".vim/bundle/neocomplcache"]
+[submodule "/Users/KashunYoshida/.vim/bundle/neocomplcache"]
 	path = .vim/bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
-[submodule ".vim/bundle/neocomplete"]
+[submodule "/Users/KashunYoshida/.vim/bundle/neocomplete"]
 	path = .vim/bundle/neocomplete
 	url = git://github.com/Shougo/neocomplete.git
-[submodule ".vim/bundle/vimfiler"]
+[submodule "/Users/KashunYoshida/.vim/bundle/vimfiler"]
 	path = .vim/bundle/vimfiler
 	url = git://github.com/Shougo/vimfiler.vim
-[submodule ".vim/bundle/vimshell"]
+[submodule "/Users/KashunYoshida/.vim/bundle/vimshell"]
 	path = .vim/bundle/vimshell
 	url = git://github.com/Shougo/vimshell.vim
-[submodule ".vim/bundle/unite"]
+[submodule "/Users/KashunYoshida/.vim/bundle/unite"]
 	path = .vim/bundle/unite
 	url = git://github.com/Shougo/unite.vim
