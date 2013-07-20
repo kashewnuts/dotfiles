@@ -10,7 +10,7 @@
 "--------------------------------------------------
 set nocompatible                      " Be iMproved
 if has('vim_starting')
-    set runtimepath+=~/dotfiles/vimfiles/neobundle.vim/
+    set runtimepath+=~/dotfiles/.vim/bundle/neobundle.vim/
 endif
 call neobundle#rc(expand('~/.vim/bundle'))
 
@@ -76,22 +76,18 @@ NeoBundleCheck                        " Installation check.
 "--------------------------------------------------
 " common
 "--------------------------------------------------
-" autocmdのリセット
-autocmd!
+" release autogroup in MyAutoCmd
+augroup MyAutoCmd
+  autocmd!
+augroup END
 syntax on "シンタックスハイライトを有効にする
 set encoding=utf8 "デフォルトの文字コード
 set ambiwidth=double "文脈依存の文字幅を正常に表示する
-set expandtab "タブをスペースに展開する(noexpandtab:展開しない)
 set number " 行番号を非表示 (nonumber:非表示)
-set tabstop=4 " タブの画面上での幅
-set softtabstop=4 "ファイル内の  が対応する空白の数
 set shiftwidth=4 "シフト移動幅
-"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
-set smarttab
 set smartindent "新しい行を作ったときに高度な自動インデントを行う
 set showmatch "閉じ括弧が入力されたとき、対応する括弧を表示する
 set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
-set list listchars=tab:>-,trail:_ " タブと行末の空白文字を可視化
 
 " OSのクリップボードを使用する
 set clipboard+=unnamed
@@ -102,13 +98,22 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-autocmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
+"--------------------------------------------------
+" tab
+"--------------------------------------------------
+""行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
+set smarttab
+set tabstop=4 " タブの画面上での幅
+set softtabstop=4 "ファイル内の  が対応する空白の数
+"set expandtab "タブをスペースに展開する(noexpandtab:展開しない)
+set list listchars=tab:>-,trail:_ " タブと行末の空白文字を可視化
+"autocmd MyAutoCmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
 
+autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
-autocmd FileType python :inoremap # X#
-autocmd FileType python :set textwidth=80 "桁数の制限
-autocmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
+autocmd MyAutoCmd FileType python :inoremap # X#
+autocmd MyAutoCmd FileType python :set textwidth=80 "桁数の制限
+autocmd MyAutoCmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
 
 "ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
@@ -210,11 +215,11 @@ function! s:bundle.hooks.on_source(bundle)
     "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
     " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd MyAutoCmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd MyAutoCmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd MyAutoCmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd MyAutoCmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd MyAutoCmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
     " Enable heavy omni completion.
     if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -237,8 +242,8 @@ let s:bundle = neobundle#get("vim-indent-guides")
 function! s:bundle.hooks.on_source(bundle)
     let g:indent_guides_enable_on_vim_startup = 1
     let g:indent_guides_auto_colors = 0
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#121212 ctermbg=233
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626 ctermbg=235
+    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#121212 ctermbg=233
+    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626 ctermbg=235
 endfunction
 unlet s:bundle
 
@@ -252,7 +257,7 @@ function! s:bundle.hooks.on_source(bundle)
     let g:jedi#rename_command = "<leader>R"
     let g:jedi#popup_on_dot = 1
     let g:jedi#show_function_definition = 0
-    autocmd FileType python let b:did_ftplugin = 1
+    autocmd MyAutoCmd FileType python let b:did_ftplugin = 1
 endfunction
 unlet s:bundle
 
@@ -261,9 +266,9 @@ unlet s:bundle
 "--------------------------------------------------
 let s:bundle = neobundle#get("vim-htmldjango_omnicomplete")
 function! s:bundle.hooks.on_source(bundle)
-    autocmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-    autocmd FileType htmldjango inoremap {% {% %}<left><left><left>
-    autocmd FileType htmldjango inoremap {{ {{ }}<left><left><left>
+    autocmd MyAutoCmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
+    autocmd MyAutoCmd FileType htmldjango inoremap {% {% %}<left><left><left>
+    autocmd MyAutoCmd FileType htmldjango inoremap {{ {{ }}<left><left><left>
 endfunction
 unlet s:bundle
 

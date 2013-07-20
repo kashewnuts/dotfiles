@@ -1,9 +1,7 @@
 .gitmodules
 .DS_Store
 .hg/
-.hgignore
 
 # vim
-.vim/.netrwhist
 .vim/*
 !/.vim/colors

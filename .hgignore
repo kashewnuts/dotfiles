@@ -1,0 +1,6 @@
+.git/
+.gitmodules
+.DS_Store
+
+.vim/bundle/
+.vim/bundle_manual/
