@@ -10,7 +10,7 @@
 "--------------------------------------------------
 set nocompatible                      " Be iMproved
 if has('vim_starting')
-    set runtimepath+=~/dotfiles/vimfiles/neobundle.vim/
+    set runtimepath+=~/dotfiles/.vim/vimfiles/neobundle.vim/
 endif
 call neobundle#rc(expand('~/.vim/bundle'))
 
@@ -102,8 +102,8 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-autocmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
-autocmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
+"autocmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
+"autocmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
 
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd FileType python :inoremap # X#
