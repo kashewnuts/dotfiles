@@ -147,16 +147,16 @@ set nowritebackup
 set smarttab
 set tabstop=4 " タブの画面上での幅
 set softtabstop=4 "ファイル内の  が対応する空白の数
-"set expandtab "タブをスペースに展開する(noexpandtab:展開しない)
+set expandtab "タブをスペースに展開する(noexpandtab:展開しない)
 set list listchars=tab:>-,trail:_ " タブと行末の空白文字を可視化
+" Makefile のみタブをスペースに展開しない
+autocmd MyAutoCmd FileType make setlocal noexpandtab
 "autocmd MyAutoCmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
 
 autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd MyAutoCmd FileType python :inoremap # X#
 autocmd MyAutoCmd FileType python :set textwidth=80 "桁数の制限
-" タブをスペースに展開する(noexpandtab:展開しない)
-autocmd MyAutoCmd FileType python :set expandtab
 autocmd MyAutoCmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
 
 "ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
