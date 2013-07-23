@@ -57,7 +57,6 @@ else
     endfunction
     unlet s:bundle
 endif
-"            \ }}
 NeoBundleLazy "Shougo/neosnippet.vim", {
             \ "depends": ["honza/vim-snippets"],
             \ "autoload": {
