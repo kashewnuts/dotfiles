@@ -22,7 +22,7 @@ do
   fi
 
   # neobundle.vim をインストールする
-  if [ ! -e $HOME/${DOT_FILES[0]}/neobundle.vim ]; then
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim
+  if [ ! -e $HOME/${DOT_FILES[0]}/neobundle.vim -a -x "`which git`" ]; then
+      git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim
   fi
 done
