@@ -19,17 +19,20 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " pathogen互換機能
 NeoBundleLocal ~/.vim/bundle_manual
 
-NeoBundle "Shougo/vimproc", {
-            \ "build": {
-            \   "windows"   : "make -f make_mingw32.mak",
-            \   "cygwin"    : "make -f make_cygwin.mak",
-            \   "mac"       : "make -f make_mac.mak",
-            \   "unix"      : "make -f make_unix.mak",
+"--------------------------------------------------
+" ShougoWare
+"--------------------------------------------------
+NeoBundle 'Shougo/vimproc', {
+            \ 'build': {
+            \   'windows'   : 'make -f make_mingw32.mak',
+            \   'cygwin'    : 'make -f make_cygwin.mak',
+            \   'mac'       : 'make -f make_mac.mak',
+            \   'unix'      : 'make -f make_unix.mak',
             \ }}
 if has('lua') && v:version >= 703 && has('patch885') || has('lua') && v:version >= 704
-    NeoBundleLazy "Shougo/neocomplete.vim", {
-        \ "autoload": {
-        \   "insert": 1,
+    NeoBundleLazy 'Shougo/neocomplete.vim', {
+        \ 'autoload': {
+        \   'insert': 1,
         \ }}
     " 2013-07-03 14:30 NeoComplCacheに合わせた
     let g:neocomplete#enable_at_startup = 1
@@ -44,9 +47,9 @@ if has('lua') && v:version >= 703 && has('patch885') || has('lua') && v:version 
     endfunction
     unlet s:bundle
 else
-    NeoBundleLazy "Shougo/neocomplcache.vim", {
-        \ "autoload": {
-        \   "insert": 1,
+    NeoBundleLazy 'Shougo/neocomplcache.vim', {
+        \ 'autoload': {
+        \   'insert': 1,
         \ }}
     " 2013-07-03 14:30 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
     let g:neocomplcache_enable_at_startup = 1
@@ -57,15 +60,15 @@ else
     endfunction
     unlet s:bundle
 endif
-NeoBundleLazy "Shougo/neosnippet.vim", {
-            \ "depends": ["honza/vim-snippets"],
-            \ "autoload": {
-            \   "insert": 1,
+NeoBundleLazy 'Shougo/neosnippet.vim', {
+            \ 'depends': ["honza/vim-snippets"],
+            \ 'autoload': {
+            \   'insert': 1,
             \ }
             \}
 NeoBundleLazy 'Shougo/unite.vim', {
             \   'autoload' : {
-            \       'commands' : [ 'Unite' ]
+            \       'commands' : [ "Unite" ]
             \   }
             \}
 NeoBundleLazy 'Shougo/vimfiler', {
@@ -78,22 +81,32 @@ NeoBundleLazy 'Shougo/vimshell', {
             \       'commands' : [ "VimShell" ]
             \   }
             \}
+
+"--------------------------------------------------
+" thinca Plugin
+"--------------------------------------------------
 NeoBundleLazy "thinca/vim-quickrun", {
             \ "autoload": {
-            \       'commands' : [ "Quickrun" ]
-            \ }}
+            \       'commands' : [ "Quickrun" ] }
+            \ }
 NeoBundleLazy 'thinca/vim-scouter', {
             \   'autoload' : {
             \       'commands' : [ "Scouter" ]
             \   }
             \}
+NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
+
+"--------------------------------------------------
+" Python Plugin
+"--------------------------------------------------
 NeoBundleLazy "lambdalisue/vim-django-support", {
             \ "autoload": {
             \   "filetypes": ["python", "python3", "djangohtml"] }
             \ }
 NeoBundleLazy 'mjbrownie/vim-htmldjango_omnicomplete', {
-            \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml"] }
-            \}
+            \ "autoload": {
+            \   "filetypes": ["python", "python3", "djangohtml"] }
+            \ }
 NeoBundleLazy 'davidhalter/jedi-vim', {
             \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml",
             \                                 "jinja", "htmljinja"]
@@ -110,7 +123,6 @@ NeoBundleLazy 'kevinw/pyflakes-vim', {
             \                }
             \}
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
 
 filetype plugin indent on             " Required!
 NeoBundleCheck                        " Installation check.
