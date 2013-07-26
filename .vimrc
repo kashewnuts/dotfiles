@@ -16,8 +16,6 @@ call neobundle#rc(expand('~/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
-" pathogen互換機能
-NeoBundleLocal ~/.vim/bundle_manual
 
 "--------------------------------------------------
 " ShougoWare
@@ -31,9 +29,8 @@ NeoBundle 'Shougo/vimproc', {
             \ }}
 if has('lua') && v:version >= 703 && has('patch885') || has('lua') && v:version >= 704
     NeoBundleLazy 'Shougo/neocomplete.vim', {
-        \ 'autoload': {
-        \   'insert': 1,
-        \ }}
+        \ 'autoload': { 'insert': 1, }
+        \ }
     " 2013-07-03 14:30 NeoComplCacheに合わせた
     let g:neocomplete#enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplete.vim")
@@ -48,9 +45,8 @@ if has('lua') && v:version >= 703 && has('patch885') || has('lua') && v:version 
     unlet s:bundle
 else
     NeoBundleLazy 'Shougo/neocomplcache.vim', {
-        \ 'autoload': {
-        \   'insert': 1,
-        \ }}
+        \ 'autoload': {'insert': 1, }
+        \ }
     " 2013-07-03 14:30 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
     let g:neocomplcache_enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplcache.vim")
@@ -61,38 +57,27 @@ else
     unlet s:bundle
 endif
 NeoBundleLazy 'Shougo/neosnippet.vim', {
-            \ 'depends': ["honza/vim-snippets"],
-            \ 'autoload': {
-            \   'insert': 1,
-            \ }
+            \   'depends': ["honza/vim-snippets"],
+            \   'autoload': { 'insert': 1, }
             \}
 NeoBundleLazy 'Shougo/unite.vim', {
-            \   'autoload' : {
-            \       'commands' : [ "Unite" ]
-            \   }
+            \   'autoload' : { 'commands' : [ "Unite" ] }
             \}
 NeoBundleLazy 'Shougo/vimfiler', {
-            \   'autoload' : {
-            \       'commands' : [ "VimFiler" ]
-            \   }
+            \   'autoload' : { 'commands' : [ "VimFiler" ] }
             \}
 NeoBundleLazy 'Shougo/vimshell', {
-            \   'autoload' : {
-            \       'commands' : [ "VimShell" ]
-            \   }
+            \   'autoload' : { 'commands' : [ "VimShell" ] }
             \}
 
 "--------------------------------------------------
 " thinca Plugin
 "--------------------------------------------------
 NeoBundleLazy "thinca/vim-quickrun", {
-            \ "autoload": {
-            \       'commands' : [ "Quickrun" ] }
+            \   "autoload": { 'commands' : [ "Quickrun" ] }
             \ }
 NeoBundleLazy 'thinca/vim-scouter', {
-            \   'autoload' : {
-            \       'commands' : [ "Scouter" ]
-            \   }
+            \   'autoload' :  { 'commands' : [ "Scouter" ] }
             \}
 NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
 
@@ -100,27 +85,22 @@ NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
 " Python Plugin
 "--------------------------------------------------
 NeoBundleLazy "lambdalisue/vim-django-support", {
-            \ "autoload": {
-            \   "filetypes": ["python", "python3", "djangohtml"] }
+            \ "autoload": { "filetypes": ["python", "python3", "djangohtml"] }
             \ }
 NeoBundleLazy 'mjbrownie/vim-htmldjango_omnicomplete', {
-            \ "autoload": {
-            \   "filetypes": ["python", "python3", "djangohtml"] }
+            \ "autoload": { "filetypes": ["python", "python3", "djangohtml"] }
             \ }
 NeoBundleLazy 'davidhalter/jedi-vim', {
             \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml",
-            \                                 "jinja", "htmljinja"]
-            \                }
+            \                                 "jinja", "htmljinja"] }
             \}
 NeoBundleLazy 'jmcantrell/vim-virtualenv', {
             \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml",
-            \                                 "jinja", "htmljinja"]
-            \                }
+            \                                 "jinja", "htmljinja"] }
             \}
 NeoBundleLazy 'kevinw/pyflakes-vim', {
             \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml",
-            \                                 "jinja", "htmljinja"]
-            \                }
+            \                                 "jinja", "htmljinja"] }
             \}
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
@@ -160,7 +140,8 @@ set smarttab
 set tabstop=4 " タブの画面上での幅
 set softtabstop=4 "ファイル内の  が対応する空白の数
 set expandtab "タブをスペースに展開する(noexpandtab:展開しない)
-set list listchars=tab:>-,trail:_ " タブと行末の空白文字を可視化
+" 不可視文字の可視化
+set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " Makefile のみタブをスペースに展開しない
 autocmd MyAutoCmd FileType make setlocal noexpandtab
 "autocmd MyAutoCmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
@@ -170,6 +151,7 @@ autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を�
 autocmd MyAutoCmd FileType python :inoremap # X#
 autocmd MyAutoCmd FileType python :set textwidth=80 "桁数の制限
 autocmd MyAutoCmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
+autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 
 "ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
@@ -188,6 +170,21 @@ nnoremap g# g#zz
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
 match ZenkakuSpace /　/
+
+" 指定文字コードで強制的にファイルを開く
+command! Cp932 edit ++enc=cp932
+command! Eucjp edit ++enc=euc-jp
+command! Iso2022jp edit ++enc=iso-2022-jp
+command! Utf8 edit ++enc=utf-8
+command! Jis Iso2022jp
+command! Sjis Cp932
+
+" ESCを二回押すことでハイライトを消す
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+" バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 
 "--------------------------------------------------------------------------
 " pair close checker.
@@ -250,7 +247,6 @@ function! s:bundle.hooks.on_source(bundle)
     set splitright
 endfunction
 unlet s:bundle
-
 
 "--------------------------------------------------
 " neosnippet
