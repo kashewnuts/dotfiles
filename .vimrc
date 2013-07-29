@@ -85,22 +85,32 @@ NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
 " Python Plugin
 "--------------------------------------------------
 NeoBundleLazy "lambdalisue/vim-django-support", {
-            \ "autoload": { "filetypes": ["python", "python3", "djangohtml"] }
+            \ "autoload": {
+            \   "insert": 1,
+            \   "filetypes": ["python", "python3", "djangohtml"] }
             \ }
 NeoBundleLazy 'mjbrownie/vim-htmldjango_omnicomplete', {
-            \ "autoload": { "filetypes": ["python", "python3", "djangohtml"] }
+            \ "autoload" : {
+            \   "insert" : 1,
+            \   "filetypes": ["python", "python3", "djangohtml"] }
             \ }
 NeoBundleLazy 'davidhalter/jedi-vim', {
-            \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml",
-            \                                 "jinja", "htmljinja"] }
+            \   "autoload" : {
+            \     "insert" : 1,
+            \     "filetypes" : ["python", "python3", "djangohtml",
+            \                    "jinja", "htmljinja"] }
             \}
 NeoBundleLazy 'jmcantrell/vim-virtualenv', {
-            \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml",
-            \                                 "jinja", "htmljinja"] }
+            \   "autoload" : {
+            \     "insert" : 1,
+            \     "filetypes" : ["python", "python3", "djangohtml",
+            \                    "jinja", "htmljinja"] }
             \}
 NeoBundleLazy 'kevinw/pyflakes-vim', {
-            \   "autoload" : { "filetypes" : ["python", "python3", "djangohtml",
-            \                                 "jinja", "htmljinja"] }
+            \   "autoload" : {
+            \     "insert" : 1,
+            \     "filetypes" : ["python", "python3", "djangohtml",
+            \                    "jinja", "htmljinja"] }
             \}
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
