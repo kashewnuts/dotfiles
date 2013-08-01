@@ -17,9 +17,8 @@ call neobundle#rc(expand('~/.vim/bundle'))
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-"--------------------------------------------------
-" ShougoWare
-"--------------------------------------------------
+""" vimproc
+"""
 NeoBundle 'Shougo/vimproc', {
             \ 'build': {
             \   'windows'   : 'make -f make_mingw32.mak',
@@ -27,6 +26,15 @@ NeoBundle 'Shougo/vimproc', {
             \   'mac'       : 'make -f make_mac.mak',
             \   'unix'      : 'make -f make_unix.mak',
             \ }}
+
+""" unite.vim
+"""
+NeoBundleLazy 'Shougo/unite.vim', {
+            \   'autoload' : { 'commands' : [ "Unite" ] }
+            \}
+
+""" neocomplete.vim, neocomplcache.vim
+"""
 if has('lua') && v:version >= 703 && has('patch885') || has('lua') && v:version >= 704
     NeoBundleLazy 'Shougo/neocomplete.vim', {
         \ 'autoload': { 'insert': 1, }
@@ -56,63 +64,155 @@ else
     endfunction
     unlet s:bundle
 endif
+
+""" neosnippet
+"""
 NeoBundleLazy 'Shougo/neosnippet.vim', {
             \   'depends': ["honza/vim-snippets"],
             \   'autoload': { 'insert': 1, }
             \}
-NeoBundleLazy 'Shougo/unite.vim', {
-            \   'autoload' : { 'commands' : [ "Unite" ] }
-            \}
+let s:bundle = neobundle#get("neosnippet.vim")
+function! s:bundle.hooks.on_source(bundle)
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ "\<Plug>(neosnippet_expand_or_jump)"
+                \: pumvisible() ? "\<C-n>" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ "\<Plug>(neosnippet_expand_or_jump)"
+                \: "\<TAB>"
+
+    " For snippet_complete marker.
+    if has('conceal')
+        set conceallevel=2 concealcursor=i
+    endif
+
+    " Enable snipMate compatibility feature.
+    let g:neosnippet#enable_snipmate_compatibility = 1
+
+    " Tell Neosnippet about the other snippets
+    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+endfunction
+unlet s:bundle
+
+""" vimfiler
+"""
 NeoBundleLazy 'Shougo/vimfiler', {
             \   'autoload' : { 'commands' : [ "VimFiler" ] }
             \}
+let s:bundle = neobundle#get("vimfiler")
+function! s:bundle.hooks.on_source(bundle)
+    let g:vimfiler_as_default_explorer = 1
+    let g:vimfiler_safe_mode_by_default = 0
+endfunction
+unlet s:bundle
+
+""" vimshell
+"""
 NeoBundleLazy 'Shougo/vimshell', {
             \   'autoload' : { 'commands' : [ "VimShell" ] }
             \}
 
-"--------------------------------------------------
-" thinca Plugin
-"--------------------------------------------------
+""" vim-quickrun
+"""
 NeoBundleLazy "thinca/vim-quickrun", {
             \   "autoload": { 'commands' : [ "Quickrun" ] }
             \ }
+nmap <Leader>r <Plug>(quickrun)
+let s:bundle = neobundle#get("vim-quickrun")
+function! s:bundle.hooks.on_source(bundle)
+    let g:quickrun_config={'*': {'split': ''}} " 横分割をするようにする
+    " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
+    set splitbelow
+    set splitright
+endfunction
+unlet s:bundle
+
+""" vim-scouter
+"""
 NeoBundleLazy 'thinca/vim-scouter', {
             \   'autoload' :  { 'commands' : [ "Scouter" ] }
             \}
+
+""" vim-ft-rst_header
+"""
 NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
 
-"--------------------------------------------------
-" Python Plugin
-"--------------------------------------------------
+""" vim-django-support
+"""
 NeoBundleLazy "lambdalisue/vim-django-support", {
             \ "autoload": {
             \   "insert": 1,
             \   "filetypes": ["python", "python3", "djangohtml"] }
             \ }
+
+""" vim-htmldjango_omnicomplete
+"""
 NeoBundleLazy 'mjbrownie/vim-htmldjango_omnicomplete', {
             \ "autoload" : {
             \   "insert" : 1,
             \   "filetypes": ["python", "python3", "djangohtml"] }
             \ }
+let s:bundle = neobundle#get("vim-htmldjango_omnicomplete")
+function! s:bundle.hooks.on_source(bundle)
+    autocmd MyAutoCmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
+    autocmd MyAutoCmd FileType htmldjango inoremap {% {% %}<left><left><left>
+    autocmd MyAutoCmd FileType htmldjango inoremap {{ {{ }}<left><left><left>
+endfunction
+unlet s:bundle
+
+""" jedi-vim
+"""
 NeoBundleLazy 'davidhalter/jedi-vim', {
             \   "autoload" : {
             \     "insert" : 1,
             \     "filetypes" : ["python", "python3", "djangohtml",
             \                    "jinja", "htmljinja"] }
             \}
+let s:bundle = neobundle#get("jedi-vim")
+function! s:bundle.hooks.on_source(bundle)
+    let g:jedi#auto_initialization = 1
+    let g:jedi#auto_vim_configuration = 0
+    let g:jedi#rename_command = "<leader>R"
+    let g:jedi#popup_on_dot = 1
+    let g:jedi#show_function_definition = 0
+    autocmd MyAutoCmd FileType python let b:did_ftplugin = 1
+endfunction
+unlet s:bundle
+
+""" vim-virtualenv
+"""
 NeoBundleLazy 'jmcantrell/vim-virtualenv', {
             \   "autoload" : {
             \     "insert" : 1,
             \     "filetypes" : ["python", "python3", "djangohtml",
             \                    "jinja", "htmljinja"] }
             \}
+
+""" pyflakes-vim
+"""
 NeoBundleLazy 'kevinw/pyflakes-vim', {
             \   "autoload" : {
             \     "insert" : 1,
             \     "filetypes" : ["python", "python3", "djangohtml",
             \                    "jinja", "htmljinja"] }
             \}
+
+""" vim-indent-guides
+"""
 NeoBundle 'nathanaelkane/vim-indent-guides'
+let s:bundle = neobundle#get("vim-indent-guides")
+function! s:bundle.hooks.on_source(bundle)
+    let g:indent_guides_enable_on_vim_startup = 1
+    let g:indent_guides_auto_colors = 0
+    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#121212 ctermbg=233
+    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626 ctermbg=235
+endfunction
+unlet s:bundle
 
 filetype plugin indent on             " Required!
 NeoBundleCheck                        " Installation check.
@@ -142,9 +242,6 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-"--------------------------------------------------
-" tab
-"--------------------------------------------------
 ""行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 set tabstop=4 " タブの画面上での幅
@@ -154,14 +251,13 @@ set expandtab "タブをスペースに展開する(noexpandtab:展開しない)
 set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " Makefile のみタブをスペースに展開しない
 autocmd MyAutoCmd FileType make setlocal noexpandtab
-"autocmd MyAutoCmd BufWritePre * :%s/\t/  /ge " 保存時にtabをスペースに変換する
-
-autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd MyAutoCmd FileType python :inoremap # X#
 autocmd MyAutoCmd FileType python :set textwidth=80 "桁数の制限
 autocmd MyAutoCmd FileType rst :set textwidth=90 "桁数の制限(100だと文字が小さい)
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
+autocmd MyAutoCmd BufNewFile *.py :%s/\t/  /ge " 保存時にtabをスペースに変換する
+autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 
 "ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
@@ -207,94 +303,3 @@ function! s:ClosePair(char)
         return a:char
     endif
 endf
-
-"--------------------------------------------------
-" IndentGuides
-"--------------------------------------------------
-let s:bundle = neobundle#get("vim-indent-guides")
-function! s:bundle.hooks.on_source(bundle)
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_auto_colors = 0
-    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#121212 ctermbg=233
-    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626 ctermbg=235
-endfunction
-unlet s:bundle
-
-"--------------------------------------------------
-" jedi
-"--------------------------------------------------
-let s:bundle = neobundle#get("jedi-vim")
-function! s:bundle.hooks.on_source(bundle)
-    let g:jedi#auto_initialization = 1
-    let g:jedi#auto_vim_configuration = 0
-    let g:jedi#rename_command = "<leader>R"
-    let g:jedi#popup_on_dot = 1
-    let g:jedi#show_function_definition = 0
-    autocmd MyAutoCmd FileType python let b:did_ftplugin = 1
-endfunction
-unlet s:bundle
-
-"--------------------------------------------------
-" vim-htmldjango_omnicomplete
-"--------------------------------------------------
-let s:bundle = neobundle#get("vim-htmldjango_omnicomplete")
-function! s:bundle.hooks.on_source(bundle)
-    autocmd MyAutoCmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-    autocmd MyAutoCmd FileType htmldjango inoremap {% {% %}<left><left><left>
-    autocmd MyAutoCmd FileType htmldjango inoremap {{ {{ }}<left><left><left>
-endfunction
-unlet s:bundle
-
-"--------------------------------------------------
-" quickrun
-"--------------------------------------------------
-nmap <Leader>r <Plug>(quickrun)
-let s:bundle = neobundle#get("vim-quickrun")
-function! s:bundle.hooks.on_source(bundle)
-    let g:quickrun_config={'*': {'split': ''}} " 横分割をするようにする
-    " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
-    set splitbelow
-    set splitright
-endfunction
-unlet s:bundle
-
-"--------------------------------------------------
-" neosnippet
-"--------------------------------------------------
-let s:bundle = neobundle#get("neosnippet.vim")
-function! s:bundle.hooks.on_source(bundle)
-    " Plugin key-mappings.
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-    " SuperTab like snippets behavior.
-    imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-                \ "\<Plug>(neosnippet_expand_or_jump)"
-                \: pumvisible() ? "\<C-n>" : "\<TAB>"
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-                \ "\<Plug>(neosnippet_expand_or_jump)"
-                \: "\<TAB>"
-
-    " For snippet_complete marker.
-    if has('conceal')
-        set conceallevel=2 concealcursor=i
-    endif
-
-    " Enable snipMate compatibility feature.
-    let g:neosnippet#enable_snipmate_compatibility = 1
-
-    " Tell Neosnippet about the other snippets
-    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-endfunction
-unlet s:bundle
-
-"--------------------------------------------------
-" VimFiler
-"--------------------------------------------------
-let s:bundle = neobundle#get("vimfiler")
-function! s:bundle.hooks.on_source(bundle)
-    let g:vimfiler_as_default_explorer = 1
-    let g:vimfiler_safe_mode_by_default = 0
-endfunction
-unlet s:bundle
