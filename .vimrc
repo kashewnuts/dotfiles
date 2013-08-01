@@ -14,10 +14,10 @@ augroup END
 "--------------------------------------------------
 " NeoBundle
 "--------------------------------------------------
-if isdirectory(expand('~.vim/neobundle.vim/'))
+if isdirectory(expand('~/.vim/neobundle.vim/'))
     set nocompatible                      " Be iMproved
     if has('vim_starting')
-        set runtimepath+=~.vim/neobundle.vim/
+        set runtimepath+=~/.vim/neobundle.vim/
     endif
     call neobundle#rc(expand('~/.vim/bundle'))
 
