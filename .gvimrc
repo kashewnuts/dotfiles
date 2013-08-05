@@ -5,9 +5,7 @@
 " To use this, copy to your home directory.
 " ==============================================================================
 
-"--------------------------------------------------
 " colorscheme 設定
-"--------------------------------------------------
 colorscheme adrian" (GUI使用時)
 
 " ツールバーを非表示にする
@@ -15,14 +13,14 @@ set guioptions-=T
 " メニューバーを非表示にする
 set guioptions-=m
 
-"--------------------------------------------------
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
+match ZenkakuSpace /　/
+
 " 背景透過設定
-"--------------------------------------------------
 set transparency=20
 
-"--------------------------------------------------
 " Hack #120: gVim でウィンドウの位置とサイズを記憶する
-"--------------------------------------------------
 let g:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
   autocmd!

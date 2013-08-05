@@ -5,6 +5,11 @@
 " To use this, copy to your home directory.
 " ==============================================================================
 
+"--------------------------------------------------
+" Initialize
+"--------------------------------------------------
+set nocompatible                      " Be iMproved
+
 """ release autogroup in MyAutoCmd
 """
 augroup MyAutoCmd
@@ -15,7 +20,6 @@ augroup END
 " NeoBundle
 "--------------------------------------------------
 if isdirectory(expand('~/.vim/neobundle.vim/'))
-    set nocompatible                      " Be iMproved
     if has('vim_starting')
         set runtimepath+=~/.vim/neobundle.vim/
     endif
@@ -233,10 +237,7 @@ set shiftwidth=4 "シフト移動幅
 set smartindent "新しい行を作ったときに高度な自動インデントを行う
 set showmatch "閉じ括弧が入力されたとき、対応する括弧を表示する
 set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
-
-" OSのクリップボードを使用する
-set clipboard+=unnamed
-set clipboard+=autoselect
+set clipboard+=unnamed,autoselect " OSのクリップボードを使用する
 
 " バックアップファイルを生成しない
 set noswapfile
@@ -274,10 +275,6 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" 全角スペースの表示
-highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
-match ZenkakuSpace /　/
-
 " 指定文字コードで強制的にファイルを開く
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -292,15 +289,3 @@ nmap <silent> <Esc><Esc> :nohlsearch<CR>
 " バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-
-"--------------------------------------------------------------------------
-" pair close checker.
-" from othree vimrc ( http://github.com/othree/rc/blob/master/osx/.vimrc )
-"--------------------------------------------------------------------------
-function! s:ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endf
