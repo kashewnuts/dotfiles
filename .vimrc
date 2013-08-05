@@ -235,16 +235,18 @@ set ambiwidth=double "文脈依存の文字幅を正常に表示する
 set number " 行番号を非表示 (nonumber:非表示)
 set shiftwidth=4 "シフト移動幅
 set smartindent "新しい行を作ったときに高度な自動インデントを行う
-set showmatch "閉じ括弧が入力されたとき、対応する括弧を表示する
 set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
 set clipboard+=unnamed,autoselect " OSのクリップボードを使用する
+set showmatch "閉じ括弧が入力されたとき、対応する括弧を表示する
+set matchpairs& matchpairs+=<:> " 対応括弧に'<'と'>'のペアを追加
+set backspace=indent,eol,start " バックスペースでなんでも消せるようにする
 
 " バックアップファイルを生成しない
 set noswapfile
 set nobackup
 set nowritebackup
 
-""行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
+" 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 set tabstop=4 " タブの画面上での幅
 set softtabstop=4 "ファイル内の  が対応する空白の数
