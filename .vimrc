@@ -157,7 +157,6 @@ if isdirectory(expand('~/.vim/neobundle.vim/'))
     """
     NeoBundleLazy "lambdalisue/vim-django-support", {
         \ "autoload": {
-        \   "insert": 1,
         \   "filetypes": ["python", "python3", "djangohtml"] }
         \ }
 
@@ -198,7 +197,6 @@ if isdirectory(expand('~/.vim/neobundle.vim/'))
     """
     NeoBundleLazy 'jmcantrell/vim-virtualenv', {
         \   "autoload" : {
-        \     "insert" : 1,
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
@@ -206,7 +204,6 @@ if isdirectory(expand('~/.vim/neobundle.vim/'))
     """
     NeoBundleLazy 'kevinw/pyflakes-vim', {
         \   "autoload" : {
-        \     "insert" : 1,
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
