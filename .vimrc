@@ -155,7 +155,7 @@ else
 
   """ vim-ft-rst_header
   """
-  NeoBundle "kashewnuts/vim-ft-rst_header"  " respect thinca/vim-ft-rst_header
+  NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
 
   """ vim-django-support
   """
