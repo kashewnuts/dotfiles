@@ -20,39 +20,39 @@ augroup END
 " NeoBundle
 "--------------------------------------------------
 let s:noplugin = 0
-if !isdirectory(expand('~/.vim/neobundle.vim/')) || v:version < 702
+if !isdirectory(expand("~/.vim/neobundle.vim/")) || v:version < 702
   " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切読み込まない
   let s:noplugin = 1
 else
-  if has('vim_starting')
+  if has("vim_starting")
     set runtimepath+=~/.vim/neobundle.vim/
   endif
-  call neobundle#rc(expand('~/.vim/bundle'))
+  call neobundle#rc(expand("~/.vim/bundle"))
 
   " Let NeoBundle manage NeoBundle
-  NeoBundleFetch 'Shougo/neobundle.vim'
+  NeoBundleFetch "Shougo/neobundle.vim"
 
   """ vimproc
   """
-  NeoBundle 'Shougo/vimproc', {
-        \ 'build': {
-        \   'windows'   : 'make -f make_mingw32.mak',
-        \   'cygwin'    : 'make -f make_cygwin.mak',
-        \   'mac'       : 'make -f make_mac.mak',
-        \   'unix'      : 'make -f make_unix.mak',
+  NeoBundle "Shougo/vimproc", {
+        \ "build": {
+        \   "windows"   : "make -f make_mingw32.mak",
+        \   "cygwin"    : "make -f make_cygwin.mak",
+        \   "mac"       : "make -f make_mac.mak",
+        \   "unix"      : "make -f make_unix.mak",
         \ }}
 
   """ unite.vim
   """
-  NeoBundleLazy 'Shougo/unite.vim', {
-        \   'autoload' : { 'commands' : [ "Unite" ] }
+  NeoBundleLazy "Shougo/unite.vim", {
+        \   "autoload" : { "commands" : [ "Unite" ] }
         \}
 
   """ neocomplete.vim, neocomplcache.vim
   """
-  if has('lua') && v:version >= 703 && has('patch885') || has('lua') && v:version >= 704
-    NeoBundleLazy 'Shougo/neocomplete.vim', {
-        \ 'autoload': { 'insert': 1, }
+  if has("lua") && v:version >= 703 && has("patch885") || has("lua") && v:version >= 704
+    NeoBundleLazy "Shougo/neocomplete.vim", {
+        \ "autoload": { "insert": 1, }
         \ }
     " 2013-07-03 14:30 NeoComplCacheに合わせた
     let g:neocomplete#enable_at_startup = 1
@@ -67,8 +67,8 @@ else
     endfunction
     unlet s:bundle
   else
-    NeoBundleLazy 'Shougo/neocomplcache.vim', {
-        \ 'autoload': {'insert': 1, }
+    NeoBundleLazy "Shougo/neocomplcache.vim", {
+        \ "autoload": {"insert": 1, }
         \ }
     " 2013-07-03 14:30 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
     let g:neocomplcache_enable_at_startup = 1
@@ -82,9 +82,9 @@ else
 
   """ neosnippet
   """
-  NeoBundleLazy 'Shougo/neosnippet.vim', {
-        \   'depends': ["honza/vim-snippets"],
-        \   'autoload': { 'insert': 1, }
+  NeoBundleLazy "Shougo/neosnippet.vim", {
+        \   "depends": ["honza/vim-snippets"],
+        \   "autoload": { "insert": 1, }
         \}
   let s:bundle = neobundle#get("neosnippet.vim")
   function! s:bundle.hooks.on_source(bundle)
@@ -102,7 +102,7 @@ else
           \: "\<TAB>"
 
     " For snippet_complete marker.
-    if has('conceal')
+    if has("conceal")
       set conceallevel=2 concealcursor=i
     endif
 
@@ -110,14 +110,14 @@ else
     let g:neosnippet#enable_snipmate_compatibility = 1
 
     " Tell Neosnippet about the other snippets
-    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+    let g:neosnippet#snippets_directory="~/.vim/bundle/vim-snippets/snippets"
   endfunction
   unlet s:bundle
 
   """ vimfiler
   """
-  NeoBundleLazy 'Shougo/vimfiler', {
-        \   'autoload' : { 'commands' : [ "VimFiler" ] }
+  NeoBundleLazy "Shougo/vimfiler", {
+        \   "autoload" : { "commands" : [ "VimFiler" ] }
         \}
   let s:bundle = neobundle#get("vimfiler")
   function! s:bundle.hooks.on_source(bundle)
@@ -128,19 +128,19 @@ else
 
   """ vimshell
   """
-  NeoBundleLazy 'Shougo/vimshell', {
-        \   'autoload' : { 'commands' : [ "VimShell" ] }
+  NeoBundleLazy "Shougo/vimshell", {
+        \   "autoload" : { "commands" : [ "VimShell" ] }
         \}
 
   """ vim-quickrun
   """
   NeoBundleLazy "thinca/vim-quickrun", {
-        \   "autoload": { 'commands' : [ "Quickrun" ] }
+        \   "autoload": { "commands" : [ "Quickrun" ] }
         \ }
   nmap <Leader>r <Plug>(quickrun)
   let s:bundle = neobundle#get("vim-quickrun")
   function! s:bundle.hooks.on_source(bundle)
-    let g:quickrun_config={'*': {'split': ''}} " 横分割をするようにする
+    let g:quickrun_config={"*": {"split": ""}} " 横分割をするようにする
     " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
     set splitbelow
     set splitright
@@ -149,13 +149,13 @@ else
 
   """ vim-scouter
   """
-  NeoBundleLazy 'thinca/vim-scouter', {
-        \   'autoload' :  { 'commands' : [ "Scouter" ] }
+  NeoBundleLazy "thinca/vim-scouter", {
+        \   "autoload" :  { "commands" : [ "Scouter" ] }
         \}
 
   """ vim-ft-rst_header
   """
-  NeoBundle 'kashewnuts/vim-ft-rst_header'  " respect thinca/vim-ft-rst_header
+  NeoBundle "kashewnuts/vim-ft-rst_header"  " respect thinca/vim-ft-rst_header
 
   """ vim-django-support
   """
@@ -166,7 +166,7 @@ else
 
   """ vim-htmldjango_omnicomplete
   """
-  NeoBundleLazy 'mjbrownie/vim-htmldjango_omnicomplete', {
+  NeoBundleLazy "mjbrownie/vim-htmldjango_omnicomplete", {
         \ "autoload" : {
         \   "insert" : 1,
         \   "filetypes": ["python", "python3", "djangohtml"] }
@@ -181,7 +181,7 @@ else
 
   """ jedi-vim
   """
-  NeoBundleLazy 'davidhalter/jedi-vim', {
+  NeoBundleLazy "davidhalter/jedi-vim", {
         \   "autoload" : {
         \   "insert" : 1,
         \   "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
@@ -199,21 +199,21 @@ else
 
   """ vim-virtualenv
   """
-  NeoBundleLazy 'jmcantrell/vim-virtualenv', {
+  NeoBundleLazy "jmcantrell/vim-virtualenv", {
         \   "autoload" : {
         \   "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
   """ pyflakes-vim
   """
-  NeoBundleLazy 'kevinw/pyflakes-vim', {
+  NeoBundleLazy "kevinw/pyflakes-vim", {
         \   "autoload" : {
         \   "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
   """ vim-indent-guides
   """
-  NeoBundle 'nathanaelkane/vim-indent-guides'
+  NeoBundle "nathanaelkane/vim-indent-guides"
   let s:bundle = neobundle#get("vim-indent-guides")
   function! s:bundle.hooks.on_source(bundle)
     let g:indent_guides_enable_on_vim_startup = 1
@@ -239,7 +239,7 @@ set smartindent " 新しい行を作ったときに高度な自動インデン�
 set imdisable " 挿入モードから抜ける際、入る際にIMEがオフになる
 set clipboard+=unnamed,autoselect " OSのクリップボードを使用する
 set showmatch " 閉じ括弧が入力されたとき、対応する括弧を表示する
-set matchpairs& matchpairs+=<:> " 対応括弧に'<'と'>'のペアを追加
+set matchpairs& matchpairs+=<:> " 対応括弧に '<' と '>' のペアを追加
 set backspace=indent,eol,start " バックスペースでなんでも消せるようにする
 
 " バックアップファイルを生成しない
