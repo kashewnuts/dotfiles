@@ -4,18 +4,7 @@ My dotfiles
 Setup
 -----
 
-Case github.com
-~~~~~~~~~~~~~~~
-
 .. code-block:: bash
 
-    git clone https://github.com/kashewnuts/dotfiles ~/dotfiles
-    ~/dotfiles/setup.sh
-
-Case bitbuket.org
-~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    hg clone https://bitbucket.org/kashewnuts/dotfiles
+    git clone https://github.com/kashewnuts/dotfiles
     ~/dotfiles/setup.sh
