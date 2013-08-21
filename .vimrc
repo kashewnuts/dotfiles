@@ -243,7 +243,7 @@ set backspace=indent,eol,start " バックスペースでなんでも消せる�
 if !(has('win16') || has('win32') || has('win64'))
   set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
   set ambiwidth=double "文脈依存の文字幅を正常に表示する
-  set list listchars=tab:≫-,trail:-,extends:≫,precedes:≪,nbsp:% " 不可視文字の可視化
+  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 else
   set list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
 endif
