@@ -21,7 +21,8 @@ augroup END
 " -------------------------------------------------
 let s:noplugin = 0
 if !isdirectory(expand("~/.vim/neobundle.vim/")) || v:version < 702
-  " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切読み込まない
+  " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切
+  " 読み込まない
   let s:noplugin = 1
 else
   if has("vim_starting")
@@ -50,11 +51,12 @@ else
 
   """ neocomplete.vim, neocomplcache.vim
   """
-  if has("lua") && v:version >= 703 && has("patch885") || has("lua") && v:version >= 704
+  if has("lua") && v:version >= 703 && has("patch885") ||
+        \ has("lua") && v:version >= 704
     NeoBundleLazy "Shougo/neocomplete.vim", {
         \ "autoload": { "insert": 1, }
         \ }
-    " 2013-07-03 14:30 NeoComplCacheに合わせた
+    " NeoComplCacheに合わせた
     let g:neocomplete#enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplete.vim")
     function! s:bundle.hooks.on_source(bundle)
@@ -70,7 +72,7 @@ else
     NeoBundleLazy "Shougo/neocomplcache.vim", {
         \ "autoload": {"insert": 1, }
         \ }
-    " 2013-07-03 14:30 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
+    " 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
     let g:neocomplcache_enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplcache.vim")
     function! s:bundle.hooks.on_source(bundle)
@@ -182,9 +184,10 @@ else
   """ jedi-vim
   """
   NeoBundleLazy "davidhalter/jedi-vim", {
-        \   "autoload" : {
-        \   "insert" : 1,
-        \   "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \  "autoload" : {
+        \    "insert" : 1,
+        \    "filetypes" : ["python", "python3", "djangohtml",
+        \                   "jinja", "htmljinja"] }
         \}
   let s:bundle = neobundle#get("jedi-vim")
   function! s:bundle.hooks.on_source(bundle)
@@ -201,14 +204,16 @@ else
   """
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
         \   "autoload" : {
-        \   "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \     "filetypes" : ["python", "python3", "djangohtml",
+        \                    "jinja", "htmljinja"] }
         \}
 
   """ pyflakes-vim
   """
   NeoBundleLazy "kevinw/pyflakes-vim", {
         \   "autoload" : {
-        \   "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \     "filetypes" : ["python", "python3", "djangohtml",
+        \                    "jinja", "htmljinja"] }
         \}
 
   """ vim-indent-guides
@@ -240,12 +245,12 @@ set showmatch " 閉じ括弧が入力されたとき、対応する括弧を表�
 set matchpairs& matchpairs+=<:> " 対応括弧に '<' と '>' のペアを追加
 set backspace=indent,eol,start " バックスペースでなんでも消せるようにする
 
-if !(has('win16') || has('win32') || has('win64'))
+if (has('win16') || has('win32') || has('win64'))
+  set list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
+else
   set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
   set ambiwidth=double "文脈依存の文字幅を正常に表示する
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-else
-  set list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
 endif
 
 " バックアップファイルを生成しない
@@ -253,7 +258,7 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
+set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデント
 set tabstop=4 " タブの画面上での幅
 set softtabstop=4 " ファイル内の  が対応する空白の数
 set expandtab " タブをスペースに展開する(noexpandtab:展開しない)
@@ -263,7 +268,7 @@ autocmd MyAutoCmd FileType make setlocal noexpandtab
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd MyAutoCmd FileType python :inoremap # X#
 autocmd MyAutoCmd FileType python :set textwidth=80 " 桁数の制限
-autocmd MyAutoCmd FileType rst :set textwidth=90 " 桁数の制限(100だと文字が小さい)
+autocmd MyAutoCmd FileType rst :set textwidth=90    " 桁数の制限
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 autocmd MyAutoCmd BufNewFile *.py :%s/\t/  /ge " 保存時にtabをスペースに変換する
 autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する

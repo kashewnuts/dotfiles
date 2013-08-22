@@ -8,8 +8,10 @@
 
 colorscheme adrian " colorscheme 設定 (GUI使用時)
 
-if has('gui_macvim')
-    set transparency=20 " 背景透過設定
+if (has('win16') || has('win32') || has('win64'))
+  set guifont=MS_Gothic:h10 " フォント設定
+elseif has('gui_macvim')
+  set transparency=20 " 背景透過設定
 endif
 
 set guioptions-=T  " ツールバーを非表示にする
