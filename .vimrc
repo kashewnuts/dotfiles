@@ -19,16 +19,42 @@ augroup END
 " -------------------------------------------------
 " NeoBundle
 " -------------------------------------------------
+let s:neobundledir = expand("~/.vim/neobundle.vim")
+let s:neobundlebundledir = expand("~/.vim/bundle")
 let s:noplugin = 0
-if !isdirectory(expand("~/.vim/neobundle.vim/")) || v:version <= 702
+
+if !isdirectory(s:neobundledir) || v:version < 702
   " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切
   " 読み込まない
   let s:noplugin = 1
+
+elseif isdirectory(s:neobundledir) && !isdirectory(s:neobundlebundledir)
+  " Neobundleが存在し、プラグインがインストールされていない場合下準備を行う
+  if has("vim_starting")
+    execute 'set runtimepath+=' . s:neobundledir
+  endif
+  call neobundle#rc(s:neobundlebundledir)
+
+  " Let NeoBundle manage NeoBundle
+  NeoBundleFetch "Shougo/neobundle.vim"
+
+  NeoBundle "Shougo/unite.vim"
+  NeoBundle "Shougo/vimproc", {
+        \ "build": {
+        \   "windows"   : "make -f make_mingw32.mak",
+        \   "cygwin"    : "make -f make_cygwin.mak",
+        \   "mac"       : "make -f make_mac.mak",
+        \   "unix"      : "make -f make_unix.mak",
+        \ }}
+
+  filetype plugin indent on         " Required!
+  NeoBundleCheck                    " Installation check.
+
 else
   if has("vim_starting")
-    set runtimepath+=~/.vim/neobundle.vim/
+    execute 'set runtimepath+=' . s:neobundledir
   endif
-  call neobundle#rc(expand("~/.vim/bundle"))
+  call neobundle#rc(s:neobundlebundledir)
 
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch "Shougo/neobundle.vim"
