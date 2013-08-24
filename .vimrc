@@ -20,7 +20,7 @@ augroup END
 " NeoBundle
 " -------------------------------------------------
 let s:noplugin = 0
-if !isdirectory(expand("~/.vim/neobundle.vim/")) || v:version < 702
+if !isdirectory(expand("~/.vim/neobundle.vim/")) || v:version <= 702
   " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切
   " 読み込まない
   let s:noplugin = 1
