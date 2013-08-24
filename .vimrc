@@ -19,21 +19,21 @@ augroup END
 " -------------------------------------------------
 " NeoBundle
 " -------------------------------------------------
-let s:neobundledir = expand("~/.vim/neobundle.vim")
-let s:neobundlebundledir = expand("~/.vim/bundle")
 let s:noplugin = 0
+let s:neobundledir = expand("~/.vim/neobundle.vim")
+let s:bundledir = expand("~/.vim/bundle")
 
 if !isdirectory(s:neobundledir) || v:version < 702
   " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切
   " 読み込まない
   let s:noplugin = 1
 
-elseif isdirectory(s:neobundledir) && !isdirectory(s:neobundlebundledir)
+elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   " Neobundleが存在し、プラグインがインストールされていない場合下準備を行う
   if has("vim_starting")
     execute 'set runtimepath+=' . s:neobundledir
   endif
-  call neobundle#rc(s:neobundlebundledir)
+  call neobundle#rc(s:bundledir)
 
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch "Shougo/neobundle.vim"
@@ -54,7 +54,7 @@ else
   if has("vim_starting")
     execute 'set runtimepath+=' . s:neobundledir
   endif
-  call neobundle#rc(s:neobundlebundledir)
+  call neobundle#rc(s:bundledir)
 
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch "Shougo/neobundle.vim"
@@ -77,8 +77,7 @@ else
 
   """ neocomplete.vim, neocomplcache.vim
   """
-  if has("lua") && v:version >= 703 && has("patch885") ||
-        \ has("lua") && v:version >= 704
+  if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
     NeoBundleLazy "Shougo/neocomplete.vim", {
         \ "autoload": { "insert": 1, }
         \ }
@@ -94,6 +93,7 @@ else
       let g:neocomplete#sources#syntax#min_keyword_length = 3
     endfunction
     unlet s:bundle
+
   else
     NeoBundleLazy "Shougo/neocomplcache.vim", {
         \ "autoload": {"insert": 1, }
