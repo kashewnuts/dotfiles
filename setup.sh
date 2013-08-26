@@ -9,6 +9,7 @@ DOT_FILES=(
     .gitmodules \
     .bashrc \
     .bash_profile \
+    .pythonstartup \
 )
 
 for file in ${DOT_FILES[@]}
