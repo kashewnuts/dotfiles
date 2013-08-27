@@ -4,13 +4,17 @@ import readline
 import rlcompleter
 import atexit
 import os
+import platform
 # タブ補完
 readline.parse_and_bind('tab: complete')
 # ヒストリーファイル
-histfile = os.path.join(os.environ['HOME'], '.pythonhistory')
+if platform.system() == 'Windows':
+    histfile = os.path.join(os.environ['HOMEPATH'], '.pythonhistory')
+else:
+    histfile = os.path.join(os.environ['HOME'], '.pythonhistory')
 try:
     readline.read_history_file(histfile)
 except IOError:
     pass
 atexit.register(readline.write_history_file, histfile)
-del os, histfile, readline, rlcompleter, atexit
+del platform, os, histfile, readline, rlcompleter, atexit
