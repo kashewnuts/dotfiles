@@ -9,12 +9,14 @@ import platform
 readline.parse_and_bind('tab: complete')
 # ヒストリーファイル
 if platform.system() == 'Windows':
-    histfile = os.path.join(os.environ['HOMEPATH'], '.pythonhistory')
+    environ_path = 'HOMEPATH'
 else:
-    histfile = os.path.join(os.environ['HOME'], '.pythonhistory')
+    environ_path = 'HOME'
+histfile = os.path.join(os.environ[environ_path], '.pythonhistory')
+
 try:
     readline.read_history_file(histfile)
 except IOError:
     pass
 atexit.register(readline.write_history_file, histfile)
-del platform, os, histfile, readline, rlcompleter, atexit
+del platform, os, histfile, environ_path, readline, rlcompleter, atexit
