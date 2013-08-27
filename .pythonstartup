@@ -9,7 +9,7 @@ import platform
 readline.parse_and_bind('tab: complete')
 # ヒストリーファイル
 if platform.system() == 'Windows':
-    environ_path = 'HOMEPATH'
+    environ_path = 'USERPROFILE'
 else:
     environ_path = 'HOME'
 histfile = os.path.join(os.environ[environ_path], '.pythonhistory')
