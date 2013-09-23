@@ -14,15 +14,15 @@ DOT_FILES=(
 
 for file in ${DOT_FILES[@]}
 do
-  # シンボリックリンク設定
+  # Set Symbolic Link
   if [ -a $HOME/$file ]; then
-    echo "既にファイルが存在します: $file"
+    echo "Already exists file: $file"
   else
     ln -s $HOME/dotfiles/$file $HOME/$file
-    echo "シンボリックリンクを貼りました: $file"
+    echo "Put Symbolic Link: $file"
   fi
 
-  # neobundle.vim をインストールする
+  # Install neobundle.vim
   if [ ! -e $HOME/${DOT_FILES[0]}/neobundle.vim -a -x "`which git`" ]; then
       git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim
   fi
