@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
-# Pythonスタートアップ
+# Python startup
 import readline
 import rlcompleter
 import atexit
 import os
 import platform
-# タブ補完
+# Tab complement
 readline.parse_and_bind('tab: complete')
-# ヒストリーファイル
+# History File
 if platform.system() == 'Windows':
     environ_path = 'USERPROFILE'
 else:
