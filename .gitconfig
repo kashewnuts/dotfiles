@@ -1,16 +1,8 @@
 [user]
-  name = kashewnuts
-  email = bjzli.m08vo9kqs@gmail.com
+	name = kashewnuts
+	email = bjzli.m08vo9kqs@gmail.com
 [core]
-  excludesfile = /Users/KashunYoshida/.gitignore_global
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path =
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
-[usr]
-  name = kashewnuts
-[github]
-  name = kashewnuts
-  token = 52a410757657878fb09e4e2c56533acc
+	autocrlf = true
+	editor = vim
+[color]
+	ui = true
