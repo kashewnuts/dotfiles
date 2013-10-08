@@ -1,0 +1,8 @@
+[user]
+	name = kashewnuts
+	email = bjzli.m08vo9kqs@gmail.com
+[core]
+	autocrlf = true
+	editor = vim
+[color]
+	ui = true

@@ -1,6 +1,7 @@
 .gitmodules
 .DS_Store
 .hg/
+Thumbs.db
 
 # vim
 .vim/bundle/

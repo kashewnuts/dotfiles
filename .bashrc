@@ -34,6 +34,12 @@ case "$OSTYPE" in
     ;;
 esac
 
+export PS1='\h:\w\$ '
+export PS2=''
+export EDITOR=vi
+alias ls='ls -FN'
+alias vi='vim'
+
 # Python
 export PYTHONSTARTUP=~/.pythonstartup
 export PIP_DOWNLOAD_CACHE=~/.pip/download_cache

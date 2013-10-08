@@ -255,6 +255,10 @@ else
   endfunction
   unlet s:bundle
 
+  """ vim-alignta
+  """
+  NeoBundle "h1mesuke/vim-alignta"
+
   filetype plugin indent on         " Required!
   NeoBundleCheck                    " Installation check.
 endif
