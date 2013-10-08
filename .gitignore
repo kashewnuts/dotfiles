@@ -1,0 +1,8 @@
+.DS_Store
+.hg/
+Thumbs.db
+
+# vim
+vim/.vim/bundle/
+vim/.vim/bundle_manual/
+vim/.vim/neobundle.vim/
