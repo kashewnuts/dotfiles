@@ -2,4 +2,4 @@
 username=kashewnuts <bjzli.m08vo9kqs@gmail.com>
 ignore=C:/Users/KashunYoshida/.hgignore_global
 editor=vim
-# ssh = ssh -C
+ssh = "C:\Program Files (x86)\Git\bin\ssh.exe" -C
