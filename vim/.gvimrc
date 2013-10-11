@@ -27,7 +27,7 @@ highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
 match ZenkakuSpace /　/
 
 " Hack #120: Store the location and size of the window by gVim
-let g:save_window_file = expand('~/.vim/.vimwinpos')
+let g:save_window_file = expand('.vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()
