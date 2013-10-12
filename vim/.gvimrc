@@ -27,7 +27,7 @@ highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
 match ZenkakuSpace /　/
 
 " Hack #120: Store the location and size of the window by gVim
-let g:save_window_file = expand('.vimwinpos')
+let g:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()
@@ -48,8 +48,8 @@ endif
 " ime setting
 if has('multi byte_ime') || has('xim') || has('gui_macvim')
     " Insert , Search mode: ime setting
-    set iminsert=0
-    set imsearch=0
+    set iminsert=2
+    set imsearch=2
     " Normal mode: IME off
     inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
 endif
