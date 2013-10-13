@@ -1,3 +1,5 @@
+cd files
+
 DOT_FILES=(
     .vim \
     .vimrc \

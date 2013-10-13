@@ -212,8 +212,7 @@ else
   NeoBundleLazy "davidhalter/jedi-vim", {
         \  "autoload" : {
         \    "insert" : 1,
-        \    "filetypes" : ["python", "python3", "djangohtml",
-        \                   "jinja", "htmljinja"] }
+        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
   let s:bundle = neobundle#get("jedi-vim")
   function! s:bundle.hooks.on_source(bundle)
@@ -231,24 +230,21 @@ else
   """
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
         \   "autoload" : {
-        \     "filetypes" : ["python", "python3", "djangohtml",
-        \                    "jinja", "htmljinja"] }
+        \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
   """ pyflakes-vim
   """
   NeoBundleLazy "kevinw/pyflakes-vim", {
         \   "autoload" : {
-        \     "filetypes" : ["python", "python3", "djangohtml",
-        \                    "jinja", "htmljinja"] }
+        \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
   """ vim-flake8
   ""
   NeoBundleLazy "nvie/vim-flake8", {
         \   "autoload" : {
-        \     "filetypes" : ["python", "python3", "djangohtml",
-        \                    "jinja", "htmljinja"] }
+        \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
   """ vim-indent-guides
@@ -311,7 +307,7 @@ autocmd MyAutoCmd FileType rst :set textwidth=90    " 桁数の制限
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 autocmd MyAutoCmd BufNewFile *.py :%s/\t/  /ge " 保存時にtabをスペースに変換する
 autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
-"autocmd MyAutoCmd BufWritePost *.py call Flake8()
+autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
 
 " ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
