@@ -301,12 +301,15 @@ set expandtab " タブをスペースに展開する(noexpandtab:展開しない
 " Makefile のみタブをスペースに展開しない
 autocmd MyAutoCmd FileType make setlocal noexpandtab
 autocmd MyAutoCmd FileType cf setlocal noexpandtab
-" 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
-autocmd MyAutoCmd FileType python :inoremap # X#
-autocmd MyAutoCmd FileType python :set textwidth=80 " 桁数の制限
 autocmd MyAutoCmd FileType rst :set textwidth=90    " 桁数の制限
-autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
-autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
+
+if &l:filetype ==# 'python'
+  " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
+  autocmd MyAutoCmd FileType python :inoremap # X#
+  autocmd MyAutoCmd FileType python :set textwidth=80 " 桁数の制限
+  autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
+  autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
+endif
 
 if &l:filetype !=# 'cf'
   autocmd MyAutoCmd BufNewFile * :%s/\t/  /ge " 保存時にtabをスペースに変換する
