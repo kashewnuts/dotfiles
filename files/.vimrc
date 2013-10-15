@@ -303,15 +303,13 @@ autocmd MyAutoCmd FileType python :inoremap # X#
 autocmd MyAutoCmd FileType python :set textwidth=80 " 桁数の制限
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
+autocmd MyAutoCmd BufNewFile * :%s/\t/  /ge " 保存時にtabをスペースに変換する
+autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 
-if &l:filetype !=# 'cf'
-  autocmd MyAutoCmd BufNewFile * :%s/\t/  /ge " 保存時にtabをスペースに変換する
-  autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
-endif
-
-" Makefile のみタブをスペースに展開しない
-autocmd MyAutoCmd FileType make setlocal noexpandtab
 autocmd MyAutoCmd FileType cf setlocal noexpandtab
+autocmd MyAutoCmd FileType cf :set eventignore=BufNewFile,BufWritePre
+
+autocmd MyAutoCmd FileType make setlocal noexpandtab
 autocmd MyAutoCmd FileType rst :set textwidth=90    " 桁数の制限
 
 " ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
