@@ -306,8 +306,9 @@ autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
 autocmd MyAutoCmd BufNewFile * :%s/\t/  /ge " 保存時にtabをスペースに変換する
 autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 
+autocmd MyAutoCmd FileType cf setlocal encoding=cp932
 autocmd MyAutoCmd FileType cf setlocal noexpandtab
-autocmd MyAutoCmd FileType cf :set eventignore=BufNewFile,BufWritePre
+autocmd MyAutoCmd FileType cf setlocal eventignore=BufNewFile,BufWritePre
 
 autocmd MyAutoCmd FileType make setlocal noexpandtab
 autocmd MyAutoCmd FileType rst :set textwidth=90    " 桁数の制限
