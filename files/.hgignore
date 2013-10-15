@@ -2,5 +2,6 @@
 .gitmodules
 .DS_Store
 
-.vim/bundle/
-.vim/bundle_manual/
+files/.vim/bundle/
+files/.vim/bundle_manual/
+files/.vim/neobundle.vim/
