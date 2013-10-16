@@ -272,6 +272,7 @@ endif
 " -------------------------------------------------
 syntax on " シンタックスハイライトを有効にする
 set encoding=utf8 " デフォルトの文字コード
+set fileencodings=iso-2022-jp,cp932,sjis,euc-jp,utf-8
 set number " 行番号を非表示 (nonumber:非表示)
 set shiftwidth=4 " シフト移動幅
 set smartindent " 新しい行を作ったときに高度な自動インデントを行う
@@ -285,7 +286,7 @@ if (has('win16') || has('win32') || has('win64'))
 else
   set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
   set ambiwidth=double "文脈依存の文字幅を正常に表示する
-  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+  set list listchars=tab:≫-,trail:-,extends:≫,precedes:≪,nbsp:%
 endif
 
 " バックアップファイルを生成しない
@@ -306,7 +307,6 @@ autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
 autocmd MyAutoCmd BufNewFile * :%s/\t/  /ge " 保存時にtabをスペースに変換する
 autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 
-autocmd MyAutoCmd FileType cf setlocal encoding=cp932
 autocmd MyAutoCmd FileType cf setlocal noexpandtab
 autocmd MyAutoCmd FileType cf setlocal eventignore=BufNewFile,BufWritePre
 
