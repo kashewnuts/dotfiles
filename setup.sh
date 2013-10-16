@@ -1,5 +1,3 @@
-cd files
-
 DOT_FILES=(
     .vim \
     .vimrc \
@@ -8,7 +6,6 @@ DOT_FILES=(
     .hgignore_global \
     .gitconfig \
     .gitignore_global \
-    .gitmodules \
     .bashrc \
     .bash_profile \
     .pythonstartup \
@@ -20,7 +17,7 @@ do
   if [ -a $HOME/$file ]; then
     echo "Already exists file: $file"
   else
-    ln -s $HOME/dotfiles/$file $HOME/$file
+    ln -s $HOME/dotfiles/files/$file $HOME/$file
     echo "Put Symbolic Link: $file"
   fi
 
