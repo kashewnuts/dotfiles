@@ -9,8 +9,8 @@ Common
     git clone https://github.com/kashewnuts/dotfiles
 
 
-For Non Windows
----------------
+For Non-Windows (like Linux, Mac OSX)
+-------------------------------------
 
 Just
 
