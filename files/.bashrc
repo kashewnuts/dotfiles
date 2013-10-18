@@ -10,5 +10,3 @@ export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
 
 # crontab
 alias crontab='crontab -i'
-
-

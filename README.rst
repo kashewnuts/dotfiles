@@ -4,6 +4,8 @@ Setup
 Common
 ------
 
+At your home directory,
+
 .. code-block:: bash
 
     git clone https://github.com/kashewnuts/dotfiles
@@ -22,7 +24,7 @@ Just
 For Windows
 -----------
 
-1st.
+1st
 
 .. code-block:: bash
 
