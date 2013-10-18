@@ -1,11 +1,13 @@
-mklink %USERPROFILE%\.vimrc %USERPROFILE%\dotfiles\files\.vimrc
-mklink %USERPROFILE%\.gvimrc %USERPROFILE%\dotfiles\files\.gvimrc
-mklink /d %USERPROFILE%\vimfiles %USERPROFILE%\dotfiles\files\.vim
-mklink /d %USERPROFILE%\.vim %USERPROFILE%\dotfiles\files\.vim
-mklink /h %USERPROFILE%\.gitconfig %USERPROFILE%\dotfiles\files\.gitconfig_win
-mklink %USERPROFILE%\.gitignore %USERPROFILE%\dotfiles\files\.gitignore
-mklink %USERPROFILE%\.hgrc %USERPROFILE%\dotfiles\files\.hgrc_win
-mklink %USERPROFILE%\.hgignore %USERPROFILE%\dotfiles\files\.hgignore
-mklink %USERPROFILE%\.pythonstartup %USERPROFILE%\dotfiles\files\.pythonstartup
+@set DOTDIR=%USERPROFILE%\dotfiles\files
 
-pause
+mklink %USERPROFILE%\.vimrc %DOTDIR%\.vimrc
+mklink %USERPROFILE%\.gvimrc %DOTDIR%\.gvimrc
+mklink /d %USERPROFILE%\vimfiles %DOTDIR%\.vim
+mklink /d %USERPROFILE%\.vim %DOTDIR%\.vim
+mklink /h %USERPROFILE%\.gitconfig %DOTDIR%\.gitconfig_win
+mklink %USERPROFILE%\.gitignore %DOTDIR%\.gitignore
+mklink %USERPROFILE%\.hgrc %DOTDIR%\.hgrc_win
+mklink %USERPROFILE%\.hgignore %DOTDIR%\.hgignore
+mklink %USERPROFILE%\.pythonstartup %DOTDIR%\.pythonstartup
+
+@pause
