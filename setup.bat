@@ -1,13 +1,13 @@
-@set DOTDIR=%USERPROFILE%\dotfiles\files
+@set DOTFILES=%USERPROFILE%\dotfiles\files
 
-mklink %USERPROFILE%\.vimrc %DOTDIR%\.vimrc
-mklink %USERPROFILE%\.gvimrc %DOTDIR%\.gvimrc
-mklink /d %USERPROFILE%\vimfiles %DOTDIR%\.vim
-mklink /d %USERPROFILE%\.vim %DOTDIR%\.vim
-mklink /h %USERPROFILE%\.gitconfig %DOTDIR%\.gitconfig_win
-mklink %USERPROFILE%\.gitignore %DOTDIR%\.gitignore
-mklink %USERPROFILE%\.hgrc %DOTDIR%\.hgrc_win
-mklink %USERPROFILE%\.hgignore %DOTDIR%\.hgignore
-mklink %USERPROFILE%\.pythonstartup %DOTDIR%\.pythonstartup
+mklink %USERPROFILE%\.vimrc %DOTFILES%\.vimrc
+mklink %USERPROFILE%\.gvimrc %DOTFILES%\.gvimrc
+mklink /d %USERPROFILE%\vimfiles %DOTFILES%\.vim
+mklink /d %USERPROFILE%\.vim %DOTFILES%\.vim
+mklink /h %USERPROFILE%\.gitconfig %DOTFILES%\.gitconfig_win
+mklink %USERPROFILE%\.gitignore %DOTFILES%\.gitignore
+mklink %USERPROFILE%\.hgrc %DOTFILES%\.hgrc_win
+mklink %USERPROFILE%\.hgignore %DOTFILES%\.hgignore
+mklink %USERPROFILE%\.pythonstartup %DOTFILES%\.pythonstartup
 
 @pause
