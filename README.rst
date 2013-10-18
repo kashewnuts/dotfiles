@@ -1,5 +1,7 @@
-Setup
-=====
+My dotfiles
+===========
+
+This is my dotfiles. To setup, run as below.
 
 Common
 ------
