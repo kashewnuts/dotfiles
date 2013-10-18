@@ -8,3 +8,6 @@
 	ui = true
 [push]
 	default = simple
+[gui]
+	encoding = utf-8
+
