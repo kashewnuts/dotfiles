@@ -4,6 +4,7 @@
 [core]
 	autocrlf = true
 	editor = vim
+	excludesfile = ~/.gitignore
 [color]
 	ui = true
 [push]

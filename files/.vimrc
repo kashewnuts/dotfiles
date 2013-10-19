@@ -303,14 +303,19 @@ autocmd MyAutoCmd FileType python inoremap # X#
 autocmd MyAutoCmd FileType python setlocal textwidth=80 " 桁数の制限
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
-autocmd MyAutoCmd BufNewFile * :%s/\t/  /ge " 保存時にtabをスペースに変換する
-autocmd MyAutoCmd BufWritePre * :%s/\s\+$//ge " 保存時に行末の空白を除去する
 
 autocmd MyAutoCmd FileType cf setlocal noexpandtab
-autocmd MyAutoCmd FileType cf setlocal eventignore=BufNewFile,BufWritePre
-
 autocmd MyAutoCmd FileType make setlocal noexpandtab
-autocmd MyAutoCmd FileType rst  setlocal textwidth=90    " 桁数の制限
+
+" カーソル位置が動くと鬱陶しい
+function! s:remove_dust()
+    let cursor = getpos(".")
+    %s/\s\+$//ge " 保存時に行末の空白を除去する
+    %s/\t/  /ge " 保存時にtabを2スペースに変換する
+    call setpos(".", cursor)
+    unlet cursor
+endfunction
+autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
 
 " ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
