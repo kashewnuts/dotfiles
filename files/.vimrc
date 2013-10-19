@@ -285,7 +285,7 @@ if (has('win16') || has('win32') || has('win64'))
 else
   set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
   set ambiwidth=double "文脈依存の文字幅を正常に表示する
-  set list listchars=tab:≫-,trail:-,extends:≫,precedes:≪,nbsp:%
+  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
 
 " バックアップファイルを生成しない
