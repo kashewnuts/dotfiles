@@ -302,7 +302,7 @@ set expandtab " タブをスペースに展開する(noexpandtab:展開しない
 autocmd MyAutoCmd FileType python inoremap # X#
 autocmd MyAutoCmd FileType python setlocal textwidth=80 " 桁数の制限
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
-autocmd MyAutoCmd BufWriteCmd *.py call Flake8()
+autocmd MyAutoCmd BufWritePost *.py call Flake8()
 
 autocmd MyAutoCmd FileType cf setlocal noexpandtab
 autocmd MyAutoCmd FileType make setlocal noexpandtab
