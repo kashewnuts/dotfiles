@@ -271,41 +271,37 @@ endif
 " common
 " -------------------------------------------------
 syntax on " シンタックスハイライトを有効にする
-set encoding=utf8 " デフォルトの文字コード
-set number " 行番号を非表示 (nonumber:非表示)
-set shiftwidth=4 " シフト移動幅
-set smartindent " 新しい行を作ったときに高度な自動インデントを行う
-set clipboard+=unnamed,autoselect " OSのクリップボードを使用する
-set showmatch " 閉じ括弧が入力されたとき、対応する括弧を表示する
-set matchpairs& matchpairs+=<:> " 対応括弧に '<' と '>' のペアを追加
-set backspace=indent,eol,start " バックスペースでなんでも消せるようにする
+setl encoding=utf8 " デフォルトの文字コード
+setl number " 行番号を非表示 (nonumber:非表示)
+setl shiftwidth=4 " シフト移動幅
+setl smartindent " 新しい行を作ったときに高度な自動インデントを行う
+setl clipboard+=unnamed,autoselect " OSのクリップボードを使用する
+setl showmatch " 閉じ括弧が入力されたとき、対応する括弧を表示する
+setl matchpairs& matchpairs+=<:> " 対応括弧に '<' と '>' のペアを追加
+setl backspace=indent,eol,start " バックスペースでなんでも消せるようにする
 
 if (has('win16') || has('win32') || has('win64'))
-  set list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
+  setl list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
 else
-  set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
-  set ambiwidth=double "文脈依存の文字幅を正常に表示する
-  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+  setl imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
+  setl ambiwidth=double "文脈依存の文字幅を正常に表示する
+  setl list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
 
-" バックアップファイルを生成しない
-set noswapfile
-set nobackup
-set nowritebackup
-
-set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデント
-set tabstop=4 " タブの画面上での幅
-set softtabstop=4 " ファイル内の  が対応する空白の数
-set expandtab " タブをスペースに展開する(noexpandtab:展開しない)
+setl smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデント
+setl tabstop=4 " タブの画面上での幅
+setl softtabstop=4 " ファイル内の  が対応する空白の数
+setl expandtab " タブをスペースに展開する(noexpandtab:展開しない)
+setl noswapfile nobackup nowritebackup " バックアップファイルを生成しない
 
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd MyAutoCmd FileType python inoremap # X#
-autocmd MyAutoCmd FileType python setlocal textwidth=80 " 桁数の制限
+autocmd MyAutoCmd FileType python setl textwidth=80 " 桁数の制限
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 autocmd MyAutoCmd BufWritePost *.py call Flake8()
 
-autocmd MyAutoCmd FileType cf setlocal noexpandtab
-autocmd MyAutoCmd FileType make setlocal noexpandtab
+autocmd MyAutoCmd FileType cf setl noexpandtab
+autocmd MyAutoCmd FileType make setl noexpandtab
 
 " カーソル位置が動くと鬱陶しい
 function! s:remove_dust()
