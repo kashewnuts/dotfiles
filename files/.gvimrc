@@ -9,18 +9,18 @@ let s:is_windows = has('win16') || has('win32') || has('win64')
 let s:is_darwin = has('mac') || has('macunix') || has('gui_macvim')
 
 if s:is_windows
-  set guifont=MS_Gothic:h12
+  setl guifont=MS_Gothic:h12
   source $VIMRUNTIME/delmenu.vim " Menu UTF-8 Setting
-  set langmenu=ja_jp.utf-8
+  setl langmenu=ja_jp.utf-8
   source $VIMRUNTIME/menu.vim
 elseif s:is_darwin
-  set transparency=20
+  setl transparency=20
 endif
 
 colorscheme adrian
 
-set guioptions-=T  " Disable Toolbar
-set guioptions-=m  " Disable Menu bar
+setl guioptions-=T  " Disable Toolbar
+setl guioptions-=m  " Disable Menu bar
 
 " Display full-width space
 highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
@@ -33,8 +33,8 @@ augroup SaveWindow
   autocmd VimLeavePre * call s:save_window()
   function! s:save_window()
     let options = [
-      \ 'set columns=' . &columns,
-      \ 'set lines=' . &lines,
+      \ 'setl columns=' . &columns,
+      \ 'setl lines=' . &lines,
       \ 'winpos ' . getwinposx() . ' ' . getwinposy(),
       \ ]
     call writefile(options, g:save_window_file)
@@ -48,8 +48,8 @@ endif
 " ime setting
 if has('multi byte_ime') || has('xim') || has('gui_macvim')
     " Insert , Search mode: ime setting
-    set iminsert=2
-    set imsearch=2
+    setl iminsert=2
+    setl imsearch=2
     " Normal mode: IME off
-    inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+    inoremap <silent> <Esc><Esc>:setl iminsert=0<CR>
 endif
