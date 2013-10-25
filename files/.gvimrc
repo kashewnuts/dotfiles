@@ -28,7 +28,7 @@ match ZenkakuSpace /　/
 
 " Hack #120: Store the location and size of the window by gVim
 let g:save_window_file = expand('~/.vimwinpos')
-augroup SaveWindow
+augroup SaveWindow 
   autocmd!
   autocmd VimLeavePre * call s:save_window()
   function! s:save_window()

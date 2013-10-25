@@ -168,10 +168,10 @@ else
   nmap <Leader>r <Plug>(quickrun)
   let s:bundle = neobundle#get("vim-quickrun")
   function! s:bundle.hooks.on_source(bundle)
-    let g:quickrun_config={"*": {"split": ""}} " 横分割をするようにする
+    " 横分割をするようにする
+    let g:quickrun_config={"*": {"split": ""}} 
     " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
-    set splitbelow
-    set splitright
+    set splitbelow splitright
   endfunction
   unlet s:bundle
 
@@ -247,22 +247,6 @@ else
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
-  """ vim-indent-guides
-  """
-  NeoBundle "nathanaelkane/vim-indent-guides"
-  let s:bundle = neobundle#get("vim-indent-guides")
-  function! s:bundle.hooks.on_source(bundle)
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_auto_colors = 0
-    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#121212 ctermbg=233
-    autocmd MyAutoCmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626 ctermbg=235
-  endfunction
-  unlet s:bundle
-
-  """ vim-alignta
-  """
-  NeoBundle "h1mesuke/vim-alignta"
-
   filetype plugin indent on         " Required!
   NeoBundleCheck                    " Installation check.
 endif
@@ -312,6 +296,8 @@ function! s:remove_dust()
     unlet cursor
 endfunction
 autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
 
 " ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
