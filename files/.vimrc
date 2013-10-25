@@ -312,6 +312,8 @@ function! s:remove_dust()
     unlet cursor
 endfunction
 autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
 
 " ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
 nnoremap <silent> <S-Left>  :5wincmd <<CR>

@@ -1,6 +1,6 @@
 [ui]
 username=kashewnuts <bjzli.m08vo9kqs@gmail.com>
-ignore=/Users/KashunYoshida/.hgignore_global
+ignore=~/.hgignore_global
 editor=vim
 ssh = ssh -C
 [merge-tools]

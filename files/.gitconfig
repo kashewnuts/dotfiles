@@ -2,7 +2,7 @@
 	name = kashewnuts
 	email = bjzli.m08vo9kqs@gmail.com
 [core]
-	excludesfile = /Users/KashunYoshida/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
