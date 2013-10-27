@@ -64,6 +64,11 @@ else
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch "Shougo/neobundle.vim"
 
+  """ unite.vim
+  NeoBundleLazy "Shougo/unite.vim", {
+        \   "autoload" : { "commands" : [ "Unite" ] }
+        \}
+
   """ vimproc
   NeoBundle "Shougo/vimproc", {
         \ "build": {
@@ -72,12 +77,6 @@ else
         \   "mac"       : "make -f make_mac.mak",
         \   "unix"      : "make -f make_unix.mak",
         \ }}
-
-  """ unite.vim
-  NeoBundleLazy "Shougo/unite.vim", {
-        \   "autoload" : { "commands" : [ "Unite" ] }
-        \}
-
   """ neocomplete.vim, neocomplcache.vim
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
     NeoBundleLazy "Shougo/neocomplete.vim", {
@@ -187,12 +186,6 @@ else
   " -------------------------------------------------
   " Python plugins
   " -------------------------------------------------
-  """ vim-django-support
-  NeoBundleLazy "lambdalisue/vim-django-support", {
-        \ "autoload": {
-        \   "filetypes": ["python", "python3", "djangohtml"] }
-        \ }
-
   """ jedi-vim
   NeoBundleLazy "davidhalter/jedi-vim", {
         \  "autoload" : {
@@ -210,6 +203,12 @@ else
     autocmd MyAutoCmd FileType python let b:did_ftplugin = 1
   endfunction
   unlet s:bundle
+
+  """ vim-django-support
+  NeoBundleLazy "lambdalisue/vim-django-support", {
+        \  "autoload": {
+        \     "filetypes": ["python", "python3", "djangohtml"] }
+        \ }
 
   """ vim-virtualenv
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
