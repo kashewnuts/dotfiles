@@ -162,8 +162,9 @@ else
   nmap <Leader>r <Plug>(quickrun)
   let s:bundle = neobundle#get("vim-quickrun")
   function! s:bundle.hooks.on_source(bundle)
-    " 横分割をするようにする
-    let g:quickrun_config={"*": {"split": ""}}
+    " 横分割をするようにする。
+    " デフォルトでシェバンを無効にする。(Windows 環境での文字化けを防ぐため)
+    let g:quickrun_config={"_": {"split": "", "hook/shebang/enable" : 0,}}
     " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
     set splitbelow splitright
   endfunction
