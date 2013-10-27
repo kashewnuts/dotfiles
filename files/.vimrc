@@ -162,18 +162,16 @@ else
   nmap <Leader>r <Plug>(quickrun)
   let s:bundle = neobundle#get("vim-quickrun")
   function! s:bundle.hooks.on_source(bundle)
-    " 横分割をするようにする。
-    " 非同期処理を有効にする。
-    " Windows 環境での文字化けを防ぐためシェバンを無効にする。
-    let g:quickrun_config={
+    " 一番下に水平分割してバッファウィンドウを10桁の高さで開く
+    " 非同期処理を有効にする
+    " Windows 環境での文字化けを防ぐためシェバンを無効にする
+    let g:quickrun_config = {
     \  "_" : {
-    \      "split": "10sp",
+    \      "outputter/buffer/split" : ":botright 10sp",
     \      "runner" : "vimproc",
     \      "hook/shebang/enable" : 0,
     \  }
     \}
-    " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
-    set splitbelow splitright
   endfunction
   unlet s:bundle
 
