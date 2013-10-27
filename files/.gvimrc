@@ -47,9 +47,9 @@ endif
 
 " ime setting
 if has('multi byte_ime') || has('xim') || has('gui_macvim')
-    " Insert , Search mode: ime setting
-    set iminsert=2
-    set imsearch=2
-    " Normal mode: IME off
-    inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+  " Insert , Search mode: ime setting
+  set iminsert=2
+  set imsearch=2
+  " Normal mode: IME off
+  inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
 endif

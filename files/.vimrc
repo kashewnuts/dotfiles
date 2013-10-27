@@ -8,10 +8,9 @@
 " -------------------------------------------------
 " Initialize
 " -------------------------------------------------
-set nocompatible                     " Be iMproved
+set nocompatible                  " Be iMproved
 
 """ release autogroup in MyAutoCmd
-"""
 augroup MyAutoCmd
   autocmd!
 augroup END
@@ -31,10 +30,13 @@ if !isdirectory(s:neobundledir) || v:version < 702
 elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   " Neobundleが存在し、プラグインがインストールされていない場合下準備を行う
   if has("vim_starting")
-    execute 'set runtimepath+=' . s:neobundledir
+    execute "set runtimepath+=" . s:neobundledir
   endif
   call neobundle#rc(s:bundledir)
 
+  " -------------------------------------------------
+  " Shougo plugins
+  " -------------------------------------------------
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch "Shougo/neobundle.vim"
 
@@ -47,20 +49,22 @@ elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
         \   "unix"      : "make -f make_unix.mak",
         \ }}
 
-  filetype plugin indent on         " Required!
-  NeoBundleCheck                    " Installation check.
+  filetype plugin indent on       " Required!
+  NeoBundleCheck                  " Installation check.
 
 else
   if has("vim_starting")
-    execute 'set runtimepath+=' . s:neobundledir
+    execute "set runtimepath+=" . s:neobundledir
   endif
   call neobundle#rc(s:bundledir)
 
+  " -------------------------------------------------
+  " Shougo plugins
+  " -------------------------------------------------
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch "Shougo/neobundle.vim"
 
   """ vimproc
-  """
   NeoBundle "Shougo/vimproc", {
         \ "build": {
         \   "windows"   : "make -f make_mingw32.mak",
@@ -70,13 +74,11 @@ else
         \ }}
 
   """ unite.vim
-  """
   NeoBundleLazy "Shougo/unite.vim", {
         \   "autoload" : { "commands" : [ "Unite" ] }
         \}
 
   """ neocomplete.vim, neocomplcache.vim
-  """
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
     NeoBundleLazy "Shougo/neocomplete.vim", {
         \ "autoload": { "insert": 1, }
@@ -109,7 +111,6 @@ else
   endif
 
   """ neosnippet
-  """
   NeoBundleLazy "Shougo/neosnippet.vim", {
         \   "depends": ["honza/vim-snippets"],
         \   "autoload": { "insert": 1, }
@@ -143,7 +144,6 @@ else
   unlet s:bundle
 
   """ vimfiler
-  """
   NeoBundleLazy "Shougo/vimfiler", {
         \   "autoload" : { "commands" : [ "VimFiler" ] }
         \}
@@ -155,13 +155,14 @@ else
   unlet s:bundle
 
   """ vimshell
-  """
   NeoBundleLazy "Shougo/vimshell", {
         \   "autoload" : { "commands" : [ "VimShell" ] }
         \}
 
+  " -------------------------------------------------
+  " thinca plugins
+  " -------------------------------------------------
   """ vim-quickrun
-  """
   NeoBundleLazy "thinca/vim-quickrun", {
         \   "autoload": { "commands" : [ "Quickrun" ] }
         \ }
@@ -169,46 +170,30 @@ else
   let s:bundle = neobundle#get("vim-quickrun")
   function! s:bundle.hooks.on_source(bundle)
     " 横分割をするようにする
-    let g:quickrun_config={"*": {"split": ""}} 
+    let g:quickrun_config={"*": {"split": ""}}
     " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
     set splitbelow splitright
   endfunction
   unlet s:bundle
 
   """ vim-scouter
-  """
   NeoBundleLazy "thinca/vim-scouter", {
         \   "autoload" :  { "commands" : [ "Scouter" ] }
         \}
 
   """ vim-ft-rst_header
-  """
   NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
 
+  " -------------------------------------------------
+  " Python plugins
+  " -------------------------------------------------
   """ vim-django-support
-  """
   NeoBundleLazy "lambdalisue/vim-django-support", {
         \ "autoload": {
         \   "filetypes": ["python", "python3", "djangohtml"] }
         \ }
 
-  """ vim-htmldjango_omnicomplete
-  """
-  NeoBundleLazy "mjbrownie/vim-htmldjango_omnicomplete", {
-        \ "autoload" : {
-        \   "insert" : 1,
-        \   "filetypes": ["python", "python3", "djangohtml"] }
-        \ }
-  let s:bundle = neobundle#get("vim-htmldjango_omnicomplete")
-  function! s:bundle.hooks.on_source(bundle)
-    autocmd MyAutoCmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-    autocmd MyAutoCmd FileType htmldjango inoremap {% {% %}<left><left><left>
-    autocmd MyAutoCmd FileType htmldjango inoremap {{ {{ }}<left><left><left>
-  endfunction
-  unlet s:bundle
-
   """ jedi-vim
-  """
   NeoBundleLazy "davidhalter/jedi-vim", {
         \  "autoload" : {
         \    "insert" : 1,
@@ -227,56 +212,52 @@ else
   unlet s:bundle
 
   """ vim-virtualenv
-  """
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
         \   "autoload" : {
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
   """ pyflakes-vim
-  """
   NeoBundleLazy "kevinw/pyflakes-vim", {
         \   "autoload" : {
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
   """ vim-flake8
-  ""
   NeoBundleLazy "nvie/vim-flake8", {
         \   "autoload" : {
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
-  filetype plugin indent on         " Required!
-  NeoBundleCheck                    " Installation check.
+  filetype plugin indent on       " Required!
+  NeoBundleCheck                  " Installation check.
 endif
 
 " -------------------------------------------------
 " common
 " -------------------------------------------------
-syntax on " シンタックスハイライトを有効にする
-set encoding=utf8 " デフォルトの文字コード
-set number " 行番号を非表示 (nonumber:非表示)
-set shiftwidth=4 " シフト移動幅
-set smartindent " 新しい行を作ったときに高度な自動インデントを行う
+syntax on                         " シンタックスハイライトを有効にする
+set encoding=utf8                 " デフォルトの文字コード
+set number                        " 行番号を非表示 (nonumber:非表示)
+set smartindent                   " 新しい行を作ったときに高度な自動インデントを行う
 set clipboard+=unnamed,autoselect " OSのクリップボードを使用する
-set showmatch " 閉じ括弧が入力されたとき、対応する括弧を表示する
-set matchpairs& matchpairs+=<:> " 対応括弧に '<' と '>' のペアを追加
-set backspace=indent,eol,start " バックスペースでなんでも消せるようにする
+set showmatch                     " 閉じ括弧が入力されたとき、対応する括弧を表示する
+set matchpairs& matchpairs+=<:>   " 対応括弧に '<' と '>' のペアを追加
+set backspace=indent,eol,start    " バックスペースでなんでも消せるようにする
+set tabstop=4                     " タブの画面上での幅
+set softtabstop=4                 " ファイル内の  が対応する空白の数
+set expandtab                     " タブをスペースに展開する(noexpandtab:展開しない)
+set shiftwidth=4                  " シフト移動幅
+set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデント
+set noswapfile nobackup nowritebackup " バックアップファイルを生成しない
 
-if (has('win16') || has('win32') || has('win64'))
+if (has("win16") || has("win32") || has("win64"))
   set list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
 else
-  set imdisable "挿入モードから抜ける際、入る際にIMEがオフになる
-  set ambiwidth=double "文脈依存の文字幅を正常に表示する
+  set imdisable                   " 挿入モードから抜ける際、入る際にIMEがオフになる
+  set ambiwidth=double            " 文脈依存の文字幅を正常に表示する
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
-
-set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデント
-set tabstop=4 " タブの画面上での幅
-set softtabstop=4 " ファイル内の  が対応する空白の数
-set expandtab " タブをスペースに展開する(noexpandtab:展開しない)
-set noswapfile nobackup nowritebackup " バックアップファイルを生成しない
 
 " 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
 autocmd MyAutoCmd FileType python inoremap # X#
@@ -289,11 +270,11 @@ autocmd MyAutoCmd FileType make set noexpandtab
 
 " カーソル位置が動くと鬱陶しい
 function! s:remove_dust()
-    let cursor = getpos(".")
-    %s/\s\+$//ge " 保存時に行末の空白を除去する
-    %s/\t/  /ge " 保存時にtabを2スペースに変換する
-    call setpos(".", cursor)
-    unlet cursor
+  let cursor = getpos(".")
+  %s/\s\+$//ge                    " 保存時に行末の空白を除去する
+  %s/\t/  /ge                     " 保存時にtabを2スペースに変換する
+  call setpos(".", cursor)
+  unlet cursor
 endfunction
 autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
