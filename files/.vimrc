@@ -10,7 +10,7 @@
 " -------------------------------------------------
 set nocompatible                  " Be iMproved
 
-""" release autogroup in MyAutoCmd
+" release autogroup in MyAutoCmd
 augroup MyAutoCmd
   autocmd!
 augroup END
@@ -64,12 +64,10 @@ else
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch "Shougo/neobundle.vim"
 
-  """ unite.vim
   NeoBundleLazy "Shougo/unite.vim", {
         \   "autoload" : { "commands" : [ "Unite" ] }
         \}
 
-  """ vimproc
   NeoBundle "Shougo/vimproc", {
         \ "build": {
         \   "windows"   : "make -f make_mingw32.mak",
@@ -77,7 +75,7 @@ else
         \   "mac"       : "make -f make_mac.mak",
         \   "unix"      : "make -f make_unix.mak",
         \ }}
-  """ neocomplete.vim, neocomplcache.vim
+
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
     NeoBundleLazy "Shougo/neocomplete.vim", {
         \ "autoload": { "insert": 1, }
@@ -109,7 +107,6 @@ else
     unlet s:bundle
   endif
 
-  """ neosnippet
   NeoBundleLazy "Shougo/neosnippet.vim", {
         \   "depends": ["honza/vim-snippets"],
         \   "autoload": { "insert": 1, }
@@ -142,7 +139,6 @@ else
   endfunction
   unlet s:bundle
 
-  """ vimfiler
   NeoBundleLazy "Shougo/vimfiler", {
         \   "autoload" : { "commands" : [ "VimFiler" ] }
         \}
@@ -153,7 +149,6 @@ else
   endfunction
   unlet s:bundle
 
-  """ vimshell
   NeoBundleLazy "Shougo/vimshell", {
         \   "autoload" : { "commands" : [ "VimShell" ] }
         \}
@@ -161,7 +156,6 @@ else
   " -------------------------------------------------
   " thinca plugins
   " -------------------------------------------------
-  """ vim-quickrun
   NeoBundleLazy "thinca/vim-quickrun", {
         \   "autoload": { "commands" : [ "Quickrun" ] }
         \ }
@@ -175,18 +169,15 @@ else
   endfunction
   unlet s:bundle
 
-  """ vim-scouter
   NeoBundleLazy "thinca/vim-scouter", {
         \   "autoload" :  { "commands" : [ "Scouter" ] }
         \}
 
-  """ vim-ft-rst_header
   NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
 
   " -------------------------------------------------
   " Python plugins
   " -------------------------------------------------
-  """ jedi-vim
   NeoBundleLazy "davidhalter/jedi-vim", {
         \  "autoload" : {
         \    "insert" : 1,
@@ -204,36 +195,45 @@ else
   endfunction
   unlet s:bundle
 
-  """ vim-django-support
   NeoBundleLazy "lambdalisue/vim-django-support", {
         \  "autoload": {
         \     "filetypes": ["python", "python3", "djangohtml"] }
         \ }
 
-  """ vim-virtualenv
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
         \   "autoload" : {
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
-  """ pyflakes-vim
   NeoBundleLazy "kevinw/pyflakes-vim", {
         \   "autoload" : {
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
-  """ vim-flake8
   NeoBundleLazy "nvie/vim-flake8", {
         \   "autoload" : {
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
+
+  " -------------------------------------------------
+  " Common plugins
+  " -------------------------------------------------
+  NeoBundle "tpope/vim-surround"
+
+  NeoBundle "vim-scripts/Align"
+  let s:bundle = neobundle#get("Align")
+  function! s:bundle.hooks.on_source(bundle)
+    let g:Align_xstrlen = 3      " for japanese string
+    let g:DrChipTopLvlMenu = ''  " remove 'DrChip' menu
+  endfunction
+  unlet s:bundle
 
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
 endif
 
 " -------------------------------------------------
-" common
+" Common
 " -------------------------------------------------
 syntax on                         " シンタックスハイライトを有効にする
 set encoding=utf8                 " デフォルトの文字コード
