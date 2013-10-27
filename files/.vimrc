@@ -211,11 +211,6 @@ else
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
         \}
 
-  NeoBundleLazy "kevinw/pyflakes-vim", {
-        \   "autoload" : {
-        \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \}
-
   NeoBundleLazy "nvie/vim-flake8", {
         \   "autoload" : {
         \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
