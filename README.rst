@@ -26,7 +26,7 @@ Just
 For Windows
 -----------
 
-1st
+1st, Run as an administrator.
 
 .. code-block:: bash
 

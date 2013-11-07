@@ -5,8 +5,8 @@
 " To use this, copy to your home directory.
 " ==============================================================================
 
-let s:is_windows = has('win16') || has('win32') || has('win64')
-let s:is_darwin = has('mac') || has('macunix') || has('gui_macvim')
+let s:is_windows = has("win16") || has("win32") || has("win64")
+let s:is_darwin = has("mac") || has("macunix") || has("gui_macvim")
 
 if s:is_windows
   set guifont=MS_Gothic:h12
@@ -27,26 +27,26 @@ highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
 match ZenkakuSpace /　/
 
 " Hack #120: Store the location and size of the window by gVim
-let g:save_window_file = expand('~/.vimwinpos')
+let g:save_window_file = expand("~/.vimwinpos")
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()
   function! s:save_window()
     let options = [
-      \ 'set columns=' . &columns,
-      \ 'set lines=' . &lines,
-      \ 'winpos ' . getwinposx() . ' ' . getwinposy(),
+      \ "set columns=" . &columns,
+      \ "set lines=" . &lines,
+      \ "winpos " . getwinposx() . " " . getwinposy(),
       \ ]
     call writefile(options, g:save_window_file)
   endfunction
 augroup END
 
 if filereadable(g:save_window_file)
-  execute 'source' g:save_window_file
+  execute "source" g:save_window_file
 endif
 
 " ime setting
-if has('multi byte_ime') || has('xim') || has('gui_macvim')
+if has("multi byte_ime") || has("xim") || has("gui_macvim")
   " Insert , Search mode: ime setting
   set iminsert=2
   set imsearch=2

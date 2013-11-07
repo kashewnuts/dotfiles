@@ -5,6 +5,7 @@
 	autocrlf = true
 	editor = vim
 	excludesfile = ~/.gitignore
+	quotepath = false
 [color]
 	ui = true
 [push]
