@@ -97,8 +97,6 @@ else
         let g:neocomplete#force_omni_input_patterns = {}
       endif
       let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
-
-
     endfunction
     unlet s:bundle
 
@@ -113,11 +111,12 @@ else
       let g:acp_enableAtStartup = 0
       let g:neocomplcache_enable_smart_case = 1
       " jedi omni completion
-      if !exists('g:neocomplcache_omni_functions')
-          let g:neocomplcache_omni_functions = {}
+      autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
+      let g:jedi#auto_vim_configuration = 0
+      if !exists('g:neocomplcache_force_omni_patterns')
+        let g:neocomplcache_force_omni_patterns = {}
       endif
-      let g:neocomplcache_omni_functions['python'] = 'jedi#completions'
-      let g:jedi#popup_on_dot = 0
+      let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
     endfunction
     unlet s:bundle
   endif
@@ -208,7 +207,6 @@ else
   let s:bundle = neobundle#get("jedi-vim")
   function! s:bundle.hooks.on_source(bundle)
     let g:jedi#auto_initialization = 0
-    let g:jedi#auto_vim_configuration = 1
     let g:jedi#rename_command = "<leader>R"
     let g:jedi#popup_on_dot = 1
     let g:jedi#show_call_signatures = 0
