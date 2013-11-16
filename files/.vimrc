@@ -78,7 +78,7 @@ else
 
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
     NeoBundleLazy "Shougo/neocomplete.vim", {
-        \ "autoload": { "insert": 1, }
+        \  "autoload": { "insert": 1, }
         \ }
     " NeoComplCacheに合わせた
     let g:neocomplete#enable_at_startup = 1
@@ -90,12 +90,21 @@ else
       let g:neocomplete#enable_smart_case = 1
       " Set minimum syntax keyword length.
       let g:neocomplete#sources#syntax#min_keyword_length = 3
+      " jedi omni completion
+      autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
+      let g:jedi#auto_vim_configuration = 0
+      if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+      endif
+      let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
+
+
     endfunction
     unlet s:bundle
 
   else
     NeoBundleLazy "Shougo/neocomplcache.vim", {
-        \ "autoload": {"insert": 1, }
+        \  "autoload": {"insert": 1, }
         \ }
     " 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
     let g:neocomplcache_enable_at_startup = 1
@@ -103,14 +112,20 @@ else
     function! s:bundle.hooks.on_source(bundle)
       let g:acp_enableAtStartup = 0
       let g:neocomplcache_enable_smart_case = 1
+      " jedi omni completion
+      if !exists('g:neocomplcache_omni_functions')
+          let g:neocomplcache_omni_functions = {}
+      endif
+      let g:neocomplcache_omni_functions['python'] = 'jedi#completions'
+      let g:jedi#popup_on_dot = 0
     endfunction
     unlet s:bundle
   endif
 
   NeoBundleLazy "Shougo/neosnippet.vim", {
-        \   "depends": ["honza/vim-snippets"],
-        \   "autoload": { "insert": 1, }
-        \}
+        \  "depends": ["honza/vim-snippets"],
+        \  "autoload": { "insert": 1, }
+        \ }
   let s:bundle = neobundle#get("neosnippet.vim")
   function! s:bundle.hooks.on_source(bundle)
     " Plugin key-mappings.
@@ -140,8 +155,8 @@ else
   unlet s:bundle
 
   NeoBundleLazy "Shougo/vimfiler", {
-        \   "autoload" : { "commands" : [ "VimFiler" ] }
-        \}
+        \  "autoload" : { "commands" : [ "VimFiler" ] }
+        \ }
   let s:bundle = neobundle#get("vimfiler")
   function! s:bundle.hooks.on_source(bundle)
     let g:vimfiler_as_default_explorer = 1
@@ -151,13 +166,13 @@ else
 
   NeoBundleLazy "Shougo/vimshell", {
         \   "autoload" : { "commands" : [ "VimShell" ] }
-        \}
+        \ }
 
   " -------------------------------------------------
   " thinca plugins
   " -------------------------------------------------
   NeoBundleLazy "thinca/vim-quickrun", {
-        \   "autoload": { "commands" : [ "Quickrun" ] }
+        \  "autoload": { "commands" : [ "Quickrun" ] }
         \ }
   nmap <Leader>r <Plug>(quickrun)
   let s:bundle = neobundle#get("vim-quickrun")
@@ -171,13 +186,13 @@ else
     \      "runner" : "vimproc",
     \      "hook/shebang/enable" : 0,
     \  }
-    \}
+    \ }
   endfunction
   unlet s:bundle
 
   NeoBundleLazy "thinca/vim-scouter", {
-        \   "autoload" :  { "commands" : [ "Scouter" ] }
-        \}
+        \  "autoload" :  { "commands" : [ "Scouter" ] }
+        \ }
 
   NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
 
@@ -185,10 +200,11 @@ else
   " Python plugins
   " -------------------------------------------------
   NeoBundleLazy "davidhalter/jedi-vim", {
-        \  "autoload" : {
+        \  "autoload": {
         \    "insert" : 1,
         \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \}
+        \ }
+
   let s:bundle = neobundle#get("jedi-vim")
   function! s:bundle.hooks.on_source(bundle)
     let g:jedi#auto_initialization = 0
@@ -203,24 +219,23 @@ else
 
   NeoBundleLazy "lambdalisue/vim-django-support", {
         \  "autoload": {
-        \     "filetypes": ["python", "python3", "djangohtml"] }
+        \    "filetypes": ["python", "python3", "djangohtml"] }
         \ }
 
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
-        \   "autoload" : {
-        \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \}
+        \  "autoload" : {
+        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \ }
 
   NeoBundleLazy "nvie/vim-flake8", {
-        \   "autoload" : {
-        \     "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \}
+        \  "autoload": {
+        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \ }
 
   " -------------------------------------------------
   " Common plugins
   " -------------------------------------------------
   NeoBundle "tpope/vim-surround"
-
   NeoBundle "vim-scripts/Align"
   let s:bundle = neobundle#get("Align")
   function! s:bundle.hooks.on_source(bundle)
@@ -250,6 +265,7 @@ set expandtab                     " タブをスペースに展開する(noexpan
 set shiftwidth=4                  " シフト移動幅
 set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデント
 set noswapfile nobackup nowritebackup " バックアップファイルを生成しない
+set wildmenu wildmode=list:full   " command-line completion
 
 if (has("win16") || has("win32") || has("win64"))
   set list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
