@@ -1,14 +1,14 @@
 DOT_FILES=(
-    .vim \
-    .vimrc \
-    .gvimrc \
-    .hgrc \
-    .hgignore_global \
-    .gitconfig \
+    .vim              \
+    .vimrc            \
+    .gvimrc           \
+    .hgrc             \
+    .hgignore_global  \
+    .gitconfig        \
     .gitignore_global \
-    .bashrc \
-    .bash_profile \
-    .pythonstartup \
+    .bashrc           \
+    .bash_profile     \
+    .pythonstartup    \
 )
 
 for file in ${DOT_FILES[@]}
