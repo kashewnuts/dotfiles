@@ -23,12 +23,11 @@ let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir = expand("~/.vim/bundle")
 
 if !isdirectory(s:neobundledir) || v:version < 702
-  " NeoBundleが存在しない、もしくはVimのバージョンが古い場合はプラグインを一切
-  " 読み込まない
+  " NeoBundle doesn't exist, or you do not read all the plug-in if the version of Vim is old
   let s:noplugin = 1
 
 elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
-  " Neobundleが存在し、プラグインがインストールされていない場合下準備を行う
+  " If Neobundle is present and the plug-in is not installed, I performed in preparation
   if has("vim_starting")
     execute "set runtimepath+=" . s:neobundledir
   endif
@@ -80,7 +79,7 @@ else
     NeoBundleLazy "Shougo/neocomplete.vim", {
         \  "autoload": { "insert": 1, }
         \ }
-    " NeoComplCacheに合わせた
+    " Combined with NeoComplCache
     let g:neocomplete#enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplete.vim")
     function! s:bundle.hooks.on_source(bundle)
@@ -104,7 +103,7 @@ else
     NeoBundleLazy "Shougo/neocomplcache.vim", {
         \  "autoload": {"insert": 1, }
         \ }
-    " 原因不明だがNeoComplCacheEnableコマンドが見つからないので変更
+    " Cause is unknown, but NeoComplCacheEnable command is found, so change.
     let g:neocomplcache_enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplcache.vim")
     function! s:bundle.hooks.on_source(bundle)
@@ -176,9 +175,9 @@ else
   nmap <Leader>r <Plug>(quickrun)
   let s:bundle = neobundle#get("vim-quickrun")
   function! s:bundle.hooks.on_source(bundle)
-    " 一番下に水平分割してバッファウィンドウを10桁の高さで開く
-    " 非同期処理を有効にする
-    " Windows 環境での文字化けを防ぐためシェバンを無効にする
+    " Open at the height of the 10-digit buffer window by horizontal split at the bottom
+    " Enable asynchronous processing
+    " Disable the Sheban prevent garbled in a Windows environment
     let g:quickrun_config = {
     \  "_" : {
     \      "outputter/buffer/split" : ":botright 10sp",
@@ -237,56 +236,57 @@ else
   NeoBundle "vim-scripts/Align"
   let s:bundle = neobundle#get("Align")
   function! s:bundle.hooks.on_source(bundle)
-    let g:Align_xstrlen = 3      " for japanese string
-    let g:DrChipTopLvlMenu = ''  " remove 'DrChip' menu
+    let g:Align_xstrlen = 3           " for japanese string
+    let g:DrChipTopLvlMenu = ''       " remove 'DrChip' menu
   endfunction
   unlet s:bundle
 
-  filetype plugin indent on       " Required!
-  NeoBundleCheck                  " Installation check.
+  filetype plugin indent on           " Required!
+  NeoBundleCheck                      " Installation check.
 endif
 
 " -------------------------------------------------
 " Common
 " -------------------------------------------------
-syntax on                         " シンタックスハイライトを有効にする
-set encoding=utf8                 " デフォルトの文字コード
-set number                        " 行番号を非表示 (nonumber:非表示)
-set smartindent                   " 新しい行を作ったときに高度な自動インデントを行う
-set clipboard+=unnamed,autoselect " OSのクリップボードを使用する
-set showmatch                     " 閉じ括弧が入力されたとき、対応する括弧を表示する
-set matchpairs& matchpairs+=<:>   " 対応括弧に '<' と '>' のペアを追加
-set backspace=indent,eol,start    " バックスペースでなんでも消せるようにする
-set tabstop=4                     " タブの画面上での幅
-set softtabstop=4                 " ファイル内の  が対応する空白の数
-set expandtab                     " タブをスペースに展開する(noexpandtab:展開しない)
-set shiftwidth=4                  " シフト移動幅
-set smarttab " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデント
-set noswapfile nobackup nowritebackup " バックアップファイルを生成しない
-set wildmenu wildmode=list:full   " command-line completion
+syntax on                             " Enable syntax highlighting
+set encoding=utf8                     " Default character code
+set number                            " Show line number (nonumber: Hide)
+set smartindent                       " Advanced automatic indentation when you made the new line
+set clipboard+=unnamed,autoselect     " Use the OS clipboard
+set showmatch                         " When the brackets is entered closed, to view the matching brackets
+set matchpairs& matchpairs+=<:>       " To support brackets add a pair of '<' and '>'
+set backspace=indent,eol,start        " Can erase everything in the back space
+set tabstop=4                         " Width on the screen of the tab
+set softtabstop=4                     " Number of spaces in the file space is the corresponding
+set expandtab                         " expand tabs to spaces (noexpandtab: do not expand)
+set shiftwidth=4                      " Shift move width
+" If you type the Tab in the margin of the beginning of the line, indented by the number of 'shiftwidth'.
+set smarttab
+set noswapfile nobackup nowritebackup " doesn't generate a backup file
+set wildmenu wildmode=list:full       " Command-line completion
 
 if (has("win16") || has("win32") || has("win64"))
-  set list listchars=tab:>-,trail:-,extends:>,precedes:< " 不可視文字の可視化
+  set list listchars=tab:>-,trail:-,extends:>,precedes:< " visualize the invisible character
 else
-  set imdisable                   " 挿入モードから抜ける際、入る際にIMEがオフになる
-  set ambiwidth=double            " 文脈依存の文字幅を正常に表示する
+  set imdisable                       " When you exit or enter, IME is turned off
+  set ambiwidth=double                " View characters normally width of context-sensitive
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
 
-" 新しく作った行の最初の文字が '#' のとき、インデントを解除しない
+" When the '#' character in the first line of the newly created, it is not unindent
 autocmd MyAutoCmd FileType python inoremap # X#
-autocmd MyAutoCmd FileType python set textwidth=80 " 桁数の制限
+autocmd MyAutoCmd FileType python set textwidth=80 " Limit number of digits
 autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
 autocmd MyAutoCmd BufWritePost *.py call Flake8()
 
 autocmd MyAutoCmd FileType cf set noexpandtab
 autocmd MyAutoCmd FileType make set noexpandtab
 
-" カーソル位置が動くと鬱陶しい
+" Cheerless cursor position is moved
 function! s:remove_dust()
   let cursor = getpos(".")
-  %s/\s\+$//ge                    " 保存時に行末の空白を除去する
-  %s/\t/  /ge                     " 保存時にtabを2スペースに変換する
+  %s/\s\+$//ge                        " Remove trailing whitespace on save
+  %s/\t/  /ge                         " Converted to 2 whitespace tab when you save
   call setpos(".", cursor)
   unlet cursor
 endfunction
@@ -294,13 +294,13 @@ autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
 
-" ウィンドウ分割時にウィンドウサイズを調節する設定です。Shiftキー＋矢印キー。
+" Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
 nnoremap <silent> <S-Right> :5wincmd ><CR>
 nnoremap <silent> <S-Up>    :5wincmd -<CR>
 nnoremap <silent> <S-Down>  :5wincmd +<CR>
 
-" 検索結果に移動したとき、その位置を画面の中央にする。
+" When you move in the search results, and in the center of the screen that position.
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
@@ -308,7 +308,7 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" 指定文字コードで強制的にファイルを開く
+" Open the file to force the specified character code.
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
 command! Iso2022jp edit ++enc=iso-2022-jp
@@ -316,13 +316,13 @@ command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
 
-" ESCを二回押すことでハイライトを消す
+" Turn off the highlight by pressing twice the ESC.
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
-" バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
+" Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 
-" j, k による移動を折り返されたテキストでも自然に振る舞うように変更
+" Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj
 nnoremap k gk
