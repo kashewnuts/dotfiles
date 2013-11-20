@@ -23,11 +23,11 @@ let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir = expand("~/.vim/bundle")
 
 if !isdirectory(s:neobundledir) || v:version < 702
-  " NeoBundle doesn't exist, or you do not read all the plug-in if the version of Vim is old
   let s:noplugin = 1
 
 elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
-  " If Neobundle is present and the plug-in is not installed, I performed in preparation
+  " If Neobundle is present and the plug-in is not installed,
+  " I performed in preparation
   if has("vim_starting")
     execute "set runtimepath+=" . s:neobundledir
   endif
@@ -175,7 +175,7 @@ else
   nmap <Leader>r <Plug>(quickrun)
   let s:bundle = neobundle#get("vim-quickrun")
   function! s:bundle.hooks.on_source(bundle)
-    " Open at the height of the 10-digit buffer window by horizontal split at the bottom
+    " Open at the height of 10-digit buffer window by horizontal split at the bottom
     " Enable asynchronous processing
     " Disable the Sheban prevent garbled in a Windows environment
     let g:quickrun_config = {
@@ -236,40 +236,39 @@ else
   NeoBundle "vim-scripts/Align"
   let s:bundle = neobundle#get("Align")
   function! s:bundle.hooks.on_source(bundle)
-    let g:Align_xstrlen = 3           " for japanese string
-    let g:DrChipTopLvlMenu = ''       " remove 'DrChip' menu
+    let g:Align_xstrlen = 3       " for japanese string
+    let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
   endfunction
   unlet s:bundle
 
-  filetype plugin indent on           " Required!
-  NeoBundleCheck                      " Installation check.
+  filetype plugin indent on       " Required!
+  NeoBundleCheck                  " Installation check.
 endif
 
 " -------------------------------------------------
 " Common
 " -------------------------------------------------
-syntax on                             " Enable syntax highlighting
-set encoding=utf8                     " Default character code
-set number                            " Show line number (nonumber: Hide)
-set smartindent                       " Advanced automatic indentation when you made the new line
-set clipboard+=unnamed,autoselect     " Use the OS clipboard
-set showmatch                         " When the brackets is entered closed, to view the matching brackets
-set matchpairs& matchpairs+=<:>       " To support brackets add a pair of '<' and '>'
-set backspace=indent,eol,start        " Can erase everything in the back space
-set tabstop=4                         " Width on the screen of the tab
-set softtabstop=4                     " Number of spaces in the file space is the corresponding
-set expandtab                         " expand tabs to spaces (noexpandtab: do not expand)
-set shiftwidth=4                      " Shift move width
-" If you type the Tab in the margin of the beginning of the line, indented by the number of 'shiftwidth'.
-set smarttab
+syntax on          " Enable syntax highlighting
+set encoding=utf8  " Default character code
+set number         " Show line number (nonumber: Hide)
+set smartindent    " Advanced automatic indentation when you made the new line
+set showmatch      " When the brackets is entered closed, to view the matching brackets
+set tabstop=4      " Width on the screen of the tab
+set softtabstop=4  " Number of spaces in the file space is the corresponding
+set expandtab      " expand tabs to spaces (noexpandtab: do not expand)
+set shiftwidth=4   " Shift move width
+set smarttab       " Indent by the number of 'shiftwidth'.
+set matchpairs& matchpairs+=<:>   " To support brackets add a pair of '<' and '>'
+set backspace=indent,eol,start    " Can erase everything in the back space
+set wildmenu wildmode=list:full   " Command-line completion
+set clipboard+=unnamed,autoselect " Use the OS clipboard
 set noswapfile nobackup nowritebackup " doesn't generate a backup file
-set wildmenu wildmode=list:full       " Command-line completion
 
 if (has("win16") || has("win32") || has("win64"))
-  set list listchars=tab:>-,trail:-,extends:>,precedes:< " visualize the invisible character
+  set list listchars=tab:>-,trail:-,extends:>,precedes:< " visualize character
 else
-  set imdisable                       " When you exit or enter, IME is turned off
-  set ambiwidth=double                " View characters normally width of context-sensitive
+  set imdisable         " When you exit or enter, IME is turned off
+  set ambiwidth=double  " View characters normally width of context-sensitive
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
 
@@ -285,8 +284,8 @@ autocmd MyAutoCmd FileType make set noexpandtab
 " Cheerless cursor position is moved
 function! s:remove_dust()
   let cursor = getpos(".")
-  %s/\s\+$//ge                        " Remove trailing whitespace on save
-  %s/\t/  /ge                         " Converted to 2 whitespace tab when you save
+  %s/\s\+$//ge          " Remove trailing whitespace on save
+  %s/\t/  /ge           " Converted to 2 whitespace tab when you save
   call setpos(".", cursor)
   unlet cursor
 endfunction
