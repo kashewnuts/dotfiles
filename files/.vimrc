@@ -258,10 +258,10 @@ set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " expand tabs to spaces (noexpandtab: do not expand)
 set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
-set matchpairs& matchpairs+=<:>   " To support brackets add a pair of '<' and '>'
-set backspace=indent,eol,start    " Can erase everything in the back space
-set wildmenu wildmode=list:full   " Command-line completion
-set clipboard+=unnamed,autoselect " Use the OS clipboard
+set matchpairs& matchpairs+=<:>       " To support brackets add a pair of '<' and '>'
+set backspace=indent,eol,start        " Can erase everything in the back space
+set wildmenu wildmode=list:full       " Command-line completion
+set clipboard+=unnamed,autoselect     " Use the OS clipboard
 set noswapfile nobackup nowritebackup " doesn't generate a backup file
 
 if (has("win16") || has("win32") || has("win64"))
