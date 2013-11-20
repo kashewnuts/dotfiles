@@ -16,7 +16,7 @@ augroup MyAutoCmd
 augroup END
 
 " -------------------------------------------------
-" NeoBundle
+" Plugins
 " -------------------------------------------------
 let s:noplugin = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
@@ -83,10 +83,8 @@ else
     let g:neocomplete#enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplete.vim")
     function! s:bundle.hooks.on_source(bundle)
-      " NeoCompleteEnable
-      let g:acp_enableAtStartup = 0
-      " Use smartcase.
-      let g:neocomplete#enable_smart_case = 1
+      let g:acp_enableAtStartup = 0           " NeoCompleteEnable
+      let g:neocomplete#enable_smart_case = 1 " Use smartcase.
       " Set minimum syntax keyword length.
       let g:neocomplete#sources#syntax#min_keyword_length = 3
       " jedi omni completion
@@ -230,7 +228,7 @@ else
         \ }
 
   " -------------------------------------------------
-  " Common plugins
+  "  plugins
   " -------------------------------------------------
   NeoBundle "tpope/vim-surround"
   NeoBundle "vim-scripts/Align"
@@ -240,6 +238,7 @@ else
     let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
   endfunction
   unlet s:bundle
+  " }}}
 
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
