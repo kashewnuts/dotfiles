@@ -36,9 +36,7 @@ elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   " -------------------------------------------------
   " Shougo plugins
   " -------------------------------------------------
-  " Let NeoBundle manage NeoBundle
-  NeoBundleFetch "Shougo/neobundle.vim"
-
+  NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
   NeoBundle "Shougo/unite.vim"
   NeoBundle "Shougo/vimproc", {
         \ "build": {
@@ -60,9 +58,7 @@ else
   " -------------------------------------------------
   " Shougo plugins
   " -------------------------------------------------
-  " Let NeoBundle manage NeoBundle
-  NeoBundleFetch "Shougo/neobundle.vim"
-
+  NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
   NeoBundleLazy "Shougo/unite.vim", {
         \   "autoload" : { "commands" : [ "Unite" ] }
         \}
@@ -83,8 +79,8 @@ else
     let g:neocomplete#enable_at_startup = 1
     let s:bundle = neobundle#get("neocomplete.vim")
     function! s:bundle.hooks.on_source(bundle)
-      let g:acp_enableAtStartup = 0           " NeoCompleteEnable
-      let g:neocomplete#enable_smart_case = 1 " Use smartcase.
+      let g:acp_enableAtStartup = 0            " NeoCompleteEnable
+      let g:neocomplete#enable_smart_case = 1  " Use smartcase.
       " Set minimum syntax keyword length.
       let g:neocomplete#sources#syntax#min_keyword_length = 3
       " jedi omni completion
@@ -228,7 +224,7 @@ else
         \ }
 
   " -------------------------------------------------
-  "  plugins
+  "  Editting support plugins
   " -------------------------------------------------
   NeoBundle "tpope/vim-surround"
   NeoBundle "vim-scripts/Align"
@@ -257,11 +253,11 @@ set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " expand tabs to spaces (noexpandtab: do not expand)
 set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
-set matchpairs& matchpairs+=<:>       " To support brackets add a pair of '<' and '>'
-set backspace=indent,eol,start        " Can erase everything in the back space
-set wildmenu wildmode=list:full       " Command-line completion
-set clipboard+=unnamed,autoselect     " Use the OS clipboard
-set noswapfile nobackup nowritebackup " doesn't generate a backup file
+set matchpairs& matchpairs+=<:>        " To support brackets add a pair of '<' and '>'
+set backspace=indent,eol,start         " Can erase everything in the back space
+set wildmenu wildmode=list:full        " Command-line completion
+set clipboard+=unnamed,autoselect      " Use the OS clipboard
+set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 
 if (has("win16") || has("win32") || has("win64"))
   set list listchars=tab:>-,trail:-,extends:>,precedes:< " visualize character
