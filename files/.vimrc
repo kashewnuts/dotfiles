@@ -263,7 +263,6 @@ if (has("win16") || has("win32") || has("win64"))
   set list listchars=tab:>-,trail:-,extends:>,precedes:< " visualize character
 else
   set imdisable         " When you exit or enter, IME is turned off
-  set ambiwidth=double  " View characters normally width of context-sensitive
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
 
@@ -320,3 +319,62 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj
 nnoremap k gk
+
+" -------------------------------------------------
+" Automatic recognition of character code
+" -------------------------------------------------
+if &encoding !=# 'utf-8'
+  set encoding=japan
+  set fileencoding=japan
+endif
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  " Check iconv are aware of eucJP-ms
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'eucjp-ms'
+    let s:enc_jis = 'iso-2022-jp-3'
+  " Check iconv are aware of JISX0213
+  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'euc-jisx0213'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+  " Construct fileencodings
+  if &encoding ==# 'utf-8'
+    let s:fileencodings_default = &fileencodings
+    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+    let &fileencodings = &fileencodings .','. s:fileencodings_default
+    unlet s:fileencodings_default
+  else
+    let &fileencodings = &fileencodings .','. s:enc_jis
+    set fileencodings+=utf-8,ucs-2le,ucs-2
+    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+      set fileencodings+=cp932
+      set fileencodings-=euc-jp
+      set fileencodings-=euc-jisx0213
+      set fileencodings-=eucjp-ms
+      let &encoding = s:enc_euc
+      let &fileencoding = s:enc_euc
+    else
+      let &fileencodings = &fileencodings .','. s:enc_euc
+    endif
+  endif
+  " dispose the constant
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+" If don't include the Japanese, use the encoding to fileencoding
+if has('autocmd')
+  function! AU_ReCheck_FENC()
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding=&encoding
+    endif
+  endfunction
+  autocmd BufReadPost * call AU_ReCheck_FENC()
+endif
+" Automatic recognition of the line feed code
+set fileformats=unix,dos,mac
+" Cursor position to prevent misalignment even if character of □ or ○
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
