@@ -2,3 +2,6 @@
 files/.vim/bundle/
 files/.vim/bundle_manual/
 files/.vim/neobundle.vim/
+files/.vim/autoload/
+files/.vim/ftdetect/
+files/.vim/syntax/
