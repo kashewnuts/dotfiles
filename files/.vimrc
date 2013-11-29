@@ -90,6 +90,7 @@ else
         let g:neocomplete#force_omni_input_patterns = {}
       endif
       let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
+      let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
     endfunction
     unlet s:bundle
 
@@ -224,6 +225,16 @@ else
         \ }
 
   " -------------------------------------------------
+  "  Golang plugins
+  " -------------------------------------------------
+  NeoBundleLazy "nsf/gocode", {
+        \  "autoload": { "filetypes" : ["go"] }
+        \ }
+  NeoBundleLazy "Blackrush/vim-gocode", {
+        \  "autoload": { "filetypes" : ["go"] }
+        \ }
+
+  " -------------------------------------------------
   "  Editting support plugins
   " -------------------------------------------------
   NeoBundle "tpope/vim-surround"
@@ -234,7 +245,6 @@ else
     let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
   endfunction
   unlet s:bundle
-  " }}}
 
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
@@ -274,6 +284,7 @@ autocmd MyAutoCmd BufWritePost *.py call Flake8()
 
 autocmd MyAutoCmd FileType cf set noexpandtab
 autocmd MyAutoCmd FileType make set noexpandtab
+autocmd MyAutoCmd FileType go set noexpandtab
 
 " Cheerless cursor position is moved
 function! s:remove_dust()
@@ -370,7 +381,7 @@ if has('autocmd')
       let &fileencoding=&encoding
     endif
   endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
+  autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
 endif
 " Automatic recognition of the line feed code
 set fileformats=unix,dos,mac
@@ -378,3 +389,16 @@ set fileformats=unix,dos,mac
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
+
+" Golang settings
+if $GOROOT != ''
+  set rtp+=$GOROOT/misc/vim
+  set completeopt=menu,preview
+  if $GOPATH != ''
+    " gocode
+    exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+    " golint
+    exe "set rtp+=".globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
+  endif
+endif
+autocmd MyAutoCmd BufWritePre *.go Fmt

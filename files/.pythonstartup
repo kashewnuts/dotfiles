@@ -1,22 +1,21 @@
 # -*- encoding: utf-8 -*-
 # Python startup
-import readline
-import rlcompleter
-import atexit
-import os
-import platform
-# Tab complement
-readline.parse_and_bind('tab: complete')
-# History File
-if platform.system() == 'Windows':
-    environ_path = 'USERPROFILE'
-else:
-    environ_path = 'HOME'
-histfile = os.path.join(os.environ[environ_path], '.pythonhistory')
-
 try:
-    readline.read_history_file(histfile)
-except IOError:
+    import readline
+    import rlcompleter
+    import atexit
+    import os
+    import platform
+    # Tab complement
+    readline.parse_and_bind('tab: complete')
+    # History File
+    histfile = os.path.join(os.environ['HOME'], '.pythonhistory')
+
+    try:
+        readline.read_history_file(histfile)
+    except IOError:
+        pass
+    atexit.register(readline.write_history_file, histfile)
+    del platform, os, histfile, environ_path, readline, rlcompleter, atexit
+except:
     pass
-atexit.register(readline.write_history_file, histfile)
-del platform, os, histfile, environ_path, readline, rlcompleter, atexit
