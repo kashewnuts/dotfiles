@@ -23,7 +23,7 @@ endif
 
 " Display full-width space
 highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
-match ZenkakuSpace /„ÄÄ/
+match ZenkakuSpace /Å@/
 
 " Hack #120: Store the location and size of the window by gVim
 let g:save_window_file = expand("~/.vimwinpos")

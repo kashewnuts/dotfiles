@@ -116,7 +116,7 @@ else
   endif
 
   NeoBundleLazy "Shougo/neosnippet.vim", {
-        \  "depends": ["honza/vim-snippets"],
+        \  "depends": ["honza/vim-snippets", "Shougo/neosnippet-snippets"],
         \  "autoload": { "insert": 1, }
         \ }
   let s:bundle = neobundle#get("neosnippet.vim")
@@ -245,6 +245,9 @@ else
     let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
   endfunction
   unlet s:bundle
+  NeoBundleLazy "mrtazz/simplenote.vim", {
+        \  "autoload" :  { "commands" : [ "Simplenote" ] }
+        \ }
 
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
@@ -384,7 +387,7 @@ if has('autocmd')
   autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
 endif
 " Automatic recognition of the line feed code
-set fileformats=unix,dos,mac
+"set fileformats=unix,dos,mac
 " Cursor position to prevent misalignment even if character of □ or ○
 if exists('&ambiwidth')
   set ambiwidth=double
@@ -400,5 +403,10 @@ if $GOROOT != ''
     " golint
     exe "set rtp+=".globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
   endif
+  " grep
+  set grepprg=jvgrep
 endif
 autocmd MyAutoCmd BufWritePre *.go Fmt
+
+" Simplenote settings
+source ~/.simplenoterc
