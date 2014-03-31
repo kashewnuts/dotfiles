@@ -410,3 +410,7 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 
 " Simplenote settings
 source ~/.simplenoterc
+
+if has('undofile')
+  set noundofile
+endif
