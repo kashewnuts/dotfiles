@@ -148,8 +148,13 @@ else
   unlet s:bundle
 
   NeoBundleLazy "Shougo/vimfiler", {
-        \  "autoload" : { "commands" : [ "VimFiler" ] }
-        \ }
+      \ "depends": ["Shougo/unite.vim"],
+      \ "autoload": {
+      \   "commands": ["VimFiler", "VimFilerTab", "VimFilerExplorer"],
+      \ }}
+  nnoremap <Leader>e :VimFilerExplorer<CR>
+  " close vimfiler automatically when there are only vimfiler open
+  autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
   let s:bundle = neobundle#get("vimfiler")
   function! s:bundle.hooks.on_source(bundle)
     let g:vimfiler_as_default_explorer = 1
