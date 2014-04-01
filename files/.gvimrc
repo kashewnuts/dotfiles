@@ -13,14 +13,6 @@ colorscheme adrian
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
 
-" Menu UTF-8 Setting
-if s:is_windows
-  set guifont=MS_Gothic:h12
-  source $VIMRUNTIME/delmenu.vim
-  set langmenu=ja_jp.utf-8
-  source $VIMRUNTIME/menu.vim
-endif
-
 " Display full-width space
 highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
 match ZenkakuSpace /Å@/

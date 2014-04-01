@@ -8,6 +8,7 @@
 " -------------------------------------------------
 " Initialize
 " -------------------------------------------------
+set guioptions+=M                 " Don't read menu.vim
 set nocompatible                  " Be iMproved
 
 " release autogroup in MyAutoCmd
@@ -21,6 +22,20 @@ augroup END
 let s:noplugin = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir = expand("~/.vim/bundle")
+
+function! s:init_neobundle()
+  NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
+  NeoBundleLazy "Shougo/unite.vim", {
+        \   "autoload" : { "commands" : [ "Unite" ] }
+        \}
+  NeoBundle "Shougo/vimproc", {
+        \ "build": {
+        \   "windows"   : "make -f make_mingw32.mak",
+        \   "cygwin"    : "make -f make_cygwin.mak",
+        \   "mac"       : "make -f make_mac.mak",
+        \   "unix"      : "make -f make_unix.mak",
+        \ }}
+endfunction
 
 if !isdirectory(s:neobundledir) || v:version < 702
   let s:noplugin = 1
@@ -36,16 +51,7 @@ elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   " -------------------------------------------------
   " Shougo plugins
   " -------------------------------------------------
-  NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
-  NeoBundle "Shougo/unite.vim"
-  NeoBundle "Shougo/vimproc", {
-        \ "build": {
-        \   "windows"   : "make -f make_mingw32.mak",
-        \   "cygwin"    : "make -f make_cygwin.mak",
-        \   "mac"       : "make -f make_mac.mak",
-        \   "unix"      : "make -f make_unix.mak",
-        \ }}
-
+  call s:init_neobundle()
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
 
@@ -58,18 +64,8 @@ else
   " -------------------------------------------------
   " Shougo plugins
   " -------------------------------------------------
-  NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
-  NeoBundleLazy "Shougo/unite.vim", {
-        \   "autoload" : { "commands" : [ "Unite" ] }
-        \}
-
-  NeoBundle "Shougo/vimproc", {
-        \ "build": {
-        \   "windows"   : "make -f make_mingw32.mak",
-        \   "cygwin"    : "make -f make_cygwin.mak",
-        \   "mac"       : "make -f make_mac.mak",
-        \   "unix"      : "make -f make_unix.mak",
-        \ }}
+  " autocmd MyAutoCmd BufWritePre * call <SID>init_neobundle()
+  call s:init_neobundle()
 
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
     NeoBundleLazy "Shougo/neocomplete.vim", {
@@ -154,11 +150,11 @@ else
       \ }}
   nnoremap <Leader>e :VimFilerExplorer<CR>
   " close vimfiler automatically when there are only vimfiler open
-  autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
   let s:bundle = neobundle#get("vimfiler")
   function! s:bundle.hooks.on_source(bundle)
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_safe_mode_by_default = 0
+    autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
   endfunction
   unlet s:bundle
 
@@ -253,6 +249,7 @@ else
   NeoBundleLazy "mrtazz/simplenote.vim", {
         \  "autoload" :  { "commands" : [ "Simplenote" ] }
         \ }
+  NeoBundle "mattn/emmet-vim"
 
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
@@ -416,6 +413,6 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 " Simplenote settings
 source ~/.simplenoterc
 
-if has('undofile')
+if exists('&undofile')
   set noundofile
 endif
