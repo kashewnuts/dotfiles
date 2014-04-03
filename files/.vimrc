@@ -47,10 +47,6 @@ elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
     execute "set runtimepath+=" . s:neobundledir
   endif
   call neobundle#rc(s:bundledir)
-
-  " -------------------------------------------------
-  " Shougo plugins
-  " -------------------------------------------------
   call s:init_neobundle()
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
@@ -64,7 +60,6 @@ else
   " -------------------------------------------------
   " Shougo plugins
   " -------------------------------------------------
-  " autocmd MyAutoCmd BufWritePre * call <SID>init_neobundle()
   call s:init_neobundle()
 
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
