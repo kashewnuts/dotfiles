@@ -1,7 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='C:\Users\KashunYoshida\.virtualenvs\tinkerer\myblog\_themes\custom_dark'
 let g:netrw_dirhist_2='C:/Users/KashunYoshida/.virtualenvs/tinkerer/myblog/_themes/custom_dark'
 let g:netrw_dirhist_3='C:/Users/yoshida.kashun.IND/dotfiles'
 let g:netrw_dirhist_4='C:\Users\KashunYoshida\Recent'
 let g:netrw_dirhist_5='C:\Users\KashunYoshida\.ssh'
+let g:netrw_dirhist_6='/home/vagrant/.rvm/rubies/ruby-2.1.1'

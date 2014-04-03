@@ -23,7 +23,12 @@ let s:noplugin = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir = expand("~/.vim/bundle")
 
+" Install Minimum Plugins
 function! s:init_neobundle()
+  if has("vim_starting")
+    execute "set runtimepath+=" . s:neobundledir
+  endif
+  call neobundle#rc(s:bundledir)
   NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
   NeoBundleLazy "Shougo/unite.vim", {
         \   "autoload" : { "commands" : [ "Unite" ] }
@@ -43,25 +48,15 @@ if !isdirectory(s:neobundledir) || v:version < 702
 elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   " If Neobundle is present and the plug-in is not installed,
   " I performed in preparation
-  if has("vim_starting")
-    execute "set runtimepath+=" . s:neobundledir
-  endif
-  call neobundle#rc(s:bundledir)
   call s:init_neobundle()
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
 
 else
-  if has("vim_starting")
-    execute "set runtimepath+=" . s:neobundledir
-  endif
-  call neobundle#rc(s:bundledir)
-
   " -------------------------------------------------
   " Shougo plugins
   " -------------------------------------------------
   call s:init_neobundle()
-
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
     NeoBundleLazy "Shougo/neocomplete.vim", {
         \  "autoload": { "insert": 1, }
