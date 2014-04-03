@@ -236,6 +236,21 @@ else
         \ }
 
   " -------------------------------------------------
+  "  Git plugins
+  " -------------------------------------------------
+  NeoBundleLazy "mattn/gist-vim", {
+        \ "depends": ["mattn/webapi-vim"],
+        \ "autoload": {
+        \   "commands": ["Gist"],
+        \ }}
+
+  NeoBundleLazy "gregsexton/gitv", {
+        \ "depends": ["tpope/vim-fugitive"],
+        \ "autoload": {
+        \   "commands": ["Gitv"],
+        \ }}
+
+  " -------------------------------------------------
   "  Editting support plugins
   " -------------------------------------------------
   NeoBundle "tpope/vim-surround"
@@ -413,6 +428,7 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 " Simplenote settings
 source ~/.simplenoterc
 
+" Don't make *.un~ files
 if exists('&undofile')
   set noundofile
 endif
