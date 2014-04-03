@@ -261,9 +261,19 @@ else
     let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
   endfunction
   unlet s:bundle
+
   NeoBundleLazy "mrtazz/simplenote.vim", {
         \  "autoload" :  { "commands" : [ "Simplenote" ] }
         \ }
+  let s:bundle = neobundle#get("simplenote.vim")
+  function! s:bundle.hooks.on_source(bundle)
+    let s:simplenoterc = expand('~/.simplenoterc')
+    if filereadable(s:simplenoterc)
+        execute 'source ' . s:simplenoterc
+    endif
+  endfunction
+  unlet s:bundle
+
   NeoBundle "mattn/emmet-vim"
 
   filetype plugin indent on       " Required!
@@ -424,9 +434,6 @@ if $GOROOT != ''
   set grepprg=jvgrep
 endif
 autocmd MyAutoCmd BufWritePre *.go Fmt
-
-" Simplenote settings
-source ~/.simplenoterc
 
 " Don't make *.un~ files
 if exists('&undofile')
