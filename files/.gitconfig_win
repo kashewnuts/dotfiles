@@ -12,3 +12,5 @@
 	default = simple
 [gui]
 	encoding = utf-8
+[alias]
+	lg = log --graph --decorate --oneline
