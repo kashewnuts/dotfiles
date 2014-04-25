@@ -23,6 +23,6 @@ do
 
   # Install neobundle.vim
   if [ ! -e $HOME/${DOT_FILES[0]}/neobundle.vim -a -x "`which git`" ]; then
-      git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim
+    git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim
   fi
 done
