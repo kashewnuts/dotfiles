@@ -429,3 +429,9 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 if exists('&undofile')
   set noundofile
 endif
+
+" Local settings
+let s:localrc = expand($HOME . '/.vimrc.local')
+if filereadable(s:localrc)
+  source ~/.vimrc.local
+endif

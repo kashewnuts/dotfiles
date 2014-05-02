@@ -52,3 +52,9 @@ if s:is_windows
 elseif s:is_darwin
   set transparency=20
 endif
+
+" Local settings
+let s:localrc = expand($HOME . '/.gvimrc.local')
+if filereadable(s:localrc)
+  source ~/.gvimrc.local
+endif
