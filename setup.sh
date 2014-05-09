@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 DOT_FILES=(
     .vim              \
     .vimrc            \
