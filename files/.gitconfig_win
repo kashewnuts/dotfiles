@@ -16,11 +16,11 @@
 	logOutputEncoding = utf-8
 [alias]
 	lg = log --graph --decorate --oneline
-	co = checkout
 	br = branch
 	ci = commit
-	st = status
+	co = checkout
 	df = diff
+	st = status
 [diff]
 	tool = WinMerge
 	guitool = WinMerge
