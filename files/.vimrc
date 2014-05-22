@@ -5,20 +5,22 @@
 " To use this, copy to your home directory.
 " ==============================================================================
 
-" -------------------------------------------------
-" Initialize
-" -------------------------------------------------
+" Basic Settings {{{
+" ------------------------------------------------------------------------------
 set guioptions+=M                 " Don't read menu.vim
 set nocompatible                  " Be iMproved
+
+" Encoding
+set encoding=utf-8
+scriptencoding utf-8
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
   autocmd!
 augroup END
+" }}}
 
-" -------------------------------------------------
-" Plugins
-" -------------------------------------------------
+" NeoBundle {{{
 let s:noplugin = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir = expand("~/.vim/bundle")
@@ -30,9 +32,7 @@ function! s:init_neobundle()
   endif
   call neobundle#rc(s:bundledir)
   NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
-  NeoBundleLazy "Shougo/unite.vim", {
-        \   "autoload" : { "commands" : [ "Unite" ] }
-        \}
+  NeoBundleLazy "Shougo/unite.vim", { "autoload" : { "commands" : ["Unite"] } }
   NeoBundle "Shougo/vimproc", {
         \ "build": {
         \   "windows"   : "make -f make_mingw32.mak",
@@ -42,6 +42,23 @@ function! s:init_neobundle()
         \ }}
 endfunction
 
+" bundled
+function! s:bundled(bundle)
+  if !isdirectory(s:bundledir)
+    return 0
+  endif
+  if stridx(&runtimepath, s:neobundledir) == -1
+    return 0
+  endif
+
+  if a:bundle ==# 'neobundle.vim'
+    return 1
+  else
+    return neobundle#is_installed(a:bundle)
+  endif
+endfunction
+
+" Install Plugins
 if !isdirectory(s:neobundledir) || v:version < 702
   let s:noplugin = 1
 
@@ -53,60 +70,136 @@ elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   NeoBundleCheck                  " Installation check.
 
 else
-  " -------------------------------------------------
-  " Shougo plugins
+  " Shougo plugins {{{
   " -------------------------------------------------
   call s:init_neobundle()
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
-    NeoBundleLazy "Shougo/neocomplete.vim", {
-        \  "autoload": { "insert": 1, }
-        \ }
+    NeoBundleLazy "Shougo/neocomplete.vim", { "autoload": { "insert": 1, } }
     " Combined with NeoComplCache
     let g:neocomplete#enable_at_startup = 1
-    let s:bundle = neobundle#get("neocomplete.vim")
-    function! s:bundle.hooks.on_source(bundle)
-      let g:acp_enableAtStartup = 0            " NeoCompleteEnable
-      let g:neocomplete#enable_smart_case = 1  " Use smartcase.
-      " Set minimum syntax keyword length.
-      let g:neocomplete#sources#syntax#min_keyword_length = 3
-      " jedi omni completion
-      autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
-      let g:jedi#auto_vim_configuration = 0
-      if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-      endif
-      let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
-      let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
-    endfunction
-    unlet s:bundle
-
   else
-    NeoBundleLazy "Shougo/neocomplcache.vim", {
-        \  "autoload": {"insert": 1, }
-        \ }
+    NeoBundleLazy "Shougo/neocomplcache.vim", { "autoload": {"insert": 1, } }
     " Cause is unknown, but NeoComplCacheEnable command is found, so change.
     let g:neocomplcache_enable_at_startup = 1
-    let s:bundle = neobundle#get("neocomplcache.vim")
-    function! s:bundle.hooks.on_source(bundle)
-      let g:acp_enableAtStartup = 0
-      let g:neocomplcache_enable_smart_case = 1
-      " jedi omni completion
-      autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
-      let g:jedi#auto_vim_configuration = 0
-      if !exists('g:neocomplcache_force_omni_patterns')
-        let g:neocomplcache_force_omni_patterns = {}
-      endif
-      let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
-    endfunction
-    unlet s:bundle
   endif
-
   NeoBundleLazy "Shougo/neosnippet.vim", {
         \  "depends": ["honza/vim-snippets", "Shougo/neosnippet-snippets"],
         \  "autoload": { "insert": 1, }
         \ }
-  let s:bundle = neobundle#get("neosnippet.vim")
-  function! s:bundle.hooks.on_source(bundle)
+
+  NeoBundleLazy "Shougo/vimfiler", {
+        \ "depends": ["Shougo/unite.vim"],
+        \ "autoload": {
+        \   "commands": ["VimFiler", "VimFilerTab", "VimFilerExplorer"],
+        \ }}
+  NeoBundleLazy "Shougo/vimshell", { "autoload" : { "commands" : ["VimShell"] } }
+  " }}}
+
+  " thinca plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy "thinca/vim-quickrun", { "autoload": { "commands" : ["Quickrun"] } }
+  NeoBundleLazy "thinca/vim-scouter", { "autoload" : { "commands" : ["Scouter"] } }
+  NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
+  " }}}
+
+  " Python plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy "davidhalter/jedi-vim", {
+        \  "autoload": {
+        \    "insert" : 1,
+        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \ }
+  NeoBundleLazy "lambdalisue/vim-django-support", {
+        \  "autoload": {
+        \    "filetypes": ["python", "python3", "djangohtml"] }
+        \ }
+  NeoBundleLazy "jmcantrell/vim-virtualenv", {
+        \  "autoload" : {
+        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \ }
+  NeoBundleLazy "nvie/vim-flake8", {
+        \  "autoload": {
+        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+        \ }
+  " }}}
+
+  " Golang plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy "nsf/gocode", { "autoload": { "filetypes" : ["go"] } }
+  NeoBundleLazy "Blackrush/vim-gocode", { "autoload": { "filetypes" : ["go"] } }
+  " }}}
+
+  " Git plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy "mattn/gist-vim", {
+        \ "depends": ["mattn/webapi-vim"],
+        \ "autoload": {
+        \   "commands": ["Gist"],
+        \ }}
+  NeoBundleLazy "gregsexton/gitv", {
+        \ "depends": ["tpope/vim-fugitive"],
+        \ "autoload": {
+        \   "commands": ["Gitv"],
+        \ }}
+  " }}}
+
+  " Editting support plugins {{{
+  " -------------------------------------------------
+  NeoBundle "tpope/vim-surround"
+  NeoBundle "vim-scripts/Align"
+  NeoBundleLazy "mrtazz/simplenote.vim", { "autoload" : { "commands" : ["Simplenote"] } }
+  NeoBundle "mattn/emmet-vim"
+  " }}}
+
+  " Twitter plugins {{{
+  " -------------------------------------------------
+  NeoBundle "basyura/TweetVim"
+  NeoBundle "tyru/open-browser.vim"
+  NeoBundle "basyura/twibill.vim"
+  NeoBundle "mattn/webapi-vim"
+  NeoBundle "h1mesuke/unite-outline"
+  NeoBundle "basyura/bitly.vim"
+  NeoBundle "mattn/favstar-vim"
+  " }}}
+
+  " Plugins Settings {{{
+  " -------------------------------------------------
+
+  " neocomplete.vim {{{
+  if s:bundled('neocomplete.vim')
+    let g:acp_enableAtStartup = 0            " NeoCompleteEnable
+    let g:neocomplete#enable_smart_case = 1  " Use smartcase.
+
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+    " jedi omni completion
+    autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
+
+    let g:jedi#auto_vim_configuration = 0
+    if !exists('g:neocomplete#force_omni_input_patterns')
+      let g:neocomplete#force_omni_input_patterns = {}
+    endif
+    let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
+    let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
+  endif " }}}
+
+  " neocomplcache.vim {{{
+  if s:bundled("neocomplcache.vim")
+    let g:acp_enableAtStartup = 0
+    let g:neocomplcache_enable_smart_case = 1
+
+    " jedi omni completion
+    autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
+    let g:jedi#auto_vim_configuration = 0
+    if !exists('g:neocomplcache_force_omni_patterns')
+      let g:neocomplcache_force_omni_patterns = {}
+    endif
+    let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
+  endif " }}}
+
+  " neosnippet {{{
+  if s:bundled("neosnippet.vim")
     " Plugin key-mappings.
     imap <C-k>   <Plug>(neosnippet_expand_or_jump)
     smap <C-k>   <Plug>(neosnippet_expand_or_jump)
@@ -130,37 +223,20 @@ else
 
     " Tell Neosnippet about the other snippets
     let g:neosnippet#snippets_directory=s:bundledir."/vim-snippets/snippets"
-  endfunction
-  unlet s:bundle
+  endif " }}}
 
-  NeoBundleLazy "Shougo/vimfiler", {
-      \ "depends": ["Shougo/unite.vim"],
-      \ "autoload": {
-      \   "commands": ["VimFiler", "VimFilerTab", "VimFilerExplorer"],
-      \ }}
-  nnoremap <Leader>e :VimFilerExplorer<CR>
-  " close vimfiler automatically when there are only vimfiler open
-  let s:bundle = neobundle#get("vimfiler")
-  function! s:bundle.hooks.on_source(bundle)
+  " vimfiler {{{
+  if s:bundled("vimfiler")
     let g:vimfiler_as_default_explorer = 1
     let g:vimfiler_safe_mode_by_default = 0
+    " close vimfiler automatically when there are only vimfiler open
+    nnoremap <Leader>e :VimFilerExplorer<CR>
     autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
-  endfunction
-  unlet s:bundle
+  endif " }}}
 
-  NeoBundleLazy "Shougo/vimshell", {
-        \   "autoload" : { "commands" : [ "VimShell" ] }
-        \ }
-
-  " -------------------------------------------------
-  " thinca plugins
-  " -------------------------------------------------
-  NeoBundleLazy "thinca/vim-quickrun", {
-        \  "autoload": { "commands" : [ "Quickrun" ] }
-        \ }
-  nmap <Leader>r <Plug>(quickrun)
-  let s:bundle = neobundle#get("vim-quickrun")
-  function! s:bundle.hooks.on_source(bundle)
+  " vim-quickrun {{{
+  if s:bundled("vim-quickrun")
+    nmap <Leader>r <Plug>(quickrun)
     " Open at the height of 10-digit buffer window by horizontal split at the bottom
     " Enable asynchronous processing
     " Disable the Sheban prevent garbled in a Windows environment
@@ -171,121 +247,40 @@ else
     \      "hook/shebang/enable" : 0,
     \  }
     \ }
-  endfunction
-  unlet s:bundle
+  endif " }}}
 
-  NeoBundleLazy "thinca/vim-scouter", {
-        \  "autoload" :  { "commands" : [ "Scouter" ] }
-        \ }
-
-  NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
-
-  " -------------------------------------------------
-  " Python plugins
-  " -------------------------------------------------
-  NeoBundleLazy "davidhalter/jedi-vim", {
-        \  "autoload": {
-        \    "insert" : 1,
-        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \ }
-
-  let s:bundle = neobundle#get("jedi-vim")
-  function! s:bundle.hooks.on_source(bundle)
+  " jedi-vim {{{
+  if s:bundled("jedi-vim")
     let g:jedi#auto_initialization = 0
     let g:jedi#rename_command = "<leader>R"
     let g:jedi#popup_on_dot = 1
     let g:jedi#show_call_signatures = 0
     let g:jedi#popup_select_first = 0
     autocmd MyAutoCmd FileType python let b:did_ftplugin = 1
-  endfunction
-  unlet s:bundle
+  endif " }}}
 
-  NeoBundleLazy "lambdalisue/vim-django-support", {
-        \  "autoload": {
-        \    "filetypes": ["python", "python3", "djangohtml"] }
-        \ }
-
-  NeoBundleLazy "jmcantrell/vim-virtualenv", {
-        \  "autoload" : {
-        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \ }
-
-  NeoBundleLazy "nvie/vim-flake8", {
-        \  "autoload": {
-        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \ }
-
-  " -------------------------------------------------
-  "  Golang plugins
-  " -------------------------------------------------
-  NeoBundleLazy "nsf/gocode", {
-        \  "autoload": { "filetypes" : ["go"] }
-        \ }
-  NeoBundleLazy "Blackrush/vim-gocode", {
-        \  "autoload": { "filetypes" : ["go"] }
-        \ }
-
-  " -------------------------------------------------
-  "  Git plugins
-  " -------------------------------------------------
-  NeoBundleLazy "mattn/gist-vim", {
-        \ "depends": ["mattn/webapi-vim"],
-        \ "autoload": {
-        \   "commands": ["Gist"],
-        \ }}
-
-  NeoBundleLazy "gregsexton/gitv", {
-        \ "depends": ["tpope/vim-fugitive"],
-        \ "autoload": {
-        \   "commands": ["Gitv"],
-        \ }}
-
-  " -------------------------------------------------
-  "  Editting support plugins
-  " -------------------------------------------------
-  NeoBundle "tpope/vim-surround"
-  NeoBundle "vim-scripts/Align"
-  let s:bundle = neobundle#get("Align")
-  function! s:bundle.hooks.on_source(bundle)
+  " Align {{{
+  if s:bundled("Align")
     let g:Align_xstrlen = 3       " for japanese string
     let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
-  endfunction
-  unlet s:bundle
+  endif " }}}
 
-  NeoBundleLazy "mrtazz/simplenote.vim", {
-        \  "autoload" :  { "commands" : [ "Simplenote" ] }
-        \ }
-  let s:bundle = neobundle#get("simplenote.vim")
-  function! s:bundle.hooks.on_source(bundle)
+  " simplenote {{{
+  if s:bundled("simplenote.vim")
     let s:simplenoterc = expand('~/.simplenoterc')
     if filereadable(s:simplenoterc)
         execute 'source ' . s:simplenoterc
     endif
-  endfunction
-  unlet s:bundle
+  endif " }}}
 
-  NeoBundle "mattn/emmet-vim"
-
-  " -------------------------------------------------
-  "  Twitter plugins
-  " -------------------------------------------------
-  NeoBundle "basyura/TweetVim"
-  NeoBundle "tyru/open-browser.vim"
-  NeoBundle "basyura/twibill.vim"
-  NeoBundle "mattn/webapi-vim"
-  NeoBundle "h1mesuke/unite-outline"
-  NeoBundle "basyura/bitly.vim"
-  NeoBundle "mattn/favstar-vim"
+  " }}}
 
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
-endif
+endif " }}}
 
-" -------------------------------------------------
-" Common
-" -------------------------------------------------
+" Misc {{{
 syntax on          " Enable syntax highlighting
-set encoding=utf8  " Default character code
 set number         " Show line number (nonumber: Hide)
 set smartindent    " Advanced automatic indentation when you made the new line
 set showmatch      " When the brackets is entered closed, to view the matching brackets
@@ -299,19 +294,18 @@ set backspace=indent,eol,start         " Can erase everything in the back space
 set wildmenu wildmode=list:full        " Command-line completion
 set clipboard+=unnamed,autoselect      " Use the OS clipboard
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+" }}}
 
+" Visualize character {{{
 if (has("win16") || has("win32") || has("win64"))
-  set list listchars=tab:>-,trail:-,extends:>,precedes:< " visualize character
+  set list listchars=tab:>-,trail:-,extends:>,precedes:<
 else
   set imdisable         " When you exit or enter, IME is turned off
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
+" }}}
 
-" When the '#' character in the first line of the newly created, it is not unindent
-autocmd MyAutoCmd FileType python inoremap # X#
-autocmd MyAutoCmd FileType python set textwidth=80 " Limit number of digits
-autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
-autocmd MyAutoCmd BufWritePost *.py call Flake8()
+" FileType {{{
 
 " ts   : tabstop
 " sw   : shiftwidth
@@ -320,9 +314,7 @@ autocmd MyAutoCmd BufWritePost *.py call Flake8()
 " noet : noexpandtab
 " si   : smartindent
 " cinw : cinwords
-
-" Indentation
-autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et
+autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
 autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
@@ -331,8 +323,11 @@ autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType text       setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType rst        setl ts=2 sw=2 sts=2 et
+" When the '#' character in the first line of the newly created, it is not unindent
+autocmd MyAutoCmd FileType python inoremap # X#
+" }}}
 
-" Cheerless cursor position is moved
+" Cheerless cursor position is moved {{{
 function! s:remove_dust()
   let cursor = getpos(".")
   %s/\s\+$//ge          " Remove trailing whitespace on save
@@ -343,7 +338,9 @@ endfunction
 autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
+" }}}
 
+" KeyMaping {{{
 " Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
 nnoremap <silent> <S-Right> :5wincmd ><CR>
@@ -358,14 +355,6 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" Open the file to force the specified character code.
-command! Cp932 edit ++enc=cp932
-command! Eucjp edit ++enc=euc-jp
-command! Iso2022jp edit ++enc=iso-2022-jp
-command! Utf8 edit ++enc=utf-8
-command! Jis Iso2022jp
-command! Sjis Cp932
-
 " Turn off the highlight by pressing twice the ESC.
 nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
@@ -376,10 +365,19 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj
 nnoremap k gk
+" }}}
 
-" -------------------------------------------------
-" Automatic recognition of character code
-" -------------------------------------------------
+" Open the file to force the specified character code. {{{
+command! Cp932 edit ++enc=cp932
+command! Eucjp edit ++enc=euc-jp
+command! Iso2022jp edit ++enc=iso-2022-jp
+command! Utf8 edit ++enc=utf-8
+command! Jis Iso2022jp
+command! Sjis Cp932
+" }}}
+
+" Automatic recognition of character code {{{
+" ------------------------------------------------------------------------------
 if &encoding !=# 'utf-8'
   set encoding=japan
   set fileencoding=japan
@@ -434,9 +432,16 @@ endif
 " Cursor position to prevent misalignment even if character of □ or ○
 if exists('&ambiwidth')
   set ambiwidth=double
-endif
+endif " }}}
 
-" Golang settings
+" Python settings {{{
+" ------------------------------------------------------------------------------
+autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
+autocmd MyAutoCmd BufWritePost *.py call Flake8()
+" }}}
+
+" Golang settings {{{
+" ------------------------------------------------------------------------------
 if $GOROOT != ''
   set rtp+=$GOROOT/misc/vim
   set completeopt=menu,preview
@@ -450,14 +455,20 @@ if $GOROOT != ''
   set grepprg=jvgrep
 endif
 autocmd MyAutoCmd BufWritePre *.go Fmt
+" }}}
 
-" Don't make *.un~ files
+" Don't make *.un~ files {{{
+" ------------------------------------------------------------------------------
 if exists('&undofile')
   set noundofile
-endif
+endif "}}}
 
-" Local settings
+" Local settings {{{
+" ------------------------------------------------------------------------------
 let s:localrc = expand($HOME . '/.vimrc.local')
 if filereadable(s:localrc)
   source ~/.vimrc.local
-endif
+endif " }}}
+
+" vim: expandtab softtabstop=2 shiftwidth=2
+" vim: foldmethod=marker

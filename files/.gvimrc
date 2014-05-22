@@ -5,6 +5,7 @@
 " To use this, copy to your home directory.
 " ==============================================================================
 
+" Basic Settings {{{
 let s:is_windows = has("win16") || has("win32") || has("win64")
 let s:is_darwin = has("mac") || has("macunix") || has("gui_macvim")
 
@@ -12,12 +13,14 @@ colorscheme adrian
 
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
+" }}}
 
-" Display full-width space
+" Display full-width space {{{
 highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
 match ZenkakuSpace /Å@/
+" }}}
 
-" Hack #120: Store the location and size of the window by gVim
+" Hack #120: Store the location and size of the window by gVim {{{
 let s:save_window_file = expand("~/.vimwinpos")
 augroup SaveWindow
   autocmd!
@@ -35,26 +38,30 @@ augroup END
 if filereadable(s:save_window_file)
   execute "source" s:save_window_file
 endif
+" }}}
 
-" ime setting
+" IME setting {{{
 if has("multi byte_ime") || has("xim") || has("gui_macvim")
   " Insert , Search mode: ime setting
   set iminsert=2
   set imsearch=2
   " Normal mode: IME off
   inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
-endif
+endif " }}}
 
-" semitransparency
+" Semitransparency {{{
 if s:is_windows
   gui
   set transparency=220
 elseif s:is_darwin
   set transparency=20
-endif
+endif " }}}
 
-" Local settings
+" Local settings {{{
 let s:localrc = expand($HOME . '/.gvimrc.local')
 if filereadable(s:localrc)
   source ~/.gvimrc.local
-endif
+endif " }}}
+
+" vim: expandtab softtabstop=2 shiftwidth=2
+" vim: foldmethod=marker
