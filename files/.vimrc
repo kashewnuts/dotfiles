@@ -25,7 +25,7 @@ let s:noplugin = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir = expand("~/.vim/bundle")
 
-" Install Minimum Plugins
+" Install Minimum Plugins {{{
 function! s:init_neobundle()
   if has("vim_starting")
     execute "set runtimepath+=" . s:neobundledir
@@ -40,9 +40,9 @@ function! s:init_neobundle()
         \   "mac"       : "make -f make_mac.mak",
         \   "unix"      : "make -f make_unix.mak",
         \ }}
-endfunction
+endfunction " }}}
 
-" bundled
+" bundled {{{
 function! s:bundled(bundle)
   if !isdirectory(s:bundledir)
     return 0
@@ -56,7 +56,7 @@ function! s:bundled(bundle)
   else
     return neobundle#is_installed(a:bundle)
   endif
-endfunction
+endfunction " }}}
 
 " Install Plugins
 if !isdirectory(s:neobundledir) || v:version < 702
