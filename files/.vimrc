@@ -21,9 +21,9 @@ augroup END
 " }}}
 
 " NeoBundle {{{
-let s:noplugin = 0
+let s:noplugin     = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
-let s:bundledir = expand("~/.vim/bundle")
+let s:bundledir    = expand("~/.vim/bundle")
 
 " Install Minimum Plugins {{{
 function! s:init_neobundle()
@@ -34,12 +34,12 @@ function! s:init_neobundle()
   NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
   NeoBundleLazy "Shougo/unite.vim", { "autoload" : { "commands" : ["Unite"] } }
   NeoBundle "Shougo/vimproc", {
-        \ "build": {
-        \   "windows"   : "make -f make_mingw32.mak",
-        \   "cygwin"    : "make -f make_cygwin.mak",
-        \   "mac"       : "make -f make_mac.mak",
-        \   "unix"      : "make -f make_unix.mak",
-        \ }}
+    \ "build": {
+    \   "windows"   : "make -f make_mingw32.mak",
+    \   "cygwin"    : "make -f make_cygwin.mak",
+    \   "mac"       : "make -f make_mac.mak",
+    \   "unix"      : "make -f make_unix.mak",
+    \ }}
 endfunction " }}}
 
 " bundled {{{
@@ -83,15 +83,15 @@ else
     let g:neocomplcache_enable_at_startup = 1
   endif
   NeoBundleLazy "Shougo/neosnippet.vim", {
-        \  "depends": ["honza/vim-snippets", "Shougo/neosnippet-snippets"],
-        \  "autoload": { "insert": 1, }
-        \ }
+    \  "depends"  : ["honza/vim-snippets", "Shougo/neosnippet-snippets"],
+    \  "autoload" : { "insert": 1, }
+    \ }
 
   NeoBundleLazy "Shougo/vimfiler", {
-        \ "depends": ["Shougo/unite.vim"],
-        \ "autoload": {
-        \   "commands": ["VimFiler", "VimFilerTab", "VimFilerExplorer"],
-        \ }}
+    \ "depends"    : ["Shougo/unite.vim"],
+    \ "autoload"   : {
+    \   "commands" : ["VimFiler", "VimFilerTab", "VimFilerExplorer"],
+    \ }}
   NeoBundleLazy "Shougo/vimshell", { "autoload" : { "commands" : ["VimShell"] } }
   " }}}
 
@@ -105,22 +105,22 @@ else
   " Python plugins {{{
   " -------------------------------------------------
   NeoBundleLazy "davidhalter/jedi-vim", {
-        \  "autoload": {
-        \    "insert" : 1,
-        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \ }
+    \  "autoload": {
+    \    "insert"    : 1,
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+    \ }
   NeoBundleLazy "lambdalisue/vim-django-support", {
-        \  "autoload": {
-        \    "filetypes": ["python", "python3", "djangohtml"] }
-        \ }
+    \  "autoload": {
+    \    "filetypes": ["python", "python3", "djangohtml"] }
+    \ }
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
-        \  "autoload" : {
-        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \ }
+    \  "autoload" : {
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+    \ }
   NeoBundleLazy "nvie/vim-flake8", {
-        \  "autoload": {
-        \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-        \ }
+    \  "autoload": {
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
+    \ }
   " }}}
 
   " Golang plugins {{{
@@ -132,15 +132,11 @@ else
   " Git plugins {{{
   " -------------------------------------------------
   NeoBundleLazy "mattn/gist-vim", {
-        \ "depends": ["mattn/webapi-vim"],
-        \ "autoload": {
-        \   "commands": ["Gist"],
-        \ }}
+    \ "depends" : ["mattn/webapi-vim"],
+    \ "autoload": { "commands": ["Gist"], }}
   NeoBundleLazy "gregsexton/gitv", {
-        \ "depends": ["tpope/vim-fugitive"],
-        \ "autoload": {
-        \   "commands": ["Gitv"],
-        \ }}
+    \ "depends" : ["tpope/vim-fugitive"],
+    \ "autoload": { "commands": ["Gitv"], }}
   " }}}
 
   " Editting support plugins {{{
@@ -323,7 +319,7 @@ autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType text       setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType rst        setl ts=2 sw=2 sts=2 et
-" When the '#' character in the first line of the newly created, it is not unindent
+" When the '#' character in the first line of the newly created, it isn't unindent
 autocmd MyAutoCmd FileType python inoremap # X#
 " }}}
 
