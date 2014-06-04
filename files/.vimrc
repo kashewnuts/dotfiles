@@ -157,6 +157,12 @@ else
   NeoBundle "basyura/bitly.vim"
   NeoBundle "mattn/favstar-vim"
   " }}}
+  
+  " Gmail plugin {{{
+  " -------------------------------------------------
+  NeoBundle "yuratomo/gmail.vim"
+  " }}}
+  
 
   " Plugins Settings {{{
   " -------------------------------------------------
@@ -457,7 +463,14 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 " ------------------------------------------------------------------------------
 if exists('&undofile')
   set noundofile
-endif "}}}
+endif "}}
+
+" Gmail settings {{{
+" ------------------------------------------------------------------------------
+let s:localrc = expand($HOME . '/.anyname')
+if filereadable(s:localrc)
+  source ~/.anyname
+endif " }}}
 
 " Local settings {{{
 " ------------------------------------------------------------------------------
