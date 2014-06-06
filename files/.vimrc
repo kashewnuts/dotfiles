@@ -32,13 +32,13 @@ function! s:init_neobundle()
   endif
   call neobundle#rc(s:bundledir)
   NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
-  NeoBundleLazy "Shougo/unite.vim", { "autoload" : { "commands" : ["Unite"] } }
+  NeoBundleLazy "Shougo/unite.vim", { "autoload": { "commands": ["Unite"] } }
   NeoBundle "Shougo/vimproc", {
     \ "build": {
-    \   "windows"   : "make -f make_mingw32.mak",
-    \   "cygwin"    : "make -f make_cygwin.mak",
-    \   "mac"       : "make -f make_mac.mak",
-    \   "unix"      : "make -f make_unix.mak",
+    \   "windows" : "make -f make_mingw32.mak",
+    \   "cygwin"  : "make -f make_cygwin.mak",
+    \   "mac"     : "make -f make_mac.mak",
+    \   "unix"    : "make -f make_unix.mak",
     \ }}
 endfunction " }}}
 
@@ -92,13 +92,13 @@ else
     \ "autoload"   : {
     \   "commands" : ["VimFiler", "VimFilerTab", "VimFilerExplorer"],
     \ }}
-  NeoBundleLazy "Shougo/vimshell", { "autoload" : { "commands" : ["VimShell"] } }
+  NeoBundleLazy "Shougo/vimshell", { "autoload": { "commands": ["VimShell"] } }
   " }}}
 
   " thinca plugins {{{
   " -------------------------------------------------
-  NeoBundleLazy "thinca/vim-quickrun", { "autoload": { "commands" : ["Quickrun"] } }
-  NeoBundleLazy "thinca/vim-scouter", { "autoload" : { "commands" : ["Scouter"] } }
+  NeoBundleLazy "thinca/vim-quickrun", { "autoload": { "commands": ["Quickrun"] } }
+  NeoBundleLazy "thinca/vim-scouter", { "autoload": { "commands": ["Scouter"] } }
   NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
   " }}}
 
@@ -125,8 +125,8 @@ else
 
   " Golang plugins {{{
   " -------------------------------------------------
-  NeoBundleLazy "nsf/gocode", { "autoload": { "filetypes" : ["go"] } }
-  NeoBundleLazy "Blackrush/vim-gocode", { "autoload": { "filetypes" : ["go"] } }
+  NeoBundleLazy "nsf/gocode", { "autoload": { "filetypes": ["go"] } }
+  NeoBundleLazy "Blackrush/vim-gocode", { "autoload": { "filetypes": ["go"] } }
   " }}}
 
   " Git plugins {{{
@@ -143,7 +143,7 @@ else
   " -------------------------------------------------
   NeoBundle "tpope/vim-surround"
   NeoBundle "vim-scripts/Align"
-  NeoBundleLazy "mrtazz/simplenote.vim", { "autoload" : { "commands" : ["Simplenote"] } }
+  NeoBundleLazy "mrtazz/simplenote.vim", { "autoload": { "commands": ["Simplenote"] } }
   NeoBundle "mattn/emmet-vim"
   " }}}
 
@@ -157,12 +157,12 @@ else
   NeoBundle "basyura/bitly.vim"
   NeoBundle "mattn/favstar-vim"
   " }}}
-  
+
   " Gmail plugin {{{
   " -------------------------------------------------
-  NeoBundle "yuratomo/gmail.vim"
+  NeoBundleLazy "yuratomo/gmail.vim", { "autoload": { "commands": ["Gmail"] } }
   " }}}
-  
+
 
   " Plugins Settings {{{
   " -------------------------------------------------
@@ -272,6 +272,14 @@ else
     let s:simplenoterc = expand('~/.simplenoterc')
     if filereadable(s:simplenoterc)
         execute 'source ' . s:simplenoterc
+    endif
+  endif " }}}
+
+  " gmail.vim {{{
+  if s:bundled("gmail.vim")
+    let s:localrc = expand($HOME . '/.anyname')
+    if filereadable(s:localrc)
+      source ~/.anyname
     endif
   endif " }}}
 
@@ -463,14 +471,7 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 " ------------------------------------------------------------------------------
 if exists('&undofile')
   set noundofile
-endif "}}
-
-" Gmail settings {{{
-" ------------------------------------------------------------------------------
-let s:localrc = expand($HOME . '/.anyname')
-if filereadable(s:localrc)
-  source ~/.anyname
-endif " }}}
+endif "}}}
 
 " Local settings {{{
 " ------------------------------------------------------------------------------
