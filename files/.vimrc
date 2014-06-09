@@ -25,7 +25,8 @@ let s:noplugin     = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir    = expand("~/.vim/bundle")
 
-" Install Minimum Plugins {{{
+" Functions {{{
+" Install Minimum Plugins
 function! s:init_neobundle()
   if has("vim_starting")
     execute "set runtimepath+=" . s:neobundledir
@@ -40,9 +41,9 @@ function! s:init_neobundle()
     \   "mac"     : "make -f make_mac.mak",
     \   "unix"    : "make -f make_unix.mak",
     \ }}
-endfunction " }}}
+endfunction
 
-" bundled {{{
+" bundled
 function! s:bundled(bundle)
   if !isdirectory(s:bundledir)
     return 0
@@ -56,7 +57,8 @@ function! s:bundled(bundle)
   else
     return neobundle#is_installed(a:bundle)
   endif
-endfunction " }}}
+endfunction
+" }}}
 
 " Install Plugins
 if !isdirectory(s:neobundledir) || v:version < 702
@@ -139,21 +141,29 @@ else
 
   " Editting support plugins {{{
   " -------------------------------------------------
-  NeoBundle "tpope/vim-surround"
-  NeoBundle "vim-scripts/Align"
+  NeoBundleLazy "tpope/vim-surround", {
+    \ "autoload" : {
+    \   "mappings" : [
+    \     ["nx", "<Plug>Dsurround"], ["nx", "<Plug>Csurround"],
+    \     ["nx", "<Plug>Ysurround"], ["nx", "<Plug>YSurround"],
+    \     ["nx", "<Plug>Yssurround"], ["nx", "<Plug>YSsurround"],
+    \     ["nx", "<Plug>YSsurround"], ["vx", "<Plug>VgSurround"],
+    \     ["vx", "<Plug>VSurround"]
+    \ ]}}
+  NeoBundleLazy "vim-scripts/Align", { "autoload": { "commands": ["Align"], }}
   NeoBundleLazy "mrtazz/simplenote.vim", { "autoload": { "commands": ["Simplenote"] } }
-  NeoBundle "mattn/emmet-vim"
+  NeoBundleLazy "mattn/emmet-vim", {
+    \ "autoload": { "filetypes": ["html", "ruby", "php", "css", "haml", "xml"] } }
   " }}}
 
   " Twitter plugins {{{
   " -------------------------------------------------
-  NeoBundle "basyura/TweetVim"
-  NeoBundle "tyru/open-browser.vim"
-  NeoBundle "basyura/twibill.vim"
-  NeoBundle "mattn/webapi-vim"
-  NeoBundle "h1mesuke/unite-outline"
-  NeoBundle "basyura/bitly.vim"
-  NeoBundle "mattn/favstar-vim"
+  NeoBundleLazy "basyura/TweetVim", {
+    \ "depends": ["basyura/twibill.vim", "tyru/open-browser.vim", "mattn/webapi-vim",
+    \             "h1mesuke/unite-outline", "basyura/bitly.vim", "mattn/favstar-vim"],
+    \ "autoload": {
+    \   "commands": ["TweetVimHomeTimeline", "TweetVimSay", "TweetVimListStatus", 
+    \                "TweetVimSearch"], }}
   " }}}
 
   " Gmail plugin {{{
@@ -162,7 +172,7 @@ else
   " }}}
 
 
-  " Plugins Settings {{{
+  " Plugins Settings
   " -------------------------------------------------
 
   " neocomplete.vim {{{
@@ -231,7 +241,8 @@ else
     let g:vimfiler_safe_mode_by_default = 0
     " close vimfiler automatically when there are only vimfiler open
     nnoremap <Leader>e :VimFilerExplorer<CR>
-    autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
+    autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') |
+          \ q | endif
   endif " }}}
 
   " vim-quickrun {{{
@@ -273,6 +284,15 @@ else
     endif
   endif " }}}
 
+  " emmet-vim {{{
+  if s:bundled("emmet-vim")
+  let g:user_emmet_settings = {
+  \  "php" : { "extends" : "html", "filters" : "c", },
+  \  "xml" : { "extends" : "html", },
+  \  "haml": { "extends" : "html", },
+  \}
+  endif " }}}
+
   " gmail.vim {{{
   if s:bundled("gmail.vim")
     let s:localrc = expand($HOME . '/.anyname')
@@ -280,8 +300,6 @@ else
       source ~/.anyname
     endif
   endif " }}}
-
-  " }}}
 
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
