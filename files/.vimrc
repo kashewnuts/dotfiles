@@ -74,17 +74,17 @@ else
   " -------------------------------------------------
   call s:init_neobundle()
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
-    NeoBundleLazy "Shougo/neocomplete.vim", { "autoload": { "insert": 1, } }
+    NeoBundleLazy "Shougo/neocomplete.vim", { "autoload": { "insert": 1 } }
     " Combined with NeoComplCache
     let g:neocomplete#enable_at_startup = 1
   else
-    NeoBundleLazy "Shougo/neocomplcache.vim", { "autoload": {"insert": 1, } }
+    NeoBundleLazy "Shougo/neocomplcache.vim", { "autoload": {"insert": 1 } }
     " Cause is unknown, but NeoComplCacheEnable command is found, so change.
     let g:neocomplcache_enable_at_startup = 1
   endif
   NeoBundleLazy "Shougo/neosnippet.vim", {
     \  "depends"  : ["honza/vim-snippets", "Shougo/neosnippet-snippets"],
-    \  "autoload" : { "insert": 1, }
+    \  "autoload" : { "insert": 1 }
     \ }
 
   NeoBundleLazy "Shougo/vimfiler", {
@@ -132,11 +132,9 @@ else
   " Git plugins {{{
   " -------------------------------------------------
   NeoBundleLazy "mattn/gist-vim", {
-    \ "depends" : ["mattn/webapi-vim"],
-    \ "autoload": { "commands": ["Gist"], }}
+    \ "depends" : ["mattn/webapi-vim"], "autoload": { "commands": ["Gist"] }}
   NeoBundleLazy "gregsexton/gitv", {
-    \ "depends" : ["tpope/vim-fugitive"],
-    \ "autoload": { "commands": ["Gitv"], }}
+    \ "depends" : ["tpope/vim-fugitive"], "autoload": { "commands": ["Gitv"] }}
   " }}}
 
   " Editting support plugins {{{
