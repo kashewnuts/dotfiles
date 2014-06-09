@@ -33,7 +33,7 @@ function! s:init_neobundle()
   endif
   call neobundle#rc(s:bundledir)
   NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
-  NeoBundleLazy "Shougo/unite.vim", { "autoload": { "commands": ["Unite"] } }
+  NeoBundleLazy "Shougo/unite.vim", { "autoload": { "commands": ["Unite"] }}
   NeoBundle "Shougo/vimproc", {
     \ "build": {
     \   "windows" : "make -f make_mingw32.mak",
@@ -76,11 +76,11 @@ else
   " -------------------------------------------------
   call s:init_neobundle()
   if has("lua") && ((v:version >= 703 && has("patch885")) || v:version >= 704)
-    NeoBundleLazy "Shougo/neocomplete.vim", { "autoload": { "insert": 1 } }
+    NeoBundleLazy "Shougo/neocomplete.vim", { "autoload": { "insert": 1 }}
     " Combined with NeoComplCache
     let g:neocomplete#enable_at_startup = 1
   else
-    NeoBundleLazy "Shougo/neocomplcache.vim", { "autoload": {"insert": 1 } }
+    NeoBundleLazy "Shougo/neocomplcache.vim", { "autoload": {"insert": 1 }}
     " Cause is unknown, but NeoComplCacheEnable command is found, so change.
     let g:neocomplcache_enable_at_startup = 1
   endif
@@ -94,13 +94,13 @@ else
     \ "autoload"   : {
     \   "commands" : ["VimFiler", "VimFilerTab", "VimFilerExplorer"],
     \ }}
-  NeoBundleLazy "Shougo/vimshell", { "autoload": { "commands": ["VimShell"] } }
+  NeoBundleLazy "Shougo/vimshell", { "autoload": { "commands": ["VimShell"] }}
   " }}}
 
   " thinca plugins {{{
   " -------------------------------------------------
-  NeoBundleLazy "thinca/vim-quickrun", { "autoload": { "commands": ["Quickrun"] } }
-  NeoBundleLazy "thinca/vim-scouter", { "autoload": { "commands": ["Scouter"] } }
+  NeoBundleLazy "thinca/vim-quickrun", { "autoload": { "commands": ["Quickrun"] }}
+  NeoBundleLazy "thinca/vim-scouter", { "autoload": { "commands": ["Scouter"] }}
   NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
   " }}}
 
@@ -109,26 +109,23 @@ else
   NeoBundleLazy "davidhalter/jedi-vim", {
     \  "autoload": {
     \    "insert"    : 1,
-    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-    \ }
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }}
   NeoBundleLazy "lambdalisue/vim-django-support", {
     \  "autoload": {
     \    "filetypes": ["python", "python3", "djangohtml"] }
     \ }
   NeoBundleLazy "jmcantrell/vim-virtualenv", {
     \  "autoload" : {
-    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-    \ }
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }}
   NeoBundleLazy "nvie/vim-flake8", {
     \  "autoload": {
-    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }
-    \ }
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }}
   " }}}
 
   " Golang plugins {{{
   " -------------------------------------------------
-  NeoBundleLazy "nsf/gocode", { "autoload": { "filetypes": ["go"] } }
-  NeoBundleLazy "Blackrush/vim-gocode", { "autoload": { "filetypes": ["go"] } }
+  NeoBundleLazy "nsf/gocode", { "autoload": { "filetypes": ["go"] }}
+  NeoBundleLazy "Blackrush/vim-gocode", { "autoload": { "filetypes": ["go"] }}
   " }}}
 
   " Git plugins {{{
@@ -151,9 +148,9 @@ else
     \     ["vx", "<Plug>VSurround"]
     \ ]}}
   NeoBundleLazy "vim-scripts/Align", { "autoload": { "commands": ["Align"], }}
-  NeoBundleLazy "mrtazz/simplenote.vim", { "autoload": { "commands": ["Simplenote"] } }
+  NeoBundleLazy "mrtazz/simplenote.vim", { "autoload": { "commands": ["Simplenote"] }}
   NeoBundleLazy "mattn/emmet-vim", {
-    \ "autoload": { "filetypes": ["html", "ruby", "php", "css", "haml", "xml"] } }
+    \ "autoload": { "filetypes": ["html", "ruby", "php", "css", "haml", "xml"] }}
   " }}}
 
   " Twitter plugins {{{
@@ -168,7 +165,7 @@ else
 
   " Gmail plugin {{{
   " -------------------------------------------------
-  NeoBundleLazy "yuratomo/gmail.vim", { "autoload": { "commands": ["Gmail"] } }
+  NeoBundleLazy "yuratomo/gmail.vim", { "autoload": { "commands": ["Gmail"] }}
   " }}}
 
 
@@ -295,9 +292,9 @@ else
 
   " gmail.vim {{{
   if s:bundled("gmail.vim")
-    let s:localrc = expand($HOME . '/.anyname')
+    let s:localrc = expand($HOME . '~/.anyname')
     if filereadable(s:localrc)
-      source ~/.anyname
+      execute 'source ' . s:localrc
     endif
   endif " }}}
 
