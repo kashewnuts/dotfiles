@@ -489,7 +489,6 @@ endif "}}}
 " Display full-width space {{{
 " ------------------------------------------------------------------------------
 function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
   highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=Dark
 endfunction
 
