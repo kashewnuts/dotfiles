@@ -7,8 +7,9 @@
 
 " Basic Settings {{{
 " ------------------------------------------------------------------------------
-set guioptions+=M                 " Don't read menu.vim
-set nocompatible                  " Be iMproved
+if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
+set nocompatible        " Be iMproved
+set guioptions+=M       " Don't read menu.vim
 
 " Encoding
 set encoding=utf-8
@@ -21,6 +22,7 @@ augroup END
 " }}}
 
 " NeoBundle {{{
+" ------------------------------------------------------------------------------
 let s:noplugin     = 0
 let s:neobundledir = expand("~/.vim/neobundle.vim")
 let s:bundledir    = expand("~/.vim/bundle")
@@ -56,6 +58,14 @@ function! s:bundled(bundle)
     return 1
   else
     return neobundle#is_installed(a:bundle)
+  endif
+endfunction
+
+" load_source
+function! s:load_source(path)
+  let path = expand(a:path)
+  if filereadable(path)
+    execute "source " . path
   endif
 endfunction
 " }}}
@@ -275,10 +285,7 @@ else
 
   " simplenote {{{
   if s:bundled("simplenote.vim")
-    let s:simplenoterc = expand('~/.simplenoterc')
-    if filereadable(s:simplenoterc)
-        execute 'source ' . s:simplenoterc
-    endif
+    call s:load_source(expand('~/.simplenoterc'))
   endif " }}}
 
   " emmet-vim {{{
@@ -292,10 +299,7 @@ else
 
   " gmail.vim {{{
   if s:bundled("gmail.vim")
-    let s:gmailrc = expand('~/.anyname')
-    if filereadable(s:gmailrc)
-      execute 'source ' . s:gmailrc
-    endif
+    call s:load_source(expand('~/.anyname'))
   endif " }}}
 
   filetype plugin indent on       " Required!
@@ -344,8 +348,8 @@ autocmd MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType text       setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType rst        setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
 " When the '#' character in the first line of the newly created, it isn't unindent
 autocmd MyAutoCmd FileType python inoremap # X#
 " }}}
@@ -481,15 +485,13 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 " }}}
 
 " Don't make *.un~ files {{{
-" ------------------------------------------------------------------------------
 if exists('&undofile')
   set noundofile
 endif "}}}
 
 " Display full-width space {{{
-" ------------------------------------------------------------------------------
 function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=Dark
+  highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=DarkGray
 endfunction
 
 if has('syntax')
@@ -502,13 +504,9 @@ if has('syntax')
 endif
 " }}}
 
-
 " Local settings {{{
-" ------------------------------------------------------------------------------
-let s:localrc = expand('~/.vimrc.local')
-if filereadable(s:localrc)
-  execute 'source ' . s:localrc
-endif " }}}
+call s:load_source(expand('~/.vimrc.local'))
+" }}}
 
 " vim: expandtab softtabstop=2 shiftwidth=2
 " vim: foldmethod=marker
