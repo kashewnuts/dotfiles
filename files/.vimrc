@@ -292,9 +292,9 @@ else
 
   " gmail.vim {{{
   if s:bundled("gmail.vim")
-    let s:localrc = expand($HOME . '~/.anyname')
-    if filereadable(s:localrc)
-      execute 'source ' . s:localrc
+    let s:gmailrc = expand('~/.anyname')
+    if filereadable(s:gmailrc)
+      execute 'source ' . s:gmailrc
     endif
   endif " }}}
 
@@ -459,7 +459,7 @@ endif " }}}
 
 " Python settings {{{
 " ------------------------------------------------------------------------------
-autocmd MyAutoCmd BufNewFile *.py 0r $HOME/.vim/template/python.txt
+autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
 autocmd MyAutoCmd BufWritePost *.py call Flake8()
 " }}}
 
@@ -486,11 +486,29 @@ if exists('&undofile')
   set noundofile
 endif "}}}
 
+" Display full-width space {{{
+" ------------------------------------------------------------------------------
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
+  highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=Dark
+endfunction
+
+if has('syntax')
+  augroup ZenkakuSpace
+    autocmd!
+    autocmd ColorScheme * call ZenkakuSpace()
+    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+  augroup END
+  call ZenkakuSpace()
+endif
+" }}}
+
+
 " Local settings {{{
 " ------------------------------------------------------------------------------
-let s:localrc = expand($HOME . '/.vimrc.local')
+let s:localrc = expand('~/.vimrc.local')
 if filereadable(s:localrc)
-  source ~/.vimrc.local
+  execute 'source ' . s:localrc
 endif " }}}
 
 " vim: expandtab softtabstop=2 shiftwidth=2

@@ -15,11 +15,6 @@ set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
 " }}}
 
-" Display full-width space {{{
-highlight ZenkakuSpace cterm=underline ctermfg=LightBlue guibg=DarkBlue
-match ZenkakuSpace /Å@/
-" }}}
-
 " Hack #120: Store the location and size of the window by gVim {{{
 let s:save_window_file = expand("~/.vimwinpos")
 augroup SaveWindow
@@ -58,7 +53,7 @@ elseif s:is_darwin
 endif " }}}
 
 " Local settings {{{
-let s:localrc = expand($HOME . '/.gvimrc.local')
+let s:localrc = expand('~/.gvimrc.local')
 if filereadable(s:localrc)
   source ~/.gvimrc.local
 endif " }}}
