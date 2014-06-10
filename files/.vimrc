@@ -278,6 +278,11 @@ else
     autocmd MyAutoCmd FileType python let b:did_ftplugin = 1
   endif " }}}
 
+  " vim-flake8 {{{
+  if s:bundled("vim-flake8")
+    autocmd MyAutoCmd BufWritePost *.py call Flake8()
+  endif " }}}
+
   " Align {{{
   if s:bundled("Align")
     let g:Align_xstrlen = 3       " for japanese string
@@ -342,17 +347,18 @@ endif
 " noet : noexpandtab
 " si   : smartindent
 " cinw : cinwords
-autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
-autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
 autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
+autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
 " When the '#' character in the first line of the newly created, it isn't unindent
 autocmd MyAutoCmd FileType python inoremap # X#
+autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
 " }}}
 
 " Cheerless cursor position is moved {{{
@@ -405,7 +411,6 @@ command! Sjis Cp932
 " }}}
 
 " Automatic recognition of character code {{{
-" ------------------------------------------------------------------------------
 if &encoding !=# 'utf-8'
   set encoding=japan
   set fileencoding=japan
@@ -462,14 +467,7 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif " }}}
 
-" Python settings {{{
-" ------------------------------------------------------------------------------
-autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
-autocmd MyAutoCmd BufWritePost *.py call Flake8()
-" }}}
-
 " Golang settings {{{
-" ------------------------------------------------------------------------------
 if $GOROOT != ''
   set rtp+=$GOROOT/misc/vim
   set completeopt=menu,preview

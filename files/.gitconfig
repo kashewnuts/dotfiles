@@ -16,8 +16,8 @@
 	token = 52a410757657878fb09e4e2c56533acc
 [color]
 	ui = true
-[push]
-	default = simple
+# [push]
+# 	default = simple
 [gui]
 	encoding = utf-8
 [alias]
