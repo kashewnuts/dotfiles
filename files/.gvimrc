@@ -1,8 +1,9 @@
 " ==============================================================================
-" Vim GUI settings
+" Vim GUI Configuration
 "
-" Maintainer   : Kashun YOSHIDA
-" To use this, copy to your home directory.
+" Author:   Kashun YOSHIDA
+" Platform: Windows, Linux, MacOSX
+" NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
 " Basic Settings {{{
