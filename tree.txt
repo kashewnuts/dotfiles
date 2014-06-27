@@ -1,0 +1,3967 @@
+.
+├── .git
+│   ├── HEAD
+│   ├── branches
+│   ├── config
+│   ├── description
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   └── exclude
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   │       ├── heads
+│   │       │   └── master
+│   │       └── remotes
+│   │           └── origin
+│   │               └── HEAD
+│   ├── objects
+│   │   ├── info
+│   │   └── pack
+│   │       ├── pack-16d72139b27cdf2fc9726e81c83703501a1fbff5.idx
+│   │       └── pack-16d72139b27cdf2fc9726e81c83703501a1fbff5.pack
+│   ├── packed-refs
+│   └── refs
+│       ├── heads
+│       │   └── master
+│       ├── remotes
+│       │   └── origin
+│       │       └── HEAD
+│       └── tags
+├── .gitignore
+├── README.rst
+├── files
+│   ├── .bash_profile
+│   ├── .bashrc
+│   ├── .gitconfig
+│   ├── .gitconfig_win
+│   ├── .gitignore
+│   ├── .gitignore_global
+│   ├── .gvimrc
+│   ├── .hgignore
+│   ├── .hgignore_global
+│   ├── .hgrc
+│   ├── .hgrc_win
+│   ├── .pythonstartup
+│   ├── .vim
+│   │   ├── .netrwhist
+│   │   ├── bundle
+│   │   │   ├── .neobundle
+│   │   │   │   ├── doc
+│   │   │   │   │   ├── Align.txt
+│   │   │   │   │   ├── bitly.txt
+│   │   │   │   │   ├── emmet.txt
+│   │   │   │   │   ├── fugitive.txt
+│   │   │   │   │   ├── gist-vim.txt
+│   │   │   │   │   ├── gitv.txt
+│   │   │   │   │   ├── gmailvim.txt
+│   │   │   │   │   ├── jedi-vim.txt
+│   │   │   │   │   ├── neobundle.txt
+│   │   │   │   │   ├── neocomplete.txt
+│   │   │   │   │   ├── neosnippet.txt
+│   │   │   │   │   ├── openbrowser.txt
+│   │   │   │   │   ├── quickrun.jax
+│   │   │   │   │   ├── quickrun.txt
+│   │   │   │   │   ├── scouter.txt
+│   │   │   │   │   ├── simplenote.txt
+│   │   │   │   │   ├── surround.txt
+│   │   │   │   │   ├── tags
+│   │   │   │   │   ├── tags-ja
+│   │   │   │   │   ├── tweetvim.txt
+│   │   │   │   │   ├── unite-outline.jax
+│   │   │   │   │   ├── unite-outline.txt
+│   │   │   │   │   ├── unite.txt
+│   │   │   │   │   ├── vim-django-support.txt
+│   │   │   │   │   ├── vim-gocode.txt
+│   │   │   │   │   ├── vimfiler.txt
+│   │   │   │   │   ├── vimproc.txt
+│   │   │   │   │   ├── vimshell.txt
+│   │   │   │   │   ├── virtualenv.txt
+│   │   │   │   │   ├── webapi-html.txt
+│   │   │   │   │   ├── webapi-http.txt
+│   │   │   │   │   ├── webapi-json.txt
+│   │   │   │   │   ├── webapi-xml.txt
+│   │   │   │   │   └── webapi.txt
+│   │   │   │   ├── ftdetect
+│   │   │   │   │   ├── gofiletype.vim
+│   │   │   │   │   └── neosnippet.vim
+│   │   │   │   ├── install_info
+│   │   │   │   └── tags_info
+│   │   │   ├── Align
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-69f35125b2215381346c58bda219cca93ca26e51.idx
+│   │   │   │   │   │       └── pack-69f35125b2215381346c58bda219cca93ca26e51.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── README
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── Align.vim
+│   │   │   │   │   └── AlignMaps.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── Align.txt
+│   │   │   │   └── plugin
+│   │   │   │       ├── AlignMapsPlugin.vim
+│   │   │   │       ├── AlignPlugin.vim
+│   │   │   │       └── cecutil.vim
+│   │   │   ├── TweetVim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-983cf8874b61e78669d66e0b0c8267f3efe50536.idx
+│   │   │   │   │   │       └── pack-983cf8874b61e78669d66e0b0c8267f3efe50536.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── README.markdown
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── tweetvim
+│   │   │   │   │   │   ├── account.vim
+│   │   │   │   │   │   ├── action
+│   │   │   │   │   │   │   ├── around.vim
+│   │   │   │   │   │   │   ├── block.vim
+│   │   │   │   │   │   │   ├── browser.vim
+│   │   │   │   │   │   │   ├── buffer_next.vim
+│   │   │   │   │   │   │   ├── buffer_previous.vim
+│   │   │   │   │   │   │   ├── buffer_previous_stream.vim
+│   │   │   │   │   │   │   ├── cursor_down.vim
+│   │   │   │   │   │   │   ├── cursor_up.vim
+│   │   │   │   │   │   │   ├── enter.vim
+│   │   │   │   │   │   │   ├── expand_url.vim
+│   │   │   │   │   │   │   ├── favorite.vim
+│   │   │   │   │   │   │   ├── favstar.vim
+│   │   │   │   │   │   │   ├── favstar_browser.vim
+│   │   │   │   │   │   │   ├── follow.vim
+│   │   │   │   │   │   │   ├── in_reply_to.vim
+│   │   │   │   │   │   │   ├── list.vim
+│   │   │   │   │   │   │   ├── open_links.vim
+│   │   │   │   │   │   │   ├── page_next.vim
+│   │   │   │   │   │   │   ├── page_previous.vim
+│   │   │   │   │   │   │   ├── qt.vim
+│   │   │   │   │   │   │   ├── reload.vim
+│   │   │   │   │   │   │   ├── remove_favorite.vim
+│   │   │   │   │   │   │   ├── remove_status.vim
+│   │   │   │   │   │   │   ├── reply.vim
+│   │   │   │   │   │   │   ├── reply_to_all.vim
+│   │   │   │   │   │   │   ├── retweet.vim
+│   │   │   │   │   │   │   ├── search.vim
+│   │   │   │   │   │   │   ├── unfollow.vim
+│   │   │   │   │   │   │   └── user_timeline.vim
+│   │   │   │   │   │   ├── buffer.vim
+│   │   │   │   │   │   ├── cache.vim
+│   │   │   │   │   │   ├── complete.vim
+│   │   │   │   │   │   ├── filter
+│   │   │   │   │   │   │   ├── ngword.vim
+│   │   │   │   │   │   │   └── userstream.vim
+│   │   │   │   │   │   ├── filter.vim
+│   │   │   │   │   │   ├── hook.vim
+│   │   │   │   │   │   ├── logger.vim
+│   │   │   │   │   │   ├── migration.vim
+│   │   │   │   │   │   ├── say.vim
+│   │   │   │   │   │   ├── tweet.vim
+│   │   │   │   │   │   ├── twibill.vim
+│   │   │   │   │   │   └── util.vim
+│   │   │   │   │   ├── tweetvim.vim
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       ├── outline
+│   │   │   │   │   │       │   └── tweetvim.vim
+│   │   │   │   │   │       ├── tweetvim_action.vim
+│   │   │   │   │   │       ├── tweetvim_add_to_list.vim
+│   │   │   │   │   │       ├── tweetvim_switch_account.vim
+│   │   │   │   │   │       ├── tweetvim_timeline.vim
+│   │   │   │   │   │       └── tweetvim_tweet_history.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _5de2c28
+│   │   │   │   │   │   │   ├── Bitwise.vim
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   ├── Base64.vim
+│   │   │   │   │   │   │   │   ├── Collection.vim
+│   │   │   │   │   │   │   │   ├── Dict.vim
+│   │   │   │   │   │   │   │   ├── LazyList.vim
+│   │   │   │   │   │   │   │   ├── List.vim
+│   │   │   │   │   │   │   │   ├── OrderedSet.vim
+│   │   │   │   │   │   │   │   ├── String.vim
+│   │   │   │   │   │   │   │   └── Tree.vim
+│   │   │   │   │   │   │   ├── Database
+│   │   │   │   │   │   │   │   └── SQLite.vim
+│   │   │   │   │   │   │   ├── DateTime.vim
+│   │   │   │   │   │   │   ├── Experimental
+│   │   │   │   │   │   │   │   └── Functor.vim
+│   │   │   │   │   │   │   ├── Locale
+│   │   │   │   │   │   │   │   └── Message.vim
+│   │   │   │   │   │   │   ├── Mapping.vim
+│   │   │   │   │   │   │   ├── Math.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── Process.vim
+│   │   │   │   │   │   │   ├── ProcessManager.vim
+│   │   │   │   │   │   │   ├── Random
+│   │   │   │   │   │   │   │   └── Xor128.vim
+│   │   │   │   │   │   │   ├── System
+│   │   │   │   │   │   │   │   ├── Cache.vim
+│   │   │   │   │   │   │   │   ├── File.vim
+│   │   │   │   │   │   │   │   └── Filepath.vim
+│   │   │   │   │   │   │   ├── Text
+│   │   │   │   │   │   │   │   ├── CSV.vim
+│   │   │   │   │   │   │   │   ├── LTSV.vim
+│   │   │   │   │   │   │   │   ├── Lexer.vim
+│   │   │   │   │   │   │   │   └── Parser.vim
+│   │   │   │   │   │   │   ├── Vim
+│   │   │   │   │   │   │   │   ├── Buffer.vim
+│   │   │   │   │   │   │   │   ├── BufferManager.vim
+│   │   │   │   │   │   │   │   ├── Compat.vim
+│   │   │   │   │   │   │   │   └── Message.vim
+│   │   │   │   │   │   │   └── Web
+│   │   │   │   │   │   │       ├── HTML.vim
+│   │   │   │   │   │   │       ├── HTTP.vim
+│   │   │   │   │   │   │       ├── JSON.vim
+│   │   │   │   │   │   │       ├── URI.vim
+│   │   │   │   │   │   │       └── XML.vim
+│   │   │   │   │   │   ├── _5de2c28.vim
+│   │   │   │   │   │   └── tweetvim.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── tweetvim.txt
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── tweetvim.vim
+│   │   │   │   └── syntax
+│   │   │   │       └── tweetvim.vim
+│   │   │   ├── bitly.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── 00
+│   │   │   │   │   │   │   └── b2ff6b05958d034ca537430a4076d4e4f92d95
+│   │   │   │   │   │   ├── 05
+│   │   │   │   │   │   │   ├── a0f425bdb36025833eec26e58324b37ac3527d
+│   │   │   │   │   │   │   └── cd36c82ed5d3b10bc78fc05356367fe1fcefe7
+│   │   │   │   │   │   ├── 14
+│   │   │   │   │   │   │   └── 471edb71bbe2d739ec965785861c51cc580e78
+│   │   │   │   │   │   ├── 16
+│   │   │   │   │   │   │   └── 1f07b1c483c977d8a1e3563d777545e1194a5f
+│   │   │   │   │   │   ├── 1d
+│   │   │   │   │   │   │   └── 6a9b0b886460c7aa4638a010a6574719958d98
+│   │   │   │   │   │   ├── 1e
+│   │   │   │   │   │   │   └── cf2d0c7ed4e46941670107182f7c5161f8788c
+│   │   │   │   │   │   ├── 23
+│   │   │   │   │   │   │   ├── 433158bfcec7e9b59d67632c6d507f74cb7d6c
+│   │   │   │   │   │   │   └── 7499e6e53ce7b5a2ebad8d2859e13a927b3210
+│   │   │   │   │   │   ├── 2d
+│   │   │   │   │   │   │   └── 7d904cdda74d752f2ed7e46e78f6120a9f901f
+│   │   │   │   │   │   ├── 2e
+│   │   │   │   │   │   │   └── 3ae5954b3f56a2c4837e63c1b78d02af2f993b
+│   │   │   │   │   │   ├── 30
+│   │   │   │   │   │   │   └── a5f2fb33fd93c5bdf7e25c9afc1ffcd13465e4
+│   │   │   │   │   │   ├── 31
+│   │   │   │   │   │   │   └── dd2c4157079533b33a929a229e22837ec6421d
+│   │   │   │   │   │   ├── 32
+│   │   │   │   │   │   │   └── 5560a25cf8d7eeff4688cc7d19e2e101dc3979
+│   │   │   │   │   │   ├── 34
+│   │   │   │   │   │   │   └── a56b3126f5ccb45654079286b49609886755e9
+│   │   │   │   │   │   ├── 35
+│   │   │   │   │   │   │   └── 865ccc39cd7636c1ec1af0e3f72e7e29c00478
+│   │   │   │   │   │   ├── 37
+│   │   │   │   │   │   │   └── 7500dba7e1e0fec7fbefcf17683fe3cc6fde11
+│   │   │   │   │   │   ├── 38
+│   │   │   │   │   │   │   └── 91fc2152b054e359cf96af54e03d02cee3375a
+│   │   │   │   │   │   ├── 3e
+│   │   │   │   │   │   │   └── e236ec1653259fea56cc9900798eafc3479e16
+│   │   │   │   │   │   ├── 45
+│   │   │   │   │   │   │   ├── 38fac719db13ded7b3ef4692af0457341efb36
+│   │   │   │   │   │   │   └── dc49551a569622edca50a849be8e7f69a19cfb
+│   │   │   │   │   │   ├── 48
+│   │   │   │   │   │   │   └── 9dcda7fe985208a3010818645705d0af36b4cc
+│   │   │   │   │   │   ├── 4f
+│   │   │   │   │   │   │   └── bfde8b09d4e1a435d0786f8d75385b72e163a5
+│   │   │   │   │   │   ├── 52
+│   │   │   │   │   │   │   └── 227704a6fc3c313328eb98dab679723fef20ba
+│   │   │   │   │   │   ├── 53
+│   │   │   │   │   │   │   └── 62d2ce74dbbb3b317af14e466b8de4fff01bdd
+│   │   │   │   │   │   ├── 54
+│   │   │   │   │   │   │   └── 436287bd0ca19c42ca8e0097a7a9313b0e4d4e
+│   │   │   │   │   │   ├── 56
+│   │   │   │   │   │   │   └── 07280beec0e11102a48bc9c0178abf622b0b1e
+│   │   │   │   │   │   ├── 5d
+│   │   │   │   │   │   │   └── f81d4484ac0e7cecd855bf19a1e9335e3dc045
+│   │   │   │   │   │   ├── 5f
+│   │   │   │   │   │   │   └── ec073e79cef4282e7abe8fd1b0e732ef7eec15
+│   │   │   │   │   │   ├── 60
+│   │   │   │   │   │   │   └── f3b76482e15331e3ce2bae67bc7ed47558fa0d
+│   │   │   │   │   │   ├── 62
+│   │   │   │   │   │   │   └── f2e98faf2d5139188ae99ca4b76d94cf741a4b
+│   │   │   │   │   │   ├── 65
+│   │   │   │   │   │   │   └── 7fca014f23395141a4be23e42fbc8c4d5f63dc
+│   │   │   │   │   │   ├── 6a
+│   │   │   │   │   │   │   └── d0a23e58d608c93eb09985c77447c80fdba7f7
+│   │   │   │   │   │   ├── 71
+│   │   │   │   │   │   │   ├── 0fd1e4ff346a801acbfa13fe4b2d38c0b4cf0b
+│   │   │   │   │   │   │   └── d7e0d251ce7974e01e1181e23eb2ac953f8aee
+│   │   │   │   │   │   ├── 76
+│   │   │   │   │   │   │   └── 8933cf472ae8899a65cbaeb46f5f1ff617a1bf
+│   │   │   │   │   │   ├── 7c
+│   │   │   │   │   │   │   └── 2ff785245413153f4c6c66b2300f60a46c1309
+│   │   │   │   │   │   ├── 7e
+│   │   │   │   │   │   │   └── 8e4485674e92c3d93be45d8353e307fc05e203
+│   │   │   │   │   │   ├── 84
+│   │   │   │   │   │   │   └── 22ffdce64f88d667a496069c49e2293159f16e
+│   │   │   │   │   │   ├── 85
+│   │   │   │   │   │   │   └── 0e725856c0e17b3ba997511652fa9969126095
+│   │   │   │   │   │   ├── 87
+│   │   │   │   │   │   │   └── ef3f31508cbb5a8d4eba29633d678214220351
+│   │   │   │   │   │   ├── 8a
+│   │   │   │   │   │   │   └── e2553c6bd0888bceecc2ae4bcc957246a202fa
+│   │   │   │   │   │   ├── 8d
+│   │   │   │   │   │   │   └── 6b8c15f1a82d2709acde6df3211d7b4d7aa6ae
+│   │   │   │   │   │   ├── 9b
+│   │   │   │   │   │   │   └── 1c4e2381de4be8affcbc75a1e5c29970c5bb21
+│   │   │   │   │   │   ├── a0
+│   │   │   │   │   │   │   └── 19e1b4fe31e95d171b75323cab1d95bedbb9db
+│   │   │   │   │   │   ├── a6
+│   │   │   │   │   │   │   └── 75955ef5189704dbf2443881a694a52d4b1fce
+│   │   │   │   │   │   ├── a8
+│   │   │   │   │   │   │   └── b69db00cc5be7166707e31ea6ffe2027b57b64
+│   │   │   │   │   │   ├── bd
+│   │   │   │   │   │   │   ├── 02923a24a25e4777c775346774601096bdb615
+│   │   │   │   │   │   │   ├── 72386bb2ece5d34017dc9bf08682289634780c
+│   │   │   │   │   │   │   └── ac31f195b9366c94573debfeae3e5fff71ce76
+│   │   │   │   │   │   ├── c2
+│   │   │   │   │   │   │   ├── 53f005b3ec90b24172b8b85e7165eafe504bf9
+│   │   │   │   │   │   │   └── 97da2223ecb9ca817bfd777531a8995ca0dd07
+│   │   │   │   │   │   ├── c6
+│   │   │   │   │   │   │   └── 3cd816d091daf3d9d39916293228a2f867c824
+│   │   │   │   │   │   ├── c7
+│   │   │   │   │   │   │   └── b95e897e760ac52e42363ad41a2f2aa6856c55
+│   │   │   │   │   │   ├── c8
+│   │   │   │   │   │   │   ├── 23d3aca9c7e71d148f4162a98ac026cbe9d747
+│   │   │   │   │   │   │   └── 751483471d9f1c1f6c02731e02b66d05253666
+│   │   │   │   │   │   ├── ca
+│   │   │   │   │   │   │   └── 405b5a3f7581f437f1e75832b7fd7d338a7c65
+│   │   │   │   │   │   ├── cd
+│   │   │   │   │   │   │   └── 9e42f42679949d0f34cc0fa06fcf64fec70d8d
+│   │   │   │   │   │   ├── ce
+│   │   │   │   │   │   │   └── f05fe8b905e99c5746d8d6348e211d71f30064
+│   │   │   │   │   │   ├── d6
+│   │   │   │   │   │   │   └── 882f4dc4e1c68fd08b1a5b8560479639fc1b69
+│   │   │   │   │   │   ├── de
+│   │   │   │   │   │   │   └── ad8181669b80b8533f9a1de6c98d037d1eee95
+│   │   │   │   │   │   ├── e0
+│   │   │   │   │   │   │   └── abf8d1e39f2c2129c21af17180519616194ed4
+│   │   │   │   │   │   ├── eb
+│   │   │   │   │   │   │   └── 2ec45e0030c5b77503764efd5add4ea394398c
+│   │   │   │   │   │   ├── f0
+│   │   │   │   │   │   │   └── d63d6c8ff35ffe703a23e56147dd8a5a8a555b
+│   │   │   │   │   │   ├── f4
+│   │   │   │   │   │   │   ├── 7c2fb8043f2de0b614a4c057e8af78666f423a
+│   │   │   │   │   │   │   └── c70a54a35459aa8a96a6dd00db9977c38d0b4b
+│   │   │   │   │   │   ├── f8
+│   │   │   │   │   │   │   └── dac13d3eb1894561ff27a7c4b7f0d5ce1f1801
+│   │   │   │   │   │   ├── fe
+│   │   │   │   │   │   │   └── 88154ded9a1e7c4529e2e8eb8dba409c12618f
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── README
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── bitly
+│   │   │   │   │   │   ├── http.vim
+│   │   │   │   │   │   └── xml.vim
+│   │   │   │   │   └── bitly.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── bitly.txt
+│   │   │   │   └── test
+│   │   │   │       └── test1.vim
+│   │   │   ├── emmet-vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-f5b82e5b1291241eb11fbf09e3fda73cd0987788.idx
+│   │   │   │   │   │       └── pack-f5b82e5b1291241eb11fbf09e3fda73cd0987788.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── .gitmodules
+│   │   │   │   ├── Makefile
+│   │   │   │   ├── README.mkd
+│   │   │   │   ├── TODO
+│   │   │   │   ├── TUTORIAL
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── emmet
+│   │   │   │   │   │   ├── lang
+│   │   │   │   │   │   │   ├── css.vim
+│   │   │   │   │   │   │   ├── haml.vim
+│   │   │   │   │   │   │   ├── html.vim
+│   │   │   │   │   │   │   ├── less.vim
+│   │   │   │   │   │   │   ├── sass.vim
+│   │   │   │   │   │   │   ├── scss.vim
+│   │   │   │   │   │   │   └── slim.vim
+│   │   │   │   │   │   ├── lang.vim
+│   │   │   │   │   │   ├── lorem
+│   │   │   │   │   │   │   ├── en.vim
+│   │   │   │   │   │   │   └── ja.vim
+│   │   │   │   │   │   └── util.vim
+│   │   │   │   │   └── emmet.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── emmet.txt
+│   │   │   │   ├── emmet.vim.vimup
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── emmet.vim
+│   │   │   │   └── unittest.vim
+│   │   │   ├── favstar-vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-3ff2e3aebfb908739eb382da37d46c93cd3dae66.idx
+│   │   │   │   │   │       └── pack-3ff2e3aebfb908739eb382da37d46c93cd3dae66.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── README.mkd
+│   │   │   │   └── plugin
+│   │   │   │       └── favstar.vim
+│   │   │   ├── gist-vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-e18ae5c1a0e82ae0e69e314249f19f9a5e507134.idx
+│   │   │   │   │   │       └── pack-e18ae5c1a0e82ae0e69e314249f19f9a5e507134.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── Makefile
+│   │   │   │   ├── README.mkd
+│   │   │   │   ├── autoload
+│   │   │   │   │   └── gist.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── gist-vim.txt
+│   │   │   │   ├── gist.vim.vimup
+│   │   │   │   └── plugin
+│   │   │   │       └── gist.vim
+│   │   │   ├── gitv
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-4a711cb23fb31808d6396807e679dcbe5a58f7ce.idx
+│   │   │   │   │   │       └── pack-4a711cb23fb31808d6396807e679dcbe5a58f7ce.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.markdown
+│   │   │   │   ├── doc
+│   │   │   │   │   └── gitv.txt
+│   │   │   │   ├── ftplugin
+│   │   │   │   │   └── gitv.vim
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── gitv.vim
+│   │   │   │   └── syntax
+│   │   │   │       └── gitv.vim
+│   │   │   ├── gmail.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-3b531393bfc435d2690b02a5f91590ce1bead77f.idx
+│   │   │   │   │   │       └── pack-3b531393bfc435d2690b02a5f91590ce1bead77f.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── README.ja.md
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── gmail
+│   │   │   │   │   │   ├── imap.vim
+│   │   │   │   │   │   ├── smtp.vim
+│   │   │   │   │   │   ├── util.vim
+│   │   │   │   │   │   └── win.vim
+│   │   │   │   │   └── gmail.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── gmailvim.txt
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── gmail.vim
+│   │   │   │   └── syntax
+│   │   │   │       └── gmail.vim
+│   │   │   ├── gocode
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-76ed81c004925f59959c0cebefd5c19795e69b9f.idx
+│   │   │   │   │   │       └── pack-76ed81c004925f59959c0cebefd5c19795e69b9f.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── LICENSE
+│   │   │   │   ├── README.md
+│   │   │   │   ├── _gccgo
+│   │   │   │   │   └── package.go
+│   │   │   │   ├── _goremote
+│   │   │   │   │   └── goremote.go
+│   │   │   │   ├── _testing
+│   │   │   │   │   ├── DESC
+│   │   │   │   │   ├── README
+│   │   │   │   │   ├── all.bash
+│   │   │   │   │   ├── run.py
+│   │   │   │   │   ├── run.rb
+│   │   │   │   │   ├── run.tcl
+│   │   │   │   │   ├── test.0001
+│   │   │   │   │   │   ├── cursor.47
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0002
+│   │   │   │   │   │   ├── cursor.105
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0003
+│   │   │   │   │   │   ├── cursor.552
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0004
+│   │   │   │   │   │   ├── cursor.1348
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0005
+│   │   │   │   │   │   ├── b.go
+│   │   │   │   │   │   ├── cursor.327
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0006
+│   │   │   │   │   │   ├── b.go
+│   │   │   │   │   │   ├── cursor.286
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0007
+│   │   │   │   │   │   ├── cursor.58
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0008
+│   │   │   │   │   │   ├── cursor.120
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0009
+│   │   │   │   │   │   ├── cursor.126
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0010
+│   │   │   │   │   │   ├── cursor.104
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0011
+│   │   │   │   │   │   ├── cursor.76
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0012
+│   │   │   │   │   │   ├── cursor.114
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0013
+│   │   │   │   │   │   ├── cursor.359
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0014
+│   │   │   │   │   │   ├── cursor.191
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0015
+│   │   │   │   │   │   ├── cursor.130
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0016
+│   │   │   │   │   │   ├── cursor.122
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0017
+│   │   │   │   │   │   ├── cursor.70
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0018
+│   │   │   │   │   │   ├── cursor.355
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0019
+│   │   │   │   │   │   ├── cursor.72
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0020
+│   │   │   │   │   │   ├── cursor.174
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0021
+│   │   │   │   │   │   ├── cursor.82
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0022
+│   │   │   │   │   │   ├── cursor.79
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0023
+│   │   │   │   │   │   ├── cursor.88
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0024
+│   │   │   │   │   │   ├── cursor.71
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0025
+│   │   │   │   │   │   ├── cursor.53
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0026
+│   │   │   │   │   │   ├── cursor.164
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0027
+│   │   │   │   │   │   ├── cursor.84
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0028
+│   │   │   │   │   │   ├── cursor.129
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0029
+│   │   │   │   │   │   ├── cursor.62
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0030
+│   │   │   │   │   │   ├── cursor.85
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0031
+│   │   │   │   │   │   ├── cursor.80
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0032
+│   │   │   │   │   │   ├── cursor.1835
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0033
+│   │   │   │   │   │   ├── cursor.138
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0034
+│   │   │   │   │   │   ├── cursor.82
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0035
+│   │   │   │   │   │   ├── cursor.91
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0036
+│   │   │   │   │   │   ├── cursor.67
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0037
+│   │   │   │   │   │   ├── cursor.139
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0038
+│   │   │   │   │   │   ├── cursor.87
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0039
+│   │   │   │   │   │   ├── cursor.88
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0040
+│   │   │   │   │   │   ├── cursor.96
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0041
+│   │   │   │   │   │   ├── cursor.140
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0042
+│   │   │   │   │   │   ├── cursor.126
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0043
+│   │   │   │   │   │   ├── cursor.182
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0044
+│   │   │   │   │   │   ├── cursor.105
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0045
+│   │   │   │   │   │   ├── cursor.51
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0046
+│   │   │   │   │   │   ├── cursor.53
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   ├── test.0047
+│   │   │   │   │   │   ├── cursor.43
+│   │   │   │   │   │   ├── out.expected
+│   │   │   │   │   │   └── test.go.in
+│   │   │   │   │   └── test.0048
+│   │   │   │   │       ├── cursor.53
+│   │   │   │   │       ├── out.expected
+│   │   │   │   │       └── test.go.in
+│   │   │   │   ├── autocompletecontext.go
+│   │   │   │   ├── autocompletefile.go
+│   │   │   │   ├── client.go
+│   │   │   │   ├── config.go
+│   │   │   │   ├── cursorcontext.go
+│   │   │   │   ├── debian
+│   │   │   │   │   ├── changelog
+│   │   │   │   │   ├── compat
+│   │   │   │   │   ├── control
+│   │   │   │   │   ├── copyright
+│   │   │   │   │   ├── docs
+│   │   │   │   │   ├── gocode.default
+│   │   │   │   │   ├── rules
+│   │   │   │   │   └── source
+│   │   │   │   │       └── format
+│   │   │   │   ├── decl.go
+│   │   │   │   ├── declcache.go
+│   │   │   │   ├── docs
+│   │   │   │   │   ├── IDE_integration.md
+│   │   │   │   │   └── autocomplete_formats.md
+│   │   │   │   ├── emacs
+│   │   │   │   │   └── go-autocomplete.el
+│   │   │   │   ├── emacs-company
+│   │   │   │   │   ├── README.md
+│   │   │   │   │   └── company-go.el
+│   │   │   │   ├── formatters.go
+│   │   │   │   ├── gocode.go
+│   │   │   │   ├── os_posix.go
+│   │   │   │   ├── os_windows.go
+│   │   │   │   ├── package.go
+│   │   │   │   ├── ripper.go
+│   │   │   │   ├── rpc.go
+│   │   │   │   ├── scope.go
+│   │   │   │   ├── server.go
+│   │   │   │   ├── utils.go
+│   │   │   │   └── vim
+│   │   │   │       ├── autoload
+│   │   │   │       │   └── gocomplete.vim
+│   │   │   │       ├── ftplugin
+│   │   │   │       │   └── go
+│   │   │   │       │       └── gocomplete.vim
+│   │   │   │       ├── pathogen_update.sh
+│   │   │   │       ├── symlink.sh
+│   │   │   │       └── update.sh
+│   │   │   ├── jedi-vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── modules
+│   │   │   │   │   │   └── jedi
+│   │   │   │   │   │       ├── HEAD
+│   │   │   │   │   │       ├── branches
+│   │   │   │   │   │       ├── config
+│   │   │   │   │   │       ├── description
+│   │   │   │   │   │       ├── hooks
+│   │   │   │   │   │       │   ├── applypatch-msg.sample
+│   │   │   │   │   │       │   ├── commit-msg.sample
+│   │   │   │   │   │       │   ├── post-update.sample
+│   │   │   │   │   │       │   ├── pre-applypatch.sample
+│   │   │   │   │   │       │   ├── pre-commit.sample
+│   │   │   │   │   │       │   ├── pre-push.sample
+│   │   │   │   │   │       │   ├── pre-rebase.sample
+│   │   │   │   │   │       │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │       │   └── update.sample
+│   │   │   │   │   │       ├── index
+│   │   │   │   │   │       ├── info
+│   │   │   │   │   │       │   └── exclude
+│   │   │   │   │   │       ├── logs
+│   │   │   │   │   │       │   ├── HEAD
+│   │   │   │   │   │       │   └── refs
+│   │   │   │   │   │       │       ├── heads
+│   │   │   │   │   │       │       │   └── master
+│   │   │   │   │   │       │       └── remotes
+│   │   │   │   │   │       │           └── origin
+│   │   │   │   │   │       │               └── HEAD
+│   │   │   │   │   │       ├── objects
+│   │   │   │   │   │       │   ├── info
+│   │   │   │   │   │       │   └── pack
+│   │   │   │   │   │       │       ├── pack-f5151e55c25dbb1e62cd492a35e5b9e91a9370c5.idx
+│   │   │   │   │   │       │       └── pack-f5151e55c25dbb1e62cd492a35e5b9e91a9370c5.pack
+│   │   │   │   │   │       ├── packed-refs
+│   │   │   │   │   │       └── refs
+│   │   │   │   │   │           ├── heads
+│   │   │   │   │   │           │   └── master
+│   │   │   │   │   │           ├── remotes
+│   │   │   │   │   │           │   └── origin
+│   │   │   │   │   │           │       └── HEAD
+│   │   │   │   │   │           └── tags
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-2afa9e8464727ab1cd7821abccc7c531c3531ba3.idx
+│   │   │   │   │   │       └── pack-2afa9e8464727ab1cd7821abccc7c531c3531ba3.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── .gitmodules
+│   │   │   │   ├── .travis.yml
+│   │   │   │   ├── AUTHORS.txt
+│   │   │   │   ├── CONTRIBUTING.md
+│   │   │   │   ├── LICENSE.txt
+│   │   │   │   ├── README.rst
+│   │   │   │   ├── after
+│   │   │   │   │   ├── ftplugin
+│   │   │   │   │   │   └── python
+│   │   │   │   │   │       └── jedi.vim
+│   │   │   │   │   └── syntax
+│   │   │   │   │       └── python.vim
+│   │   │   │   ├── autoload
+│   │   │   │   │   └── jedi.vim
+│   │   │   │   ├── conftest.py
+│   │   │   │   ├── doc
+│   │   │   │   │   └── jedi-vim.txt
+│   │   │   │   ├── ftplugin
+│   │   │   │   │   └── python
+│   │   │   │   │       └── jedi.vim
+│   │   │   │   ├── initialize.py
+│   │   │   │   ├── jedi
+│   │   │   │   │   ├── .coveragerc
+│   │   │   │   │   ├── .git
+│   │   │   │   │   ├── .gitignore
+│   │   │   │   │   ├── .travis.yml
+│   │   │   │   │   ├── AUTHORS.txt
+│   │   │   │   │   ├── CHANGELOG.rst
+│   │   │   │   │   ├── CONTRIBUTING.md
+│   │   │   │   │   ├── LICENSE.txt
+│   │   │   │   │   ├── MANIFEST.in
+│   │   │   │   │   ├── README.rst
+│   │   │   │   │   ├── conftest.py
+│   │   │   │   │   ├── docs
+│   │   │   │   │   │   ├── Makefile
+│   │   │   │   │   │   ├── _screenshots
+│   │   │   │   │   │   │   ├── screenshot_complete.png
+│   │   │   │   │   │   │   ├── screenshot_function.png
+│   │   │   │   │   │   │   └── screenshot_pydoc.png
+│   │   │   │   │   │   ├── _static
+│   │   │   │   │   │   │   ├── logo-src.txt
+│   │   │   │   │   │   │   └── logo.png
+│   │   │   │   │   │   ├── _templates
+│   │   │   │   │   │   │   ├── ghbuttons.html
+│   │   │   │   │   │   │   └── sidebarlogo.html
+│   │   │   │   │   │   ├── _themes
+│   │   │   │   │   │   │   ├── flask
+│   │   │   │   │   │   │   │   ├── LICENSE
+│   │   │   │   │   │   │   │   ├── layout.html
+│   │   │   │   │   │   │   │   ├── relations.html
+│   │   │   │   │   │   │   │   ├── static
+│   │   │   │   │   │   │   │   │   ├── flasky.css_t
+│   │   │   │   │   │   │   │   │   └── small_flask.css
+│   │   │   │   │   │   │   │   └── theme.conf
+│   │   │   │   │   │   │   └── flask_theme_support.py
+│   │   │   │   │   │   ├── conf.py
+│   │   │   │   │   │   ├── docs
+│   │   │   │   │   │   │   ├── development.rst
+│   │   │   │   │   │   │   ├── features.rst
+│   │   │   │   │   │   │   ├── installation.rst
+│   │   │   │   │   │   │   ├── plugin-api-classes.rst
+│   │   │   │   │   │   │   ├── plugin-api.rst
+│   │   │   │   │   │   │   ├── settings.rst
+│   │   │   │   │   │   │   ├── testing.rst
+│   │   │   │   │   │   │   └── usage.rst
+│   │   │   │   │   │   ├── global.rst
+│   │   │   │   │   │   └── index.rst
+│   │   │   │   │   ├── jedi
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── __main__.py
+│   │   │   │   │   │   ├── _compatibility.py
+│   │   │   │   │   │   ├── api
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── classes.py
+│   │   │   │   │   │   │   ├── helpers.py
+│   │   │   │   │   │   │   ├── interpreter.py
+│   │   │   │   │   │   │   ├── keywords.py
+│   │   │   │   │   │   │   ├── replstartup.py
+│   │   │   │   │   │   │   └── usages.py
+│   │   │   │   │   │   ├── cache.py
+│   │   │   │   │   │   ├── common.py
+│   │   │   │   │   │   ├── debug.py
+│   │   │   │   │   │   ├── evaluate
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── cache.py
+│   │   │   │   │   │   │   ├── compiled
+│   │   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   │   ├── fake
+│   │   │   │   │   │   │   │   │   ├── _functools.pym
+│   │   │   │   │   │   │   │   │   ├── _sqlite3.pym
+│   │   │   │   │   │   │   │   │   ├── _sre.pym
+│   │   │   │   │   │   │   │   │   ├── _weakref.pym
+│   │   │   │   │   │   │   │   │   ├── builtins.pym
+│   │   │   │   │   │   │   │   │   ├── datetime.pym
+│   │   │   │   │   │   │   │   │   ├── io.pym
+│   │   │   │   │   │   │   │   │   └── posix.pym
+│   │   │   │   │   │   │   │   └── fake.py
+│   │   │   │   │   │   │   ├── docstrings.py
+│   │   │   │   │   │   │   ├── dynamic.py
+│   │   │   │   │   │   │   ├── finder.py
+│   │   │   │   │   │   │   ├── helpers.py
+│   │   │   │   │   │   │   ├── imports.py
+│   │   │   │   │   │   │   ├── iterable.py
+│   │   │   │   │   │   │   ├── param.py
+│   │   │   │   │   │   │   ├── precedence.py
+│   │   │   │   │   │   │   ├── recursion.py
+│   │   │   │   │   │   │   ├── representation.py
+│   │   │   │   │   │   │   ├── stdlib.py
+│   │   │   │   │   │   │   └── sys_path.py
+│   │   │   │   │   │   ├── parser
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── fast.py
+│   │   │   │   │   │   │   ├── representation.py
+│   │   │   │   │   │   │   ├── tokenize.py
+│   │   │   │   │   │   │   └── user_context.py
+│   │   │   │   │   │   ├── refactoring.py
+│   │   │   │   │   │   ├── settings.py
+│   │   │   │   │   │   └── utils.py
+│   │   │   │   │   ├── pytest.ini
+│   │   │   │   │   ├── scripts
+│   │   │   │   │   │   ├── memory_check.py
+│   │   │   │   │   │   ├── profile.py
+│   │   │   │   │   │   └── wx_check.py
+│   │   │   │   │   ├── setup.py
+│   │   │   │   │   ├── sith.py
+│   │   │   │   │   ├── test
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── completion
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── arrays.py
+│   │   │   │   │   │   │   ├── basic.py
+│   │   │   │   │   │   │   ├── classes.py
+│   │   │   │   │   │   │   ├── complex.py
+│   │   │   │   │   │   │   ├── decorators.py
+│   │   │   │   │   │   │   ├── definition.py
+│   │   │   │   │   │   │   ├── descriptors.py
+│   │   │   │   │   │   │   ├── docstring.py
+│   │   │   │   │   │   │   ├── dynamic.py
+│   │   │   │   │   │   │   ├── functions.py
+│   │   │   │   │   │   │   ├── generators.py
+│   │   │   │   │   │   │   ├── goto.py
+│   │   │   │   │   │   │   ├── import_tree
+│   │   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   │   ├── mod1.py
+│   │   │   │   │   │   │   │   ├── mod2.py
+│   │   │   │   │   │   │   │   ├── pkg
+│   │   │   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   │   │   └── mod1.py
+│   │   │   │   │   │   │   │   ├── random.py
+│   │   │   │   │   │   │   │   ├── recurse_class1.py
+│   │   │   │   │   │   │   │   ├── recurse_class2.py
+│   │   │   │   │   │   │   │   ├── rename1.py
+│   │   │   │   │   │   │   │   └── rename2.py
+│   │   │   │   │   │   │   ├── imports.py
+│   │   │   │   │   │   │   ├── invalid.py
+│   │   │   │   │   │   │   ├── isinstance.py
+│   │   │   │   │   │   │   ├── keywords.py
+│   │   │   │   │   │   │   ├── lambdas.py
+│   │   │   │   │   │   │   ├── named_param.py
+│   │   │   │   │   │   │   ├── ordering.py
+│   │   │   │   │   │   │   ├── precedence.py
+│   │   │   │   │   │   │   ├── std.py
+│   │   │   │   │   │   │   ├── sys_path.py
+│   │   │   │   │   │   │   ├── thirdparty
+│   │   │   │   │   │   │   │   ├── PyQt4_.py
+│   │   │   │   │   │   │   │   ├── django_.py
+│   │   │   │   │   │   │   │   ├── jedi_.py
+│   │   │   │   │   │   │   │   ├── psycopg2_.py
+│   │   │   │   │   │   │   │   └── pylab_.py
+│   │   │   │   │   │   │   ├── types.py
+│   │   │   │   │   │   │   └── usages.py
+│   │   │   │   │   │   ├── conftest.py
+│   │   │   │   │   │   ├── helpers.py
+│   │   │   │   │   │   ├── refactor
+│   │   │   │   │   │   │   ├── extract.py
+│   │   │   │   │   │   │   ├── inline.py
+│   │   │   │   │   │   │   └── rename.py
+│   │   │   │   │   │   ├── refactor.py
+│   │   │   │   │   │   ├── run.py
+│   │   │   │   │   │   ├── speed
+│   │   │   │   │   │   │   └── precedence.py
+│   │   │   │   │   │   ├── test_api
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── test_api.py
+│   │   │   │   │   │   │   ├── test_api_classes.py
+│   │   │   │   │   │   │   ├── test_api_classes_follow_definition.py
+│   │   │   │   │   │   │   ├── test_call_signatures.py
+│   │   │   │   │   │   │   ├── test_defined_names.py
+│   │   │   │   │   │   │   ├── test_full_name.py
+│   │   │   │   │   │   │   ├── test_interpreter.py
+│   │   │   │   │   │   │   └── test_unicode.py
+│   │   │   │   │   │   ├── test_cache.py
+│   │   │   │   │   │   ├── test_debug.py
+│   │   │   │   │   │   ├── test_evaluate
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── absolute_import
+│   │   │   │   │   │   │   │   ├── local_module.py
+│   │   │   │   │   │   │   │   └── unittest.py
+│   │   │   │   │   │   │   ├── extensions
+│   │   │   │   │   │   │   │   ├── README.rst
+│   │   │   │   │   │   │   │   ├── compiled.pyx
+│   │   │   │   │   │   │   │   ├── compiled27
+│   │   │   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   │   │   └── compiled.so
+│   │   │   │   │   │   │   │   ├── compiled32
+│   │   │   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   │   │   └── compiled.so
+│   │   │   │   │   │   │   │   └── setup.py
+│   │   │   │   │   │   │   ├── namespace_package
+│   │   │   │   │   │   │   │   ├── ns1
+│   │   │   │   │   │   │   │   │   └── pkg
+│   │   │   │   │   │   │   │   │       ├── __init__.py
+│   │   │   │   │   │   │   │   │       ├── ns1_file.py
+│   │   │   │   │   │   │   │   │       └── ns1_folder
+│   │   │   │   │   │   │   │   │           └── __init__.py
+│   │   │   │   │   │   │   │   └── ns2
+│   │   │   │   │   │   │   │       └── pkg
+│   │   │   │   │   │   │   │           ├── ns2_file.py
+│   │   │   │   │   │   │   │           └── ns2_folder
+│   │   │   │   │   │   │   │               ├── __init__.py
+│   │   │   │   │   │   │   │               └── nested
+│   │   │   │   │   │   │   │                   └── __init__.py
+│   │   │   │   │   │   │   ├── not_in_sys_path
+│   │   │   │   │   │   │   │   ├── not_in_sys_path.py
+│   │   │   │   │   │   │   │   ├── not_in_sys_path_package
+│   │   │   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   │   │   └── module.py
+│   │   │   │   │   │   │   │   └── pkg
+│   │   │   │   │   │   │   │       └── module.py
+│   │   │   │   │   │   │   ├── test_absolute_import.py
+│   │   │   │   │   │   │   ├── test_compiled.py
+│   │   │   │   │   │   │   ├── test_docstring.py
+│   │   │   │   │   │   │   ├── test_extension.py
+│   │   │   │   │   │   │   ├── test_imports.py
+│   │   │   │   │   │   │   ├── test_namespace_package.py
+│   │   │   │   │   │   │   ├── test_precedence.py
+│   │   │   │   │   │   │   └── test_pyc.py
+│   │   │   │   │   │   ├── test_integration.py
+│   │   │   │   │   │   ├── test_integration_import.py
+│   │   │   │   │   │   ├── test_integration_keyword.py
+│   │   │   │   │   │   ├── test_jedi_system.py
+│   │   │   │   │   │   ├── test_parser
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── test_fast_parser.py
+│   │   │   │   │   │   │   ├── test_get_code.py
+│   │   │   │   │   │   │   ├── test_parser.py
+│   │   │   │   │   │   │   └── test_token.py
+│   │   │   │   │   │   ├── test_regression.py
+│   │   │   │   │   │   ├── test_speed.py
+│   │   │   │   │   │   └── test_utils.py
+│   │   │   │   │   └── tox.ini
+│   │   │   │   ├── jedi_vim.py
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── jedi.vim
+│   │   │   │   ├── pytest.ini
+│   │   │   │   ├── test
+│   │   │   │   │   ├── completions.vim
+│   │   │   │   │   ├── completions_disabled.vim
+│   │   │   │   │   ├── documentation.vim
+│   │   │   │   │   ├── goto.vim
+│   │   │   │   │   ├── pyimport.vim
+│   │   │   │   │   ├── signatures.vim
+│   │   │   │   │   └── utils.vim
+│   │   │   │   └── test_integration.py
+│   │   │   ├── neocomplcache.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-97f4e31747d54ea05a8ef51e9f925795879bda0a.idx
+│   │   │   │   │   │       └── pack-97f4e31747d54ea05a8ef51e9f925795879bda0a.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── neocomplcache
+│   │   │   │   │   │   ├── async_cache.vim
+│   │   │   │   │   │   ├── cache.vim
+│   │   │   │   │   │   ├── commands.vim
+│   │   │   │   │   │   ├── complete.vim
+│   │   │   │   │   │   ├── context_filetype.vim
+│   │   │   │   │   │   ├── filters
+│   │   │   │   │   │   │   ├── converter_abbr.vim
+│   │   │   │   │   │   │   ├── converter_case.vim
+│   │   │   │   │   │   │   ├── converter_delimiter.vim
+│   │   │   │   │   │   │   ├── converter_nothing.vim
+│   │   │   │   │   │   │   ├── converter_remove_next_keyword.vim
+│   │   │   │   │   │   │   ├── matcher_fuzzy.vim
+│   │   │   │   │   │   │   ├── matcher_head.vim
+│   │   │   │   │   │   │   ├── matcher_old.vim
+│   │   │   │   │   │   │   ├── sorter_length.vim
+│   │   │   │   │   │   │   ├── sorter_nothing.vim
+│   │   │   │   │   │   │   └── sorter_rank.vim
+│   │   │   │   │   │   ├── filters.vim
+│   │   │   │   │   │   ├── handler.vim
+│   │   │   │   │   │   ├── helper.vim
+│   │   │   │   │   │   ├── init.vim
+│   │   │   │   │   │   ├── mappings.vim
+│   │   │   │   │   │   ├── sources
+│   │   │   │   │   │   │   ├── buffer_complete.vim
+│   │   │   │   │   │   │   ├── dictionary_complete.vim
+│   │   │   │   │   │   │   ├── filename_complete.vim
+│   │   │   │   │   │   │   ├── filename_include.vim
+│   │   │   │   │   │   │   ├── include_complete.vim
+│   │   │   │   │   │   │   ├── member_complete.vim
+│   │   │   │   │   │   │   ├── omni_complete.vim
+│   │   │   │   │   │   │   ├── syntax_complete.vim
+│   │   │   │   │   │   │   ├── tags_complete.vim
+│   │   │   │   │   │   │   ├── vim_complete
+│   │   │   │   │   │   │   │   ├── autocmds.dict
+│   │   │   │   │   │   │   │   ├── command_args.dict
+│   │   │   │   │   │   │   │   ├── command_completions.dict
+│   │   │   │   │   │   │   │   ├── command_prototypes.dict
+│   │   │   │   │   │   │   │   ├── command_replaces.dict
+│   │   │   │   │   │   │   │   ├── commands.dict
+│   │   │   │   │   │   │   │   ├── features.dict
+│   │   │   │   │   │   │   │   ├── functions.dict
+│   │   │   │   │   │   │   │   ├── helper.vim
+│   │   │   │   │   │   │   │   ├── mappings.dict
+│   │   │   │   │   │   │   │   ├── options.dict
+│   │   │   │   │   │   │   │   └── variables.dict
+│   │   │   │   │   │   │   └── vim_complete.vim
+│   │   │   │   │   │   ├── util.vim
+│   │   │   │   │   │   └── variables.vim
+│   │   │   │   │   ├── neocomplcache.vim
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       ├── file_include.vim
+│   │   │   │   │   │       └── neocomplcache.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _13055f8
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   ├── List.vim
+│   │   │   │   │   │   │   │   └── String.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   └── System
+│   │   │   │   │   │   │       └── Cache.vim
+│   │   │   │   │   │   ├── _13055f8.vim
+│   │   │   │   │   │   └── neocomplcache.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── neocomplcache.txt
+│   │   │   │   ├── plugin
+│   │   │   │   │   ├── neocomplcache
+│   │   │   │   │   │   ├── buffer_complete.vim
+│   │   │   │   │   │   ├── dictionary_complete.vim
+│   │   │   │   │   │   ├── include_complete.vim
+│   │   │   │   │   │   ├── syntax_complete.vim
+│   │   │   │   │   │   └── tags_complete.vim
+│   │   │   │   │   └── neocomplcache.vim
+│   │   │   │   └── vest
+│   │   │   │       └── test-neocomplcache.vim
+│   │   │   ├── neocomplete.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-e24a1bbb0e95b5695fcf5ffecbeabf95be7fe3d9.idx
+│   │   │   │   │   │       └── pack-e24a1bbb0e95b5695fcf5ffecbeabf95be7fe3d9.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── neocomplete
+│   │   │   │   │   │   ├── async_cache.vim
+│   │   │   │   │   │   ├── cache.vim
+│   │   │   │   │   │   ├── commands.vim
+│   │   │   │   │   │   ├── complete.vim
+│   │   │   │   │   │   ├── context_filetype.vim
+│   │   │   │   │   │   ├── custom.vim
+│   │   │   │   │   │   ├── echodoc.vim
+│   │   │   │   │   │   ├── filters
+│   │   │   │   │   │   │   ├── converter_abbr.vim
+│   │   │   │   │   │   │   ├── converter_case.vim
+│   │   │   │   │   │   │   ├── converter_delimiter.vim
+│   │   │   │   │   │   │   ├── converter_disable_abbr.vim
+│   │   │   │   │   │   │   ├── converter_remove_last_paren.vim
+│   │   │   │   │   │   │   ├── converter_remove_overlap.vim
+│   │   │   │   │   │   │   ├── matcher_fuzzy.vim
+│   │   │   │   │   │   │   ├── matcher_head.vim
+│   │   │   │   │   │   │   ├── matcher_length.vim
+│   │   │   │   │   │   │   ├── sorter_filename.vim
+│   │   │   │   │   │   │   ├── sorter_length.vim
+│   │   │   │   │   │   │   ├── sorter_rank.vim
+│   │   │   │   │   │   │   └── sorter_word.vim
+│   │   │   │   │   │   ├── filters.vim
+│   │   │   │   │   │   ├── handler.vim
+│   │   │   │   │   │   ├── helper.vim
+│   │   │   │   │   │   ├── init.vim
+│   │   │   │   │   │   ├── mappings.vim
+│   │   │   │   │   │   ├── sources
+│   │   │   │   │   │   │   ├── buffer.vim
+│   │   │   │   │   │   │   ├── dictionary.vim
+│   │   │   │   │   │   │   ├── file.vim
+│   │   │   │   │   │   │   ├── file_include.vim
+│   │   │   │   │   │   │   ├── include.vim
+│   │   │   │   │   │   │   ├── member.vim
+│   │   │   │   │   │   │   ├── omni.vim
+│   │   │   │   │   │   │   ├── syntax.vim
+│   │   │   │   │   │   │   ├── tag.vim
+│   │   │   │   │   │   │   ├── vim
+│   │   │   │   │   │   │   │   ├── command_args.dict
+│   │   │   │   │   │   │   │   ├── command_completions.dict
+│   │   │   │   │   │   │   │   ├── command_replaces.dict
+│   │   │   │   │   │   │   │   ├── helper.vim
+│   │   │   │   │   │   │   │   └── mappings.dict
+│   │   │   │   │   │   │   └── vim.vim
+│   │   │   │   │   │   ├── util.vim
+│   │   │   │   │   │   └── variables.vim
+│   │   │   │   │   ├── neocomplete.vim
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       ├── file_include.vim
+│   │   │   │   │   │       └── neocomplete.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _neocomplete
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   ├── List.vim
+│   │   │   │   │   │   │   │   └── String.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── Process.vim
+│   │   │   │   │   │   │   └── System
+│   │   │   │   │   │   │       └── Cache.vim
+│   │   │   │   │   │   ├── _neocomplete.vim
+│   │   │   │   │   │   └── neocomplete.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── neocomplete.txt
+│   │   │   │   ├── plugin
+│   │   │   │   │   ├── neocomplete
+│   │   │   │   │   │   ├── buffer.vim
+│   │   │   │   │   │   ├── dictionary.vim
+│   │   │   │   │   │   ├── include.vim
+│   │   │   │   │   │   ├── syntax.vim
+│   │   │   │   │   │   └── tag.vim
+│   │   │   │   │   └── neocomplete.vim
+│   │   │   │   └── vest
+│   │   │   │       └── test-neocomplete.vim
+│   │   │   ├── neosnippet-snippets
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-c0f8e812faf916661eba9652a82464cf005276de.idx
+│   │   │   │   │   │       └── pack-c0f8e812faf916661eba9652a82464cf005276de.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── README.mkd
+│   │   │   │   └── neosnippets
+│   │   │   │       ├── Gemfile.snip
+│   │   │   │       ├── _.snip
+│   │   │   │       ├── actionscript.snip
+│   │   │   │       ├── apache.snip
+│   │   │   │       ├── applescript.snip
+│   │   │   │       ├── bib.snip
+│   │   │   │       ├── c.snip
+│   │   │   │       ├── clojure.snip
+│   │   │   │       ├── cmake.snip
+│   │   │   │       ├── coffee.snip
+│   │   │   │       ├── cpp.snip
+│   │   │   │       ├── css.snip
+│   │   │   │       ├── d.snip
+│   │   │   │       ├── erlang.snip
+│   │   │   │       ├── eruby.snip
+│   │   │   │       ├── go.snip
+│   │   │   │       ├── groovy.snip
+│   │   │   │       ├── haskell.snip
+│   │   │   │       ├── html.snip
+│   │   │   │       ├── java.snip
+│   │   │   │       ├── javascript.snip
+│   │   │   │       ├── kp19pp.snip
+│   │   │   │       ├── liquid.snip
+│   │   │   │       ├── lua.snip
+│   │   │   │       ├── make.snip
+│   │   │   │       ├── markdown.snip
+│   │   │   │       ├── mediawiki.snip
+│   │   │   │       ├── moon.snip
+│   │   │   │       ├── neosnippet.snip
+│   │   │   │       ├── objc.snip
+│   │   │   │       ├── perl.snip
+│   │   │   │       ├── php.snip
+│   │   │   │       ├── python.snip
+│   │   │   │       ├── rails.snip
+│   │   │   │       ├── rst.snip
+│   │   │   │       ├── ruby.snip
+│   │   │   │       ├── scala.snip
+│   │   │   │       ├── scheme.snip
+│   │   │   │       ├── sh.snip
+│   │   │   │       ├── sql.snip
+│   │   │   │       ├── sshconfig.snip
+│   │   │   │       ├── tex.snip
+│   │   │   │       ├── vim
+│   │   │   │       │   └── vital.snip
+│   │   │   │       ├── vim.snip
+│   │   │   │       ├── vimshell.snip
+│   │   │   │       └── xhtml.snip
+│   │   │   ├── neosnippet.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-52818b2e570c10aba9aea41df5164b097fcf06a4.idx
+│   │   │   │   │   │       └── pack-52818b2e570c10aba9aea41df5164b097fcf06a4.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── neocomplcache
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       └── snippets_complete.vim
+│   │   │   │   │   ├── neocomplete
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       └── neosnippet.vim
+│   │   │   │   │   ├── neosnippet
+│   │   │   │   │   │   ├── commands.vim
+│   │   │   │   │   │   ├── helpers.vim
+│   │   │   │   │   │   ├── init.vim
+│   │   │   │   │   │   ├── mappings.vim
+│   │   │   │   │   │   ├── parser.vim
+│   │   │   │   │   │   ├── util.vim
+│   │   │   │   │   │   ├── variables.vim
+│   │   │   │   │   │   └── view.vim
+│   │   │   │   │   ├── neosnippet.vim
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       ├── neosnippet.vim
+│   │   │   │   │   │       ├── neosnippet_file.vim
+│   │   │   │   │   │       └── neosnippet_target.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _neosnippet
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   └── List.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── Process.vim
+│   │   │   │   │   │   │   └── System
+│   │   │   │   │   │   │       └── Cache.vim
+│   │   │   │   │   │   ├── _neosnippet.vim
+│   │   │   │   │   │   └── neosnippet.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── neosnippet.txt
+│   │   │   │   ├── ftdetect
+│   │   │   │   │   └── neosnippet.vim
+│   │   │   │   ├── ftplugin
+│   │   │   │   │   └── neosnippet.vim
+│   │   │   │   ├── indent
+│   │   │   │   │   └── neosnippet.vim
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── neosnippet.vim
+│   │   │   │   └── syntax
+│   │   │   │       └── neosnippet.vim
+│   │   │   ├── open-browser.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-008f25bd3dc7d2524fa34ae747bc29a6d1b1da93.idx
+│   │   │   │   │   │       └── pack-008f25bd3dc7d2524fa34ae747bc29a6d1b1da93.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── openbrowser.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _openbrowser
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   ├── List.vim
+│   │   │   │   │   │   │   │   └── String.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── Process.vim
+│   │   │   │   │   │   │   ├── Vim
+│   │   │   │   │   │   │   │   └── Buffer.vim
+│   │   │   │   │   │   │   └── Web
+│   │   │   │   │   │   │       ├── HTTP.vim
+│   │   │   │   │   │   │       └── URI.vim
+│   │   │   │   │   │   ├── _openbrowser.vim
+│   │   │   │   │   │   └── openbrowser.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── openbrowser.txt
+│   │   │   │   └── plugin
+│   │   │   │       └── openbrowser.vim
+│   │   │   ├── simplenote.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── modules
+│   │   │   │   │   │   └── autoload
+│   │   │   │   │   │       └── simplenote.py
+│   │   │   │   │   │           ├── HEAD
+│   │   │   │   │   │           ├── branches
+│   │   │   │   │   │           ├── config
+│   │   │   │   │   │           ├── description
+│   │   │   │   │   │           ├── hooks
+│   │   │   │   │   │           │   ├── applypatch-msg.sample
+│   │   │   │   │   │           │   ├── commit-msg.sample
+│   │   │   │   │   │           │   ├── post-update.sample
+│   │   │   │   │   │           │   ├── pre-applypatch.sample
+│   │   │   │   │   │           │   ├── pre-commit.sample
+│   │   │   │   │   │           │   ├── pre-push.sample
+│   │   │   │   │   │           │   ├── pre-rebase.sample
+│   │   │   │   │   │           │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │           │   └── update.sample
+│   │   │   │   │   │           ├── index
+│   │   │   │   │   │           ├── info
+│   │   │   │   │   │           │   └── exclude
+│   │   │   │   │   │           ├── logs
+│   │   │   │   │   │           │   ├── HEAD
+│   │   │   │   │   │           │   └── refs
+│   │   │   │   │   │           │       ├── heads
+│   │   │   │   │   │           │       │   └── master
+│   │   │   │   │   │           │       └── remotes
+│   │   │   │   │   │           │           └── origin
+│   │   │   │   │   │           │               └── HEAD
+│   │   │   │   │   │           ├── objects
+│   │   │   │   │   │           │   ├── info
+│   │   │   │   │   │           │   └── pack
+│   │   │   │   │   │           │       ├── pack-199a090b3c4b4ad789ab4580fee598f096044973.idx
+│   │   │   │   │   │           │       └── pack-199a090b3c4b4ad789ab4580fee598f096044973.pack
+│   │   │   │   │   │           ├── packed-refs
+│   │   │   │   │   │           └── refs
+│   │   │   │   │   │               ├── heads
+│   │   │   │   │   │               │   └── master
+│   │   │   │   │   │               ├── remotes
+│   │   │   │   │   │               │   └── origin
+│   │   │   │   │   │               │       └── HEAD
+│   │   │   │   │   │               └── tags
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-4db5cba7561a6a37812280ee399f04fdc2818a5b.idx
+│   │   │   │   │   │       └── pack-4db5cba7561a6a37812280ee399f04fdc2818a5b.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitmodules
+│   │   │   │   ├── CHANGELOG.md
+│   │   │   │   ├── LICENSE
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── simplenote.py
+│   │   │   │   │   │   ├── .git
+│   │   │   │   │   │   ├── .gitignore
+│   │   │   │   │   │   ├── .travis.yml
+│   │   │   │   │   │   ├── HISTORY.rst
+│   │   │   │   │   │   ├── LICENSE
+│   │   │   │   │   │   ├── MANIFEST
+│   │   │   │   │   │   ├── MANIFEST.in
+│   │   │   │   │   │   ├── README.rst
+│   │   │   │   │   │   ├── docs
+│   │   │   │   │   │   │   ├── Makefile
+│   │   │   │   │   │   │   ├── api.rst
+│   │   │   │   │   │   │   ├── conf.py
+│   │   │   │   │   │   │   ├── index.rst
+│   │   │   │   │   │   │   └── make.bat
+│   │   │   │   │   │   ├── setup.py
+│   │   │   │   │   │   ├── simplenote
+│   │   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   │   ├── simplenote.py
+│   │   │   │   │   │   │   └── simplenote.pyc
+│   │   │   │   │   │   ├── tests
+│   │   │   │   │   │   │   └── test_simplenote.py
+│   │   │   │   │   │   └── tox.ini
+│   │   │   │   │   └── simplenote.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── simplenote.txt
+│   │   │   │   ├── generate_release.sh
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── simplenote.vim
+│   │   │   │   └── tests
+│   │   │   │       └── simplenote.vader
+│   │   │   ├── twibill.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-9ca89caf8394a0d58cde6087258e12f504b1539b.idx
+│   │   │   │   │   │       └── pack-9ca89caf8394a0d58cde6087258e12f504b1539b.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.markdown
+│   │   │   │   └── autoload
+│   │   │   │       ├── twibill
+│   │   │   │       │   ├── async.vim
+│   │   │   │       │   ├── base64.vim
+│   │   │   │       │   ├── hmac.vim
+│   │   │   │       │   ├── http.vim
+│   │   │   │       │   ├── json.vim
+│   │   │   │       │   ├── oauth.vim
+│   │   │   │       │   ├── sha1.vim
+│   │   │   │       │   └── util.vim
+│   │   │   │       └── twibill.vim
+│   │   │   ├── unite-outline
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-4f5ff231f0809e2f7691a4e200213525a54e0494.idx
+│   │   │   │   │   │       └── pack-4f5ff231f0809e2f7691a4e200213525a54e0494.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.mkd
+│   │   │   │   ├── autoload
+│   │   │   │   │   └── unite
+│   │   │   │   │       ├── filters
+│   │   │   │   │       │   ├── outline_formatter.vim
+│   │   │   │   │       │   └── outline_matcher_glob.vim
+│   │   │   │   │       └── sources
+│   │   │   │   │           ├── outline
+│   │   │   │   │           │   ├── defaults
+│   │   │   │   │           │   │   ├── changelog.vim
+│   │   │   │   │           │   │   ├── conf.vim
+│   │   │   │   │           │   │   ├── cpp.vim
+│   │   │   │   │           │   │   ├── css.vim
+│   │   │   │   │           │   │   ├── dosini.vim
+│   │   │   │   │           │   │   ├── help.vim
+│   │   │   │   │           │   │   ├── html.vim
+│   │   │   │   │           │   │   ├── java.vim
+│   │   │   │   │           │   │   ├── javascript.vim
+│   │   │   │   │           │   │   ├── markdown.vim
+│   │   │   │   │           │   │   ├── perl.vim
+│   │   │   │   │           │   │   ├── php.vim
+│   │   │   │   │           │   │   ├── pir.vim
+│   │   │   │   │           │   │   ├── python.vim
+│   │   │   │   │           │   │   ├── review.vim
+│   │   │   │   │           │   │   ├── rst.vim
+│   │   │   │   │           │   │   ├── ruby
+│   │   │   │   │           │   │   │   └── rspec.vim
+│   │   │   │   │           │   │   ├── ruby.vim
+│   │   │   │   │           │   │   ├── scala.vim
+│   │   │   │   │           │   │   ├── scheme.vim
+│   │   │   │   │           │   │   ├── sh.vim
+│   │   │   │   │           │   │   ├── tex.vim
+│   │   │   │   │           │   │   ├── textile.vim
+│   │   │   │   │           │   │   ├── unittest.vim
+│   │   │   │   │           │   │   └── vim.vim
+│   │   │   │   │           │   ├── misc
+│   │   │   │   │           │   │   └── wzmemo_text.vim
+│   │   │   │   │           │   ├── modules
+│   │   │   │   │           │   │   ├── base.vim
+│   │   │   │   │           │   │   ├── ctags.vim
+│   │   │   │   │           │   │   ├── file_cache.vim
+│   │   │   │   │           │   │   ├── tree.vim
+│   │   │   │   │           │   │   └── util.vim
+│   │   │   │   │           │   └── util.vim
+│   │   │   │   │           └── outline.vim
+│   │   │   │   └── doc
+│   │   │   │       ├── .gitignore
+│   │   │   │       ├── unite-outline.jax
+│   │   │   │       └── unite-outline.txt
+│   │   │   ├── unite.vim
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-84223ff87530d95d8f7fad5cdf194e3e0cab76dd.idx
+│   │   │   │   │   │       └── pack-84223ff87530d95d8f7fad5cdf194e3e0cab76dd.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── CONTRIBUTING.md
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   ├── action.vim
+│   │   │   │   │   │   ├── candidates.vim
+│   │   │   │   │   │   ├── complete.vim
+│   │   │   │   │   │   ├── custom.vim
+│   │   │   │   │   │   ├── filters
+│   │   │   │   │   │   │   ├── converter_default.vim
+│   │   │   │   │   │   │   ├── converter_file_directory.vim
+│   │   │   │   │   │   │   ├── converter_full_path.vim
+│   │   │   │   │   │   │   ├── converter_nothing.vim
+│   │   │   │   │   │   │   ├── converter_relative_abbr.vim
+│   │   │   │   │   │   │   ├── converter_relative_word.vim
+│   │   │   │   │   │   │   ├── converter_smart_path.vim
+│   │   │   │   │   │   │   ├── converter_tail.vim
+│   │   │   │   │   │   │   ├── converter_tail_abbr.vim
+│   │   │   │   │   │   │   ├── matcher_context.vim
+│   │   │   │   │   │   │   ├── matcher_default.vim
+│   │   │   │   │   │   │   ├── matcher_fuzzy.vim
+│   │   │   │   │   │   │   ├── matcher_glob.vim
+│   │   │   │   │   │   │   ├── matcher_hide_hidden_files.vim
+│   │   │   │   │   │   │   ├── matcher_migemo.vim
+│   │   │   │   │   │   │   ├── matcher_project_files.vim
+│   │   │   │   │   │   │   ├── matcher_regexp.vim
+│   │   │   │   │   │   │   ├── sorter_default.vim
+│   │   │   │   │   │   │   ├── sorter_ftime.vim
+│   │   │   │   │   │   │   ├── sorter_length.vim
+│   │   │   │   │   │   │   ├── sorter_nothing.vim
+│   │   │   │   │   │   │   ├── sorter_rank.vim
+│   │   │   │   │   │   │   ├── sorter_reverse.vim
+│   │   │   │   │   │   │   ├── sorter_selecta.vim
+│   │   │   │   │   │   │   └── sorter_word.vim
+│   │   │   │   │   │   ├── filters.vim
+│   │   │   │   │   │   ├── handlers.vim
+│   │   │   │   │   │   ├── helper.vim
+│   │   │   │   │   │   ├── init.vim
+│   │   │   │   │   │   ├── kinds
+│   │   │   │   │   │   │   ├── buffer.vim
+│   │   │   │   │   │   │   ├── cdable.vim
+│   │   │   │   │   │   │   ├── command.vim
+│   │   │   │   │   │   │   ├── common.vim
+│   │   │   │   │   │   │   ├── completion.vim
+│   │   │   │   │   │   │   ├── directory.vim
+│   │   │   │   │   │   │   ├── file.vim
+│   │   │   │   │   │   │   ├── guicmd.vim
+│   │   │   │   │   │   │   ├── jump_list.vim
+│   │   │   │   │   │   │   ├── openable.vim
+│   │   │   │   │   │   │   ├── source.vim
+│   │   │   │   │   │   │   ├── tab.vim
+│   │   │   │   │   │   │   ├── uri.vim
+│   │   │   │   │   │   │   ├── window.vim
+│   │   │   │   │   │   │   └── word.vim
+│   │   │   │   │   │   ├── mappings.vim
+│   │   │   │   │   │   ├── sources
+│   │   │   │   │   │   │   ├── action.vim
+│   │   │   │   │   │   │   ├── alias.vim
+│   │   │   │   │   │   │   ├── bookmark.vim
+│   │   │   │   │   │   │   ├── buffer
+│   │   │   │   │   │   │   │   └── variables.vim
+│   │   │   │   │   │   │   ├── buffer.vim
+│   │   │   │   │   │   │   ├── change.vim
+│   │   │   │   │   │   │   ├── command.vim
+│   │   │   │   │   │   │   ├── directory.vim
+│   │   │   │   │   │   │   ├── file.vim
+│   │   │   │   │   │   │   ├── file_point.vim
+│   │   │   │   │   │   │   ├── find.vim
+│   │   │   │   │   │   │   ├── function.vim
+│   │   │   │   │   │   │   ├── grep.vim
+│   │   │   │   │   │   │   ├── history_input.vim
+│   │   │   │   │   │   │   ├── history_yank.vim
+│   │   │   │   │   │   │   ├── interactive.vim
+│   │   │   │   │   │   │   ├── jump.vim
+│   │   │   │   │   │   │   ├── jump_point.vim
+│   │   │   │   │   │   │   ├── launcher.vim
+│   │   │   │   │   │   │   ├── line.vim
+│   │   │   │   │   │   │   ├── mapping.vim
+│   │   │   │   │   │   │   ├── menu.vim
+│   │   │   │   │   │   │   ├── output.vim
+│   │   │   │   │   │   │   ├── process.vim
+│   │   │   │   │   │   │   ├── rec.vim
+│   │   │   │   │   │   │   ├── register.vim
+│   │   │   │   │   │   │   ├── resume.vim
+│   │   │   │   │   │   │   ├── runtimepath.vim
+│   │   │   │   │   │   │   ├── script.vim
+│   │   │   │   │   │   │   ├── source.vim
+│   │   │   │   │   │   │   ├── tab.vim
+│   │   │   │   │   │   │   ├── vimgrep.vim
+│   │   │   │   │   │   │   ├── window.vim
+│   │   │   │   │   │   │   └── window_gui.vim
+│   │   │   │   │   │   ├── start.vim
+│   │   │   │   │   │   ├── util.vim
+│   │   │   │   │   │   ├── variables.vim
+│   │   │   │   │   │   └── view.vim
+│   │   │   │   │   ├── unite.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _unite
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   ├── List.vim
+│   │   │   │   │   │   │   │   └── String.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── Process.vim
+│   │   │   │   │   │   │   ├── System
+│   │   │   │   │   │   │   │   ├── Cache.vim
+│   │   │   │   │   │   │   │   └── File.vim
+│   │   │   │   │   │   │   └── Vim
+│   │   │   │   │   │   │       └── Message.vim
+│   │   │   │   │   │   ├── _unite.vim
+│   │   │   │   │   │   ├── unite.vim.vital
+│   │   │   │   │   │   └── unite.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── unite.txt
+│   │   │   │   ├── plugin
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   ├── bookmark.vim
+│   │   │   │   │   │   ├── buffer.vim
+│   │   │   │   │   │   ├── history_yank.vim
+│   │   │   │   │   │   └── window.vim
+│   │   │   │   │   └── unite.vim
+│   │   │   │   ├── syntax
+│   │   │   │   │   └── unite.vim
+│   │   │   │   └── vest
+│   │   │   │       ├── test-matcher.vim
+│   │   │   │       ├── test-sorter.vim
+│   │   │   │       └── test-source.vim
+│   │   │   ├── vim-django-support
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── 01
+│   │   │   │   │   │   │   └── 6fa0eba398477141a1013b2b2663e76cb3c711
+│   │   │   │   │   │   ├── 08
+│   │   │   │   │   │   │   └── 5d41f6c2abb15dd4da43dfd2b65d9d2c76c3ed
+│   │   │   │   │   │   ├── 0c
+│   │   │   │   │   │   │   └── 4afa99d3ac78c6f3ca902f8decd335da063af0
+│   │   │   │   │   │   ├── 0d
+│   │   │   │   │   │   │   └── 112b04f3d7562dd62412552ed07df53a6274f3
+│   │   │   │   │   │   ├── 11
+│   │   │   │   │   │   │   └── 09e898c9e5806e60ed2afa61582f7b11f1116d
+│   │   │   │   │   │   ├── 14
+│   │   │   │   │   │   │   └── c6f2bc9f68fdcceb2d9faee79140a784e681ec
+│   │   │   │   │   │   ├── 18
+│   │   │   │   │   │   │   └── 3a8d4daa0367f23b13ff4f6a7cc481af69989c
+│   │   │   │   │   │   ├── 1b
+│   │   │   │   │   │   │   └── 6d0bc74990f7cc16dc49ba32167a009c20005c
+│   │   │   │   │   │   ├── 1d
+│   │   │   │   │   │   │   └── 6f3b4c86bd99f3b31fed371939223c5567496a
+│   │   │   │   │   │   ├── 1e
+│   │   │   │   │   │   │   └── eb34ea3ccb71f0aff8ceabedb1d313ad4666f3
+│   │   │   │   │   │   ├── 23
+│   │   │   │   │   │   │   ├── 4132d7b1bcefb161f90d79965a906d369f5428
+│   │   │   │   │   │   │   └── 41aa64b4158ec81bb02ccf5ea2f4971fbf7465
+│   │   │   │   │   │   ├── 2f
+│   │   │   │   │   │   │   └── b14c795ca18e5fb1838cd8ca82cab6e7aa3805
+│   │   │   │   │   │   ├── 31
+│   │   │   │   │   │   │   └── fe7ba4f5b8a2678a29aca5789b4c8ec739e56d
+│   │   │   │   │   │   ├── 37
+│   │   │   │   │   │   │   └── 2bb550c8bd74123ed5ac810fde7b4328e12bcf
+│   │   │   │   │   │   ├── 3f
+│   │   │   │   │   │   │   └── fe4056b4c3cae30c317102b3bedccb04a75597
+│   │   │   │   │   │   ├── 45
+│   │   │   │   │   │   │   ├── 6853fd3dbcec95a82509ff95540f94f30e274f
+│   │   │   │   │   │   │   ├── 95029c31b1bdc40f5acd2e04551da130f32822
+│   │   │   │   │   │   │   └── 99c9f3f500f984cd6f35b6216a6571f51341bf
+│   │   │   │   │   │   ├── 49
+│   │   │   │   │   │   │   └── 5ed09115dff03694f0d5044ad0b209a6dbd018
+│   │   │   │   │   │   ├── 4a
+│   │   │   │   │   │   │   └── 6b4a819be677e65e1f769dc96ff9a575c32215
+│   │   │   │   │   │   ├── 4c
+│   │   │   │   │   │   │   └── 5c284787558c3afc1fbead37de81e7d82d6a92
+│   │   │   │   │   │   ├── 4e
+│   │   │   │   │   │   │   └── 8f413a474311a8f54bafdc5d483e55f43ff60a
+│   │   │   │   │   │   ├── 4f
+│   │   │   │   │   │   │   └── ab53e06032271ff1067ed07806a31690f80907
+│   │   │   │   │   │   ├── 53
+│   │   │   │   │   │   │   └── b2277a508c1912c6ba4f2a9882eb12717a9f76
+│   │   │   │   │   │   ├── 54
+│   │   │   │   │   │   │   └── 8486d927c585dc3fd28d1052d905fac5552ca8
+│   │   │   │   │   │   ├── 5b
+│   │   │   │   │   │   │   └── 348dfd17b6882168669e60a6856c3df1097a41
+│   │   │   │   │   │   ├── 5d
+│   │   │   │   │   │   │   └── d6c09e2ac2acea37bc8bb571c31f4ce3ae8dcc
+│   │   │   │   │   │   ├── 64
+│   │   │   │   │   │   │   └── b7df78d87019ec849888772c580c88697d76fd
+│   │   │   │   │   │   ├── 65
+│   │   │   │   │   │   │   ├── ad07c9da31bf3699b2b01534c3675bb5e444a4
+│   │   │   │   │   │   │   └── f8995a8376288620675eca3d922dcec88be392
+│   │   │   │   │   │   ├── 67
+│   │   │   │   │   │   │   └── 6babb2917132c7e448e64dc4aa21c638154de8
+│   │   │   │   │   │   ├── 69
+│   │   │   │   │   │   │   └── fb0431e0859272aaf5e3a3b620ce70c4c1b096
+│   │   │   │   │   │   ├── 6a
+│   │   │   │   │   │   │   └── 274137f259dea335c326bd45e0fc042199aed4
+│   │   │   │   │   │   ├── 6e
+│   │   │   │   │   │   │   ├── 48fa59c0f62f714448d2d6157ea551173dd996
+│   │   │   │   │   │   │   └── 5bcc3bff86d7d66b7834b8c2c45513a5227e9c
+│   │   │   │   │   │   ├── 6f
+│   │   │   │   │   │   │   ├── 0458fa1a07fcd435dd23540652bcaa99231c45
+│   │   │   │   │   │   │   └── 084ad0dd54f93f774cfdacf61aaffe88fb8bb0
+│   │   │   │   │   │   ├── 73
+│   │   │   │   │   │   │   └── b31c364473816bb5cf1bad504a95a65d118b34
+│   │   │   │   │   │   ├── 76
+│   │   │   │   │   │   │   └── 5093aa704f546f49217a42d7b26a19ab9379f2
+│   │   │   │   │   │   ├── 77
+│   │   │   │   │   │   │   ├── 28bde507c4ab8f03352abf7f0f0272309b7c76
+│   │   │   │   │   │   │   └── c423dbc3163ee4ef7330d0f9598f8bb15fa032
+│   │   │   │   │   │   ├── 80
+│   │   │   │   │   │   │   └── f5592652b8c284513770754f09ee3a44d33cab
+│   │   │   │   │   │   ├── 81
+│   │   │   │   │   │   │   └── deff704e87074dbec2f5badd7d2da3ea40a269
+│   │   │   │   │   │   ├── 85
+│   │   │   │   │   │   │   └── 715536ae9f1a852d62d69d3d33aa031df4f789
+│   │   │   │   │   │   ├── 87
+│   │   │   │   │   │   │   └── c69a7361502e4464c934dc5a2c033c1b2d369e
+│   │   │   │   │   │   ├── 8d
+│   │   │   │   │   │   │   └── a0401977f48cf74bd22698f641bd587dc80251
+│   │   │   │   │   │   ├── 8e
+│   │   │   │   │   │   │   ├── 8e295875902f1e606674005d84ffa82ddfc5f4
+│   │   │   │   │   │   │   └── a10a371113629bdf9ce7052440f519a7e51b06
+│   │   │   │   │   │   ├── 8f
+│   │   │   │   │   │   │   └── c25f43fe6f308b9d776af79dc22a5c1c262847
+│   │   │   │   │   │   ├── 91
+│   │   │   │   │   │   │   └── 568c88ba8ee00de6fb186fb0cbeeb589679a34
+│   │   │   │   │   │   ├── 96
+│   │   │   │   │   │   │   └── c32a62f767b0e1f50ff533670319ca3f03cce7
+│   │   │   │   │   │   ├── 9a
+│   │   │   │   │   │   │   └── ace290710d11ef54ef0773cd6375d8e2ba9414
+│   │   │   │   │   │   ├── 9b
+│   │   │   │   │   │   │   └── fdddc9f3326c5ee0f777791796ceb6497c0e07
+│   │   │   │   │   │   ├── a0
+│   │   │   │   │   │   │   └── b21e72a2ce22141d60c494de1f58cb960b413f
+│   │   │   │   │   │   ├── a2
+│   │   │   │   │   │   │   └── 67b5c5a8b0521275ccf5772535e519500296cb
+│   │   │   │   │   │   ├── a4
+│   │   │   │   │   │   │   └── 6542fcfa91fe0881ffa24dfbe43a112fa02fe6
+│   │   │   │   │   │   ├── ad
+│   │   │   │   │   │   │   └── 929aa02cdb65317d03b6b65f9f4f77cfac079c
+│   │   │   │   │   │   ├── b0
+│   │   │   │   │   │   │   └── aab171a6a82c52b3c2cf62f0a2aa24b3627654
+│   │   │   │   │   │   ├── b3
+│   │   │   │   │   │   │   └── 3dcb917c4c46cfb9390a0cee74b0d7927549c5
+│   │   │   │   │   │   ├── b4
+│   │   │   │   │   │   │   └── a4ad0bb1f6b989c4e229fee50ccb4cb09b0588
+│   │   │   │   │   │   ├── b6
+│   │   │   │   │   │   │   ├── 6fe5cfb01a61cd0ef26ed13a4191bb6acc9db5
+│   │   │   │   │   │   │   └── b991678f2373a6f62102a2bba4122eceb38392
+│   │   │   │   │   │   ├── b7
+│   │   │   │   │   │   │   └── bb82cfccf8440ac094526e65434055c779f871
+│   │   │   │   │   │   ├── ba
+│   │   │   │   │   │   │   ├── 2bc1e462da39ca7b2a701a90e2e2b8c7be1d63
+│   │   │   │   │   │   │   └── 5622c39a3fd4b7569c6f92f1598084509a4c98
+│   │   │   │   │   │   ├── be
+│   │   │   │   │   │   │   └── 64a6f1c0c31c78404c897e395a01fa90c2c00c
+│   │   │   │   │   │   ├── c0
+│   │   │   │   │   │   │   └── ec628d19f293d815d337c0a67c24e73fe84207
+│   │   │   │   │   │   ├── c6
+│   │   │   │   │   │   │   └── 71acecf2410aedb9c96a462b3955e393aa043e
+│   │   │   │   │   │   ├── c8
+│   │   │   │   │   │   │   └── 88523df16f9d618c36109714b54c80c903d18e
+│   │   │   │   │   │   ├── cf
+│   │   │   │   │   │   │   └── 5a4f68ad801a77214f1ca9f260f028777ad30a
+│   │   │   │   │   │   ├── d4
+│   │   │   │   │   │   │   └── abab8be2a17e2f92fb8c3ddb39b3eed5c0d1c8
+│   │   │   │   │   │   ├── d5
+│   │   │   │   │   │   │   └── ad226f964144abb8f63e76070daec7f430c3a6
+│   │   │   │   │   │   ├── d8
+│   │   │   │   │   │   │   └── 654aa0e2f2f3c1760e0fcbcbb52c1c5941fba7
+│   │   │   │   │   │   ├── db
+│   │   │   │   │   │   │   └── 1ea4b9095383744d245802260bb72f0c13846d
+│   │   │   │   │   │   ├── e3
+│   │   │   │   │   │   │   └── 5bd5063b8bcbbb239e3d729f1ed2dea8fec88c
+│   │   │   │   │   │   ├── e6
+│   │   │   │   │   │   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   │   │   │   │   │   ├── e7
+│   │   │   │   │   │   │   └── 8acd350f5156776760edc3ffd8e6ac418036e4
+│   │   │   │   │   │   ├── e8
+│   │   │   │   │   │   │   └── 4008c500dbf782e09e746696bb7268c8d52653
+│   │   │   │   │   │   ├── eb
+│   │   │   │   │   │   │   └── 02bfc195efe63f6e285c3c82f6421d5b4a8f34
+│   │   │   │   │   │   ├── ed
+│   │   │   │   │   │   │   └── e3af1d973ff3f38f3e9c6a030c7e6e82a989cc
+│   │   │   │   │   │   ├── fc
+│   │   │   │   │   │   │   └── 8cf34026912eb03884c0a1a1daa47c22113177
+│   │   │   │   │   │   ├── fe
+│   │   │   │   │   │   │   └── 035a1803e6ceeb22c5f4fd950cc18cd1271120
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   └── django_support.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── vim-django-support.txt
+│   │   │   │   ├── lib
+│   │   │   │   │   └── vim_django_support
+│   │   │   │   │       ├── __init__.py
+│   │   │   │   │       └── settings.py
+│   │   │   │   └── plugin
+│   │   │   │       └── django_support.vim
+│   │   │   ├── vim-flake8
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── 06
+│   │   │   │   │   │   │   ├── 4594befb5a350826c2033b773878d3c1e75a5b
+│   │   │   │   │   │   │   └── 94399e6a9e1c06ef801e60dcfbfdabeffcf587
+│   │   │   │   │   │   ├── 08
+│   │   │   │   │   │   │   ├── b3348b39b8e6d3a89e4dec2e4cfbdd6ab1bde6
+│   │   │   │   │   │   │   └── f1f2b1f5073ea7b9e4e914eb1c34279af4ea24
+│   │   │   │   │   │   ├── 0a
+│   │   │   │   │   │   │   └── a6cd08f60a942c22073abac16ef82a08bc9f33
+│   │   │   │   │   │   ├── 0b
+│   │   │   │   │   │   │   ├── 386c7689692974ab5e58c9fd53ef7e664eef6b
+│   │   │   │   │   │   │   └── b2f696f2e934c5549a127a989fe7984275df67
+│   │   │   │   │   │   ├── 10
+│   │   │   │   │   │   │   └── a283a1506d1b3b55c2ae0b2799d1f9f99a3e90
+│   │   │   │   │   │   ├── 11
+│   │   │   │   │   │   │   └── 1a34f1c1abc408e26898a214e852d3a3a81560
+│   │   │   │   │   │   ├── 13
+│   │   │   │   │   │   │   └── 6cb4b21b22103600ee2e40a4819fbb63a30bc9
+│   │   │   │   │   │   ├── 1a
+│   │   │   │   │   │   │   └── 5e519b327901122fd21cef553bfb871ca4b98c
+│   │   │   │   │   │   ├── 1b
+│   │   │   │   │   │   │   └── 609af337456f9b2a8a9a4cdd93a5e09504581e
+│   │   │   │   │   │   ├── 20
+│   │   │   │   │   │   │   └── 7b8224487380af7e9be81b131a632ed532b86e
+│   │   │   │   │   │   ├── 21
+│   │   │   │   │   │   │   └── 7c98f0d1b8192feab3dace8618974331845590
+│   │   │   │   │   │   ├── 23
+│   │   │   │   │   │   │   ├── 4a198429ef602d8ff4cbc4497ca62059a412c2
+│   │   │   │   │   │   │   └── b79b43a226d69e2be8dcabc71aea426b3f723c
+│   │   │   │   │   │   ├── 28
+│   │   │   │   │   │   │   └── 262f5b631809530f350a524314976f1c9ae74c
+│   │   │   │   │   │   ├── 29
+│   │   │   │   │   │   │   └── 41a5201cf0c7050cf8750d1c4f311dd292940c
+│   │   │   │   │   │   ├── 2a
+│   │   │   │   │   │   │   └── a5028219a5192be46a3d4eb3a7c93d113e9040
+│   │   │   │   │   │   ├── 2c
+│   │   │   │   │   │   │   ├── 24dd4395fedc879d3cebfc1e43bd4c0aef6caa
+│   │   │   │   │   │   │   └── f450fb46d67e32d13ad0ff92397c11e8c640cd
+│   │   │   │   │   │   ├── 2f
+│   │   │   │   │   │   │   ├── c7ed426a9337f9e5fada7b54d55af6d0c771de
+│   │   │   │   │   │   │   └── ee056f1d3ba41d9cfc090084819c4a6b5e16ca
+│   │   │   │   │   │   ├── 32
+│   │   │   │   │   │   │   └── 9bcb00d831a331fabd37429758cbadf3b91328
+│   │   │   │   │   │   ├── 38
+│   │   │   │   │   │   │   ├── 1686d2f1fc799f7d248993f0ac86dd96ce7bab
+│   │   │   │   │   │   │   └── bb6f7da9b71af7b5c86f831f28983fd0690980
+│   │   │   │   │   │   ├── 39
+│   │   │   │   │   │   │   └── 21fdf8b913e0b219ee88f4b87b3b20b96b03bc
+│   │   │   │   │   │   ├── 3b
+│   │   │   │   │   │   │   └── 154262d17fa1430919c60c22af8b33dde7ab03
+│   │   │   │   │   │   ├── 41
+│   │   │   │   │   │   │   └── 07a511fd66b5fd2abf37944ffd419982fe999b
+│   │   │   │   │   │   ├── 45
+│   │   │   │   │   │   │   └── 2086f0b6dc39e6cf1369b910994c1525a90e24
+│   │   │   │   │   │   ├── 4d
+│   │   │   │   │   │   │   ├── a2acc41d9238379d489857a7c156d6d857ea3d
+│   │   │   │   │   │   │   └── b8b3b333d4859767035acc989eb8ad1b874fae
+│   │   │   │   │   │   ├── 52
+│   │   │   │   │   │   │   └── d9fdfcfaa7718fa877be460dcd5a9fa7c5d849
+│   │   │   │   │   │   ├── 54
+│   │   │   │   │   │   │   └── d3b0c3f54637bacfb8c1d14406af82ff3f06af
+│   │   │   │   │   │   ├── 56
+│   │   │   │   │   │   │   └── bfe432d42e8839853796fe89453f75d5043bc8
+│   │   │   │   │   │   ├── 5d
+│   │   │   │   │   │   │   └── 87dc069a00d51ce29245b0b16dc536ed69017d
+│   │   │   │   │   │   ├── 66
+│   │   │   │   │   │   │   └── 174e2d85c3aa21c8c12825f9389fdaefbf277e
+│   │   │   │   │   │   ├── 67
+│   │   │   │   │   │   │   └── 3b1816bc42d5673e8834af6526e733d98be96e
+│   │   │   │   │   │   ├── 6b
+│   │   │   │   │   │   │   └── a0e144b95c1728b64bf9091a61b629c1b9694e
+│   │   │   │   │   │   ├── 71
+│   │   │   │   │   │   │   └── 0abf7d97acf3d29a3a1ad750aeaf5c66a3248c
+│   │   │   │   │   │   ├── 72
+│   │   │   │   │   │   │   └── 6a30afc32139b955ff732c5b47cdc4152ffdf7
+│   │   │   │   │   │   ├── 73
+│   │   │   │   │   │   │   └── 5913a9b2816a34d3e8bfb2dcfcfbdc3c8415d7
+│   │   │   │   │   │   ├── 7a
+│   │   │   │   │   │   │   └── 01cf82205517ce73b65bdc7214ae26fa44a88a
+│   │   │   │   │   │   ├── 7b
+│   │   │   │   │   │   │   └── 674256e9b6614ab3ed66f725f19b536356f3eb
+│   │   │   │   │   │   ├── 80
+│   │   │   │   │   │   │   └── 338e1657cb1369479d7da0b4fe09200ffeb34d
+│   │   │   │   │   │   ├── 83
+│   │   │   │   │   │   │   └── 41753408bbc506ac0f9fe4ff60648206b4bf51
+│   │   │   │   │   │   ├── 86
+│   │   │   │   │   │   │   └── a09cb2b967a65e4bb66b0fec59ce31dc2ad688
+│   │   │   │   │   │   ├── 89
+│   │   │   │   │   │   │   └── 4217a11632413bfa14d4e56473546072090642
+│   │   │   │   │   │   ├── 8a
+│   │   │   │   │   │   │   ├── 19a79ddfac0b4e05faad58b72ad3ca4e1e7d91
+│   │   │   │   │   │   │   ├── 573a9806eacf000b03b4bbf37aff4ce06d73a6
+│   │   │   │   │   │   │   └── 9a3d5eb1232b84e4301b937b11cbfba6e18cad
+│   │   │   │   │   │   ├── 8d
+│   │   │   │   │   │   │   └── 88c0c53078aa96344e5ca11a84fa9f9109b276
+│   │   │   │   │   │   ├── 8f
+│   │   │   │   │   │   │   ├── 17dcc2b5e036e990a91ceef87f3bdeed43175e
+│   │   │   │   │   │   │   ├── 2986dd4212b37d457678660acc7bb6726e779f
+│   │   │   │   │   │   │   └── fb306445d21268c3a52935ad81d46e3b82a990
+│   │   │   │   │   │   ├── 94
+│   │   │   │   │   │   │   ├── 7f660844168bf154049642f8baa0f74bad2297
+│   │   │   │   │   │   │   └── e5f650dadfd745f2fccafbba1b79fbb3e4d79f
+│   │   │   │   │   │   ├── 99
+│   │   │   │   │   │   │   └── ef175da759223f5c3c0eb06d68dda1261ba106
+│   │   │   │   │   │   ├── 9b
+│   │   │   │   │   │   │   ├── 838866b27612d5628a5a1a055ce887c28c52a2
+│   │   │   │   │   │   │   └── b647e7920b396beb5b9764f8c0b65b956d86fd
+│   │   │   │   │   │   ├── 9e
+│   │   │   │   │   │   │   └── 057cb971e34f8fcf93f49a67fe6c5cb0599fb5
+│   │   │   │   │   │   ├── a0
+│   │   │   │   │   │   │   └── 733502b1c08eb172081b012cf96cde9e262d7a
+│   │   │   │   │   │   ├── af
+│   │   │   │   │   │   │   ├── c396487bcd8d9895613a50e4ca61114743c5fe
+│   │   │   │   │   │   │   └── db41fd61b8367191d2f22d2c90d909a51a8a6a
+│   │   │   │   │   │   ├── b0
+│   │   │   │   │   │   │   └── d951e6111b05a05eab47c2404cdae236ad1647
+│   │   │   │   │   │   ├── b2
+│   │   │   │   │   │   │   └── 6d9a1a75e05bc5d86efa9b479cf3138af526f2
+│   │   │   │   │   │   ├── b4
+│   │   │   │   │   │   │   └── 56f77b5edf91e52f4b0042d565e2f75a191c98
+│   │   │   │   │   │   ├── b5
+│   │   │   │   │   │   │   ├── 126df43b7cd124272f40e52898cb021f9993c9
+│   │   │   │   │   │   │   └── b43666c181f32ea4c0856f34679fc541f39152
+│   │   │   │   │   │   ├── b8
+│   │   │   │   │   │   │   └── 4d224f64bb46a3af2db6f692cd8afca2a35e5a
+│   │   │   │   │   │   ├── b9
+│   │   │   │   │   │   │   └── 140ef09a8394b043e8eaedf95517d5a219ee42
+│   │   │   │   │   │   ├── ba
+│   │   │   │   │   │   │   └── 7a75747eaae450f2a1b68513ff7825d5eab7fc
+│   │   │   │   │   │   ├── bd
+│   │   │   │   │   │   │   └── 2c0b935e6b31362278a0f44dfd1d210885c24b
+│   │   │   │   │   │   ├── bf
+│   │   │   │   │   │   │   └── c97c7f9952974c4bd9add558714081eb92a8e5
+│   │   │   │   │   │   ├── ca
+│   │   │   │   │   │   │   ├── 1dc6d3ef003f7e44eec46231779cb18009c88d
+│   │   │   │   │   │   │   └── c78c40c561325dbd3172552b958abd8c5bf6a0
+│   │   │   │   │   │   ├── cb
+│   │   │   │   │   │   │   └── 9a0b37420ec63740558411287398bc82dbd39d
+│   │   │   │   │   │   ├── d1
+│   │   │   │   │   │   │   ├── bb8f1d440a4656342bcc536574e0e1627dedcb
+│   │   │   │   │   │   │   └── ece6162e3d964bcdeba7f2c2fda0ff1dba86ec
+│   │   │   │   │   │   ├── d2
+│   │   │   │   │   │   │   └── e426f90a014fb790bc6ca8b6cd8dbb3f8290ea
+│   │   │   │   │   │   ├── d7
+│   │   │   │   │   │   │   ├── 27bc47e3387685d7d18e3718833292833663d5
+│   │   │   │   │   │   │   └── 58e27192abbac4a89db1b8e3e672f788bbdc89
+│   │   │   │   │   │   ├── e0
+│   │   │   │   │   │   │   └── 5cca440ee233018b2d8538abae113c2036c0a2
+│   │   │   │   │   │   ├── e3
+│   │   │   │   │   │   │   ├── 2260d77449e46c31405ce5d26d83d88405e9f4
+│   │   │   │   │   │   │   ├── 38dadd0d83da0e77546451d71ad576aea7b187
+│   │   │   │   │   │   │   └── b3c61a34ec3330a1da9f8649f8789bbb53d3d6
+│   │   │   │   │   │   ├── f2
+│   │   │   │   │   │   │   └── 2f606c1e47a3e45407576d4b5c33367255ea1a
+│   │   │   │   │   │   ├── f8
+│   │   │   │   │   │   │   └── 4055baa03b30179628af15d0a53d88cb10bea8
+│   │   │   │   │   │   ├── fc
+│   │   │   │   │   │   │   ├── 04a1123eb6b2aa855eddfcee6da7a04ca0408c
+│   │   │   │   │   │   │   └── fbab2407cc85d2edf985c7f1ea3f9b70624e8c
+│   │   │   │   │   │   ├── fd
+│   │   │   │   │   │   │   └── 831c3addab5131be7af0f4330e74a53cf93083
+│   │   │   │   │   │   ├── fe
+│   │   │   │   │   │   │   └── bb9e738bcb9fdb4ef3424596821d20487fda91
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── README.mdown
+│   │   │   │   └── ftplugin
+│   │   │   │       └── python_flake8.vim
+│   │   │   ├── vim-ft-rst_header
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── 00
+│   │   │   │   │   │   │   └── 180c1e5911ff24a6ef8cba4370944a88c52d3e
+│   │   │   │   │   │   ├── 04
+│   │   │   │   │   │   │   └── 3e60bd370802dcde7ed8bc98b9f795a4b35eda
+│   │   │   │   │   │   ├── 05
+│   │   │   │   │   │   │   └── 5076be55438d44673033624d98b68c947004c1
+│   │   │   │   │   │   ├── 12
+│   │   │   │   │   │   │   └── 7f7b1f7f2811265c3db06b19a49ec78d8d5159
+│   │   │   │   │   │   ├── 13
+│   │   │   │   │   │   │   └── 3a0fbebd8d99c0ebbb84ec1658acd614cac9a2
+│   │   │   │   │   │   ├── 14
+│   │   │   │   │   │   │   ├── 142c328574c467c6a9453aa068400d30f464f0
+│   │   │   │   │   │   │   └── b7d3a7ab725565bafc95db4209a65b8a0f5779
+│   │   │   │   │   │   ├── 23
+│   │   │   │   │   │   │   └── c309b6c4b2f5916bbe52646df43a7b76ba7b6b
+│   │   │   │   │   │   ├── 2b
+│   │   │   │   │   │   │   └── 21bc3e47c961056fb686276577c58d358213e9
+│   │   │   │   │   │   ├── 2c
+│   │   │   │   │   │   │   └── 2ceed10b68a5b3f4dcfc85834afb87d20e2c43
+│   │   │   │   │   │   ├── 3a
+│   │   │   │   │   │   │   └── 0c74721a004c2a2dc90a85c6184f24409349fb
+│   │   │   │   │   │   ├── 3c
+│   │   │   │   │   │   │   └── f0c7aea4c8480c50598c0f1c795ceaaff32762
+│   │   │   │   │   │   ├── 4e
+│   │   │   │   │   │   │   └── dbfb42bbc4152a143cd87f6db5b24305152080
+│   │   │   │   │   │   ├── 51
+│   │   │   │   │   │   │   └── 5454d8aa8dfade0f60c9afef07bf2f51d9fadb
+│   │   │   │   │   │   ├── 62
+│   │   │   │   │   │   │   └── 2bae5b6ec93ade4726b8ef9e6a92bed93d167b
+│   │   │   │   │   │   ├── 65
+│   │   │   │   │   │   │   └── c0b7a74b6cc72e9441a15f7a473f761ef1b8a2
+│   │   │   │   │   │   ├── 74
+│   │   │   │   │   │   │   └── bd36c7da523230599a0178642eeb8a57ff2485
+│   │   │   │   │   │   ├── 8e
+│   │   │   │   │   │   │   └── c8d8482f79a79dbcf7bd8a54bc48a9c3b94448
+│   │   │   │   │   │   ├── 9f
+│   │   │   │   │   │   │   └── d8f65f06a1e019fcbfb4d4d1e719969e12e671
+│   │   │   │   │   │   ├── a0
+│   │   │   │   │   │   │   └── ff31d8a2badba71e0d2e07d2d31801d8a34efd
+│   │   │   │   │   │   ├── b9
+│   │   │   │   │   │   │   ├── ec18bc3279bbfbc2604e00c5327560a12400ee
+│   │   │   │   │   │   │   └── ef7b0ac3a594d75ac002c4f30504d7d70c9c72
+│   │   │   │   │   │   ├── c3
+│   │   │   │   │   │   │   └── fff91f652dca697028729cffad5fb0d151cf06
+│   │   │   │   │   │   ├── d3
+│   │   │   │   │   │   │   └── 3ad1e9b2423f7c854d8558861d5a1aa08d2076
+│   │   │   │   │   │   ├── d9
+│   │   │   │   │   │   │   └── 682b2826e1469f81a00474f6051b27de6ea16c
+│   │   │   │   │   │   ├── e4
+│   │   │   │   │   │   │   └── b87a9e70aeef7490b7396113037b04c44209f3
+│   │   │   │   │   │   ├── ea
+│   │   │   │   │   │   │   └── 809a24ab2c48701bd5a6b97f66026debff6fec
+│   │   │   │   │   │   ├── eb
+│   │   │   │   │   │   │   └── 753c1b51474c12f1baa36bd8f9a052e193b5d9
+│   │   │   │   │   │   ├── ed
+│   │   │   │   │   │   │   └── 453d50e917eb0a271fc7e4bf9ff217f8f89f0d
+│   │   │   │   │   │   ├── ee
+│   │   │   │   │   │   │   ├── 3beeea6c2444a5b0f170c3581a7b9bdf23e903
+│   │   │   │   │   │   │   └── 431ffa021c8da77877fdbe2aca17bb947848fb
+│   │   │   │   │   │   ├── f3
+│   │   │   │   │   │   │   └── 5a9005a08eb36157b6e3954126e67cf34f7909
+│   │   │   │   │   │   ├── f4
+│   │   │   │   │   │   │   └── c06065605e62961fe8ef66c58d2abe25397fba
+│   │   │   │   │   │   ├── ff
+│   │   │   │   │   │   │   └── 05c10a620e826a67747e5d78f17527463ed3bf
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   └── ftplugin
+│   │   │   │       └── rst_header.vim
+│   │   │   ├── vim-fugitive
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-cca20a6bc7d9b646ddcb579646a029277ee6fb53.idx
+│   │   │   │   │   │       └── pack-cca20a6bc7d9b646ddcb579646a029277ee6fb53.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── CONTRIBUTING.markdown
+│   │   │   │   ├── README.markdown
+│   │   │   │   ├── doc
+│   │   │   │   │   └── fugitive.txt
+│   │   │   │   └── plugin
+│   │   │   │       └── fugitive.vim
+│   │   │   ├── vim-gocode
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-64a06f03bed884bd183bac9ddf63e10def42134e.idx
+│   │   │   │   │   │       └── pack-64a06f03bed884bd183bac9ddf63e10def42134e.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.md
+│   │   │   │   ├── addon-info.json
+│   │   │   │   ├── autoload
+│   │   │   │   │   └── go
+│   │   │   │   │       ├── complete.vim
+│   │   │   │   │       └── package.vim
+│   │   │   │   ├── compiler
+│   │   │   │   │   └── go.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── vim-gocode.txt
+│   │   │   │   ├── ftdetect
+│   │   │   │   │   └── gofiletype.vim
+│   │   │   │   ├── ftplugin
+│   │   │   │   │   ├── go
+│   │   │   │   │   │   ├── fmt.vim
+│   │   │   │   │   │   ├── import.vim
+│   │   │   │   │   │   ├── install.vim
+│   │   │   │   │   │   ├── pkg.vim
+│   │   │   │   │   │   └── test.sh
+│   │   │   │   │   └── go.vim
+│   │   │   │   ├── indent
+│   │   │   │   │   └── go.vim
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── godoc.vim
+│   │   │   │   └── syntax
+│   │   │   │       ├── go.vim
+│   │   │   │       └── godoc.vim
+│   │   │   ├── vim-quickrun
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-fe41dbadd9e5aa45db1d9f9ba21f6208c5df5eef.idx
+│   │   │   │   │   │       └── pack-fe41dbadd9e5aa45db1d9f9ba21f6208c5df5eef.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── quickrun
+│   │   │   │   │   │   ├── hook
+│   │   │   │   │   │   │   ├── cd.vim
+│   │   │   │   │   │   │   ├── eval.vim
+│   │   │   │   │   │   │   ├── output_encode.vim
+│   │   │   │   │   │   │   ├── shebang.vim
+│   │   │   │   │   │   │   ├── sweep.vim
+│   │   │   │   │   │   │   └── time.vim
+│   │   │   │   │   │   ├── module.vim
+│   │   │   │   │   │   ├── outputter
+│   │   │   │   │   │   │   ├── browser.vim
+│   │   │   │   │   │   │   ├── buffer.vim
+│   │   │   │   │   │   │   ├── buffered.vim
+│   │   │   │   │   │   │   ├── error.vim
+│   │   │   │   │   │   │   ├── file.vim
+│   │   │   │   │   │   │   ├── message.vim
+│   │   │   │   │   │   │   ├── multi.vim
+│   │   │   │   │   │   │   ├── null.vim
+│   │   │   │   │   │   │   ├── quickfix.vim
+│   │   │   │   │   │   │   └── variable.vim
+│   │   │   │   │   │   └── runner
+│   │   │   │   │   │       ├── process_manager.vim
+│   │   │   │   │   │       ├── python.vim
+│   │   │   │   │   │       ├── remote.vim
+│   │   │   │   │   │       ├── shell.vim
+│   │   │   │   │   │       ├── system.vim
+│   │   │   │   │   │       ├── vimproc.vim
+│   │   │   │   │   │       └── vimscript.vim
+│   │   │   │   │   ├── quickrun.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _0ebe83b
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   ├── List.vim
+│   │   │   │   │   │   │   │   └── String.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── ProcessManager.vim
+│   │   │   │   │   │   │   └── System
+│   │   │   │   │   │   │       ├── File.vim
+│   │   │   │   │   │   │       └── Filepath.vim
+│   │   │   │   │   │   ├── _0ebe83b.vim
+│   │   │   │   │   │   └── quickrun.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   ├── quickrun.jax
+│   │   │   │   │   └── quickrun.txt
+│   │   │   │   └── plugin
+│   │   │   │       └── quickrun.vim
+│   │   │   ├── vim-scouter
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── 05
+│   │   │   │   │   │   │   ├── 48fe2e5c9370cb9d5a5d5020b6752eedf4cc00
+│   │   │   │   │   │   │   └── eefabc3cb294573035d8fb19d138ac9a705499
+│   │   │   │   │   │   ├── 0a
+│   │   │   │   │   │   │   └── ef7fe37681c5fef5fd6fb4990b33f6bb27a9e1
+│   │   │   │   │   │   ├── 0b
+│   │   │   │   │   │   │   ├── d9e972b5de841e89e4caea5f19ca71a3f2b570
+│   │   │   │   │   │   │   └── e50e4a02ec214201c5e269651cd2649c945ea7
+│   │   │   │   │   │   ├── 0c
+│   │   │   │   │   │   │   └── 1269ddf93f7677ae5700fc13b27b76576d902e
+│   │   │   │   │   │   ├── 0f
+│   │   │   │   │   │   │   └── d0cf3c0b99b153e296d98402e4c44c602397a2
+│   │   │   │   │   │   ├── 12
+│   │   │   │   │   │   │   └── fcdf16f8864cf56fa0cbc1c91607dcdf84899b
+│   │   │   │   │   │   ├── 17
+│   │   │   │   │   │   │   └── 3e32dfa82e7a320663699addffbc0c2aaed52b
+│   │   │   │   │   │   ├── 18
+│   │   │   │   │   │   │   └── 0c217973177853975eadc82025080e86de6ad3
+│   │   │   │   │   │   ├── 1d
+│   │   │   │   │   │   │   └── 39a26c299895b3a08c38ebfb9ddda118204091
+│   │   │   │   │   │   ├── 1f
+│   │   │   │   │   │   │   └── f4e9ad64952fd0ac33d2a1f9d928ca25c6bd9b
+│   │   │   │   │   │   ├── 22
+│   │   │   │   │   │   │   └── ea13e146ed324991670179bdd35466adb343b9
+│   │   │   │   │   │   ├── 23
+│   │   │   │   │   │   │   └── ebbe70b2f26e1685e910efebca08e297be06a4
+│   │   │   │   │   │   ├── 2a
+│   │   │   │   │   │   │   └── 3015a6aa8f738bcb007bf5613544422e6e27fe
+│   │   │   │   │   │   ├── 2e
+│   │   │   │   │   │   │   └── 2c9fdd2568bb237868df953b3faa687f0fb458
+│   │   │   │   │   │   ├── 32
+│   │   │   │   │   │   │   └── 3bfc9f8bf9913b750c01b2eae2f18d2164500f
+│   │   │   │   │   │   ├── 33
+│   │   │   │   │   │   │   └── d0d3a860a1dd4b7c6bc866e8bce9a469b64345
+│   │   │   │   │   │   ├── 3a
+│   │   │   │   │   │   │   └── e9bf7e63b2d80451f1d37878ca2136fc4301a1
+│   │   │   │   │   │   ├── 3c
+│   │   │   │   │   │   │   ├── 59861387f0bdc7a743d032e2307b7591c9afdf
+│   │   │   │   │   │   │   └── 6c56b0a7a6f73963d8f91c69c705e6845d6357
+│   │   │   │   │   │   ├── 43
+│   │   │   │   │   │   │   ├── 23348a91f2f803d60e5d1271bbb2e35f3daf9f
+│   │   │   │   │   │   │   └── 3ed46dac74046c6489509a28b39c07e5ad6612
+│   │   │   │   │   │   ├── 47
+│   │   │   │   │   │   │   └── b574ceccb98e965745da20e15ff0c2e554bda8
+│   │   │   │   │   │   ├── 49
+│   │   │   │   │   │   │   └── e73d43eba41e5965c8692bc32d722357499edd
+│   │   │   │   │   │   ├── 4d
+│   │   │   │   │   │   │   └── a9daae07af2e64b08d006ba8dbfdca6c4dcea5
+│   │   │   │   │   │   ├── 55
+│   │   │   │   │   │   │   └── 6a1130cc8f26f3c7c0b37039ed7a5037519600
+│   │   │   │   │   │   ├── 5b
+│   │   │   │   │   │   │   └── 03b9c8bc3879bcb3c7327c79275e59750e8407
+│   │   │   │   │   │   ├── 5f
+│   │   │   │   │   │   │   └── ccc6c37d11736d2d9839e4dd7980d630d1b53a
+│   │   │   │   │   │   ├── 62
+│   │   │   │   │   │   │   └── 1c8d9e068e3e5fc34df46c384ed41b8aa3ab8e
+│   │   │   │   │   │   ├── 63
+│   │   │   │   │   │   │   └── d524d927f23337a91c7f7e2353c095d4b155d9
+│   │   │   │   │   │   ├── 64
+│   │   │   │   │   │   │   └── bf45ffe49e10a22b7c6c0d50220ce8cd31ff49
+│   │   │   │   │   │   ├── 68
+│   │   │   │   │   │   │   └── f813c9f884b4b23f7ecb5b44f79e8186ba6414
+│   │   │   │   │   │   ├── 69
+│   │   │   │   │   │   │   └── 173e65a175432015203a4e52caa04c906cf3a8
+│   │   │   │   │   │   ├── 6d
+│   │   │   │   │   │   │   └── 0d44fcc4d5fc93f61a76db4614eabec39c2a93
+│   │   │   │   │   │   ├── 6f
+│   │   │   │   │   │   │   └── 4a4f58ae381e16fc9890c0c0194a26595c61a8
+│   │   │   │   │   │   ├── 70
+│   │   │   │   │   │   │   └── 26ebda50e81bd65456c17135d046f7ba1d999e
+│   │   │   │   │   │   ├── 72
+│   │   │   │   │   │   │   └── dc244c173d4e64c276a01e812e918f0e62ba3b
+│   │   │   │   │   │   ├── 7d
+│   │   │   │   │   │   │   └── 672d66e517e156b6d908ea6b3f0d5db0526872
+│   │   │   │   │   │   ├── 7e
+│   │   │   │   │   │   │   └── 05ad80c32f9f214c77957588cbd286f2176412
+│   │   │   │   │   │   ├── 81
+│   │   │   │   │   │   │   └── c656397a8c77ca10d14ed35fbe674172d096ed
+│   │   │   │   │   │   ├── 90
+│   │   │   │   │   │   │   └── 0317f72317950d0f3b7cfc3a3666b6ee6645bb
+│   │   │   │   │   │   ├── 91
+│   │   │   │   │   │   │   └── 12026ce11d0422ee5fa169fbc2ae2253868e43
+│   │   │   │   │   │   ├── 9a
+│   │   │   │   │   │   │   └── d3c0d12eeafa96948ce5c9c80c50e8f482f1ee
+│   │   │   │   │   │   ├── a2
+│   │   │   │   │   │   │   └── 5f0a466b518cec9d60d47058e33d89cdbcaf02
+│   │   │   │   │   │   ├── a6
+│   │   │   │   │   │   │   └── f24d6017a1e8d9e1987c31c1ec4e02ed29ab99
+│   │   │   │   │   │   ├── b0
+│   │   │   │   │   │   │   └── 6c2a2850d52a92c1a0b2ceee684f02d0244cbb
+│   │   │   │   │   │   ├── b1
+│   │   │   │   │   │   │   └── 4344d9b6566b212fb85da17d8aebcfcd254c4b
+│   │   │   │   │   │   ├── b2
+│   │   │   │   │   │   │   ├── 14d836070e06d9db2448ef10a2fc195ef3234e
+│   │   │   │   │   │   │   └── a1d674bb64064f3b0abf52516346c1db15ced7
+│   │   │   │   │   │   ├── b6
+│   │   │   │   │   │   │   └── 2e155a732a6c85d5ef30944a8119f339da45cd
+│   │   │   │   │   │   ├── ba
+│   │   │   │   │   │   │   ├── 9080b16994ee12bd95a2333a2c23c3130b2d17
+│   │   │   │   │   │   │   └── cc9446750df0b717db51ed874df621cde5e7e0
+│   │   │   │   │   │   ├── be
+│   │   │   │   │   │   │   └── d1d4ed95a756e2d7d9739461630836f86d81b6
+│   │   │   │   │   │   ├── c4
+│   │   │   │   │   │   │   └── ef28b4da5dad5e16a2ad57d18a8e8ef5bd2280
+│   │   │   │   │   │   ├── c5
+│   │   │   │   │   │   │   ├── 506c920725feaee607c59ac49a5dc093f160f1
+│   │   │   │   │   │   │   └── 678a0bf3493109c85769571483cec0c03cbca5
+│   │   │   │   │   │   ├── cf
+│   │   │   │   │   │   │   └── d31dfb78b6131eb025ee9952f6ac8ee73f340c
+│   │   │   │   │   │   ├── d6
+│   │   │   │   │   │   │   └── aca95b63e63f6f324bf9107353c5216e33bdd9
+│   │   │   │   │   │   ├── d9
+│   │   │   │   │   │   │   └── 5ed537a5e30dfb22eec38d003ad0c8f6ec8796
+│   │   │   │   │   │   ├── e1
+│   │   │   │   │   │   │   └── 7750b40fef1de2b03a91c107a6da7b3c010dd4
+│   │   │   │   │   │   ├── e8
+│   │   │   │   │   │   │   ├── 6d43f1613b947248505ab06c0b7254cfaaf35a
+│   │   │   │   │   │   │   └── b29918fac8db2dfaba306157a39a32be357f11
+│   │   │   │   │   │   ├── f0
+│   │   │   │   │   │   │   └── 0a099834e19e8146760d16b080a4fa63532685
+│   │   │   │   │   │   ├── f4
+│   │   │   │   │   │   │   └── 16aad7cbc9704bee1cff7bb55f3011ed925078
+│   │   │   │   │   │   ├── f7
+│   │   │   │   │   │   │   └── 49318877b01bd54206f01f7dc9a08668542929
+│   │   │   │   │   │   ├── f8
+│   │   │   │   │   │   │   └── 7babdffb185e64d7056c01cf37ad079d1d6312
+│   │   │   │   │   │   ├── f9
+│   │   │   │   │   │   │   └── 811c61cbc87c66763d98d358f26e30e8a2762d
+│   │   │   │   │   │   ├── fa
+│   │   │   │   │   │   │   └── 643314276c528733395eb68d6559d8a21c25f6
+│   │   │   │   │   │   ├── ff
+│   │   │   │   │   │   │   └── c2dc6a227fed98bdd28fee2b156a0812fadb6d
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── doc
+│   │   │   │   │   └── scouter.txt
+│   │   │   │   └── plugin
+│   │   │   │       └── scouter.vim
+│   │   │   ├── vim-snippets
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-b63fff3fe2af065551945f2aaf76815b2a6c48e7.idx
+│   │   │   │   │   │       └── pack-b63fff3fe2af065551945f2aaf76815b2a6c48e7.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── LICENSE
+│   │   │   │   ├── README.md
+│   │   │   │   ├── UltiSnips
+│   │   │   │   │   ├── README
+│   │   │   │   │   ├── all.snippets
+│   │   │   │   │   ├── bib.snippets
+│   │   │   │   │   ├── bindzone.snippets
+│   │   │   │   │   ├── c.snippets
+│   │   │   │   │   ├── coffee.snippets
+│   │   │   │   │   ├── coffee_jasmine.snippets
+│   │   │   │   │   ├── cpp.snippets
+│   │   │   │   │   ├── cs.snippets
+│   │   │   │   │   ├── css.snippets
+│   │   │   │   │   ├── d.snippets
+│   │   │   │   │   ├── django.snippets
+│   │   │   │   │   ├── elixir.snippets
+│   │   │   │   │   ├── erlang.snippets
+│   │   │   │   │   ├── eruby.snippets
+│   │   │   │   │   ├── go.snippets
+│   │   │   │   │   ├── haskell.snippets
+│   │   │   │   │   ├── help.snippets
+│   │   │   │   │   ├── html.snippets
+│   │   │   │   │   ├── html_minimal.snippets
+│   │   │   │   │   ├── htmldjango.snippets
+│   │   │   │   │   ├── htmljinja.snippets
+│   │   │   │   │   ├── java.snippets
+│   │   │   │   │   ├── javascript.snippets
+│   │   │   │   │   ├── javascript_angular.snippets
+│   │   │   │   │   ├── javascript_ember.snippets
+│   │   │   │   │   ├── javascript_jasmine.snippets
+│   │   │   │   │   ├── javascript_jsdoc.snippets
+│   │   │   │   │   ├── jinja2.snippets
+│   │   │   │   │   ├── json.snippets
+│   │   │   │   │   ├── ledger.snippets
+│   │   │   │   │   ├── lhaskell.snippets
+│   │   │   │   │   ├── lua.snippets
+│   │   │   │   │   ├── mako.snippets
+│   │   │   │   │   ├── markdown.snippets
+│   │   │   │   │   ├── objc.snippets
+│   │   │   │   │   ├── ocaml.snippets
+│   │   │   │   │   ├── pandoc.snippets
+│   │   │   │   │   ├── perl.snippets
+│   │   │   │   │   ├── php.snippets
+│   │   │   │   │   ├── php_phpunit.snippets
+│   │   │   │   │   ├── php_symfony2.snippets
+│   │   │   │   │   ├── proto.snippets
+│   │   │   │   │   ├── puppet.snippets
+│   │   │   │   │   ├── python.snippets
+│   │   │   │   │   ├── r.snippets
+│   │   │   │   │   ├── rails.snippets
+│   │   │   │   │   ├── rnoweb.snippets
+│   │   │   │   │   ├── rst.snippets
+│   │   │   │   │   ├── ruby.snippets
+│   │   │   │   │   ├── rust.snippets
+│   │   │   │   │   ├── scss.snippets
+│   │   │   │   │   ├── sh.snippets
+│   │   │   │   │   ├── snippets.snippets
+│   │   │   │   │   ├── soy.snippets
+│   │   │   │   │   ├── tcl.snippets
+│   │   │   │   │   ├── tex.snippets
+│   │   │   │   │   ├── texmath.snippets
+│   │   │   │   │   ├── twig.snippets
+│   │   │   │   │   ├── vim.snippets
+│   │   │   │   │   ├── xhtml.snippets
+│   │   │   │   │   ├── xml.snippets
+│   │   │   │   │   └── zsh.snippets
+│   │   │   │   ├── addon-info.json
+│   │   │   │   ├── autoload
+│   │   │   │   │   └── vim_snippets.vim
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── vimsnippets.vim
+│   │   │   │   ├── pythonx
+│   │   │   │   │   └── vimsnippets.py
+│   │   │   │   └── snippets
+│   │   │   │       ├── _.snippets
+│   │   │   │       ├── actionscript.snippets
+│   │   │   │       ├── apache.snippets
+│   │   │   │       ├── autoit.snippets
+│   │   │   │       ├── c.snippets
+│   │   │   │       ├── chef.snippets
+│   │   │   │       ├── clojure.snippets
+│   │   │   │       ├── cmake.snippets
+│   │   │   │       ├── coffee
+│   │   │   │       │   ├── angular_coffee.snippets
+│   │   │   │       │   ├── coffee.snippets
+│   │   │   │       │   └── jquery_coffee.snippets
+│   │   │   │       ├── cpp.snippets
+│   │   │   │       ├── cs.snippets
+│   │   │   │       ├── css.snippets
+│   │   │   │       ├── dart.snippets
+│   │   │   │       ├── diff.snippets
+│   │   │   │       ├── django.snippets
+│   │   │   │       ├── dosini.snippets
+│   │   │   │       ├── elixir.snippets
+│   │   │   │       ├── erlang.snippets
+│   │   │   │       ├── eruby.snippets
+│   │   │   │       ├── falcon.snippets
+│   │   │   │       ├── go.snippets
+│   │   │   │       ├── haml.snippets
+│   │   │   │       ├── haskell.snippets
+│   │   │   │       ├── html.snippets
+│   │   │   │       ├── html_minimal.snippets
+│   │   │   │       ├── htmldjango.snippets
+│   │   │   │       ├── htmltornado.snippets
+│   │   │   │       ├── jade.snippets
+│   │   │   │       ├── java.snippets
+│   │   │   │       ├── javascript
+│   │   │   │       │   ├── javascript-jquery.snippets
+│   │   │   │       │   ├── javascript.d3.snippets
+│   │   │   │       │   └── javascript.snippets
+│   │   │   │       ├── jsp.snippets
+│   │   │   │       ├── ledger.snippets
+│   │   │   │       ├── ls.snippets
+│   │   │   │       ├── lua.snippets
+│   │   │   │       ├── make.snippets
+│   │   │   │       ├── mako.snippets
+│   │   │   │       ├── markdown.snippets
+│   │   │   │       ├── objc.snippets
+│   │   │   │       ├── openfoam.snippets
+│   │   │   │       ├── perl.snippets
+│   │   │   │       ├── php.snippets
+│   │   │   │       ├── plsql.snippets
+│   │   │   │       ├── po.snippets
+│   │   │   │       ├── processing.snippets
+│   │   │   │       ├── progress.snippets
+│   │   │   │       ├── puppet.snippets
+│   │   │   │       ├── python.snippets
+│   │   │   │       ├── r.snippets
+│   │   │   │       ├── rst.snippets
+│   │   │   │       ├── ruby.snippets
+│   │   │   │       ├── rust.snippets
+│   │   │   │       ├── scala.snippets
+│   │   │   │       ├── scheme.snippets
+│   │   │   │       ├── sh.snippets
+│   │   │   │       ├── slim.snippets
+│   │   │   │       ├── snippets.snippets
+│   │   │   │       ├── sql.snippets
+│   │   │   │       ├── tcl.snippets
+│   │   │   │       ├── tex.snippets
+│   │   │   │       ├── textile.snippets
+│   │   │   │       ├── vim.snippets
+│   │   │   │       ├── xslt.snippets
+│   │   │   │       ├── yii-chtml.snippets
+│   │   │   │       ├── yii.snippets
+│   │   │   │       └── zsh.snippets
+│   │   │   ├── vim-surround
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-fa90ddf341c2f08680ed3db4a11df11b92d9ac7f.idx
+│   │   │   │   │   │       └── pack-fa90ddf341c2f08680ed3db4a11df11b92d9ac7f.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.markdown
+│   │   │   │   ├── doc
+│   │   │   │   │   └── surround.txt
+│   │   │   │   └── plugin
+│   │   │   │       └── surround.vim
+│   │   │   ├── vim-virtualenv
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-26976c6755c18f046645cb07a390e5b121d482d2.idx
+│   │   │   │   │   │       └── pack-26976c6755c18f046645cb07a390e5b121d482d2.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.mkd
+│   │   │   │   ├── autoload
+│   │   │   │   │   └── virtualenv.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── virtualenv.txt
+│   │   │   │   └── plugin
+│   │   │   │       └── virtualenv.vim
+│   │   │   ├── vimfiler
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-fcd301ff7ffd4c0c457c6271817328d1399619e0.idx
+│   │   │   │   │   │       └── pack-fcd301ff7ffd4c0c457c6271817328d1399619e0.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   ├── filters
+│   │   │   │   │   │   │   └── matcher_vimfiler_mask.vim
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       ├── vimfiler_drive.vim
+│   │   │   │   │   │       ├── vimfiler_execute.vim
+│   │   │   │   │   │       ├── vimfiler_history.vim
+│   │   │   │   │   │       ├── vimfiler_mask.vim
+│   │   │   │   │   │       ├── vimfiler_popd.vim
+│   │   │   │   │   │       └── vimfiler_sort.vim
+│   │   │   │   │   ├── vimfiler
+│   │   │   │   │   │   ├── columns
+│   │   │   │   │   │   │   ├── size.vim
+│   │   │   │   │   │   │   ├── time.vim
+│   │   │   │   │   │   │   └── type.vim
+│   │   │   │   │   │   ├── exrename.vim
+│   │   │   │   │   │   ├── handler.vim
+│   │   │   │   │   │   ├── helper.vim
+│   │   │   │   │   │   ├── init.vim
+│   │   │   │   │   │   ├── mappings.vim
+│   │   │   │   │   │   ├── util.vim
+│   │   │   │   │   │   ├── variables.vim
+│   │   │   │   │   │   └── view.vim
+│   │   │   │   │   ├── vimfiler.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _vimfiler
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   └── List.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── Process.vim
+│   │   │   │   │   │   │   ├── System
+│   │   │   │   │   │   │   │   └── Cache.vim
+│   │   │   │   │   │   │   └── Vim
+│   │   │   │   │   │   │       ├── Buffer.vim
+│   │   │   │   │   │   │       └── Message.vim
+│   │   │   │   │   │   ├── _vimfiler.vim
+│   │   │   │   │   │   └── vimfiler.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── vimfiler.txt
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── vimfiler.vim
+│   │   │   │   ├── syntax
+│   │   │   │   │   ├── exrename.vim
+│   │   │   │   │   └── vimfiler.vim
+│   │   │   │   └── vest
+│   │   │   │       └── test-vimfiler.vim
+│   │   │   ├── vimproc
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-9b2d5d9e493a94f513efc80945fbc8b0d3afc18d.idx
+│   │   │   │   │   │       └── pack-9b2d5d9e493a94f513efc80945fbc8b0d3afc18d.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── Makefile
+│   │   │   │   ├── README.mkd
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── fakepoll.h
+│   │   │   │   │   ├── proc.c
+│   │   │   │   │   ├── proc_w32.c
+│   │   │   │   │   ├── ptytty.c
+│   │   │   │   │   ├── vimproc
+│   │   │   │   │   │   ├── cmd.vim
+│   │   │   │   │   │   ├── filepath.vim
+│   │   │   │   │   │   ├── lexer.vim
+│   │   │   │   │   │   ├── parser.vim
+│   │   │   │   │   │   └── util.vim
+│   │   │   │   │   ├── vimproc.vim
+│   │   │   │   │   ├── vimproc_mac.so
+│   │   │   │   │   └── vimstack.c
+│   │   │   │   ├── doc
+│   │   │   │   │   └── vimproc.txt
+│   │   │   │   ├── make_android.mak
+│   │   │   │   ├── make_cygwin.mak
+│   │   │   │   ├── make_mac.mak
+│   │   │   │   ├── make_mingw32.mak
+│   │   │   │   ├── make_mingw64.mak
+│   │   │   │   ├── make_msvc.mak
+│   │   │   │   ├── make_sunos.mak
+│   │   │   │   ├── make_unix.mak
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── vimproc.vim
+│   │   │   │   ├── tools
+│   │   │   │   │   ├── benchmark.vim
+│   │   │   │   │   ├── fork.py
+│   │   │   │   │   ├── leak_check.vim
+│   │   │   │   │   ├── leak_check2.vim
+│   │   │   │   │   └── update-dll-mingw.bat
+│   │   │   │   └── vest
+│   │   │   │       ├── test-fopen.vim
+│   │   │   │       ├── test-functions.vim
+│   │   │   │       ├── test-lexer.vim
+│   │   │   │       ├── test-parser.vim
+│   │   │   │       ├── test-popen.vim
+│   │   │   │       ├── test-socket.vim
+│   │   │   │       └── test-system.vim
+│   │   │   ├── vimshell
+│   │   │   │   ├── .git
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   ├── branches
+│   │   │   │   │   ├── config
+│   │   │   │   │   ├── description
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   │   └── update.sample
+│   │   │   │   │   ├── index
+│   │   │   │   │   ├── info
+│   │   │   │   │   │   └── exclude
+│   │   │   │   │   ├── logs
+│   │   │   │   │   │   ├── HEAD
+│   │   │   │   │   │   └── refs
+│   │   │   │   │   │       ├── heads
+│   │   │   │   │   │       │   └── master
+│   │   │   │   │   │       └── remotes
+│   │   │   │   │   │           └── origin
+│   │   │   │   │   │               └── HEAD
+│   │   │   │   │   ├── objects
+│   │   │   │   │   │   ├── info
+│   │   │   │   │   │   └── pack
+│   │   │   │   │   │       ├── pack-2699c3ad6735bd7fb4d2d442974d493350924bb0.idx
+│   │   │   │   │   │       └── pack-2699c3ad6735bd7fb4d2d442974d493350924bb0.pack
+│   │   │   │   │   ├── packed-refs
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       ├── remotes
+│   │   │   │   │       │   └── origin
+│   │   │   │   │       │       └── HEAD
+│   │   │   │   │       └── tags
+│   │   │   │   ├── .gitignore
+│   │   │   │   ├── README.md
+│   │   │   │   ├── autoload
+│   │   │   │   │   ├── neocomplcache
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       └── vimshell_complete.vim
+│   │   │   │   │   ├── neocomplete
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       ├── vimshell.vim
+│   │   │   │   │   │       └── vimshell_history.vim
+│   │   │   │   │   ├── unite
+│   │   │   │   │   │   ├── kinds
+│   │   │   │   │   │   │   └── vimshell_history.vim
+│   │   │   │   │   │   └── sources
+│   │   │   │   │   │       ├── vimshell_external_history.vim
+│   │   │   │   │   │       ├── vimshell_history.vim
+│   │   │   │   │   │       ├── vimshell_zsh_complete
+│   │   │   │   │   │       │   └── complete.zsh
+│   │   │   │   │   │       └── vimshell_zsh_complete.vim
+│   │   │   │   │   ├── vimshell
+│   │   │   │   │   │   ├── altercmd.vim
+│   │   │   │   │   │   ├── commands
+│   │   │   │   │   │   │   ├── alias.vim
+│   │   │   │   │   │   │   ├── bg.vim
+│   │   │   │   │   │   │   ├── build.vim
+│   │   │   │   │   │   │   ├── cd.vim
+│   │   │   │   │   │   │   ├── cdup.vim
+│   │   │   │   │   │   │   ├── clear.vim
+│   │   │   │   │   │   │   ├── dirs.vim
+│   │   │   │   │   │   │   ├── echo.vim
+│   │   │   │   │   │   │   ├── eval.vim
+│   │   │   │   │   │   │   ├── exe.vim
+│   │   │   │   │   │   │   ├── exit.vim
+│   │   │   │   │   │   │   ├── export.vim
+│   │   │   │   │   │   │   ├── galias.vim
+│   │   │   │   │   │   │   ├── gcd.vim
+│   │   │   │   │   │   │   ├── gendoc.vim
+│   │   │   │   │   │   │   ├── gexe.vim
+│   │   │   │   │   │   │   ├── h.vim
+│   │   │   │   │   │   │   ├── histdel.vim
+│   │   │   │   │   │   │   ├── history.vim
+│   │   │   │   │   │   │   ├── iexe.vim
+│   │   │   │   │   │   │   ├── less.vim
+│   │   │   │   │   │   │   ├── let.vim
+│   │   │   │   │   │   │   ├── ls.vim
+│   │   │   │   │   │   │   ├── mkcd.vim
+│   │   │   │   │   │   │   ├── nop.vim
+│   │   │   │   │   │   │   ├── open.vim
+│   │   │   │   │   │   │   ├── popd.vim
+│   │   │   │   │   │   │   ├── pwd.vim
+│   │   │   │   │   │   │   ├── repeat.vim
+│   │   │   │   │   │   │   ├── scp.vim
+│   │   │   │   │   │   │   ├── sexe.vim
+│   │   │   │   │   │   │   ├── shell.vim
+│   │   │   │   │   │   │   ├── source.vim
+│   │   │   │   │   │   │   ├── source_shellcmd.vim
+│   │   │   │   │   │   │   ├── ssh.vim
+│   │   │   │   │   │   │   ├── sudo.vim
+│   │   │   │   │   │   │   ├── texe.vim
+│   │   │   │   │   │   │   ├── time.vim
+│   │   │   │   │   │   │   ├── vexe.vim
+│   │   │   │   │   │   │   ├── view.vim
+│   │   │   │   │   │   │   ├── vim.vim
+│   │   │   │   │   │   │   ├── vimdiff.vim
+│   │   │   │   │   │   │   ├── vimsh.vim
+│   │   │   │   │   │   │   ├── whereis.vim
+│   │   │   │   │   │   │   └── which.vim
+│   │   │   │   │   │   ├── complete
+│   │   │   │   │   │   │   └── helper.vim
+│   │   │   │   │   │   ├── complete.vim
+│   │   │   │   │   │   ├── handlers.vim
+│   │   │   │   │   │   ├── help.vim
+│   │   │   │   │   │   ├── helpers.vim
+│   │   │   │   │   │   ├── history.vim
+│   │   │   │   │   │   ├── hook.vim
+│   │   │   │   │   │   ├── init.vim
+│   │   │   │   │   │   ├── int_mappings.vim
+│   │   │   │   │   │   ├── interactive.vim
+│   │   │   │   │   │   ├── mappings.vim
+│   │   │   │   │   │   ├── parser.vim
+│   │   │   │   │   │   ├── term_mappings.vim
+│   │   │   │   │   │   ├── terminal.vim
+│   │   │   │   │   │   ├── util.vim
+│   │   │   │   │   │   ├── variables.vim
+│   │   │   │   │   │   └── view.vim
+│   │   │   │   │   ├── vimshell.vim
+│   │   │   │   │   ├── vital
+│   │   │   │   │   │   ├── _vimshell
+│   │   │   │   │   │   │   ├── Data
+│   │   │   │   │   │   │   │   └── List.vim
+│   │   │   │   │   │   │   ├── Prelude.vim
+│   │   │   │   │   │   │   ├── Process.vim
+│   │   │   │   │   │   │   └── Vim
+│   │   │   │   │   │   │       └── Buffer.vim
+│   │   │   │   │   │   ├── _vimshell.vim
+│   │   │   │   │   │   └── vimshell.vital
+│   │   │   │   │   └── vital.vim
+│   │   │   │   ├── doc
+│   │   │   │   │   └── vimshell.txt
+│   │   │   │   ├── plugin
+│   │   │   │   │   └── vimshell.vim
+│   │   │   │   ├── syntax
+│   │   │   │   │   ├── vimshell.vim
+│   │   │   │   │   └── vimshrc.vim
+│   │   │   │   └── vest
+│   │   │   │       ├── commands.vim
+│   │   │   │       ├── config.vim
+│   │   │   │       └── parser.vim
+│   │   │   └── webapi-vim
+│   │   │       ├── .git
+│   │   │       │   ├── HEAD
+│   │   │       │   ├── branches
+│   │   │       │   ├── config
+│   │   │       │   ├── description
+│   │   │       │   ├── hooks
+│   │   │       │   │   ├── applypatch-msg.sample
+│   │   │       │   │   ├── commit-msg.sample
+│   │   │       │   │   ├── post-update.sample
+│   │   │       │   │   ├── pre-applypatch.sample
+│   │   │       │   │   ├── pre-commit.sample
+│   │   │       │   │   ├── pre-push.sample
+│   │   │       │   │   ├── pre-rebase.sample
+│   │   │       │   │   ├── prepare-commit-msg.sample
+│   │   │       │   │   └── update.sample
+│   │   │       │   ├── index
+│   │   │       │   ├── info
+│   │   │       │   │   └── exclude
+│   │   │       │   ├── logs
+│   │   │       │   │   ├── HEAD
+│   │   │       │   │   └── refs
+│   │   │       │   │       ├── heads
+│   │   │       │   │       │   └── master
+│   │   │       │   │       └── remotes
+│   │   │       │   │           └── origin
+│   │   │       │   │               └── HEAD
+│   │   │       │   ├── objects
+│   │   │       │   │   ├── info
+│   │   │       │   │   └── pack
+│   │   │       │   │       ├── pack-e63ae56c4b1591736c0698a9eb75b805cb7caa69.idx
+│   │   │       │   │       └── pack-e63ae56c4b1591736c0698a9eb75b805cb7caa69.pack
+│   │   │       │   ├── packed-refs
+│   │   │       │   └── refs
+│   │   │       │       ├── heads
+│   │   │       │       │   └── master
+│   │   │       │       ├── remotes
+│   │   │       │       │   └── origin
+│   │   │       │       │       └── HEAD
+│   │   │       │       └── tags
+│   │   │       ├── .gitignore
+│   │   │       ├── Makefile
+│   │   │       ├── README.md
+│   │   │       ├── autoload
+│   │   │       │   └── webapi
+│   │   │       │       ├── atom.vim
+│   │   │       │       ├── base64.vim
+│   │   │       │       ├── bit.vim
+│   │   │       │       ├── feed.vim
+│   │   │       │       ├── hmac.vim
+│   │   │       │       ├── html.vim
+│   │   │       │       ├── http.vim
+│   │   │       │       ├── json.vim
+│   │   │       │       ├── jsonrpc.vim
+│   │   │       │       ├── metaWeblog.vim
+│   │   │       │       ├── oauth.vim
+│   │   │       │       ├── sha1.vim
+│   │   │       │       ├── soap.vim
+│   │   │       │       ├── ucs.vim
+│   │   │       │       ├── xml.vim
+│   │   │       │       └── xmlrpc.vim
+│   │   │       ├── doc
+│   │   │       │   ├── webapi-html.txt
+│   │   │       │   ├── webapi-http.txt
+│   │   │       │   ├── webapi-json.txt
+│   │   │       │   ├── webapi-xml.txt
+│   │   │       │   └── webapi.txt
+│   │   │       ├── example
+│   │   │       │   ├── gistview.vim
+│   │   │       │   ├── google-buzz.vim
+│   │   │       │   ├── hatenadiary.vim
+│   │   │       │   ├── jugem.vim
+│   │   │       │   ├── livedoor.vim
+│   │   │       │   ├── rss.vim
+│   │   │       │   ├── twitter.vim
+│   │   │       │   └── weather.vim
+│   │   │       └── webapi.vim.vimup
+│   │   ├── colors
+│   │   │   ├── adrian.vim
+│   │   │   └── louver.vim
+│   │   ├── neobundle.vim
+│   │   │   ├── .git
+│   │   │   │   ├── HEAD
+│   │   │   │   ├── branches
+│   │   │   │   ├── config
+│   │   │   │   ├── description
+│   │   │   │   ├── hooks
+│   │   │   │   │   ├── applypatch-msg.sample
+│   │   │   │   │   ├── commit-msg.sample
+│   │   │   │   │   ├── post-update.sample
+│   │   │   │   │   ├── pre-applypatch.sample
+│   │   │   │   │   ├── pre-commit.sample
+│   │   │   │   │   ├── pre-push.sample
+│   │   │   │   │   ├── pre-rebase.sample
+│   │   │   │   │   ├── prepare-commit-msg.sample
+│   │   │   │   │   └── update.sample
+│   │   │   │   ├── index
+│   │   │   │   ├── info
+│   │   │   │   │   └── exclude
+│   │   │   │   ├── logs
+│   │   │   │   │   ├── HEAD
+│   │   │   │   │   └── refs
+│   │   │   │   │       ├── heads
+│   │   │   │   │       │   └── master
+│   │   │   │   │       └── remotes
+│   │   │   │   │           └── origin
+│   │   │   │   │               └── HEAD
+│   │   │   │   ├── objects
+│   │   │   │   │   ├── info
+│   │   │   │   │   └── pack
+│   │   │   │   │       ├── pack-101fe9bd47cc8d6d9174f555069976e9081b9a90.idx
+│   │   │   │   │       └── pack-101fe9bd47cc8d6d9174f555069976e9081b9a90.pack
+│   │   │   │   ├── packed-refs
+│   │   │   │   └── refs
+│   │   │   │       ├── heads
+│   │   │   │       │   └── master
+│   │   │   │       ├── remotes
+│   │   │   │       │   └── origin
+│   │   │   │       │       └── HEAD
+│   │   │   │       └── tags
+│   │   │   ├── .gitignore
+│   │   │   ├── LICENSE-MIT.txt
+│   │   │   ├── README.md
+│   │   │   ├── autoload
+│   │   │   │   ├── neobundle
+│   │   │   │   │   ├── autoload.vim
+│   │   │   │   │   ├── cache.vim
+│   │   │   │   │   ├── commands.vim
+│   │   │   │   │   ├── config.vim
+│   │   │   │   │   ├── init.vim
+│   │   │   │   │   ├── installer.vim
+│   │   │   │   │   ├── parser.vim
+│   │   │   │   │   ├── sources
+│   │   │   │   │   │   ├── github.vim
+│   │   │   │   │   │   ├── neobundle_vim_recipes.vim
+│   │   │   │   │   │   └── vim_scripts_org.vim
+│   │   │   │   │   ├── types
+│   │   │   │   │   │   ├── git.vim
+│   │   │   │   │   │   ├── hg.vim
+│   │   │   │   │   │   ├── nosync.vim
+│   │   │   │   │   │   ├── raw.vim
+│   │   │   │   │   │   └── svn.vim
+│   │   │   │   │   ├── util.vim
+│   │   │   │   │   └── vamkr.vim
+│   │   │   │   ├── neobundle.vim
+│   │   │   │   └── unite
+│   │   │   │       ├── kinds
+│   │   │   │       │   └── neobundle.vim
+│   │   │   │       └── sources
+│   │   │   │           ├── neobundle.vim
+│   │   │   │           ├── neobundle_install.vim
+│   │   │   │           ├── neobundle_lazy.vim
+│   │   │   │           ├── neobundle_log.vim
+│   │   │   │           └── neobundle_search.vim
+│   │   │   ├── bin
+│   │   │   │   ├── install.sh
+│   │   │   │   ├── neoinstall
+│   │   │   │   ├── neoinstall.bat
+│   │   │   │   └── neoinstall_novimproc.bat
+│   │   │   ├── doc
+│   │   │   │   └── neobundle.txt
+│   │   │   ├── ftdetect
+│   │   │   │   └── vimrecipe.vim
+│   │   │   ├── plugin
+│   │   │   │   └── neobundle.vim
+│   │   │   ├── syntax
+│   │   │   │   └── vimrecipe.vim
+│   │   │   ├── test
+│   │   │   │   ├── readme.md
+│   │   │   │   ├── vimrc
+│   │   │   │   ├── vimrc2
+│   │   │   │   ├── vimrc3
+│   │   │   │   └── vimrc4
+│   │   │   └── vest
+│   │   │       ├── test-parse.vim
+│   │   │       └── test-tsort.vim
+│   │   ├── plugin
+│   │   │   └── sqlutil_700
+│   │   │       ├── autoload
+│   │   │       │   └── SQLUtilities.vim
+│   │   │       ├── doc
+│   │   │       │   └── SQLUtilities.txt
+│   │   │       └── plugin
+│   │   │           └── SQLUtilities.vim
+│   │   └── template
+│   │       └── python.txt
+│   └── .vimrc
+├── setup.bat
+├── setup.sh
+└── tree.txt
+
+1329 directories, 2635 files
