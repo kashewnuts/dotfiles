@@ -5,9 +5,7 @@ DOT_FILES=(
     .vimrc            \
     .gvimrc           \
     .hgrc             \
-    .hgignore_global  \
     .gitconfig        \
-    .gitignore_global \
     .bashrc           \
     .bash_profile     \
     .pythonstartup    \

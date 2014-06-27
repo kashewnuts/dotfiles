@@ -327,6 +327,7 @@ set backspace=indent,eol,start         " Can erase everything in the back space
 set wildmenu wildmode=list:full        " Command-line completion
 set clipboard+=unnamed,autoselect      " Use the OS clipboard
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+set vb t_vb=                           " mute the beep
 " }}}
 
 " Visualize character {{{
@@ -461,7 +462,7 @@ if has('autocmd')
   autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
 endif
 " Automatic recognition of the line feed code
-"set fileformats=unix,dos,mac
+"set fileformats=unix,mac,dos
 " Cursor position to prevent misalignment even if character of □ or ○
 if exists('&ambiwidth')
   set ambiwidth=double

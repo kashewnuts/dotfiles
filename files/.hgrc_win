@@ -1,6 +1,6 @@
 [ui]
 username=kashewnuts <bjzli.m08vo9kqs@gmail.com>
-ignore=~/.hgignore_global
+ignore=~/.hgignore
 editor=vim
 ssh = "C:\Program Files (x86)\Git\bin\ssh.exe" -C
 
