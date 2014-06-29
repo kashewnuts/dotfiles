@@ -21,8 +21,10 @@ install brew-cask
 # .dmg
 cask install google-chrome
 cask install iterm2
-cask install virtualbox
+cask install onyx
+cask install tinkertool
 cask install vagrant
+cask install virtualbox
 cask install xtrafinder
 
 # Remove outdated versions
