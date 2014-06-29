@@ -10,7 +10,7 @@
 " ------------------------------------------------------------------------------
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 set nocompatible        " Be iMproved
-set guioptions+=M       " Don't read menu.vim
+" set guioptions+=M       " Don't read menu.vim
 
 " Encoding
 set encoding=utf-8
@@ -176,7 +176,8 @@ else
 
   " Gmail plugin {{{
   " -------------------------------------------------
-  NeoBundleLazy "yuratomo/gmail.vim", { "autoload": { "commands": ["Gmail"] }}
+  " NeoBundleLazy "yuratomo/gmail.vim", { "autoload": { "commands": ["Gmail"] }}
+  NeoBundleLazy "kashewnuts/gmail.vim", { "autoload": { "commands": ["Gmail"] }}
   " }}}
 
 
