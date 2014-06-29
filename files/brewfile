@@ -1,0 +1,29 @@
+# Make sure using latest Homebrew
+update
+
+# Update already-installed formula (takes too much time, I will do it manually later)
+# upgrade
+
+# Add Repository
+tap homebrew/versions || true
+tap phinze/homebrew-cask || true
+tap homebrew/binary || true
+tap sonots/mycask || true
+
+# Packages
+
+install git
+install ctags
+install wget
+install tree
+install brew-cask
+
+# .dmg
+cask install google-chrome
+cask install iterm2
+cask install virtualbox
+cask install vagrant
+cask install xtrafinder
+
+# Remove outdated versions
+cleanup
