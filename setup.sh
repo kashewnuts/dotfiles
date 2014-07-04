@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
 DOT_FILES=(
-    .vim              \
-    .vimrc            \
-    .gvimrc           \
-    .hgrc             \
-    .gitconfig        \
-    .bashrc           \
-    .bash_profile     \
-    .pythonstartup    \
+    .bash_profile        \
+    .bashrc              \
+    .git-completion.bash \
+    .git-prompt.sh       \
+    .gitconfig           \
+    .gvimrc              \
+    .hgrc                \
+    .pythonstartup       \
+    .vim                 \
+    .vimrc               \
 )
 
 for file in ${DOT_FILES[@]}

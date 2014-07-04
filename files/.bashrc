@@ -8,6 +8,12 @@ export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
 # crontab
 alias crontab='crontab -i'
 
+# git-comletion.bash
+source ~/.git-prompt.sh
+source ~/.git-completion.bash
+GIT_PS1_SHOWDIRTYSTATE=true
+export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+
 case "$OSTYPE" in
     # BSD (contains Mac)
     darwin*)
