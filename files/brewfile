@@ -17,6 +17,8 @@ install ctags
 install wget
 install tree
 install brew-cask
+install python
+install python3
 
 # .dmg
 cask install google-chrome
