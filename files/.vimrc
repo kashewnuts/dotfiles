@@ -162,6 +162,8 @@ else
   NeoBundleLazy "mrtazz/simplenote.vim", { "autoload": { "commands": ["Simplenote"] }}
   NeoBundleLazy "mattn/emmet-vim", {
     \ "autoload": { "filetypes": ["html", "ruby", "php", "css", "haml", "xml"] }}
+  NeoBundleLazy "vim-scripts/SQLUtilities", {
+    \ "depends" : ["Align"], "autoload": { "commands": ["SQLUFormatter"] }}
   " }}}
 
   " Twitter plugins {{{
