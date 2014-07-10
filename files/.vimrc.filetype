@@ -1,0 +1,37 @@
+" FileType {{{
+
+" ts   : tabstop
+" sw   : shiftwidth
+" sts  : softtabstop
+" et   : expandtab
+" noet : noexpandtab
+" si   : smartindent
+" cinw : cinwords
+autocmd MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
+autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
+autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+" When the '#' character in the first line of the newly created, it isn't unindent
+autocmd MyAutoCmd FileType python inoremap # X#
+autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
+" }}}
+
+" Cheerless cursor position is moved {{{
+function! s:remove_dust()
+  let cursor = getpos(".")
+  %s/\s\+$//ge          " Remove trailing whitespace on save
+  %s/\t/  /ge           " Converted to 2 whitespace tab when you save
+  call setpos(".", cursor)
+  unlet cursor
+endfunction
+autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
+" }}}
+
+" vim: expandtab softtabstop=2 shiftwidth=2

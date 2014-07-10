@@ -10,10 +10,14 @@
 let s:is_windows = has("win16") || has("win32") || has("win64")
 let s:is_darwin = has("mac") || has("macunix") || has("gui_macvim")
 
-colorscheme adrian
-
+" guioptions
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
+
+" Font
+if s:is_windows
+  set guifont=MS_Gothic:h10
+endif
 " }}}
 
 " Hack #120: Store the location and size of the window by gVim {{{
@@ -60,4 +64,3 @@ if filereadable(s:localrc)
 endif " }}}
 
 " vim: expandtab softtabstop=2 shiftwidth=2
-" vim: foldmethod=marker
