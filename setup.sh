@@ -30,9 +30,10 @@ if [ ! -e $HOME/.vim/neobundle.vim -a -x "`which git`" ]; then
 fi
 
 # Set Symbolic Link .gitconfig.os
-if [ -a $HOME/.gitconfig.os ]; then
-  echo "Already exists file: $file"
+GITCONFIGOS=.gitconfig.os
+if [ -a $HOME/${GITCONFIGOS} ]; then
+  echo "Already exists file: ${GITCONFIGOS}"
 else
-  ln -s $HOME/dotfiles/.gitconfig.unix $HOME/.gitconfig.os
-  echo "Put Symbolic Link: $file"
+  ln -s $HOME/dotfiles/.gitconfig.unix $HOME/${GITCONFIGOS}
+  echo "Put Symbolic Link: ${GITCONFIGOS}"
 fi
