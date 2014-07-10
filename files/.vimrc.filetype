@@ -34,4 +34,4 @@ autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
 " }}}
 
-" vim: expandtab softtabstop=2 shiftwidth=2
+" vim: expandtab softtabstop=2 shiftwidth=2 ft=vim

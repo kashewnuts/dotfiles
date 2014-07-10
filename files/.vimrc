@@ -30,4 +30,4 @@ call s:load_source(expand('~/dotfiles/files/.vimrc.misc'))
 " Local
 call s:load_source(expand('~/.vimrc.local'))
 
-" vim: expandtab softtabstop=2 shiftwidth=2
+" vim: expandtab softtabstop=2 shiftwidth=2 ft=vim

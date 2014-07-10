@@ -291,4 +291,4 @@ else
   NeoBundleCheck                  " Installation check.
 endif " }}}
 
-" vim: expandtab softtabstop=2 shiftwidth=2
+" vim: expandtab softtabstop=2 shiftwidth=2 ft=vim
