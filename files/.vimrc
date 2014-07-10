@@ -332,7 +332,7 @@ set smartindent    " Advanced automatic indentation when you made the new line
 set showmatch      " When the brackets is entered closed, to view the matching brackets
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
-set noexpandtab    " noexpand tabs to spaces (expandtab: expand)
+set expandtab      " noexpand tabs to spaces (expandtab: expand)
 set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
 set matchpairs& matchpairs+=<:>        " To support brackets add a pair of '<' and '>'
@@ -347,7 +347,7 @@ set vb t_vb=                           " mute the beep
 if s:env.is_windows
   set list listchars=tab:>-,trail:-,extends:>,precedes:<
 else
-  set imdisable         " When you exit or enter, IME is turned off
+  set imdisable    " When you exit or enter, IME is turned off
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 endif
 " }}}
@@ -381,8 +381,10 @@ autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
 autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
 autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
+autocmd MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
 " When the '#' character in the first line of the newly created, it isn't unindent
 autocmd MyAutoCmd FileType python inoremap # X#
