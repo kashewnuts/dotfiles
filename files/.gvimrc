@@ -13,13 +13,6 @@ let s:env = VimrcEnvironment()
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
 
-" ColorScheme
-if s:env.is_windows
-  colorscheme louver
-else
-  colorscheme adrian
-endif
-
 " Font
 if s:env.is_windows
   set guifont=MS_Gothic:h10

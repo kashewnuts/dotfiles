@@ -10,7 +10,6 @@
 " ------------------------------------------------------------------------------
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 set nocompatible        " Be iMproved
-" set guioptions+=M       " Don't read menu.vim
 
 " Encoding
 set encoding=utf-8
@@ -355,10 +354,17 @@ endif
 
 " ColorScheme {{{
 if s:env.is_windows
-  colorscheme louver
+  let s:colorscheme = 'louver'
 else
-  colorscheme adrian
-endif " }}}
+  let s:colorscheme = 'adrian'
+endif
+
+if !has('gui_running')
+  execute printf('colorscheme %s', s:colorscheme)
+else
+  execute printf('autocmd MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
+endif
+" }}}
 
 " FileType {{{
 
