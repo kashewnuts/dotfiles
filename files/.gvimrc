@@ -7,15 +7,21 @@
 " ==============================================================================
 
 " Basic Settings {{{
-let s:is_windows = has("win16") || has("win32") || has("win64")
-let s:is_darwin = has("mac") || has("macunix") || has("gui_macvim")
+let s:env = VimrcEnvironment()
 
 " guioptions
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
 
+" ColorScheme
+if s:env.is_windows
+  colorscheme louver
+else
+  colorscheme adrian
+endif
+
 " Font
-if s:is_windows
+if s:env.is_windows
   set guifont=MS_Gothic:h10
 endif
 " }}}
@@ -41,7 +47,7 @@ endif
 " }}}
 
 " IME setting {{{
-if has("multi byte_ime") || has("xim") || has("gui_macvim")
+if s:env.is_ime
   " Insert , Search mode: ime setting
   set iminsert=2
   set imsearch=2
@@ -50,10 +56,10 @@ if has("multi byte_ime") || has("xim") || has("gui_macvim")
 endif " }}}
 
 " Semitransparency {{{
-if s:is_windows
+if s:env.is_windows
   gui
   set transparency=220
-elseif s:is_darwin
+elseif s:env.is_darwin
   set transparency=20
 endif " }}}
 
@@ -63,4 +69,4 @@ if filereadable(s:localrc)
   source ~/.gvimrc.local
 endif " }}}
 
-" vim: expandtab softtabstop=2 shiftwidth=2
+" vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
