@@ -6,14 +6,16 @@
 " NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
-" Basic Settings {{{
+" Env {{{
 let s:env = VimrcEnvironment()
+" }}}
 
-" guioptions
+" guioptions {{{
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
+" }}}
 
-" Font
+" Font {{{
 if s:env.is_windows
   set guifont=MS_Gothic:h10
 endif
