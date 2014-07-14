@@ -180,10 +180,11 @@ else
   " Twitter plugins {{{
   " -------------------------------------------------
   NeoBundleLazy "basyura/TweetVim", {
-    \ "depends": ["basyura/twibill.vim", "tyru/open-browser.vim", "mattn/webapi-vim",
-    \             "h1mesuke/unite-outline", "basyura/bitly.vim", "mattn/favstar-vim"],
+    \ "depends": [
+    \   "basyura/twibill.vim", "tyru/open-browser.vim", "mattn/webapi-vim",
+    \   "h1mesuke/unite-outline", "basyura/bitly.vim", "mattn/favstar-vim"],
     \ "autoload": {
-    \   "commands": ["TweetVimHomeTimeline", "TweetVimSay", "TweetVimListStatus", 
+    \   "commands": ["TweetVimHomeTimeline", "TweetVimSay", "TweetVimListStatus",
     \                "TweetVimSearch"], }}
   " }}}
 
@@ -320,6 +321,12 @@ else
   " gmail.vim {{{
   if s:bundled("gmail.vim")
     call s:load_source(expand('~/.anyname'))
+  endif " }}}
+
+  " TweetVim {{{
+  if s:bundled("TweetVim")
+    let g:tweetvim_display_time = 1
+    let g:tweetvim_async_post = 1
   endif " }}}
 
   filetype plugin indent on       " Required!
