@@ -174,6 +174,7 @@ else
     \ "autoload": { "filetypes": ["html", "ruby", "php", "css", "haml", "xml"] }}
   NeoBundleLazy "vim-scripts/SQLUtilities", {
     \ "depends" : ["Align"], "autoload": { "commands": ["SQLUFormatter"] }}
+  " NeoBundle "kana/vim-textobj-line"
   " }}}
 
   " Twitter plugins {{{
@@ -329,7 +330,7 @@ endif " }}}
 syntax on          " Enable syntax highlighting
 set number         " Show line number (nonumber: Hide)
 set smartindent    " Advanced automatic indentation when you made the new line
-set showmatch      " When the brackets is entered closed, to view the matching brackets
+set showmatch      " The highlight matching brackets
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
@@ -338,9 +339,9 @@ set smarttab       " Indent by the number of 'shiftwidth'.
 set vb t_vb=       " mute the beep
 set history=1000   " history
 set textwidth=0    " Disable new line to enter automatically
-set matchpairs& matchpairs+=<:>        " To support brackets add a pair of '<' and '>'
-set backspace=indent,eol,start         " Can erase everything in the back space
-set wildmenu wildmode=list:full        " Command-line completion
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set backspace=indent,eol,start  " Can erase everything in the back space
+set wildmenu wildmode=list:full " Command-line completion
 set clipboard+=unnamed,autoselect      " Use the OS clipboard
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 " }}}
@@ -388,7 +389,8 @@ autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
 autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
 autocmd MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
 autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
-" When the '#' character in the first line of the newly created, it isn't unindent
+" When the '#' character in the first line of the newly created, 
+" it isn't unindent
 autocmd MyAutoCmd FileType python inoremap # X#
 autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
 " }}}
@@ -413,7 +415,8 @@ nnoremap <silent> <S-Right> :5wincmd ><CR>
 nnoremap <silent> <S-Up>    :5wincmd -<CR>
 nnoremap <silent> <S-Down>  :5wincmd +<CR>
 
-" When you move in the search results, and in the center of the screen that position.
+" When you move in the search results, 
+" and in the center of the screen that position.
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
