@@ -188,10 +188,11 @@ else
     \                "TweetVimSearch"], }}
   " }}}
 
-  " Gmail plugin {{{
+  " Google plugin {{{
   " -------------------------------------------------
   " NeoBundleLazy "yuratomo/gmail.vim", { "autoload": { "commands": ["Gmail"] }}
   NeoBundleLazy "kashewnuts/gmail.vim", { "autoload": { "commands": ["Gmail"] }}
+  NeoBundleLazy "itchyny/calendar.vim", { "autoload": { "commands": ["Calendar"] }}
   " }}}
 
 
@@ -329,6 +330,13 @@ else
     let g:tweetvim_async_post = 1
   endif " }}}
 
+  " TweetVim {{{
+  if s:bundled("calendar.vim")
+    let g:calendar_frame = 'default'
+    let g:calendar_google_calendar = 1
+    let g:calendar_google_task = 1
+  endif " }}}
+
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
 endif " }}}
@@ -413,6 +421,10 @@ endfunction
 autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
 autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
+" }}}
+
+" Grep {{{
+autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 " }}}
 
 " KeyMaping {{{
