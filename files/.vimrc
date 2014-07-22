@@ -312,11 +312,11 @@ else
 
   " emmet-vim {{{
   if s:bundled("emmet-vim")
-  let g:user_emmet_settings = {
-  \  "php" : { "extends" : "html", "filters" : "c", },
-  \  "xml" : { "extends" : "html", },
-  \  "haml": { "extends" : "html", },
-  \}
+    let g:user_emmet_settings = {
+    \  "php" : { "extends" : "html", "filters" : "c", },
+    \  "xml" : { "extends" : "html", },
+    \  "haml": { "extends" : "html", },
+    \ }
   endif " }}}
 
   " gmail.vim {{{
