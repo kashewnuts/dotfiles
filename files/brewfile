@@ -19,6 +19,8 @@ install tree
 install brew-cask
 
 # .dmg
+cask install appcleaner
+cask install dropbox
 cask install google-chrome
 cask install iterm2
 cask install onyx

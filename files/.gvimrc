@@ -18,6 +18,8 @@ set guioptions-=m  " Disable Menu bar
 " Font {{{
 if s:env.is_windows
   set guifont=MS_Gothic:h10
+elseif s:env.is_darwin
+  set guifont=Osaka-Mono:h14
 endif
 " }}}
 

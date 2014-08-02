@@ -185,7 +185,7 @@ else
     \   "h1mesuke/unite-outline", "basyura/bitly.vim", "mattn/favstar-vim"],
     \ "autoload": {
     \   "commands": ["TweetVimHomeTimeline", "TweetVimSay", "TweetVimListStatus",
-    \                "TweetVimSearch"], }}
+    \                "TweetVimSearch", "TweetVimMentions"], }}
   " }}}
 
   " Gmail plugin {{{
@@ -346,6 +346,7 @@ set smarttab       " Indent by the number of 'shiftwidth'.
 set vb t_vb=       " mute the beep
 set history=1000   " history
 set textwidth=0    " Disable new line to enter automatically
+set wrap
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
