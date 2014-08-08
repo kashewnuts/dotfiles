@@ -185,7 +185,7 @@ else
     \   "h1mesuke/unite-outline", "basyura/bitly.vim", "mattn/favstar-vim"],
     \ "autoload": {
     \   "commands": ["TweetVimHomeTimeline", "TweetVimSay", "TweetVimListStatus",
-    \                "TweetVimSearch"], }}
+    \                "TweetVimSearch", "TweetVimMentions"], }}
   " }}}
 
   " Google plugin {{{
@@ -351,14 +351,19 @@ set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
 set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
-set vb t_vb=       " mute the beep
 set history=1000   " history
 set textwidth=0    " Disable new line to enter automatically
+set ruler
+set hlsearch       " highlight search terms
+set ignorecase
+set incsearch
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
 set clipboard+=unnamed,autoselect      " Use the OS clipboard
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+" disable annoying errorbells and visual bell completely
+set noerrorbells novisualbell t_vb=
 " }}}
 
 " Visualize character {{{
@@ -371,11 +376,7 @@ endif
 " }}}
 
 " ColorScheme {{{
-if s:env.is_windows
-  let s:colorscheme = 'louver'
-else
-  let s:colorscheme = 'adrian'
-endif
+let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
 
 if !has('gui_running')
   execute printf('colorscheme %s', s:colorscheme)
@@ -540,6 +541,13 @@ autocmd MyAutoCmd BufWritePre *.go Fmt
 " Don't make *.un~ files {{{
 if exists('&undofile')
   set noundofile
+endif "}}}
+
+" breakindent {{{
+if v:version >= 704 && has('patch338')
+  " https://github.com/vim-jp/issues/issues/114
+  " http://ftp.vim.org/vim/patches/7.4/7.4.338
+  set breakindent
 endif "}}}
 
 " Display full-width space {{{
