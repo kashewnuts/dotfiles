@@ -32,6 +32,231 @@ endfunction
 let s:env = VimrcEnvironment()
 " }}}
 
+" Misc {{{
+syntax on          " Enable syntax highlighting
+set number         " Show line number (nonumber: Hide)
+set smartindent    " Advanced automatic indentation when you made the new line
+set showmatch      " The highlight matching brackets
+set tabstop=4      " Width on the screen of the tab
+set softtabstop=4  " Number of spaces in the file space is the corresponding
+set expandtab      " noexpand tabs to spaces (expandtab: expand)
+set shiftwidth=4   " Shift move width
+set smarttab       " Indent by the number of 'shiftwidth'.
+set history=1000   " history
+set textwidth=0    " Disable new line to enter automatically
+set ruler          " show the current row and column
+set hlsearch       " highlight searches
+set incsearch      " do incremental searching
+set showmatch      " jump to matches when entering regexp
+set ignorecase     " ignore case when searching
+set smartcase      " no ignorecase if Uppercase char present
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set backspace=indent,eol,start  " Can erase everything in the back space
+set wildmenu wildmode=list:full " Command-line completion
+set clipboard+=unnamed,autoselect      " Use the OS clipboard
+set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+" disable annoying errorbells and visual bell completely
+set noerrorbells novisualbell t_vb=
+" }}}
+
+" Visualize character {{{
+if s:env.is_windows
+  set list listchars=tab:>-,trail:-,extends:>,precedes:<
+else
+  set imdisable    " When you exit or enter, IME is turned off
+  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+endif
+" }}}
+
+" ColorScheme {{{
+let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
+if !has('gui_running')
+  execute printf('colorscheme %s', s:colorscheme)
+else
+  execute printf('autocmd MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
+endif
+" }}}
+
+" FileType {{{
+
+" ts   : tabstop
+" sw   : shiftwidth
+" sts  : softtabstop
+" et   : expandtab
+" noet : noexpandtab
+" si   : smartindent
+" cinw : cinwords
+autocmd MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
+autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
+autocmd MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
+autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
+autocmd MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
+autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+" When the '#' character in the first line of the newly created, 
+" it isn't unindent
+autocmd MyAutoCmd FileType python inoremap # X#
+autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
+" }}}
+
+" Cheerless cursor position is moved {{{
+function! s:remove_dust()
+  let cursor = getpos(".")
+  %s/\s\+$//ge          " Remove trailing whitespace on save
+  %s/\t/  /ge           " Converted to 2 whitespace tab when you save
+  call setpos(".", cursor)
+  unlet cursor
+endfunction
+autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
+autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
+" }}}
+
+" Grep {{{
+autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
+" }}}
+
+" KeyMaping {{{
+" Adjust the window size to the window time-division. Shift + arrow key.
+nnoremap <silent> <S-Left>  :5wincmd <<CR>
+nnoremap <silent> <S-Right> :5wincmd ><CR>
+nnoremap <silent> <S-Up>    :5wincmd -<CR>
+nnoremap <silent> <S-Down>  :5wincmd +<CR>
+
+" When you move in the search results, 
+" and in the center of the screen that position.
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" Turn off the highlight by pressing twice the ESC.
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+" Escape automatically according to the situation question and backslash.
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+
+" Even text wrapping movement by j or k, is modified to act naturally.
+nnoremap j gj
+nnoremap k gk
+" }}}
+
+" Open the file to force the specified character code. {{{
+command! Cp932 edit ++enc=cp932
+command! Eucjp edit ++enc=euc-jp
+command! Iso2022jp edit ++enc=iso-2022-jp
+command! Utf8 edit ++enc=utf-8
+command! Jis Iso2022jp
+command! Sjis Cp932
+" }}}
+
+" Automatic recognition of character code {{{
+if &encoding !=# 'utf-8'
+  set encoding=japan
+  set fileencoding=japan
+endif
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  " Check iconv are aware of eucJP-ms
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'eucjp-ms'
+    let s:enc_jis = 'iso-2022-jp-3'
+  " Check iconv are aware of JISX0213
+  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'euc-jisx0213'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+  " Construct fileencodings
+  if &encoding ==# 'utf-8'
+    let s:fileencodings_default = &fileencodings
+    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+    let &fileencodings = &fileencodings .','. s:fileencodings_default
+    unlet s:fileencodings_default
+  else
+    let &fileencodings = &fileencodings .','. s:enc_jis
+    set fileencodings+=utf-8,ucs-2le,ucs-2
+    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+      set fileencodings+=cp932
+      set fileencodings-=euc-jp
+      set fileencodings-=euc-jisx0213
+      set fileencodings-=eucjp-ms
+      let &encoding = s:enc_euc
+      let &fileencoding = s:enc_euc
+    else
+      let &fileencodings = &fileencodings .','. s:enc_euc
+    endif
+  endif
+  " dispose the constant
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+" If don't include the Japanese, use the encoding to fileencoding
+if has('autocmd')
+  function! AU_ReCheck_FENC()
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding=&encoding
+    endif
+  endfunction
+  autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
+endif
+" Automatic recognition of the line feed code
+"set fileformats=unix,mac,dos
+" Cursor position to prevent misalignment even if character of □ or ○
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif " }}}
+
+" Golang settings {{{
+if $GOROOT != ''
+  set rtp+=$GOROOT/misc/vim
+  set completeopt=menu,preview
+  if $GOPATH != ''
+    " gocode
+    exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+    " golint
+    exe "set rtp+=".globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
+  endif
+  " grep
+  set grepprg=jvgrep
+endif
+autocmd MyAutoCmd BufWritePre *.go Fmt
+" }}}
+
+" Don't make *.un~ files {{{
+if exists('&undofile')
+  set noundofile
+endif "}}}
+
+" breakindent {{{
+if v:version >= 704 && has('patch338')
+  " https://github.com/vim-jp/issues/issues/114
+  " http://ftp.vim.org/vim/patches/7.4/7.4.338
+  set breakindent
+endif "}}}
+
+" Display full-width space {{{
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=DarkGray
+endfunction
+
+if has('syntax')
+  augroup ZenkakuSpace
+    autocmd!
+    autocmd ColorScheme * call ZenkakuSpace()
+    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+  augroup END
+  call ZenkakuSpace()
+endif
+" }}}
+
 " NeoBundle {{{
 " ------------------------------------------------------------------------------
 let s:noplugin     = 0
@@ -340,223 +565,6 @@ else
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
 endif " }}}
-
-" Misc {{{
-syntax on          " Enable syntax highlighting
-set number         " Show line number (nonumber: Hide)
-set smartindent    " Advanced automatic indentation when you made the new line
-set showmatch      " The highlight matching brackets
-set tabstop=4      " Width on the screen of the tab
-set softtabstop=4  " Number of spaces in the file space is the corresponding
-set expandtab      " noexpand tabs to spaces (expandtab: expand)
-set shiftwidth=4   " Shift move width
-set smarttab       " Indent by the number of 'shiftwidth'.
-set vb t_vb=       " mute the beep
-set history=1000   " history
-set textwidth=0    " Disable new line to enter automatically
-set wrap
-set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
-set backspace=indent,eol,start  " Can erase everything in the back space
-set wildmenu wildmode=list:full " Command-line completion
-set clipboard+=unnamed,autoselect      " Use the OS clipboard
-set noswapfile nobackup nowritebackup  " doesn't generate a backup file
-" }}}
-
-" Visualize character {{{
-if s:env.is_windows
-  set list listchars=tab:>-,trail:-,extends:>,precedes:<
-else
-  set imdisable    " When you exit or enter, IME is turned off
-  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-endif
-" }}}
-
-" ColorScheme {{{
-if s:env.is_windows
-  let s:colorscheme = 'louver'
-else
-  let s:colorscheme = 'adrian'
-endif
-
-if !has('gui_running')
-  execute printf('colorscheme %s', s:colorscheme)
-else
-  execute printf('autocmd MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
-endif
-" }}}
-
-" FileType {{{
-
-" ts   : tabstop
-" sw   : shiftwidth
-" sts  : softtabstop
-" et   : expandtab
-" noet : noexpandtab
-" si   : smartindent
-" cinw : cinwords
-autocmd MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
-autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
-autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
-autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
-autocmd MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
-autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
-" When the '#' character in the first line of the newly created, 
-" it isn't unindent
-autocmd MyAutoCmd FileType python inoremap # X#
-autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
-" }}}
-
-" Cheerless cursor position is moved {{{
-function! s:remove_dust()
-  let cursor = getpos(".")
-  %s/\s\+$//ge          " Remove trailing whitespace on save
-  %s/\t/  /ge           " Converted to 2 whitespace tab when you save
-  call setpos(".", cursor)
-  unlet cursor
-endfunction
-autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
-autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
-autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
-" }}}
-
-" Grep {{{
-autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
-" }}}
-
-" KeyMaping {{{
-" Adjust the window size to the window time-division. Shift + arrow key.
-nnoremap <silent> <S-Left>  :5wincmd <<CR>
-nnoremap <silent> <S-Right> :5wincmd ><CR>
-nnoremap <silent> <S-Up>    :5wincmd -<CR>
-nnoremap <silent> <S-Down>  :5wincmd +<CR>
-
-" When you move in the search results, 
-" and in the center of the screen that position.
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
-" Turn off the highlight by pressing twice the ESC.
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
-
-" Escape automatically according to the situation question and backslash.
-cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
-cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-
-" Even text wrapping movement by j or k, is modified to act naturally.
-nnoremap j gj
-nnoremap k gk
-" }}}
-
-" Open the file to force the specified character code. {{{
-command! Cp932 edit ++enc=cp932
-command! Eucjp edit ++enc=euc-jp
-command! Iso2022jp edit ++enc=iso-2022-jp
-command! Utf8 edit ++enc=utf-8
-command! Jis Iso2022jp
-command! Sjis Cp932
-" }}}
-
-" Automatic recognition of character code {{{
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " Check iconv are aware of eucJP-ms
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " Check iconv are aware of JISX0213
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " Construct fileencodings
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " dispose the constant
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" If don't include the Japanese, use the encoding to fileencoding
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" Automatic recognition of the line feed code
-"set fileformats=unix,mac,dos
-" Cursor position to prevent misalignment even if character of □ or ○
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif " }}}
-
-" Golang settings {{{
-if $GOROOT != ''
-  set rtp+=$GOROOT/misc/vim
-  set completeopt=menu,preview
-  if $GOPATH != ''
-    " gocode
-    exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-    " golint
-    exe "set rtp+=".globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
-  endif
-  " grep
-  set grepprg=jvgrep
-endif
-autocmd MyAutoCmd BufWritePre *.go Fmt
-" }}}
-
-" Don't make *.un~ files {{{
-if exists('&undofile')
-  set noundofile
-endif "}}}
-
-" Display full-width space {{{
-function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=DarkGray
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd ColorScheme * call ZenkakuSpace()
-    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
-  augroup END
-  call ZenkakuSpace()
-endif
-" }}}
 
 " Local settings {{{
 call s:load_source(expand('~/.vimrc.local'))
