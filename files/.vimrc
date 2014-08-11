@@ -379,7 +379,6 @@ endif
 
 " ColorScheme {{{
 let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
-
 if !has('gui_running')
   execute printf('colorscheme %s', s:colorscheme)
 else
