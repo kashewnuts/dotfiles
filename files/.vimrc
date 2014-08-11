@@ -353,10 +353,12 @@ set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
 set history=1000   " history
 set textwidth=0    " Disable new line to enter automatically
-set ruler
-set hlsearch       " highlight search terms
-set ignorecase
-set incsearch
+set ruler          " show the current row and column
+set hlsearch       " highlight searches
+set incsearch      " do incremental searching
+set showmatch      " jump to matches when entering regexp
+set ignorecase     " ignore case when searching
+set smartcase      " no ignorecase if Uppercase char present
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
