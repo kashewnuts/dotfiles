@@ -57,6 +57,8 @@ set clipboard+=unnamed,autoselect      " Use the OS clipboard
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 " disable annoying errorbells and visual bell completely
 set noerrorbells novisualbell t_vb=
+" Delete - characters that are displayed on the right side of the folding time
+set fillchars=vert:\|
 " }}}
 
 " Visualize character {{{
