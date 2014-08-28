@@ -232,6 +232,16 @@ endif
 autocmd MyAutoCmd BufWritePre *.go Fmt
 " }}}
 
+" Java settings {{{
+
+" Syntax highlight
+let g:java_highlight_all=1
+let g:java_highlight_debug=1
+let g:java_allow_cpp_keywords=1
+let g:java_space_errors=1
+let g:java_highlight_functions=1
+" }}}
+
 " Don't make *.un~ files {{{
 if exists('&undofile')
   set noundofile
@@ -357,7 +367,14 @@ else
   NeoBundleLazy "davidhalter/jedi-vim", {
     \  "autoload": {
     \    "insert"    : 1,
-    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }}
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] },
+    \  "build": {
+    \    "windows" : "pip install jedi",
+    \    "cygwin"  : "pip install jedi",
+    \    "mac"     : "pip install jedi",
+    \    "unix"    : "pip install jedi",
+    \  }
+    \ }
   NeoBundleLazy "lambdalisue/vim-django-support", {
     \  "autoload": {
     \    "filetypes": ["python", "python3", "djangohtml"] }
@@ -367,7 +384,24 @@ else
     \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }}
   NeoBundleLazy "nvie/vim-flake8", {
     \  "autoload": {
-    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] }}
+    \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] },
+    \  "build": {
+    \    "windows" : "pip install flake8",
+    \    "cygwin"  : "pip install flake8",
+    \    "mac"     : "pip install flake8",
+    \    "unix"    : "pip install flake8",
+    \  }
+    \ }
+  NeoBundleLazy "tell-k/vim-autopep8", {
+    \  "autoload": {
+    \    "filetypes" : ["python", "python3"] },
+    \  "build": {
+    \    "windows" : "pip install autopep8",
+    \    "cygwin"  : "pip install autopep8",
+    \    "mac"     : "pip install autopep8",
+    \    "unix"    : "pip install autopep8",
+    \  }
+    \ }
   " }}}
 
   " Golang plugins {{{
@@ -375,6 +409,22 @@ else
   NeoBundleLazy "nsf/gocode", { "autoload": { "filetypes": ["go"] }}
   NeoBundleLazy "Blackrush/vim-gocode", { "autoload": { "filetypes": ["go"] }}
   " }}}
+
+  " Java plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'vim-scripts/javacomplete', {
+    \  "autoload": {
+    \    "insert"    : 1,
+    \    "filetypes" : ["java"]
+    \  },
+    \  'build': {
+    \       'cygwin': 'javac autoload/Reflection.java',
+    \       'mac': 'javac autoload/Reflection.java',
+    \       'unix': 'javac autoload/Reflection.java',
+    \   },
+    \ }
+  " }}}
+
 
   " Git plugins {{{
   " -------------------------------------------------
@@ -435,14 +485,25 @@ else
     let g:neocomplete#sources#syntax#min_keyword_length = 3
 
     " jedi omni completion
-    autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
+    autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
 
     let g:jedi#auto_vim_configuration = 0
     if !exists('g:neocomplete#force_omni_input_patterns')
       let g:neocomplete#force_omni_input_patterns = {}
     endif
-    let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
+    let g:neocomplete#force_omni_input_patterns.python =
+      \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
+
+    let g:neocomplete#sources#omni#functions.sql = 'sqlcomplete#Complete'
+    let g:neocomplete#sources#omni#input_patterns.java =
+      \ '\%(\h\w*\|)\)\.\w*'
+
+    " Enable omni completion.
+    autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
+    autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+    autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+    autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
   endif " }}}
 
   " neocomplcache.vim {{{
@@ -451,7 +512,7 @@ else
     let g:neocomplcache_enable_smart_case = 1
 
     " jedi omni completion
-    autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
+    autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
     let g:jedi#auto_vim_configuration = 0
     if !exists('g:neocomplcache_force_omni_patterns')
       let g:neocomplcache_force_omni_patterns = {}
@@ -572,4 +633,4 @@ endif " }}}
 call s:load_source(expand('~/.vimrc.local'))
 " }}}
 
-" vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
+" vim: et st=2 sw=2 foldmethod=marker
