@@ -281,7 +281,7 @@ function! s:init_neobundle()
   if has("vim_starting")
     execute "set runtimepath+=" . s:neobundledir
   endif
-  call neobundle#rc(s:bundledir)
+  call neobundle#begin(s:bundledir)
   NeoBundleFetch "Shougo/neobundle.vim"  " Let NeoBundle manage NeoBundle
   NeoBundleLazy "Shougo/unite.vim", { "autoload": { "commands": ["Unite"] }}
   NeoBundle "Shougo/vimproc", {
@@ -326,6 +326,7 @@ elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   " If Neobundle is present and the plug-in is not installed,
   " I performed in preparation
   call s:init_neobundle()
+  call neobundle#end()
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
 
@@ -495,9 +496,9 @@ else
       \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
-    let g:neocomplete#sources#omni#functions.sql = 'sqlcomplete#Complete'
-    let g:neocomplete#sources#omni#input_patterns.java =
-      \ '\%(\h\w*\|)\)\.\w*'
+    " let g:neocomplete#sources#omni#functions.sql = 'sqlcomplete#Complete'
+    " let g:neocomplete#sources#omni#input_patterns.java =
+    "   \ '\%(\h\w*\|)\)\.\w*'
 
     " Enable omni completion.
     autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
@@ -625,6 +626,7 @@ else
     let g:calendar_google_task = 1
   endif " }}}
 
+  call neobundle#end()
   filetype plugin indent on       " Required!
   NeoBundleCheck                  " Installation check.
 endif " }}}
