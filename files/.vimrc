@@ -293,6 +293,13 @@ function! s:init_neobundle()
     \ }}
 endfunction
 
+" Finish NeoBundle setting
+function! s:finish_neobundle()
+  call neobundle#end()
+  filetype plugin indent on       " Required!
+  NeoBundleCheck                  " Installation check.
+endfunction
+
 " bundled
 function! s:bundled(bundle)
   if !isdirectory(s:bundledir)
@@ -326,9 +333,7 @@ elseif isdirectory(s:neobundledir) && !isdirectory(s:bundledir)
   " If Neobundle is present and the plug-in is not installed,
   " I performed in preparation
   call s:init_neobundle()
-  call neobundle#end()
-  filetype plugin indent on       " Required!
-  NeoBundleCheck                  " Installation check.
+  call s:finish_neobundle()
 
 else
   " Shougo plugins {{{
@@ -626,9 +631,7 @@ else
     let g:calendar_google_task = 1
   endif " }}}
 
-  call neobundle#end()
-  filetype plugin indent on       " Required!
-  NeoBundleCheck                  " Installation check.
+  call s:finish_neobundle()
 endif " }}}
 
 " Local settings {{{
