@@ -25,8 +25,8 @@ augroup END
 function! VimrcEnvironment()
   let env = {}
   let env.is_windows = has("win16") || has("win32") || has("win64")
-  let env.is_darwin = has("mac") || has("macunix") || has("gui_macvim")
-  let env.is_ime = has("multi byte_ime") || has("xim") || has("gui_macvim")
+  let env.is_darwin  = has("mac") || has("macunix") || has("gui_macvim")
+  let env.is_ime     = has("multi byte_ime") || has("xim") || has("gui_macvim")
   return env
 endfunction
 let s:env = VimrcEnvironment()
@@ -365,6 +365,7 @@ else
   " -------------------------------------------------
   NeoBundleLazy "thinca/vim-quickrun", { "autoload": { "commands": ["Quickrun"] }}
   NeoBundleLazy "thinca/vim-scouter", { "autoload": { "commands": ["Scouter"] }}
+  NeoBundleLazy "thinca/vim-ref", { "autoload": { "commands": ["vim-ref"] }}
   NeoBundle "kashewnuts/vim-ft-rst_header"    " respect thinca/vim-ft-rst_header
   " }}}
 
@@ -418,19 +419,28 @@ else
 
   " Java plugins {{{
   " -------------------------------------------------
-  NeoBundleLazy 'vim-scripts/javacomplete', {
+  NeoBundleLazy "vim-scripts/javacomplete", {
     \  "autoload": {
     \    "insert"    : 1,
     \    "filetypes" : ["java"]
     \  },
-    \  'build': {
-    \       'cygwin': 'javac autoload/Reflection.java',
-    \       'mac': 'javac autoload/Reflection.java',
-    \       'unix': 'javac autoload/Reflection.java',
+    \  "build": {
+    \    "cygwin" : "javac autoload/Reflection.java",
+    \    "mac"    : "javac autoload/Reflection.java",
+    \    "unix"   : "javac autoload/Reflection.java",
     \   },
     \ }
   " }}}
 
+  " Haskell plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy "kana/vim-filetype-haskell"  , { "autoload": { "filetypes": "haskell" }}
+  NeoBundleLazy "eagletmt/ghcmod-vim"        , { "autoload": { "filetypes": "haskell" }}
+  NeoBundleLazy "eagletmt/neco-ghc"          , { "autoload": { "filetypes": "haskell" }}
+  NeoBundleLazy "ujihisa/ref-hoogle"         , { "autoload": { "filetypes": "haskell" }}
+  NeoBundleLazy "ujihisa/unite-haskellimport", { "autoload": { "filetypes": "haskell" }}
+  NeoBundleLazy "eagletmt/unite-haddock"     , { "autoload": { "filetypes": "haskell" }}
+  " }}}
 
   " Git plugins {{{
   " -------------------------------------------------
