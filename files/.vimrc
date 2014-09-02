@@ -376,10 +376,7 @@ else
     \    "insert"    : 1,
     \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] },
     \  "build": {
-    \    "windows" : "pip install jedi",
-    \    "cygwin"  : "pip install jedi",
-    \    "mac"     : "pip install jedi",
-    \    "unix"    : "pip install jedi",
+    \    "others" : "pip install jedi",
     \  }
     \ }
   NeoBundleLazy "lambdalisue/vim-django-support", {
@@ -393,20 +390,14 @@ else
     \  "autoload": {
     \    "filetypes" : ["python", "python3", "djangohtml", "jinja", "htmljinja"] },
     \  "build": {
-    \    "windows" : "pip install flake8",
-    \    "cygwin"  : "pip install flake8",
-    \    "mac"     : "pip install flake8",
-    \    "unix"    : "pip install flake8",
+    \    "others" : "pip install flake8",
     \  }
     \ }
   NeoBundleLazy "tell-k/vim-autopep8", {
     \  "autoload": {
     \    "filetypes" : ["python", "python3"] },
     \  "build": {
-    \    "windows" : "pip install autopep8",
-    \    "cygwin"  : "pip install autopep8",
-    \    "mac"     : "pip install autopep8",
-    \    "unix"    : "pip install autopep8",
+    \    "others" : "pip install autopep8",
     \  }
     \ }
   " }}}
@@ -420,16 +411,7 @@ else
   " Java plugins {{{
   " -------------------------------------------------
   NeoBundleLazy "vim-scripts/javacomplete", {
-    \  "autoload": {
-    \    "insert"    : 1,
-    \    "filetypes" : ["java"]
-    \  },
-    \  "build": {
-    \    "cygwin" : "javac autoload/Reflection.java",
-    \    "mac"    : "javac autoload/Reflection.java",
-    \    "unix"   : "javac autoload/Reflection.java",
-    \   },
-    \ }
+    \  "autoload": { "insert" : 1, "filetypes" : ["java"] }}
   " }}}
 
   " Haskell plugins {{{
