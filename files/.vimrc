@@ -17,7 +17,7 @@ scriptencoding utf-8
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
-  autocmd!
+  au!
 augroup END
 " }}}
 
@@ -75,7 +75,7 @@ let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
 if !has('gui_running')
   execute printf('colorscheme %s', s:colorscheme)
 else
-  execute printf('autocmd MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
+  execute printf('au MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
 endif
 " }}}
 
@@ -88,21 +88,21 @@ endif
 " noet : noexpandtab
 " si   : smartindent
 " cinw : cinwords
-autocmd MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
-autocmd MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
-autocmd MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
-autocmd MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
-autocmd MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
-autocmd MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
-autocmd MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
-" When the '#' character in the first line of the newly created, 
+au MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+au MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
+au MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+" When the '#' character in the first line of the newly created,
 " it isn't unindent
-autocmd MyAutoCmd FileType python inoremap # X#
-autocmd MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
+au MyAutoCmd FileType python inoremap # X#
+au MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
 " }}}
 
 " Cheerless cursor position is moved {{{
@@ -113,13 +113,13 @@ function! s:remove_dust()
   call setpos(".", cursor)
   unlet cursor
 endfunction
-autocmd MyAutoCmd BufWritePre *.py call <SID>remove_dust()
-autocmd MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
-autocmd MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
+au MyAutoCmd BufWritePre *.py call <SID>remove_dust()
+au MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
+au MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
 " }}}
 
 " Grep {{{
-autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
+au MyAutoCmd QuickFixCmdPost *grep* cwindow
 " }}}
 
 " KeyMaping {{{
@@ -201,13 +201,13 @@ if has('iconv')
   unlet s:enc_jis
 endif
 " If don't include the Japanese, use the encoding to fileencoding
-if has('autocmd')
+if has('au')
   function! AU_ReCheck_FENC()
     if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
       let &fileencoding=&encoding
     endif
   endfunction
-  autocmd MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
+  au MyAutoCmd BufReadPost * call AU_ReCheck_FENC()
 endif
 " Automatic recognition of the line feed code
 "set fileformats=unix,mac,dos
@@ -229,11 +229,10 @@ if $GOROOT != ''
   " grep
   set grepprg=jvgrep
 endif
-autocmd MyAutoCmd BufWritePre *.go Fmt
+au MyAutoCmd BufWritePre *.go Fmt
 " }}}
 
 " Java settings {{{
-
 " Syntax highlight
 let g:java_highlight_all=1
 let g:java_highlight_debug=1
@@ -261,9 +260,9 @@ endfunction
 
 if has('syntax')
   augroup ZenkakuSpace
-    autocmd!
-    autocmd ColorScheme * call ZenkakuSpace()
-    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+    au!
+    au ColorScheme * call ZenkakuSpace()
+    au VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
   augroup END
   call ZenkakuSpace()
 endif
@@ -483,7 +482,7 @@ else
     let g:neocomplete#sources#syntax#min_keyword_length = 3
 
     " jedi omni completion
-    autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
+    au MyAutoCmd FileType python setl omnifunc=jedi#completions
 
     let g:jedi#auto_vim_configuration = 0
     if !exists('g:neocomplete#force_omni_input_patterns')
@@ -498,10 +497,10 @@ else
     "   \ '\%(\h\w*\|)\)\.\w*'
 
     " Enable omni completion.
-    autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
-    autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-    autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
-    autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
+    au MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
+    au MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+    au MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+    au MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
   endif " }}}
 
   " neocomplcache.vim {{{
@@ -510,7 +509,7 @@ else
     let g:neocomplcache_enable_smart_case = 1
 
     " jedi omni completion
-    autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
+    au MyAutoCmd FileType python setl omnifunc=jedi#completions
     let g:jedi#auto_vim_configuration = 0
     if !exists('g:neocomplcache_force_omni_patterns')
       let g:neocomplcache_force_omni_patterns = {}
@@ -551,8 +550,8 @@ else
     let g:vimfiler_safe_mode_by_default = 0
     " close vimfiler automatically when there are only vimfiler open
     nnoremap <Leader>e :VimFilerExplorer<CR>
-    autocmd MyAutoCmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') |
-          \ q | endif
+    au MyAutoCmd BufEnter * if (
+        \ winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
   endif " }}}
 
   " vim-quickrun {{{
@@ -577,12 +576,12 @@ else
     let g:jedi#popup_on_dot = 1
     let g:jedi#show_call_signatures = 0
     let g:jedi#popup_select_first = 0
-    autocmd MyAutoCmd FileType python let b:did_ftplugin = 1
+    au MyAutoCmd FileType python let b:did_ftplugin = 1
   endif " }}}
 
   " vim-flake8 {{{
   if s:bundled("vim-flake8")
-    autocmd MyAutoCmd BufWritePost *.py call Flake8()
+    au MyAutoCmd BufWritePost *.py call Flake8()
   endif " }}}
 
   " Align {{{
@@ -630,4 +629,4 @@ endif " }}}
 call s:load_source(expand('~/.vimrc.local'))
 " }}}
 
-" vim: et st=2 sw=2 foldmethod=marker
+" vim: tw=78 et st=2 sw=2 foldmethod=marker
