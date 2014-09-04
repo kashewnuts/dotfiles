@@ -6,9 +6,9 @@ export PYTHONSTARTUP=~/.pythonstartup
 export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
 
 ### Virtualenvwrapper
-if [ -f `which virtualenvwrapper.sh` ]; then
+if [ -f virtualenvwrapper.sh ]; then
     export WORKON_HOME=$HOME/.virtualenvs
-    source `which virtualenvwrapper.sh`
+    source virtualenvwrapper.sh
 fi
 
 # crontab
