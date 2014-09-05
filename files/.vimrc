@@ -263,7 +263,7 @@ if has('syntax')
     au!
     au ColorScheme * call ZenkakuSpace()
     au VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
-  au.vimgroup END
+  augroup END
   call ZenkakuSpace()
 endif
 " }}}
