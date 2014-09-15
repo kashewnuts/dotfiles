@@ -517,7 +517,7 @@ else
     let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
   endif " }}}
 
-  " neosnippet {{{
+  " neosnippet.vim {{{
   if s:bundled("neosnippet.vim")
     " Plugin key-mappings.
     imap <C-k>   <Plug>(neosnippet_expand_or_jump)
@@ -590,7 +590,7 @@ else
     let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
   endif " }}}
 
-  " simplenote {{{
+  " simplenote.vim {{{
   if s:bundled("simplenote.vim")
     call s:load_source(expand('~/.simplenoterc'))
   endif " }}}
@@ -615,7 +615,7 @@ else
     let g:tweetvim_async_post = 1
   endif " }}}
 
-  " TweetVim {{{
+  " calendar.vim {{{
   if s:bundled("calendar.vim")
     let g:calendar_frame = 'default'
     let g:calendar_google_calendar = 1
