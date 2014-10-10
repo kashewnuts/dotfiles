@@ -401,6 +401,11 @@ else
   NeoBundleLazy "vim-scripts/javacomplete", { "insert" : 1, "filetypes" : ["java"] }
   " }}}
 
+  " Scala plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy "derekwyatt/vim-scala", { "insert" : 1, "filetypes" : ["scala"] }
+  " }}}
+
   " Haskell plugins {{{
   " -------------------------------------------------
   NeoBundleLazy "kana/vim-filetype-haskell"  , { "filetypes": "haskell" }
