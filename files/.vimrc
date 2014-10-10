@@ -390,6 +390,14 @@ else
     \ }
   " }}}
 
+  " Syntastic {{{
+  NeoBundleLazy "osyo-manga/vim-watchdogs", {
+    \ "depends": [
+    \   "thinca/vim-quickrun", "osyo-manga/shabadou.vim", "jceb/vim-hier",
+    \   "dannyob/quickfixstatus"],
+    \ "commands": ["WatchdogsRun"] }
+  " }}}
+
   " Golang plugins {{{
   " -------------------------------------------------
   NeoBundleLazy "nsf/gocode", { "filetypes": ["go"] }
