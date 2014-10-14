@@ -98,8 +98,8 @@ au MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
 au MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
 au MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType jsp setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType java setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
