@@ -218,10 +218,10 @@ if exists('&ambiwidth')
 endif " }}}
 
 " Golang settings {{{
-if $GOROOT != ''
+if $GOROOT !=# ''
   set rtp+=$GOROOT/misc/vim
   set completeopt=menu,preview
-  if $GOPATH != ''
+  if $GOPATH !=# ''
     " gocode
     exe 'set rtp+='.globpath($GOPATH, 'src/github.com/nsf/gocode/vim')
     " golint
