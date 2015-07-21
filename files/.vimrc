@@ -87,9 +87,9 @@ endif
 " noet : noexpandtab
 " si   : smartindent
 " cinw : cinwords
-au MyAutoCmd FileType html       setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType html       setl ts=4 sw=4 sts=4 et
 au MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
-au MyAutoCmd FileType javascript setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType javascript setl ts=4 sw=4 sts=4 et
 au MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
 au MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
@@ -100,6 +100,7 @@ au MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
 au MyAutoCmd FileType python inoremap # X#
@@ -183,6 +184,13 @@ let g:java_highlight_debug=1
 let g:java_allow_cpp_keywords=1
 let g:java_space_errors=1
 let g:java_highlight_functions=1
+" }}}
+
+" PHP settings {{{
+let g:php_baselib       = 1
+let g:php_htmlInStrings = 1
+let g:php_noShortTags   = 1
+let g:php_sql_query     = 1
 " }}}
 
 " Don't make *.un~ files {{{
@@ -282,20 +290,20 @@ else
   " Shougo plugins {{{
   " -------------------------------------------------
   call s:init_neobundle()
-"   if has('lua') && ((v:version >= 703 && has('patch885')) || v:version >= 704)
-"     NeoBundleLazy 'Shougo/neocomplete.vim', { 'insert': 1 }
-"     " Combined with NeoComplCache
-"     let g:neocomplete#enable_at_startup = 1
-"   else
-"     NeoBundleLazy 'Shougo/neocomplcache.vim', {'insert': 1 }
-"     " Cause is unknown, but NeoComplCacheEnable command is found, so change.
-"     let g:neocomplcache_enable_at_startup = 1
-"   endif
+  if has('lua') && ((v:version >= 703 && has('patch885')) || v:version >= 704)
+    NeoBundleLazy 'Shougo/neocomplete.vim', { 'insert': 1 }
+    " Combined with NeoComplCache
+    let g:neocomplete#enable_at_startup = 1
+  else
+    NeoBundleLazy 'Shougo/neocomplcache.vim', {'insert': 1 }
+    " Cause is unknown, but NeoComplCacheEnable command is found, so change.
+    let g:neocomplcache_enable_at_startup = 1
+  endif
 "   NeoBundleLazy 'Shougo/neosnippet.vim', {
 "     \  'depends' : ['honza/vim-snippets', 'Shougo/neosnippet-snippets'],
 "     \  'insert'  : 1
 "     \ }
-" 
+
 "   NeoBundleLazy 'Shougo/vimfiler', {
 "     \ 'depends'  : ['Shougo/unite.vim'],
 "     \ 'commands' : ['VimFiler', 'VimFilerTab', 'VimFilerExplorer'],
@@ -309,6 +317,23 @@ else
 "   NeoBundleLazy 'thinca/vim-scouter', { 'commands': ['Scouter'] }
 "   NeoBundleLazy 'thinca/vim-ref', { 'commands': ['vim-ref'] }
   NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
+  " }}}
+
+
+  " Web plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'hail2u/vim-css3-syntax', {
+    \  'insert'    : 1,
+    \  'filetypes' : ['html', 'css', 'javascript', 'jinja', 'htmljinja'],
+    \ }
+  NeoBundleLazy 'othree/html5.vim', {
+    \  'insert'    : 1,
+    \  'filetypes' : ['html', 'css', 'javascript', 'jinja', 'htmljinja'],
+    \ }
+  NeoBundleLazy 'pangloss/vim-javascript', {
+    \  'insert'    : 1,
+    \  'filetypes' : ['html', 'css', 'javascript', 'jinja', 'htmljinja'],
+    \ }
   " }}}
 
 "   " Python plugins {{{
@@ -451,6 +476,7 @@ else
     " Enable omni completion.
     au MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
     au MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+    au MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
     au MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
   endif " }}}
 
