@@ -32,6 +32,9 @@ case "$OSTYPE" in
     export VIM=/Applications/MacVim.app/Contents/Resources/vim
     export VIMRUNTIME=/Applications/MacVim.app/Contents/Resources/vim/runtime
 
+    # vagrant
+    # export PATH=/opt/vagrant/embedded/gems/bin:$PATH
+
     # Open
     alias firefox="open -a Firefox"
     alias safari="open -a Safari"
