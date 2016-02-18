@@ -10,6 +10,13 @@
 let s:env = VimrcEnvironment()
 " }}}
 
+" ColorScheme {{{
+if has('gui_running')
+  let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
+  execute printf('colorscheme %s', s:colorscheme)
+endif
+" }}}
+
 " guioptions {{{
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
@@ -17,29 +24,30 @@ set guioptions-=m  " Disable Menu bar
 
 " Font {{{
 if s:env.is_windows
-  set guifont=MS_Gothic:h10
+  " set guifont=MS_Gothic:h10
+  set guifont=MeiryoKe_Gothic:h10
 elseif s:env.is_darwin
   set guifont=Osaka-Mono:h14
 endif
 " }}}
 
 " Hack #120: Store the location and size of the window by gVim {{{
-let s:save_window_file = expand("~/.vimwinpos")
+let s:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()
   function! s:save_window()
     let options = [
-      \ "set columns=" . &columns,
-      \ "set lines=" . &lines,
-      \ "winpos " . getwinposx() . " " . getwinposy(),
+      \ 'set columns=' . &columns,
+      \ 'set lines=' . &lines,
+      \ 'winpos ' . getwinposx() . ' ' . getwinposy(),
       \ ]
     call writefile(options, s:save_window_file)
   endfunction
 augroup END
 
 if filereadable(s:save_window_file)
-  execute "source" s:save_window_file
+  execute 'source' s:save_window_file
 endif
 " }}}
 

@@ -60,6 +60,15 @@ set noerrorbells novisualbell t_vb=
 set fillchars=vert:\|
 " }}}
 
+" ColorScheme {{{
+let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
+if !has('gui_running')
+  execute printf('colorscheme %s', s:colorscheme)
+elseif !s:env.is_windows
+  execute printf('au MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
+endif
+" }}}
+
 " Visualize character {{{
 if s:env.is_windows
   set list listchars=tab:>-,trail:-,extends:>,precedes:<
@@ -69,61 +78,6 @@ else
 endif
 " }}}
 
-" ColorScheme {{{
-let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
-if !has('gui_running')
-  execute printf('colorscheme %s', s:colorscheme)
-else
-  execute printf('au MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
-endif
-" }}}
-
-" FileType {{{
-
-" ts   : tabstop
-" sw   : shiftwidth
-" sts  : softtabstop
-" et   : expandtab
-" noet : noexpandtab
-" si   : smartindent
-" cinw : cinwords
-au MyAutoCmd FileType html       setl ts=4 sw=4 sts=4 et
-au MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
-au MyAutoCmd FileType javascript setl ts=4 sw=4 sts=4 et
-au MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
-au MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
-au MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
-au MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
-au MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
-
-" When the '#' character in the first line of the newly created,
-" it isn't unindent
-au MyAutoCmd FileType python inoremap # X#
-au MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
-" }}}
-
-" Cheerless cursor position is moved {{{
-function! s:remove_dust()
-  let cursor = getpos('.')
-  %s/\s\+$//ge  " Remove trailing whitespace on save
-  %s/\t/  /ge   " Converted to 2 whitespace tab when you save
-  call setpos('.', cursor)
-  unlet cursor
-endfunction
-au MyAutoCmd BufWritePre *.py call <SID>remove_dust()
-au MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
-au MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
-" }}}
-
-" Grep {{{
-au MyAutoCmd QuickFixCmdPost *grep* cwindow
-" }}}
-
 " KeyMaping {{{
 " Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
@@ -131,7 +85,7 @@ nnoremap <silent> <S-Right> :5wincmd ><CR>
 nnoremap <silent> <S-Up>    :5wincmd -<CR>
 nnoremap <silent> <S-Down>  :5wincmd +<CR>
 
-" When you move in the search results, 
+" When you move in the search results,
 " and in the center of the screen that position.
 nnoremap n nzz
 nnoremap N Nzz
@@ -159,6 +113,65 @@ command! Iso2022jp edit ++enc=iso-2022-jp
 command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
+" }}}
+
+" Cheerless cursor position is moved {{{
+function! s:remove_dust()
+  let s:cursor = getpos('.')
+  %s/\s\+$//e  " Remove trailing whitespace on save
+  %s/\t/  /e   " Converted to 2 whitespace tab when you save
+  " au MyAutoCmd BufWritePre * :%s/\s\+$//e  " Remove trailing whitespace on save
+  " au MyAutoCmd BufWritePre * :%s/\t/  /e   " Converted to 2 whitespace tab when you save
+  call setpos('.', s:cursor)
+  unlet s:cursor
+endfunction
+au MyAutoCmd BufWritePre *.py call <SID>remove_dust()
+au MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
+au MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
+
+" function! s:remove_line_in_last_line()
+"   if getline('$') == ""
+"      $delete _
+"   endif
+" endfunction
+" au MyAutoCmd BufWritePre *.py call s:remove_line_in_last_line()
+" au MyAutoCmd BufWritePre *.txt call s:remove_line_in_last_line()
+" au MyAutoCmd BufWritePre *.rst call s:remove_line_in_last_line()
+" }}}
+
+" Grep {{{
+au MyAutoCmd QuickFixCmdPost *grep* cwindow
+" }}}
+
+" Programming language settings {{{
+" ------------------------------------------------------------------------------
+" FileType {{{
+
+" ts   : tabstop
+" sw   : shiftwidth
+" sts  : softtabstop
+" et   : expandtab
+" noet : noexpandtab
+" si   : smartindent
+" cinw : cinwords
+au MyAutoCmd FileType html       setl ts=4 sw=4 sts=4 et
+au MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType javascript setl ts=4 sw=4 sts=4 et
+au MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
+au MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+au MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
+au MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
+au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+
+" When the '#' character in the first line of the newly created,
+" it isn't unindent
+au MyAutoCmd FileType python inoremap # X#
+au MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
 " }}}
 
 " Golang settings {{{
@@ -192,6 +205,7 @@ let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
 " }}}
+" }}}
 
 " Don't make *.un~ files {{{
 if exists('&undofile')
@@ -203,6 +217,11 @@ if v:version >= 704 && has('patch338')
   " https://github.com/vim-jp/issues/issues/114
   " http://ftp.vim.org/vim/patches/7.4/7.4.338
   set breakindent
+endif "}}}
+
+" nofixeol {{{
+if exists('&nofixeol')
+  set nofixeol
 endif "}}}
 
 " Display full-width space {{{
@@ -299,23 +318,23 @@ else
     " Cause is unknown, but NeoComplCacheEnable command is found, so change.
     let g:neocomplcache_enable_at_startup = 1
   endif
-"   NeoBundleLazy 'Shougo/neosnippet.vim', {
-"     \  'depends' : ['honza/vim-snippets', 'Shougo/neosnippet-snippets'],
-"     \  'insert'  : 1
-"     \ }
+  " NeoBundleLazy 'Shougo/neosnippet.vim', {
+  "   \  'depends' : ['honza/vim-snippets', 'Shougo/neosnippet-snippets'],
+  "   \  'insert'  : 1
+  "   \ }
 
-"   NeoBundleLazy 'Shougo/vimfiler', {
-"     \ 'depends'  : ['Shougo/unite.vim'],
-"     \ 'commands' : ['VimFiler', 'VimFilerTab', 'VimFilerExplorer'],
-"     \ }
-"   NeoBundleLazy 'Shougo/vimshell', { 'commands': ['VimShell'] }
-"   " }}}
-" 
-"   " thinca plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'thinca/vim-quickrun', { 'commands': ['Quickrun'] }
-"   NeoBundleLazy 'thinca/vim-scouter', { 'commands': ['Scouter'] }
-"   NeoBundleLazy 'thinca/vim-ref', { 'commands': ['vim-ref'] }
+  NeoBundleLazy 'Shougo/vimfiler', {
+    \ 'depends'  : ['Shougo/unite.vim'],
+    \ 'commands' : ['VimFiler', 'VimFilerTab', 'VimFilerExplorer'],
+    \ }
+  NeoBundleLazy 'Shougo/vimshell', { 'commands': ['VimShell'] }
+  " }}}
+
+  " thinca plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'thinca/vim-quickrun', { 'commands': ['Quickrun'] }
+  NeoBundleLazy 'thinca/vim-scouter', { 'commands': ['Scouter'] }
+  NeoBundleLazy 'thinca/vim-ref', { 'commands': ['vim-ref'] }
   NeoBundle 'kashewnuts/vim-ft-rst_header'    " respect thinca/vim-ft-rst_header
   " }}}
 
@@ -336,87 +355,88 @@ else
     \ }
   " }}}
 
-"   " Python plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'davidhalter/jedi-vim', {
-"     \  'insert'    : 1,
-"     \  'filetypes' : ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'],
-"     \  'build'     : { 'others' : 'pip install jedi' }
-"     \ }
-"   NeoBundleLazy 'lambdalisue/vim-django-support', {
-"     \  'filetypes': ['python', 'python3', 'djangohtml'] }
-"   NeoBundleLazy 'jmcantrell/vim-virtualenv', {
-"     \  'filetypes' : ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'] }
-"   NeoBundleLazy 'nvie/vim-flake8', {
-"     \  'filetypes' : ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'],
-"     \  'build'     : { 'others' : 'pip install flake8' }
-"     \ }
-"   NeoBundleLazy 'tell-k/vim-autopep8', {
-"     \  'filetypes' : ['python', 'python3'],
-"     \  'build'     : { 'others' : 'pip install autopep8' }
-"     \ }
-"   " }}}
-" 
-"   " Syntastic {{{
-"   NeoBundleLazy 'osyo-manga/vim-watchdogs', {
-"     \ 'depends': [
-"     \   'thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'jceb/vim-hier',
-"     \   'dannyob/quickfixstatus'],
-"     \ 'commands': ['WatchdogsRun'] }
-"   " }}}
-" 
-"   " Golang plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'nsf/gocode', { 'filetypes': ['go'] }
-"   NeoBundleLazy 'Blackrush/vim-gocode', { 'filetypes': ['go'] }
-"   " }}}
-" 
-"   " Java plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'vim-scripts/javacomplete', { 'insert' : 1, 'filetypes' : ['java'] }
-"   " }}}
-" 
-"   " Scala plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'derekwyatt/vim-scala', { 'insert' : 1, 'filetypes' : ['scala'] }
-"   " }}}
-" 
-"   " Haskell plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'kana/vim-filetype-haskell'  , { 'filetypes': 'haskell' }
-"   NeoBundleLazy 'eagletmt/ghcmod-vim'        , { 'filetypes': 'haskell' }
-"   NeoBundleLazy 'eagletmt/neco-ghc'          , { 'filetypes': 'haskell' }
-"   NeoBundleLazy 'ujihisa/ref-hoogle'         , { 'filetypes': 'haskell' }
-"   NeoBundleLazy 'ujihisa/unite-haskellimport', { 'filetypes': 'haskell' }
-"   NeoBundleLazy 'eagletmt/unite-haddock'     , { 'filetypes': 'haskell' }
-"   " }}}
-" 
-"   " Git plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'mattn/gist-vim', {
-"     \ 'depends' : ['mattn/webapi-vim'], 'commands': ['Gist'] }
-"   NeoBundleLazy 'gregsexton/gitv', {
-"     \ 'depends' : ['tpope/vim-fugitive'], 'commands': ['Gitv'] }
-"   " }}}
-" 
-"   " Editting support plugins {{{
-"   " -------------------------------------------------
-"   NeoBundleLazy 'tpope/vim-surround', {
-"     \ 'mappings' : [
-"     \   ['nx', '<Plug>Dsurround'], ['nx', '<Plug>Csurround'],
-"     \   ['nx', '<Plug>Ysurround'], ['nx', '<Plug>YSurround'],
-"     \   ['nx', '<Plug>Yssurround'], ['nx', '<Plug>YSsurround'],
-"     \   ['nx', '<Plug>YSsurround'], ['vx', '<Plug>VgSurround'],
-"     \   ['vx', '<Plug>VSurround']
-"     \ ]}
+  " Python plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'davidhalter/jedi-vim', {
+    \  'insert'    : 1,
+    \  'filetypes' : ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'],
+    \  'build'     : { 'others' : 'pip install jedi' }
+    \ }
+  NeoBundleLazy 'lambdalisue/vim-django-support', {
+    \  'filetypes': ['python', 'python3', 'djangohtml'] }
+  NeoBundleLazy 'jmcantrell/vim-virtualenv', {
+    \  'filetypes' : ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'] }
+  NeoBundleLazy 'nvie/vim-flake8', {
+    \  'filetypes' : ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'],
+    \  'build'     : { 'others' : 'pip install flake8' }
+    \ }
+  NeoBundleLazy 'tell-k/vim-autopep8', {
+    \  'filetypes' : ['python', 'python3'],
+    \  'build'     : { 'others' : 'pip install autopep8' }
+    \ }
+  " }}}
+
+  " Syntastic {{{
+  NeoBundleLazy 'osyo-manga/vim-watchdogs', {
+    \ 'depends': [
+    \   'thinca/vim-quickrun', 'osyo-manga/shabadou.vim', 'jceb/vim-hier',
+    \   'dannyob/quickfixstatus'],
+    \ 'commands': ['WatchdogsRun'] }
+  " }}}
+
+  " Golang plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'nsf/gocode', { 'filetypes': ['go'] }
+  NeoBundleLazy 'Blackrush/vim-gocode', { 'filetypes': ['go'] }
+  " }}}
+
+  " Java plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'vim-scripts/javacomplete', { 'insert' : 1, 'filetypes' : ['java'] }
+  " }}}
+
+  " Scala plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'derekwyatt/vim-scala', { 'insert' : 1, 'filetypes' : ['scala'] }
+  " }}}
+
+  " Haskell plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'kana/vim-filetype-haskell'  , { 'filetypes': 'haskell' }
+  NeoBundleLazy 'eagletmt/ghcmod-vim'        , { 'filetypes': 'haskell' }
+  NeoBundleLazy 'eagletmt/neco-ghc'          , { 'filetypes': 'haskell' }
+  NeoBundleLazy 'ujihisa/ref-hoogle'         , { 'filetypes': 'haskell' }
+  NeoBundleLazy 'ujihisa/unite-haskellimport', { 'filetypes': 'haskell' }
+  NeoBundleLazy 'eagletmt/unite-haddock'     , { 'filetypes': 'haskell' }
+  " }}}
+
+  " Git plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'mattn/gist-vim', {
+    \ 'depends' : ['mattn/webapi-vim'], 'commands': ['Gist'] }
+  NeoBundleLazy 'gregsexton/gitv', {
+    \ 'depends' : ['tpope/vim-fugitive'], 'commands': ['Gitv'] }
+  " }}}
+
+  " Editting support plugins {{{
+  " -------------------------------------------------
+  NeoBundleLazy 'tpope/vim-surround', {
+    \ 'mappings' : [
+    \   ['nx', '<Plug>Dsurround'], ['nx', '<Plug>Csurround'],
+    \   ['nx', '<Plug>Ysurround'], ['nx', '<Plug>YSurround'],
+    \   ['nx', '<Plug>Yssurround'], ['nx', '<Plug>YSsurround'],
+    \   ['nx', '<Plug>YSsurround'], ['vx', '<Plug>VgSurround'],
+    \   ['vx', '<Plug>VSurround']
+    \ ]}
   NeoBundleLazy 'vim-scripts/Align', { 'commands': ['Align'], }
   NeoBundleLazy 'mrtazz/simplenote.vim', { 'commands': ['Simplenote'] }
-"   NeoBundleLazy 'mattn/emmet-vim', {
-"     \ 'filetypes': ['html', 'ruby', 'php', 'css', 'haml', 'xml'] }
+  NeoBundleLazy 'mattn/emmet-vim', {
+    \ 'filetypes': ['html', 'ruby', 'php', 'css', 'haml', 'xml'] }
   NeoBundleLazy 'vim-scripts/SQLUtilities', {
     \ 'depends' : ['Align'], 'commands': ['SQLUFormatter'] }
-"   " NeoBundle "kana/vim-textobj-line"
-"   " }}}
+  NeoBundle 'itchyny/lightline.vim'
+  " }}}
+
 
   " Twitter plugins {{{
   " -------------------------------------------------
@@ -430,9 +450,9 @@ else
 
   " Google plugin {{{
   " -------------------------------------------------
+  " NeoBundleLazy 'itchyny/calendar.vim', { 'commands': ['Calendar'] }
   " NeoBundleLazy "yuratomo/gmail.vim", { "commands": ["Gmail"] }
-  NeoBundleLazy 'kashewnuts/gmail.vim', { 'commands': ['Gmail'] }
-"   NeoBundleLazy 'itchyny/calendar.vim', { 'commands': ['Calendar'] }
+  NeoBundleLazy "kashewnuts/gmail.vim", { "commands": ["Gmail"] }
   " }}}
 
 
@@ -604,6 +624,18 @@ else
     let g:calendar_frame = 'default'
     let g:calendar_google_calendar = 1
     let g:calendar_google_task = 1
+  endif " }}}
+
+  " lightline.vim {{{
+  if s:bundled('lightline.vim')
+    let g:lightline = {
+      \ 'colorscheme': 'default',
+      \ }
+    set laststatus=2
+    if !has('gui_running')
+      set t_Co=256
+    endif
+    au MyAutoCmd bufwritepost $MYVIMRC nested source $MYVIMRC
   endif " }}}
 
   call s:finish_neobundle()
