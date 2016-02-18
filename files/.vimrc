@@ -64,8 +64,6 @@ set fillchars=vert:\|
 let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
 if !has('gui_running')
   execute printf('colorscheme %s', s:colorscheme)
-elseif !s:env.is_windows
-  execute printf('au MyAutoCmd GUIEnter * colorscheme %s', s:colorscheme)
 endif
 " }}}
 
