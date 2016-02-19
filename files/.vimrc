@@ -102,6 +102,12 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj
 nnoremap k gk
+
+" Fix to become last line
+noremap <expr> <C-b> max([winheight(0) - 2, 1]) . "\<C-u>" . (line('.') < 1         + winheight(0) ? 'H' : 'L')
+noremap <expr> <C-f> max([winheight(0) - 2, 1]) . "\<C-d>" . (line('.') > line('$') - winheight(0) ? 'L' : 'H')
+noremap <expr> <C-y> (line('w0') <= 1         ? 'k' : "\<C-y>")
+noremap <expr> <C-e> (line('w$') >= line('$') ? 'j' : "\<C-e>")
 " }}}
 
 " Open the file to force the specified character code. {{{
