@@ -35,7 +35,7 @@ let s:env = VimrcEnvironment()
 syntax on          " Enable syntax highlighting
 set number         " Show line number (nonumber: Hide)
 set smartindent    " Advanced automatic indentation when you made the new line
-set showmatch      " The highlight matching brackets
+set showmatch matchtime=1       " The highlight matching brackets
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
@@ -58,6 +58,8 @@ set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set noerrorbells novisualbell t_vb=
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
+" enable view long line
+set display=lastline
 " }}}
 
 " ColorScheme {{{
@@ -458,7 +460,6 @@ else
   " NeoBundleLazy "yuratomo/gmail.vim", { "commands": ["Gmail"] }
   NeoBundleLazy "kashewnuts/gmail.vim", { "commands": ["Gmail"] }
   " }}}
-
 
   " Plugins Settings
   " -------------------------------------------------
