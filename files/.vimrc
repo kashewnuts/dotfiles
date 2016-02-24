@@ -173,6 +173,8 @@ au MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+au MyAutoCmd FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
+au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
 
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
