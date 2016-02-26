@@ -1,8 +1,8 @@
 " Vim syntax file
-" Language:		scp
-" Maintainer:	Kscphun Yoshida  <bjzli.m08vo9kqs@gmail.com>
+" Language:	scp
+" Maintainer:	Kashun Yoshida  <bjzli.m08vo9kqs@gmail.com>
 " Laspt Change:	Feb 24, 2016
-" Version:		1.0.0
+" Version:	1.0.0
 
 if exists("b:current_syntax")
   finish
@@ -22,19 +22,19 @@ syn keyword scpCommentTodo     TODO FIXME XXX TBD contained
 
 syn keyword scpInclude         Include
 syn keyword scpType            Package EndPackage
-syn keyword scpStatement       Continue continue Break break Return return Then then
+syn keyword scpStatement       Return return
 syn keyword scpStatement       WITH With with ENDWITH EndWith endwith
 syn match   scpStatement       "\<End\s\+With\>"
 
-syn keyword scpRepeat          WHILE While while WEND Wend wend
-syn keyword scpOperator        and in is not or eq
+syn keyword scpRepeat          WHILE While while WEND Wend wend Wbreak Wcontinue For Next Fbreak Fcontinue
+syn keyword scpOperator        And and in is not Or or eq
 syn keyword scpException       BEGIN Begin begin CATCH Catch catch
 
-syn keyword scpConditional     IF If if ELSEIF ElseIf elseif ELSE Else else ENDIF EndIf endif
+syn keyword scpConditional     IF If if ELSEIF ElseIf elseif ELSE Else else ENDIF EndIf endif Then then
 syn match   scpConditional     "\<End\s\+If\>"
-syn keyword scpConditional     Method
+syn keyword scpConditional     Method EndMethod
 syn match   scpConditional     "\<End\s\+Method\>"
-syn keyword scpConditional     SELECT Select select CASE Case case
+syn keyword scpConditional     SELECT Select select CASE Case case EndSelect
 syn match   scpConditional     "\<End\s\+Select\>"
 syn keyword scpConstant        NIL Nil nil NULL Null null TRUE True true FALSE False false
 

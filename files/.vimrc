@@ -18,9 +18,8 @@ scriptencoding utf-8
 augroup MyAutoCmd
   au!
 augroup END
-" }}}
 
-" Environment {{{
+" Environment
 function! VimrcEnvironment()
   let env = {}
   let env.is_windows = has('win16') || has('win32') || has('win64')
@@ -32,6 +31,7 @@ let s:env = VimrcEnvironment()
 " }}}
 
 " Misc {{{
+set guioptions+=M  " unload menu.vim
 syntax on          " Enable syntax highlighting
 set number         " Show line number (nonumber: Hide)
 set smartindent    " Advanced automatic indentation when you made the new line
@@ -54,27 +54,25 @@ set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
 set clipboard+=unnamed,autoselect      " Use the OS clipboard
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+set display=lastline                   " enable view long line
 " disable annoying errorbells and visual bell completely
 set noerrorbells novisualbell t_vb=
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
-" enable view long line
-set display=lastline
-" }}}
-
-" ColorScheme {{{
-let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
-if !has('gui_running')
-  execute printf('colorscheme %s', s:colorscheme)
-endif
-" }}}
-
-" Visualize character {{{
+" Visualize character
 if s:env.is_windows
   set list listchars=tab:>-,trail:-,extends:>,precedes:<
 else
   set imdisable    " When you exit or enter, IME is turned off
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+endif
+" }}}
+
+" ColorScheme {{{
+" let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
+let s:colorscheme = (s:env.is_windows) ? 'desert' : 'adrian'
+if !has('gui_running')
+  execute printf('colorscheme %s', s:colorscheme)
 endif
 " }}}
 
@@ -112,7 +110,7 @@ noremap <expr> <C-y> (line('w0') <= 1         ? 'k' : "\<C-y>")
 noremap <expr> <C-e> (line('w$') >= line('$') ? 'j' : "\<C-e>")
 " }}}
 
-" Open the file to force the specified character code. {{{
+" ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
 command! Iso2022jp edit ++enc=iso-2022-jp
@@ -121,38 +119,12 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 " }}}
 
-" Cheerless cursor position is moved {{{
-function! s:remove_dust()
-  let s:cursor = getpos('.')
-  %s/\s\+$//e  " Remove trailing whitespace on save
-  %s/\t/  /e   " Converted to 2 whitespace tab when you save
-  " au MyAutoCmd BufWritePre * :%s/\s\+$//e  " Remove trailing whitespace on save
-  " au MyAutoCmd BufWritePre * :%s/\t/  /e   " Converted to 2 whitespace tab when you save
-  call setpos('.', s:cursor)
-  unlet s:cursor
-endfunction
-au MyAutoCmd BufWritePre *.py call <SID>remove_dust()
-au MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
-au MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
-
-" function! s:remove_line_in_last_line()
-"   if getline('$') == ""
-"      $delete _
-"   endif
-" endfunction
-" au MyAutoCmd BufWritePre *.py call s:remove_line_in_last_line()
-" au MyAutoCmd BufWritePre *.txt call s:remove_line_in_last_line()
-" au MyAutoCmd BufWritePre *.rst call s:remove_line_in_last_line()
-" }}}
-
 " Grep {{{
 au MyAutoCmd QuickFixCmdPost *grep* cwindow
 " }}}
 
-" Programming language settings {{{
-" ------------------------------------------------------------------------------
 " FileType {{{
-
+" ------------------------------------------------------------------------------
 " ts   : tabstop
 " sw   : shiftwidth
 " sts  : softtabstop
@@ -174,13 +146,15 @@ au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
 au MyAutoCmd FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
-au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
+au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos dictionary=$HOME.'/.vim/dict/scp.dict'
+" au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
+" au MyAutoCmd FileType scp        set dictionary=$HOME.'/.vim/dict/scp.dict'
+
 
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
 au MyAutoCmd FileType python inoremap # X#
 au MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
-" }}}
 
 " Golang settings {{{
 if $GOROOT !=# ''
@@ -215,6 +189,7 @@ let g:php_sql_query     = 1
 " }}}
 " }}}
 
+" After Vim7.4 {{{
 " Don't make *.un~ files {{{
 if exists('&undofile')
   set noundofile
@@ -231,8 +206,34 @@ endif "}}}
 if exists('&nofixeol')
   set nofixeol
 endif "}}}
+" }}}
 
-" Display full-width space {{{
+" Function {{{
+" ------------------------------------------------------------------------------
+" Cheerless cursor position is moved
+function! s:remove_dust()
+  let s:cursor = getpos('.')
+  %s/\s\+$//e  " Remove trailing whitespace on save
+  %s/\t/  /e   " Converted to 2 whitespace tab when you save
+  " au MyAutoCmd BufWritePre * :%s/\s\+$//e  " Remove trailing whitespace on save
+  " au MyAutoCmd BufWritePre * :%s/\t/  /e   " Converted to 2 whitespace tab when you save
+  call setpos('.', s:cursor)
+  unlet s:cursor
+endfunction
+au MyAutoCmd BufWritePre *.py call <SID>remove_dust()
+au MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
+au MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
+
+" function! s:remove_line_in_last_line()
+"   if getline('$') == ""
+"      $delete _
+"   endif
+" endfunction
+" au MyAutoCmd BufWritePre *.py call s:remove_line_in_last_line()
+" au MyAutoCmd BufWritePre *.txt call s:remove_line_in_last_line()
+" au MyAutoCmd BufWritePre *.rst call s:remove_line_in_last_line()
+
+" Display full-width space
 function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=DarkGray
 endfunction
@@ -245,7 +246,14 @@ if has('syntax')
   augroup END
   call ZenkakuSpace()
 endif
-" }}}
+
+" load_source
+function! s:load_source(path)
+  let path = expand(a:path)
+  if filereadable(path)
+    execute 'source ' . path
+  endif
+endfunction " }}}
 
 " NeoBundle {{{
 " ------------------------------------------------------------------------------
@@ -292,14 +300,7 @@ function! s:bundled(bundle)
   else
     return neobundle#is_installed(a:bundle)
   endif
-endfunction
-
-" load_source
-function! s:load_source(path)
-  let path = expand(a:path)
-  if filereadable(path)
-    execute 'source ' . path
-  endif
+    return neobundle#is_installed(a:bundle)
 endfunction
 " }}}
 
@@ -461,6 +462,7 @@ else
   " NeoBundleLazy 'itchyny/calendar.vim', { 'commands': ['Calendar'] }
   " NeoBundleLazy "yuratomo/gmail.vim", { "commands": ["Gmail"] }
   NeoBundleLazy "kashewnuts/gmail.vim", { "commands": ["Gmail"] }
+  NeoBundleLazy "mattn/benchvimrc-vim", { "commands": ["BenchVimrc"] }
   " }}}
 
   " Plugins Settings
@@ -485,20 +487,21 @@ else
       \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
     let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
-    let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default':    '',
-      \ 'vimshell':   $HOME.'/.vimshell_hist',
-      \ 'scala':      $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
-      \ 'c':          $HOME.'/.vim/dict/c.dict',
-      \ 'cpp':        $HOME.'/.vim/dict/cpp.dict',
-      \ 'java':       $HOME.'/.vim/dict/java.dict',
-      \ 'lua':        $HOME.'/.vim/dict/lua.dict',
-      \ 'ocaml':      $HOME.'/.vim/dict/ocaml.dict',
-      \ 'perl':       $HOME.'/.vim/dict/perl.dict',
-      \ 'php':        $HOME.'/.vim/dict/php.dict',
-      \ 'scheme':     $HOME.'/.vim/dict/scheme.dict',
-      \ 'vim':        $HOME.'/.vim/dict/vim.dict'
-      \ }
+    " let g:neocomplete#sources#dictionary#dictionaries = { 'default':    '' }
+    " let g:neocomplete#sources#dictionary#dictionaries = {
+    "   \ 'default':    '',
+    "   \ 'vimshell':   $HOME.'/.vimshell_hist',
+    "   \ 'scala':      $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
+    "   \ 'c':          $HOME.'/.vim/dict/c.dict',
+    "   \ 'cpp':        $HOME.'/.vim/dict/cpp.dict',
+    "   \ 'java':       $HOME.'/.vim/dict/java.dict',
+    "   \ 'lua':        $HOME.'/.vim/dict/lua.dict',
+    "   \ 'ocaml':      $HOME.'/.vim/dict/ocaml.dict',
+    "   \ 'perl':       $HOME.'/.vim/dict/perl.dict',
+    "   \ 'php':        $HOME.'/.vim/dict/php.dict',
+    "   \ 'scheme':     $HOME.'/.vim/dict/scheme.dict',
+    "   \ 'vim':        $HOME.'/.vim/dict/vim.dict'
+    "   \ }
 
     " Enable omni completion.
     au MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
