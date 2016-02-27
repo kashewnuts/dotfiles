@@ -1,5 +1,6 @@
 # vim
 files/.vim/bundle/
+files/.vim/dein/
 files/.vim/bundle_manual/
 files/.vim/neobundle.vim/
 files/.vim/autoload/

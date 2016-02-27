@@ -31,8 +31,9 @@ if has('gui_running')
 " torte
 " zellner
   " let s:colorscheme = 'slate'
-  let s:colorscheme = (s:env.is_windows) ? 'desert' : 'adrian'
-  execute printf('colorscheme %s', s:colorscheme)
+  " let s:colorscheme = (s:env.is_windows) ? 'desert' : 'adrian'
+  " execute printf('colorscheme %s', s:colorscheme)
+  colorscheme desert
 endif
 " }}}
 
