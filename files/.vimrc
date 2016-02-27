@@ -69,11 +69,10 @@ endif
 " }}}
 
 " ColorScheme {{{
-" let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
-" let s:colorscheme = (s:env.is_windows) ? 'desert' : 'adrian'
 if !has('gui_running')
+  " let s:colorscheme = (s:env.is_windows) ? 'desert' : 'adrian'
   " execute printf('colorscheme %s', s:colorscheme)
-  colorscheme desert
+  colorscheme 'desert'
 endif
 " }}}
 
@@ -275,53 +274,55 @@ endfunction " }}}
 function! s:dein()
   set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-  call dein#begin(expand('~/.vim/dein'))
+  " if isdirectory('~/.vim/dein/')
+    call dein#begin(expand('~/.vim/dein'))
 
-  call dein#add('Shougo/dein.vim')
-  call dein#add('Shougo/unite.vim', {'on_cmd': 'Unite'})
-  call dein#add('Shougo/vimproc.vim', {
-      \ 'build': {
-      \     'windows': 'tools\\update-dll-mingw',
-      \     'cygwin': 'make -f make_cygwin.mak',
-      \     'mac': 'make -f make_mac.mak',
-      \     'linux': 'make',
-      \     'unix': 'gmake',
-      \    },
-      \ })
-  if has('lua') && (v:version >= 704)
-    call dein#add('Shougo/neocomplete.vim', {'on_i': 1})
-    " Combined with NeoComplCache
-    let g:neocomplete#enable_at_startup = 1
-  else
-    call dein#add('Shougo/neocomplcache.vim', {'on_i': 1})
-    " Cause is unknown, but NeoComplCacheEnable command is found, so change.
-    let g:neocomplcache_enable_at_startup = 1
-  endif
-  call dein#add('kashewnuts/vim-ft-rst_header')
-  call dein#add('tpope/vim-surround')
-  call dein#add('vim-scripts/Align')
-  call dein#add('mrtazz/simplenote.vim', {'on_cmd': 'Simplenote'})
-  call dein#add('vim-scripts/SQLUtilities', {'on_cmd': 'SQLUFormatter'})
-  call dein#add('itchyny/lightline.vim')
-  " Twitter
-  call dein#add('basyura/twibill.vim')
-  call dein#add('tyru/open-browser.vim')
-  call dein#add('mattn/webapi-vim')
-  call dein#add('h1mesuke/unite-outline')
-  call dein#add('basyura/bitly.vim')
-  call dein#add('mattn/favstar-vim')
-  call dein#add('basyura/TweetVim',
-    \ {'on_cmd': ['TweetVimHomeTimeline', 'TweetVimSay', 'TweetVimListStatus',
-    \            'TweetVimSearch', 'TweetVimMentions']})
-  call dein#end()
+    call dein#add('Shougo/dein.vim')
+    call dein#add('Shougo/unite.vim', {'on_cmd': 'Unite'})
+    call dein#add('Shougo/vimproc.vim', {
+        \ 'build': {
+        \     'windows': 'tools\\update-dll-mingw',
+        \     'cygwin': 'make -f make_cygwin.mak',
+        \     'mac': 'make -f make_mac.mak',
+        \     'linux': 'make',
+        \     'unix': 'gmake',
+        \    },
+        \ })
+    if has('lua') && (v:version >= 704)
+      call dein#add('Shougo/neocomplete.vim', {'on_i': 1})
+      " Combined with NeoComplCache
+      let g:neocomplete#enable_at_startup = 1
+    else
+      call dein#add('Shougo/neocomplcache.vim', {'on_i': 1})
+      " Cause is unknown, but NeoComplCacheEnable command is found, so change.
+      let g:neocomplcache_enable_at_startup = 1
+    endif
+    call dein#add('kashewnuts/vim-ft-rst_header')
+    call dein#add('tpope/vim-surround')
+    call dein#add('vim-scripts/Align')
+    call dein#add('mrtazz/simplenote.vim', {'on_cmd': 'Simplenote'})
+    call dein#add('vim-scripts/SQLUtilities', {'on_cmd': 'SQLUFormatter'})
+    call dein#add('itchyny/lightline.vim')
+    " Twitter
+    call dein#add('basyura/twibill.vim')
+    call dein#add('tyru/open-browser.vim')
+    call dein#add('mattn/webapi-vim')
+    call dein#add('h1mesuke/unite-outline')
+    call dein#add('basyura/bitly.vim')
+    call dein#add('mattn/favstar-vim')
+    call dein#add('basyura/TweetVim',
+      \ {'on_cmd': ['TweetVimHomeTimeline', 'TweetVimSay', 'TweetVimListStatus',
+      \            'TweetVimSearch', 'TweetVimMentions']})
+    call dein#end()
 
-  let g:dein#types#git#clone_depth = 1
-  if dein#check_install()
-    call dein#install()
-  endif
+    let g:dein#types#git#clone_depth = 1
+    if dein#check_install()
+      call dein#install()
+    endif
+  " endif
 endfunction
 " }}}
- 
+
 " NeoBundle {{{
 " ------------------------------------------------------------------------------
 function! s:neobundle()
@@ -516,6 +517,7 @@ function! s:neobundle()
 
     call s:bundled()
     call s:finish_neobundle()
+  endif
 endfunction
 " }}}
 
