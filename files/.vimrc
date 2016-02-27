@@ -245,7 +245,7 @@ endfunction
 function! s:bundled(bundle)
   if (v:version >= 704)
     " For dein.vim
-    if !isdirectory('~/.vim/dein')
+    if !isdirectory(expand('~/.vim/dein'))
       return 0
     endif
     if stridx(&runtimepath, '~/.vim/dein/repos/github.com/Shougo/dein.vim') == -1
@@ -274,7 +274,7 @@ endfunction " }}}
 function! s:dein()
   set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-  " if isdirectory('~/.vim/dein/')
+  if isdirectory(expand('~/.vim/dein'))
     call dein#begin(expand('~/.vim/dein'))
 
     call dein#add('Shougo/dein.vim')
@@ -319,7 +319,8 @@ function! s:dein()
     if dein#check_install()
       call dein#install()
     endif
-  " endif
+    filetype plugin indent on       " Required!
+  endif
 endfunction
 " }}}
 
