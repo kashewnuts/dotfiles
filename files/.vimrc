@@ -241,16 +241,6 @@ function! s:load_source(path)
   endif
 endfunction
 
-" bundled
-function! s:bundled(bundle)
-  if !isdirectory(expand('~/.vim/dein'))
-    return 0
-  endif
-  if stridx(&runtimepath, '~/.vim/dein/repos/github.com/Shougo/dein.vim') == -1
-    return 0
-  endif
-endfunction " }}}
-
 " dein.vim {{{
 " " ------------------------------------------------------------------------------
 let s:noplugin = 0
@@ -263,119 +253,16 @@ elseif isdirectory(s:dein) && v:version >= 704
   set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
   call dein#begin(s:dein)
 
-  " Shougo plugins {{{
-  call dein#add('Shougo/dein.vim')
-  call dein#add('Shougo/unite.vim', {'on_cmd': 'Unite'})
-  call dein#add('Shougo/vimproc.vim', {
-      \ 'build': {
-      \     'windows': 'tools\\update-dll-mingw',
-      \     'cygwin': 'make -f make_cygwin.mak',
-      \     'mac': 'make -f make_mac.mak',
-      \     'linux': 'make',
-      \     'unix': 'gmake',
-      \    },
-      \ })
-  if has('lua') && (v:version >= 704)
-    call dein#add('Shougo/neocomplete.vim', {'on_i': 1})
-    " Combined with NeoComplCache
-    let g:neocomplete#enable_at_startup = 1
-  else
-    call dein#add('Shougo/neocomplcache.vim', {'on_i': 1})
-    " Cause is unknown, but NeoComplCacheEnable command is found, so change.
-    let g:neocomplcache_enable_at_startup = 1
+  " TOML file contains plugin list
+  let s:toml      = '~/.vim/rc/dein.toml'
+  let s:lazy_toml = '~/.vim/rc/dein_lazy.toml'
+
+  " Read TOML & cache
+  if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
+    call dein#load_toml(s:toml,      {'lazy': 0})
+    call dein#load_toml(s:lazy_toml, {'lazy': 1})
+    call dein#save_cache()
   endif
-  " }}}
-
-  " thinca plugins {{{
-  call dein#add('thinca/vim-quickrun', {'on_cmd': 'Quickrun'})
-  call dein#add('thinca/vim-scouter', {'on_cmd': 'Scouter'})
-  " }}}
-
-  " Web plugins {{{
-  call dein#add('hail2u/vim-css3-syntax', {
-    \ 'on_i': 1 ,
-    \ 'on_ft': ['html', 'css', 'javascript', 'jinja', 'htmljinja']})
-  call dein#add('othree/html5.vim', {
-    \ 'on_i': 1,
-    \ 'on_ft': ['html', 'css', 'javascript', 'jinja', 'htmljinja']})
-  call dein#add('pangloss/vim-javascript', {
-    \ 'on_i': 1,
-    \ 'on_ft': ['html', 'css', 'javascript', 'jinja', 'htmljinja']})
-  call dein#add('mattn/emmet-vim', {'on_ft': ['html', 'ruby', 'php', 'css', 'haml', 'xml']})
-  " }}}
-
-  " Python plugins {{{
-  call dein#add('davidhalter/jedi-vim', {
-    \ 'on_i': 1,
-    \ 'on_ft': ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'],
-    \ 'build': {'others' : 'pip install jedi'}})
-  call dein#add('lambdalisue/vim-django-support', {
-    \ 'on_ft': ['python', 'python3', 'djangohtml']})
-  call dein#add('jmcantrell/vim-virtualenv', {
-    \ 'on_ft': ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']})
-  call dein#add('nvie/vim-flake8', {
-    \ 'on_ft': ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja'],
-    \ 'build': {'others' : 'pip install flake8'}})
-  call dein#add('tell-k/vim-autopep8', {
-    \ 'on_ft': ['python', 'python3'],
-    \ 'build': {'others' : 'pip install autopep8'}})
-  " }}}
-
-  " Syntastic {{{
-  call dein#add('osyo-manga/shabadou.vim')
-  call dein#add('jceb/vim-hier')
-  call dein#add('dannyob/quickfixstatus')
-  call dein#add('osyo-manga/vim-watchdogs', {'on_cmd': 'WatchdogsRun'})
-  " }}}
-
-  " Golang plugins {{{
-  call dein#add('nsf/gocode', {'on_ft': 'go'})
-  call dein#add('Blackrush/vim-gocode', {'on_ft': 'go'})
-  " }}}
-
-  " Java plugins {{{
-  call dein#add('vim-scripts/javacomplete', {'on_i': 1}, {'on_ft': 'java'})
-  " }}}
-
-  " Scala plugins {{{
-  call dein#add('derekwyatt/vim-scala', {'on_i': 1}, {'on_ft': 'scala'})
-  " }}}
-
-  " Haskell plugins {{{
-  call dein#add('kana/vim-filetype-haskell'  , {'on_ft': 'haskell'})
-  call dein#add('eagletmt/ghcmod-vim'        , {'on_ft': 'haskell'})
-  call dein#add('eagletmt/neco-ghc'          , {'on_ft': 'haskell'})
-  call dein#add('ujihisa/ref-hoogle'         , {'on_ft': 'haskell'})
-  call dein#add('ujihisa/unite-haskellimport', {'on_ft': 'haskell'})
-  call dein#add('eagletmt/unite-haddock'     , {'on_ft': 'haskell'})
-  " }}}
-
-  " Git plugins {{{
-  call dein#add('mattn/gist-vim', {'on_cmd': 'Gist'})
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('gregsexton/gitv', {'on_cmd': 'Gitv'})
-  " }}}
-
-  " Edit plugins {{{
-  call dein#add('kashewnuts/vim-ft-rst_header')
-  call dein#add('tpope/vim-surround')
-  call dein#add('vim-scripts/Align')
-  call dein#add('mrtazz/simplenote.vim', {'on_cmd': 'Simplenote'})
-  call dein#add('vim-scripts/SQLUtilities', {'on_cmd': 'SQLUFormatter'})
-  call dein#add('itchyny/lightline.vim')
-  " }}}
-
-  " Twitter {{{
-  call dein#add('basyura/twibill.vim')
-  call dein#add('tyru/open-browser.vim')
-  call dein#add('mattn/webapi-vim')
-  call dein#add('h1mesuke/unite-outline')
-  call dein#add('basyura/bitly.vim')
-  call dein#add('mattn/favstar-vim')
-  call dein#add('basyura/TweetVim',
-    \ {'on_cmd': ['TweetVimHomeTimeline', 'TweetVimSay', 'TweetVimListStatus',
-    \            'TweetVimSearch', 'TweetVimMentions']})
-  " }}}
   call dein#end()
 
   let g:dein#types#git#clone_depth = 1
@@ -383,178 +270,9 @@ elseif isdirectory(s:dein) && v:version >= 704
     call dein#install()
   endif
   filetype plugin indent on       " Required!
+
+  call s:load_source(expand('~/.vim/rc/plugins.vim'))
 endif
-" }}}
-
-" Plugin settings {{{
-" ------------------------------------------------------------------------------
-" neocomplete.vim {{{
-if s:bundled('neocomplete.vim')
-  let g:acp_enableAtStartup = 0            " NeoCompleteEnable
-  let g:neocomplete#enable_smart_case = 1  " Use smartcase.
-
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-  " jedi omni completion
-  au MyAutoCmd FileType python setl omnifunc=jedi#completions
-
-  let g:jedi#auto_vim_configuration = 0
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-  endif
-  let g:neocomplete#force_omni_input_patterns.python =
-    \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
-
-  " let g:neocomplete#sources#dictionary#dictionaries = { 'default':    '' }
-  " let g:neocomplete#sources#dictionary#dictionaries = {
-  "   \ 'default':    '',
-  "   \ 'vimshell':   $HOME.'/.vimshell_hist',
-  "   \ 'scala':      $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
-  "   \ 'c':          $HOME.'/.vim/dict/c.dict',
-  "   \ 'cpp':        $HOME.'/.vim/dict/cpp.dict',
-  "   \ 'java':       $HOME.'/.vim/dict/java.dict',
-  "   \ 'lua':        $HOME.'/.vim/dict/lua.dict',
-  "   \ 'ocaml':      $HOME.'/.vim/dict/ocaml.dict',
-  "   \ 'perl':       $HOME.'/.vim/dict/perl.dict',
-  "   \ 'php':        $HOME.'/.vim/dict/php.dict',
-  "   \ 'scheme':     $HOME.'/.vim/dict/scheme.dict',
-  "   \ 'vim':        $HOME.'/.vim/dict/vim.dict'
-  "   \ }
-
-  " Enable omni completion.
-  au MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
-  au MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-  au MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
-  au MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
-endif " }}}
-
-" neocomplcache.vim {{{
-if s:bundled('neocomplcache.vim')
-  let g:acp_enableAtStartup = 0
-  let g:neocomplcache_enable_smart_case = 1
-
-  " jedi omni completion
-  au MyAutoCmd FileType python setl omnifunc=jedi#completions
-  let g:jedi#auto_vim_configuration = 0
-  if !exists('g:neocomplcache_force_omni_patterns')
-    let g:neocomplcache_force_omni_patterns = {}
-  endif
-  let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
-endif " }}}
-
-" neosnippet.vim {{{
-if s:bundled('neosnippet.vim')
-  " Plugin key-mappings.
-  imap <C-k>   <Plug>(neosnippet_expand_or_jump)
-  smap <C-k>   <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k>   <Plug>(neosnippet_expand_target)
-
-  " SuperTab like snippets behavior.
-  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ '\<Plug>(neosnippet_expand_or_jump)'
-        \: pumvisible() ? '\<C-n>' : '\<TAB>'
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ '\<Plug>(neosnippet_expand_or_jump)'
-        \: '\<TAB>'
-
-  " For snippet_complete marker.
-  if has('conceal')
-    set conceallevel=2 concealcursor=i
-  endif
-
-  " Enable snipMate compatibility feature.
-  let g:neosnippet#enable_snipmate_compatibility = 1
-
-  " Tell Neosnippet about the other snippets
-  let g:neosnippet#snippets_directory=s:bundledir.'/vim-snippets/snippets'
-endif " }}}
-
-" vimfiler {{{
-if s:bundled('vimfiler')
-  let g:vimfiler_as_default_explorer = 1
-  let g:vimfiler_safe_mode_by_default = 0
-  " close vimfiler automatically when there are only vimfiler open
-  nnoremap <Leader>e :VimFilerExplorer<CR>
-  au MyAutoCmd BufEnter * if (
-      \ winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
-endif " }}}
-
-" vim-quickrun {{{
-if s:bundled('vim-quickrun')
-  nmap <Leader>r <Plug>(quickrun)
-  " Open at the height of 10-digit buffer window by horizontal split at the bottom
-  " Enable asynchronous processing
-  " Disable the Sheban prevent garbled in a Windows environment
-  let g:quickrun_config = {
-  \  '_' : {
-  \      'outputter/buffer/split' : ':botright 10sp',
-  \      'runner' : 'vimproc',
-  \      'hook/shebang/enable' : 0,
-  \  }
-  \ }
-endif " }}}
-
-" jedi-vim {{{
-if s:bundled('jedi-vim')
-  let g:jedi#auto_initialization = 0
-  let g:jedi#rename_command = '<leader>R'
-  let g:jedi#popup_on_dot = 1
-  let g:jedi#show_call_signatures = 0
-  let g:jedi#popup_select_first = 0
-  au MyAutoCmd FileType python let b:did_ftplugin = 1
-  au MyAutoCmd FileType python setl completeopt-=preview " disable docstring
-endif " }}}
-
-" vim-flake8 {{{
-if s:bundled('vim-flake8')
-  au MyAutoCmd BufWritePost *.py call Flake8()
-endif " }}}
-
-" Align {{{
-if s:bundled('Align')
-  let g:Align_xstrlen = 3       " for japanese string
-  let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
-endif " }}}
-
-" simplenote.vim {{{
-if s:bundled('simplenote.vim')
-  if s:env.is_windows
-    let g:SimplenoteListHeight=50
-  else
-    let g:SimplenoteListHeight=35
-  endif
-  let g:SimplenoteFiletype ='rst'
-  call s:load_source(expand('~/.simplenoterc'))
-endif " }}}
-
-" emmet-vim {{{
-if s:bundled('emmet-vim')
-  let g:user_emmet_settings = {
-  \  'php' : { 'extends' : 'html', 'filters' : 'c', },
-  \  'xml' : { 'extends' : 'html', },
-  \  'haml': { 'extends' : 'html', },
-  \ }
-endif " }}}
-
-" TweetVim {{{
-if s:bundled('TweetVim')
-  let g:tweetvim_display_time = 1
-  let g:tweetvim_async_post = 1
-endif " }}}
-
-" lightline.vim {{{
-if s:bundled('lightline.vim')
-  let g:lightline = {
-    \ 'colorscheme': 'default',
-    \ }
-  set laststatus=2
-  if !has('gui_running')
-    set t_Co=256
-  endif
-  au MyAutoCmd bufwritepost $MYVIMRC nested source $MYVIMRC
-endif " }}}
 " }}}
 
 " Local settings {{{
