@@ -240,6 +240,7 @@ function! s:load_source(path)
     execute 'source ' . path
   endif
 endfunction
+" }}}
 
 " dein.vim {{{
 " " ------------------------------------------------------------------------------
