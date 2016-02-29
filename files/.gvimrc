@@ -6,40 +6,19 @@
 " NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
+" guioptions {{{
+set guioptions-=T  " Disable Toolbar
+set guioptions-=m  " Disable Menu bar
+" }}}
+
 " Env {{{
 let s:env = VimrcEnvironment()
 " }}}
 
 " ColorScheme {{{
 if has('gui_running')
-  " let s:colorscheme = (s:env.is_windows) ? 'louver' : 'adrian'
-" darkblue
-" default
-" delek
-" desert
-" elflord
-" evening
-" industry
-" koehler
-" morning
-" murphy
-" pablo
-" peachpuff
-" ron
-" shine
-" slate
-" torte
-" zellner
-  " let s:colorscheme = 'slate'
-  " let s:colorscheme = (s:env.is_windows) ? 'desert' : 'adrian'
-  " execute printf('colorscheme %s', s:colorscheme)
   colorscheme desert
 endif
-" }}}
-
-" guioptions {{{
-set guioptions-=T  " Disable Toolbar
-set guioptions-=m  " Disable Menu bar
 " }}}
 
 " Font {{{

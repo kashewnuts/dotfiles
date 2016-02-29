@@ -8,6 +8,9 @@ if   = '''has('lua')'''
 repo = 'Shougo/neocomplcache.vim'
 on_i = 1
 if   = '''! has('lua')'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
 # }}}
 
 #  thinca plugins {{{
@@ -133,10 +136,12 @@ on_ft = 'haskell'
 [[plugins]]
 repo = 'ujihisa/unite-haskellimport'
 on_ft = 'haskell'
+on_source = ['Shougo/unite.vim', 'ujihisa/ref-hoogle']
 
 [[plugins]]
 repo = 'eagletmt/unite-haddock'
 on_ft = 'haskell'
+on_source = 'Shougo/unite.vim'
 # }}}
 
 # Git plugins {{{
@@ -169,16 +174,18 @@ on_cmd = 'SQLUFormatter'
 
 # Twitter {{{
 [[plugins]]
-repo = 'basyura/twibill.vim'
+repo = 'tyru/open-browser.vim'
 
 [[plugins]]
-repo = 'tyru/open-browser.vim'
+repo = 'basyura/twibill.vim'
+on_source = 'tyru/open-browser.vim'
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
 
 [[plugins]]
 repo = 'h1mesuke/unite-outline'
+on_source = 'Shougo/unite.vim'
 
 [[plugins]]
 repo = 'basyura/bitly.vim'
@@ -187,7 +194,15 @@ repo = 'basyura/bitly.vim'
 repo = 'mattn/favstar-vim'
 
 [[plugins]]
-repo = 'basyura/TweetVim',
+repo = 'basyura/TweetVim'
+on_source = [
+  'basyura/twibill.vim',
+  'tyru/open-browser.vim',
+  'mattn/webapi-vim',
+  'h1mesuke/unite-outline',
+  'basyura/bitly.vim',
+  'mattn/favstar-vim',
+]
 on_cmd = [
   'TweetVimHomeTimeline',
   'TweetVimSay',

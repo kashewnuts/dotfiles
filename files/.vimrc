@@ -49,6 +49,8 @@ set incsearch      " do incremental searching
 set showmatch      " jump to matches when entering regexp
 set ignorecase     " ignore case when searching
 set smartcase      " no ignorecase if Uppercase char present
+set laststatus=2   " Always display status bar
+set cmdheight=2    " cmdline height
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
