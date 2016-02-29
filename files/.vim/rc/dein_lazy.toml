@@ -158,6 +158,12 @@ on_source = 'tpope/vim-fugitive'
 on_cmd = 'Gitv'
 # }}}
 
+# Keyence Script plugins {{{
+[[plugins]]
+repo = 'kashewnuts/vim-scp'
+on_ft = 'scp'
+# }}}
+
 # Edit plugins {{{
 [[plugins]]
 repo = 'vim-scripts/Align'
