@@ -1,17 +1,7 @@
 " Plugin settings
 
-" bundled {{{
-function! s:bundled(bundle)
-  if !isdirectory(expand('~/.vim/dein'))
-    return 0
-  endif
-  if stridx(&runtimepath, '~/.vim/dein/repos/github.com/Shougo/dein.vim') == -1
-    return 0
-  endif
-endfunction " }}}
-
 " neocomplete.vim {{{
-if s:bundled('neocomplete.vim')
+if dein#tap('neocomplete.vim')
   let g:acp_enableAtStartup = 0            " NeoCompleteEnable
   let g:neocomplete#enable_smart_case = 1  " Use smartcase.
 
@@ -29,7 +19,6 @@ if s:bundled('neocomplete.vim')
     \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
   let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
-  " let g:neocomplete#sources#dictionary#dictionaries = { 'default':    '' }
   " let g:neocomplete#sources#dictionary#dictionaries = {
   "   \ 'default':    '',
   "   \ 'vimshell':   $HOME.'/.vimshell_hist',
@@ -53,7 +42,7 @@ if s:bundled('neocomplete.vim')
 endif " }}}
 
 " neocomplcache.vim {{{
-if s:bundled('neocomplcache.vim')
+if dein#tap('neocomplcache.vim')
   let g:acp_enableAtStartup = 0
   let g:neocomplcache_enable_smart_case = 1
 
@@ -67,7 +56,7 @@ if s:bundled('neocomplcache.vim')
 endif " }}}
 
 " neosnippet.vim {{{
-if s:bundled('neosnippet.vim')
+if dein#tap('neosnippet.vim')
   " Plugin key-mappings.
   imap <C-k>   <Plug>(neosnippet_expand_or_jump)
   smap <C-k>   <Plug>(neosnippet_expand_or_jump)
@@ -90,11 +79,11 @@ if s:bundled('neosnippet.vim')
   let g:neosnippet#enable_snipmate_compatibility = 1
 
   " Tell Neosnippet about the other snippets
-  let g:neosnippet#snippets_directory=s:bundledir.'/vim-snippets/snippets'
+  let g:neosnippet#snippets_directory=dein#tapir.'/vim-snippets/snippets'
 endif " }}}
 
 " vimfiler {{{
-if s:bundled('vimfiler')
+if dein#tap('vimfiler')
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_safe_mode_by_default = 0
   " close vimfiler automatically when there are only vimfiler open
@@ -104,7 +93,7 @@ if s:bundled('vimfiler')
 endif " }}}
 
 " vim-quickrun {{{
-if s:bundled('vim-quickrun')
+if dein#tap('vim-quickrun')
   nmap <Leader>r <Plug>(quickrun)
   " Open at the height of 10-digit buffer window by horizontal split at the bottom
   " Enable asynchronous processing
@@ -119,7 +108,7 @@ if s:bundled('vim-quickrun')
 endif " }}}
 
 " jedi-vim {{{
-if s:bundled('jedi-vim')
+if dein#tap('jedi-vim')
   let g:jedi#auto_initialization = 0
   let g:jedi#rename_command = '<leader>R'
   let g:jedi#popup_on_dot = 1
@@ -130,29 +119,29 @@ if s:bundled('jedi-vim')
 endif " }}}
 
 " vim-flake8 {{{
-if s:bundled('vim-flake8')
+if dein#tap('vim-flake8')
   au MyAutoCmd BufWritePost *.py call Flake8()
 endif " }}}
 
 " Align {{{
-if s:bundled('Align')
+if dein#tap('Align')
   let g:Align_xstrlen = 3       " for japanese string
   let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
 endif " }}}
 
 " simplenote.vim {{{
-if s:bundled('simplenote.vim')
+if dein#tap('simplenote.vim')
+  let s:env = VimrcEnvironment()
   if s:env.is_windows
     let g:SimplenoteListHeight=50
   else
     let g:SimplenoteListHeight=35
   endif
   let g:SimplenoteFiletype ='rst'
-  call s:load_source(expand('~/.simplenoterc'))
 endif " }}}
 
 " emmet-vim {{{
-if s:bundled('emmet-vim')
+if dein#tap('emmet-vim')
   let g:user_emmet_settings = {
   \  'php' : { 'extends' : 'html', 'filters' : 'c', },
   \  'xml' : { 'extends' : 'html', },
@@ -161,21 +150,9 @@ if s:bundled('emmet-vim')
 endif " }}}
 
 " TweetVim {{{
-if s:bundled('TweetVim')
+if dein#tap('TweetVim')
   let g:tweetvim_display_time = 1
   let g:tweetvim_async_post = 1
 endif " }}}
-
-" " lightline.vim {{{
-" if s:bundled('lightline.vim')
-"   let g:lightline = {
-"     \ 'colorscheme': 'default',
-"     \ }
-"   set laststatus=2
-"   if !has('gui_running')
-"     set t_Co=256
-"   endif
-"   au MyAutoCmd bufwritepost $MYVIMRC nested source $MYVIMRC
-" endif " }}}
 
 " vim: tw=78 et st=2 sw=2 foldmethod=marker

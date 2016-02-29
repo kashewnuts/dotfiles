@@ -24,11 +24,6 @@ do
   fi
 done
 
-# Install neobundle.vim
-if [ ! -e $HOME/.vim/neobundle.vim -a -x "`which git`" ]; then
-  git clone https://github.com/Shougo/neobundle.vim ~/.vim/neobundle.vim
-fi
-
 # Set Symbolic Link .gitconfig.os
 GITCONFIGOS=.gitconfig.os
 if [ -a $HOME/${GITCONFIGOS} ]; then

@@ -26,6 +26,8 @@ let g:loaded_netrw             = 1
 let g:loaded_netrwPlugin       = 1
 let g:loaded_netrwSettings     = 1
 let g:loaded_netrwFileHandlers = 1
+let g:loaded_LogiPat           = 1
+let g:loaded_logipat           = 1
 
 " Encoding
 set encoding=utf-8
@@ -49,10 +51,9 @@ let s:env = VimrcEnvironment()
 
 " Misc {{{
 set guioptions+=M  " unload menu.vim
-syntax on          " Enable syntax highlighting
 set number         " Show line number (nonumber: Hide)
-set smartindent    " Advanced automatic indentation when you made the new line
-set showmatch matchtime=1       " The highlight matching brackets
+set autoindent smartindent  " Advanced automatic indentation when you made the new line
+set showmatch matchtime=1   " The highlight matching brackets
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
@@ -263,15 +264,17 @@ endfunction
 
 " dein.vim {{{
 " " ------------------------------------------------------------------------------
-let s:noplugin = 0
-let s:dein = expand('~/.vim/dein')
-
-if !isdirectory(s:dein) || v:version < 702
-  let s:noplugin = 1
-
-elseif isdirectory(s:dein) && v:version >= 704
-  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
-  call dein#begin(s:dein)
+if v:version >= 704
+  " Begin dein.vim
+  let s:dein_dir = expand('~/.vim/dein')
+  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+  if &runtimepath !~# '/dein.vim'
+    if !isdirectory(s:dein_repo_dir)
+      execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+    endif
+    set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+  endif
+  call dein#begin(s:dein_dir)
 
   " TOML file contains plugin list
   let s:toml      = '~/.vim/rc/dein.toml'
@@ -289,10 +292,10 @@ elseif isdirectory(s:dein) && v:version >= 704
   if dein#check_install()
     call dein#install()
   endif
-  filetype plugin indent on       " Required!
 
   call s:load_source(expand('~/.vim/rc/plugins.vim'))
 endif
+syntax on  " Enable syntax highlighting
 " }}}
 
 " Local settings {{{
