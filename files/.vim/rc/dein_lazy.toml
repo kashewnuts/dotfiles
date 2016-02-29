@@ -166,6 +166,10 @@ on_ft = 'scp'
 
 # Edit plugins {{{
 [[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+on_cmd = 'h'
+
+[[plugins]]
 repo = 'vim-scripts/Align'
 
 [[plugins]]
