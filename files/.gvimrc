@@ -60,8 +60,7 @@ endif " }}}
 
 " Semitransparency {{{
 if s:env.is_windows
-  gui
-  set transparency=220
+  au MyAutoCmd GUIEnter * set transparency=220
 elseif s:env.is_darwin
   set transparency=20
 endif " }}}

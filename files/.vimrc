@@ -40,11 +40,11 @@ augroup END
 
 " Environment
 function! VimrcEnvironment()
-  let env = {}
-  let env.is_windows = has('win16') || has('win32') || has('win64')
-  let env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
-  let env.is_ime     = has('multi byte_ime') || has('xim') || has('gui_macvim')
-  return env
+  let l:env = {}
+  let l:env.is_windows = has('win16') || has('win32') || has('win64')
+  let l:env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
+  let l:env.is_ime     = has('multi byte_ime') || has('xim') || has('gui_macvim')
+  return l:env
 endfunction
 let s:env = VimrcEnvironment()
 " }}}
@@ -175,13 +175,13 @@ au MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
 
 " Golang settings {{{
 if $GOROOT !=# ''
-  set rtp+=$GOROOT/misc/vim
+  set runtimepath+=$GOROOT/misc/vim
   set completeopt=menu,preview
   if $GOPATH !=# ''
     " gocode
-    exe 'set rtp+='.globpath($GOPATH, 'src/github.com/nsf/gocode/vim')
+    exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/nsf/gocode/vim')
     " golint
-    exe 'set rtp+='.globpath($GOPATH, 'src/github.com/golang/lint/misc/vim')
+    exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/golang/lint/misc/vim')
   endif
   " grep
   set grepprg=jvgrep
@@ -255,15 +255,15 @@ endif
 
 " load_source
 function! s:load_source(path)
-  let path = expand(a:path)
-  if filereadable(path)
-    execute 'source ' . path
+  let l:path = expand(a:path)
+  if filereadable(l:path)
+    execute 'source ' . l:path
   endif
 endfunction
 " }}}
 
 " dein.vim {{{
-" " ------------------------------------------------------------------------------
+" ------------------------------------------------------------------------------
 if v:version >= 704
   " Begin dein.vim
   let s:dein_dir = expand('~/.vim/dein')
@@ -277,8 +277,8 @@ if v:version >= 704
   call dein#begin(s:dein_dir)
 
   " TOML file contains plugin list
-  let s:toml      = '~/.vim/rc/dein.toml'
-  let s:lazy_toml = '~/.vim/rc/dein_lazy.toml'
+  let s:toml      = $HOME.'/.vim/rc/dein.toml'
+  let s:lazy_toml = $HOME.'/.vim/rc/dein_lazy.toml'
 
   " Read TOML & cache
   if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
@@ -286,14 +286,13 @@ if v:version >= 704
     call dein#load_toml(s:lazy_toml, {'lazy': 1})
     call dein#save_cache()
   endif
+  call s:load_source(expand('~/.vim/rc/plugins.vim'))
   call dein#end()
 
   let g:dein#types#git#clone_depth = 1
   if dein#check_install()
     call dein#install()
   endif
-
-  call s:load_source(expand('~/.vim/rc/plugins.vim'))
 endif
 syntax on  " Enable syntax highlighting
 " }}}

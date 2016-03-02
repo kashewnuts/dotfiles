@@ -13,7 +13,7 @@ if   = '''! has('lua')'''
 repo = 'Shougo/unite.vim'
 # }}}
 
-#  thinca plugins {{{
+# thinca plugins {{{
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_cmd = 'Quickrun'
@@ -221,5 +221,9 @@ on_cmd = [
   'TweetVimMentions'
 ]
 # }}}
+
+[[plugins]]
+repo = 'mattn/benchvimrc-vim'
+on_cmd = 'BenchVimrc'
 
 # vim:se fdm=marker:
