@@ -136,12 +136,12 @@ on_ft = 'haskell'
 [[plugins]]
 repo = 'ujihisa/unite-haskellimport'
 on_ft = 'haskell'
-on_source = ['Shougo/unite.vim', 'ujihisa/ref-hoogle']
+on_source = ['unite.vim', 'ref-hoogle']
 
 [[plugins]]
 repo = 'eagletmt/unite-haddock'
 on_ft = 'haskell'
-on_source = 'Shougo/unite.vim'
+on_source = 'unite.vim'
 # }}}
 
 # Git plugins {{{
@@ -151,10 +151,11 @@ on_cmd = 'Gist'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+lazy = 1
 
 [[plugins]]
 repo = 'gregsexton/gitv'
-on_source = 'tpope/vim-fugitive'
+on_source = 'vim-fugitive'
 on_cmd = 'Gitv'
 # }}}
 
@@ -178,40 +179,46 @@ on_cmd = 'Simplenote'
 
 [[plugins]]
 repo = 'vim-scripts/SQLUtilities'
-on_source = 'vim-scripts/Align'
+on_source = 'Align'
 on_cmd = 'SQLUFormatter'
 # }}}
 
 # Twitter {{{
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+lazy = 1
 
 [[plugins]]
 repo = 'basyura/twibill.vim'
-on_source = 'tyru/open-browser.vim'
+on_source = 'open-browser.vim'
+lazy = 1
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
+lazy = 1
 
 [[plugins]]
 repo = 'h1mesuke/unite-outline'
-on_source = 'Shougo/unite.vim'
+on_source = 'unite.vim'
+lazy = 1
 
 [[plugins]]
 repo = 'basyura/bitly.vim'
+lazy = 1
 
 [[plugins]]
 repo = 'mattn/favstar-vim'
+lazy = 1
 
 [[plugins]]
 repo = 'basyura/TweetVim'
 on_source = [
-  'basyura/twibill.vim',
-  'tyru/open-browser.vim',
-  'mattn/webapi-vim',
-  'h1mesuke/unite-outline',
-  'basyura/bitly.vim',
-  'mattn/favstar-vim',
+  'twibill.vim',
+  'open-browser.vim',
+  'webapi-vim',
+  'unite-outline',
+  'bitly.vim',
+  'favstar-vim',
 ]
 on_cmd = [
   'TweetVimHomeTimeline',
@@ -222,8 +229,10 @@ on_cmd = [
 ]
 # }}}
 
+# Other {{{
 [[plugins]]
 repo = 'mattn/benchvimrc-vim'
 on_cmd = 'BenchVimrc'
+# }}}
 
 # vim:se fdm=marker:
