@@ -10,28 +10,10 @@
 " ------------------------------------------------------------------------------
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 
-" STOP default plugins
-let g:loaded_gzip              = 1
-let g:loaded_tar               = 1
-let g:loaded_tarPlugin         = 1
-let g:loaded_zip               = 1
-let g:loaded_zipPlugin         = 1
-let g:loaded_rrhelper          = 1
-let g:loaded_2html_plugin      = 1
-let g:loaded_vimball           = 1
-let g:loaded_vimballPlugin     = 1
-let g:loaded_getscript         = 1
-let g:loaded_getscriptPlugin   = 1
-let g:loaded_netrw             = 1
-let g:loaded_netrwPlugin       = 1
-let g:loaded_netrwSettings     = 1
-let g:loaded_netrwFileHandlers = 1
-let g:loaded_LogiPat           = 1
-let g:loaded_logipat           = 1
-
 " Encoding
 set encoding=utf-8
 scriptencoding utf-8
+set guioptions+=M  " unload menu.vim
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
@@ -49,10 +31,11 @@ endfunction
 let s:env = VimrcEnvironment()
 " }}}
 
-" Misc {{{
-set guioptions+=M  " unload menu.vim
+" Edit {{{
 set number         " Show line number (nonumber: Hide)
 set autoindent smartindent  " Advanced automatic indentation when you made the new line
+set copyindent    " copy the structure of the existing lines indent when
+                  " autoindenting a new line
 set showmatch matchtime=1   " The highlight matching brackets
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
@@ -72,7 +55,12 @@ set cmdheight=2    " cmdline height
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
-set clipboard+=unnamed,autoselect      " Use the OS clipboard
+" Use the OS clipboard
+if has('unnamedplus')
+  set clipboard+=unnamed,autoselect
+else
+  set clipboard+=unnamed
+endif
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set display=lastline                   " enable view long line
 " disable annoying errorbells and visual bell completely
@@ -85,14 +73,6 @@ if s:env.is_windows
 else
   set imdisable    " When you exit or enter, IME is turned off
   set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-endif
-" }}}
-
-" ColorScheme {{{
-if !has('gui_running')
-  " let s:colorscheme = (s:env.is_windows) ? 'desert' : 'adrian'
-  " execute printf('colorscheme %s', s:colorscheme)
-  colorscheme desert
 endif
 " }}}
 
@@ -166,7 +146,8 @@ au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
 au MyAutoCmd FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
-au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos dictionary=$HOME.'/.vim/dict/scp.dict'
+au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis
+au MyAutoCmd FileType scp        setl ff=dos dictionary=$HOME.'/.vim/dict/scp.dict' suffixesadd+=.scp
 
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
@@ -294,7 +275,35 @@ if v:version >= 704
     call dein#install()
   endif
 endif
-syntax on  " Enable syntax highlighting
+" }}}
+
+" Misc {{{
+" STOP default plugins
+let g:loaded_gzip              = 1
+let g:loaded_tar               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_zip               = 1
+let g:loaded_zipPlugin         = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_vimball           = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_getscript         = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_netrwFileHandlers = 1
+let g:loaded_LogiPat           = 1
+let g:loaded_logipat           = 1
+" Enable syntax highlighting
+syntax on
+" }}}
+
+" GUI {{{
+if !has('gui_running')
+  colorscheme desert
+endif
 " }}}
 
 " Local settings {{{
@@ -302,4 +311,4 @@ call s:load_source(expand('~/.vim/plugins/recognize_charcode.vim'))
 call s:load_source(expand('~/.vimrc.local'))
 " }}}
 
-" vim: tw=78 et st=2 sw=2 foldmethod=marker
+" vim: tw=78 et sw=2 foldmethod=marker

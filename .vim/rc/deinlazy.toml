@@ -1,0 +1,229 @@
+# Shougo plugins {{{
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+on_i = 1
+if   = '''has('lua')'''
+
+[[plugins]]
+repo = 'Shougo/neocomplcache.vim'
+on_i = 1
+if   = '''! has('lua')'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+# }}}
+
+# thinca plugins {{{
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_cmd = 'Quickrun'
+
+[[plugins]]
+repo = 'thinca/vim-scouter'
+on_cmd = 'Scouter'
+# }}}
+
+# Web plugins {{{
+[[plugins]]
+repo = 'hail2u/vim-css3-syntax'
+on_i = 1
+on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+
+[[plugins]]
+repo = 'othree/html5.vim'
+on_i = 1
+on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_i = 1
+on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
+# }}}
+
+# Python plugins {{{
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_i = 1
+on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
+
+  [plugins.build]
+  others = 'pip install jedi'
+
+[[plugins]]
+repo = 'nvie/vim-flake8'
+on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
+
+  [plugins.build]
+  others = 'pip install flake8'
+
+[[plugins]]
+repo = 'tell-k/vim-autopep8'
+on_ft = ['python', 'python3']
+
+  [plugins.build]
+  others = 'pip install autopep8'
+
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
+
+[[plugins]]
+repo = 'lambdalisue/vim-django-support'
+on_ft = ['python', 'python3', 'djangohtml']
+# }}}
+
+# Syntastic {{{
+[[plugins]]
+repo = 'osyo-manga/shabadou.vim'
+
+[[plugins]]
+repo = 'jceb/vim-hier'
+
+[[plugins]]
+repo = 'dannyob/quickfixstatus'
+
+[[plugins]]
+repo = 'osyo-manga/vim-watchdogs'
+on_cmd = 'WatchdogsRun'
+depends = ['osyo-manga/shabadou.vim', 'jceb/vim-hier', 'dannyob/quickfixstatus']
+# }}}
+
+# Golang plugins {{{
+[[plugins]]
+repo = 'nsf/gocode'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'Blackrush/vim-gocode'
+on_ft = 'go'
+# }}}
+
+# Java plugins {{{
+[[plugins]]
+repo ='vim-scripts/javacomplete'
+on_i = 1
+on_ft = 'java'
+# }}}
+
+# Scala plugins {{{
+[[plugins]]
+repo = 'derekwyatt/vim-scala'
+on_i = 1
+on_ft = 'scala'
+# }}}
+
+# Haskell plugins {{{
+[[plugins]]
+repo = 'kana/vim-filetype-haskell'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'eagletmt/ghcmod-vim'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'eagletmt/neco-ghc'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'ujihisa/ref-hoogle'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'ujihisa/unite-haskellimport'
+on_ft = 'haskell'
+on_source = ['Shougo/unite.vim', 'ujihisa/ref-hoogle']
+
+[[plugins]]
+repo = 'eagletmt/unite-haddock'
+on_ft = 'haskell'
+on_source = 'Shougo/unite.vim'
+# }}}
+
+# Git plugins {{{
+[[plugins]]
+repo = 'mattn/gist-vim'
+on_cmd = 'Gist'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'gregsexton/gitv'
+on_source = 'tpope/vim-fugitive'
+on_cmd = 'Gitv'
+# }}}
+
+# Keyence Script plugins {{{
+[[plugins]]
+repo = 'kashewnuts/vim-scp'
+on_ft = 'scp'
+# }}}
+
+# Edit plugins {{{
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+on_cmd = 'h'
+
+[[plugins]]
+repo = 'vim-scripts/Align'
+
+[[plugins]]
+repo = 'mrtazz/simplenote.vim'
+on_cmd = 'Simplenote'
+
+[[plugins]]
+repo = 'vim-scripts/SQLUtilities'
+on_source = 'vim-scripts/Align'
+on_cmd = 'SQLUFormatter'
+# }}}
+
+# Twitter {{{
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'basyura/twibill.vim'
+on_source = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'mattn/webapi-vim'
+
+[[plugins]]
+repo = 'h1mesuke/unite-outline'
+on_source = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'basyura/bitly.vim'
+
+[[plugins]]
+repo = 'mattn/favstar-vim'
+
+[[plugins]]
+repo = 'basyura/TweetVim'
+on_source = [
+  'basyura/twibill.vim',
+  'tyru/open-browser.vim',
+  'mattn/webapi-vim',
+  'h1mesuke/unite-outline',
+  'basyura/bitly.vim',
+  'mattn/favstar-vim',
+]
+on_cmd = [
+  'TweetVimHomeTimeline',
+  'TweetVimSay',
+  'TweetVimListStatus',
+  'TweetVimSearch',
+  'TweetVimMentions'
+]
+# }}}
+
+[[plugins]]
+repo = 'mattn/benchvimrc-vim'
+on_cmd = 'BenchVimrc'
+
+# vim:se fdm=marker:

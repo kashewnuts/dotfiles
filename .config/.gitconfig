@@ -1,0 +1,25 @@
+[user]
+	name = kashewnuts
+	email = bjzli.m08vo9kqs@gmail.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	quotepath = false
+[color]
+	ui = true
+[push]
+	default = simple
+[gui]
+	encoding = utf-8
+[i18n]
+	logOutputEncoding = utf-8
+[alias]
+	lg = log --graph --decorate --oneline
+	br = branch
+	ci = commit
+	co = checkout
+	df = diff
+	st = status
+[include]
+	path = .gitconfig.os
+	path = .gitconfig.local
