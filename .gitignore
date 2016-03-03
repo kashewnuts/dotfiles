@@ -1,9 +1,6 @@
 # vim
-files/.vim/bundle/
-files/.vim/dein/
-files/.vim/bundle_manual/
-files/.vim/neobundle.vim/
-files/.vim/autoload/
-files/.vim/ftdetect/
-files/.vim/syntax/
+.vim/dein/
+.vim/autoload/
+.vim/ftdetect/
+.vim/syntax/
 .DS_Store
