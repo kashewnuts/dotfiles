@@ -13,7 +13,6 @@ if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 " Encoding
 set encoding=utf-8
 scriptencoding utf-8
-set guioptions+=M  " unload menu.vim
 
 " release autogroup in MyAutoCmd
 augroup MyAutoCmd
@@ -31,7 +30,8 @@ endfunction
 let s:env = VimrcEnvironment()
 " }}}
 
-" Edit {{{
+" Misc {{{
+set guioptions+=M  " Disable menu.vim
 set number         " Show line number (nonumber: Hide)
 set autoindent smartindent  " Advanced automatic indentation when you made the new line
 set copyindent    " copy the structure of the existing lines indent when
@@ -245,17 +245,27 @@ endfunction
 
 " dein.vim {{{
 " ------------------------------------------------------------------------------
+" Cache
+let $CACHE = expand('~/.cache')
+if !isdirectory(expand($CACHE))
+  call mkdir(expand($CACHE), 'p')
+endif
+
+" Load dein.vim
 if v:version >= 704
   " Begin dein.vim
-  let s:dein_dir = expand('~/.vim/dein')
-  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-  if &runtimepath !~# '/dein.vim'
-    if !isdirectory(s:dein_repo_dir)
-      execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  let s:dein_dir = finddir('dein.vim', '.;')
+  if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
+    if s:dein_dir ==# '' && &runtimepath !~# '/dein.vim'
+      let s:dein_dir = expand('$CACHE/dein') . '/repos/github.com/Shougo/dein.vim'
+
+      if !isdirectory(s:dein_dir)
+        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
+      endif
     endif
-    set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+    execute ' set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
   endif
-  call dein#begin(s:dein_dir)
+  call dein#begin(expand('$CACHE/dein'))
 
   " TOML file contains plugin list
   let s:toml      = $HOME.'/.vim/rc/dein.toml'
@@ -277,7 +287,7 @@ if v:version >= 704
 endif
 " }}}
 
-" Misc {{{
+" Others {{{
 " STOP default plugins
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
