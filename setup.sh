@@ -11,7 +11,6 @@ DOT_FILES=(
 )
 
 VIM_FILES=(
-    .vim                 \
     .vimrc               \
     .gvimrc              \
 )
@@ -29,6 +28,8 @@ do
 done
 
 # For Vim
+ln -s $HOME/dotfiles/.vim $HOME/.vim
+echo "Put Symbolic Link: $file"
 for file in ${VIM_FILES[@]}
 do
   # Set Symbolic Link

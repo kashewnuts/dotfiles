@@ -62,7 +62,8 @@ endif " }}}
 if s:env.is_windows
   au MyAutoCmd GUIEnter * set transparency=220
 elseif s:env.is_darwin
-  set transparency=20
+  au MyAutoCmd GUIEnter * set transparency=20
+  " set transparency=20
 endif " }}}
 
 " Local settings {{{
@@ -71,4 +72,4 @@ if filereadable(s:localrc)
   source ~/.gvimrc.local
 endif " }}}
 
-" vim: expandtab softtabstop=2 shiftwidth=2 foldmethod=marker
+" vim: tw=78 et sw=2 foldmethod=marker
