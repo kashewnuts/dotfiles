@@ -1,7 +1,6 @@
 " Plugin settings
 
-" neocomplete.vim {{{
-if dein#tap('neocomplete.vim')
+if dein#tap('neocomplete.vim') " {{{
   let g:acp_enableAtStartup = 0            " NeoCompleteEnable
   let g:neocomplete#enable_smart_case = 1  " Use smartcase.
 
@@ -41,8 +40,7 @@ if dein#tap('neocomplete.vim')
   au MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
 endif " }}}
 
-" neocomplcache.vim {{{
-if dein#tap('neocomplcache.vim')
+if dein#tap('neocomplcache.vim') " {{{
   let g:acp_enableAtStartup = 0
   let g:neocomplcache_enable_smart_case = 1
 
@@ -55,8 +53,7 @@ if dein#tap('neocomplcache.vim')
   let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 endif " }}}
 
-" neosnippet.vim {{{
-if dein#tap('neosnippet.vim')
+if dein#tap('neosnippet.vim') " {{{
   " Plugin key-mappings.
   imap <C-k>   <Plug>(neosnippet_expand_or_jump)
   smap <C-k>   <Plug>(neosnippet_expand_or_jump)
@@ -82,8 +79,7 @@ if dein#tap('neosnippet.vim')
   let g:neosnippet#snippets_directory=dein#tapir.'/vim-snippets/snippets'
 endif " }}}
 
-" vimfiler {{{
-if dein#tap('vimfiler')
+if dein#tap('vimfiler') " {{{
   let g:vimfiler_as_default_explorer = 1
   let g:vimfiler_safe_mode_by_default = 0
   " close vimfiler automatically when there are only vimfiler open
@@ -92,8 +88,7 @@ if dein#tap('vimfiler')
       \ winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
 endif " }}}
 
-" vim-quickrun {{{
-if dein#tap('vim-quickrun')
+if dein#tap('vim-quickrun') " {{{
   nmap <Leader>r <Plug>(quickrun)
   " Open at the height of 10-digit buffer window by horizontal split at the bottom
   " Enable asynchronous processing
@@ -107,8 +102,7 @@ if dein#tap('vim-quickrun')
   \ }
 endif " }}}
 
-" jedi-vim {{{
-if dein#tap('jedi-vim')
+if dein#tap('jedi-vim') " {{{
   let g:jedi#auto_initialization = 0
   let g:jedi#rename_command = '<leader>R'
   let g:jedi#popup_on_dot = 1
@@ -118,19 +112,16 @@ if dein#tap('jedi-vim')
   au MyAutoCmd FileType python setl completeopt-=preview " disable docstring
 endif " }}}
 
-" vim-flake8 {{{
-if dein#tap('vim-flake8')
+if dein#tap('vim-flake8') " {{{
   au MyAutoCmd BufWritePost *.py call Flake8()
 endif " }}}
 
-" Align {{{
-if dein#tap('Align')
+if dein#tap('Align') " {{{
   let g:Align_xstrlen = 3       " for japanese string
   let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
 endif " }}}
 
-" simplenote.vim {{{
-if dein#tap('simplenote.vim')
+if dein#tap('simplenote.vim') " {{{
   let s:env = VimrcEnvironment()
   if s:env.is_windows
     let g:SimplenoteListHeight=50
@@ -140,8 +131,7 @@ if dein#tap('simplenote.vim')
   let g:SimplenoteFiletype ='rst'
 endif " }}}
 
-" emmet-vim {{{
-if dein#tap('emmet-vim')
+if dein#tap('emmet-vim') " {{{
   let g:user_emmet_settings = {
   \  'php' : { 'extends' : 'html', 'filters' : 'c', },
   \  'xml' : { 'extends' : 'html', },
@@ -149,10 +139,13 @@ if dein#tap('emmet-vim')
   \ }
 endif " }}}
 
-" TweetVim {{{
-if dein#tap('TweetVim')
+if dein#tap('TweetVim') " {{{
   let g:tweetvim_display_time = 1
   let g:tweetvim_async_post = 1
+endif " }}}
+
+if dein#tap('vim-trailing-whitespace') " {{{
+  let g:extra_whitespace_ignored_filetypes = ['unite']
 endif " }}}
 
 " vim: tw=78 et st=2 sw=2 foldmethod=marker

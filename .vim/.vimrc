@@ -208,18 +208,6 @@ endif "}}}
 
 " Function {{{
 " ------------------------------------------------------------------------------
-" Cheerless cursor position is moved
-function! s:remove_dust()
-  let s:cursor = getpos('.')
-  %s/\s\+$//e  " Remove trailing whitespace on save
-  %s/\t/  /e   " Converted to 2 whitespace tab when you save
-  call setpos('.', s:cursor)
-  unlet s:cursor
-endfunction
-au MyAutoCmd BufWritePre *.py call <SID>remove_dust()
-au MyAutoCmd BufWritePre *.txt call <SID>remove_dust()
-au MyAutoCmd BufWritePre *.rst call <SID>remove_dust()
-
 " Display full-width space
 function! ZenkakuSpace()
   highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=DarkGray

@@ -179,6 +179,10 @@ repo = 'vim-scripts/SQLUtilities'
 on_source = 'Align'
 depends = 'Align'
 on_cmd = 'SQLUFormatter'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+on_cmd = 'FixWhitespace'
 # }}}
 
 # Twitter {{{
