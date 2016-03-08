@@ -57,9 +57,9 @@ set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
 " Use the OS clipboard
 if has('unnamedplus')
-  set clipboard+=unnamed,autoselect
+  set clipboard+=unnamed,unnamedplus,autoselect
 else
-  set clipboard+=unnamed
+  set clipboard+=unnamed,autoselect
 endif
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set display=lastline                   " enable view long line
@@ -120,7 +120,7 @@ command! Sjis Cp932
 " }}}
 
 " Grep {{{
-au MyAutoCmd QuickFixCmdPost *grep* cwindow
+au MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 " }}}
 
 " FileType {{{
@@ -263,7 +263,8 @@ if v:version >= 704
         execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
       endif
     endif
-    execute ' set runtimepath^=' . fnamemodify(s:dein_dir, ':p')
+    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+    " execute 'set runtimepath^=' . substitute(fnamemodify(s:dein_dir, ':p') , '/$', '', '')
   endif
   call dein#begin(expand('$CACHE/dein'))
 

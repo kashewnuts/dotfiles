@@ -63,7 +63,6 @@ if s:env.is_windows
   au MyAutoCmd GUIEnter * set transparency=220
 elseif s:env.is_darwin
   au MyAutoCmd GUIEnter * set transparency=20
-  " set transparency=20
 endif " }}}
 
 " Local settings {{{

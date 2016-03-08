@@ -22,6 +22,12 @@ repo = 'tpope/vim-surround'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+# [[plugins]]
+# repo = 'tomtom/tcomment_vim'
 # }}}
 
 # vim:se fdm=marker:
