@@ -146,8 +146,8 @@ au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
 au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
 au MyAutoCmd FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
-au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis
-au MyAutoCmd FileType scp        setl ff=dos dictionary=$HOME.'/.vim/dict/scp.dict' suffixesadd+=.scp
+au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
+au MyAutoCmd FileType scp        setl dictionary='~/.vim/dict/scp.dict' suffixesadd+=.scp
 
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
@@ -257,8 +257,8 @@ if v:version >= 704
   call dein#begin(expand('$CACHE/dein'))
 
   " TOML file contains plugin list
-  let s:toml      = $HOME.'/.vim/rc/dein.toml'
-  let s:lazy_toml = $HOME.'/.vim/rc/dein_lazy.toml'
+  let s:toml      = '~/.vim/rc/dein.toml'
+  let s:lazy_toml = '~/.vim/rc/dein_lazy.toml'
 
   " Read TOML & cache
   if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
