@@ -16,8 +16,8 @@ GITCONFIGOS=.gitconfig.os
 
 for file in ${DOT_FILES[@]}
 do
-  # Set Symbolic Link .gitconfig.os
   if [ $file = .gitconfig.unix ]; then
+    # Set Symbolic Link .gitconfig.os
     if [ -a $HOME/${GITCONFIGOS} ]; then
       echo "Already exists file: ${GITCONFIGOS}"
     else
@@ -25,7 +25,7 @@ do
       echo "Put Symbolic Link: ${GITCONFIGOS}"
     fi
   else
-    # Set Symbolic Link
+    # Set Symbolic Link others
     if [ -a $HOME/$file ]; then
       echo "Already exists file: $file"
     else
