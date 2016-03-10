@@ -57,9 +57,7 @@ set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
 " Use the OS clipboard
-if has('unnamedplus')
-  set clipboard+=unnamed,unnamedplus,autoselect
-else
+if has('clipboard')
   set clipboard+=unnamed,autoselect
 endif
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
