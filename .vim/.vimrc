@@ -271,6 +271,10 @@ if v:version >= 704 && isdirectory(expand('~/.vim'))
   call dein#end()
 
   let g:dein#types#git#clone_depth = 1
+  " Install plugins to asynchronous
+  if dein#check_install(['vimproc.vim'])
+    call dein#install(['vimproc.vim'])
+  endif
   if dein#check_install()
     call dein#install()
   endif
