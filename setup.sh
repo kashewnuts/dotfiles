@@ -32,7 +32,7 @@ if [ -a $HOME/.vim ]; then
   echo "Already exists file: .vim"
 else
   ln -s $HOME/dotfiles/.vim $HOME/.vim
-  echo "Put Symbolic Link: $file"
+  echo "Put Symbolic Link: .vim"
 fi
 for file in ${VIM_FILES[@]}
 do
