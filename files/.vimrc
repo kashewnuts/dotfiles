@@ -251,22 +251,20 @@ if v:version >= 704 && isdirectory(expand('~/.vim'))
       endif
     endif
     set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-    " execute 'set runtimepath^=' . substitute(fnamemodify(s:dein_dir, ':p') , '/$', '', '')
   endif
-  call dein#begin(expand('$CACHE/dein'))
-
-  " TOML file contains plugin list
-  let s:toml      = '~/.vim/rc/dein.toml'
-  let s:lazy_toml = '~/.vim/rc/dein_lazy.toml'
+  let s:path = expand('$CACHE/dein')
+  let s:toml_path = '~/.vim/rc/dein.toml'
+  let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
 
   " Read TOML & cache
-  if dein#load_cache([expand('<sfile>'), s:toml, s:lazy_toml])
-    call dein#load_toml(s:toml,      {'lazy': 0})
-    call dein#load_toml(s:lazy_toml, {'lazy': 1})
-    call dein#save_cache()
+  if dein#load_state(s:path)
+    call dein#begin(s:path)
+    call dein#load_toml(s:toml_path, {'lazy': 0})
+    call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
+    call dein#end()
+    call dein#save_state()
+    call s:load_source(expand('~/.vim/rc/plugins.vim'))
   endif
-  call s:load_source(expand('~/.vim/rc/plugins.vim'))
-  call dein#end()
 
   let g:dein#types#git#clone_depth = 1
   " Install plugins to asynchronous
@@ -307,6 +305,7 @@ colorscheme desert
 " Local settings {{{
 call s:load_source(expand('~/.vim/plugins/recognize_charcode.vim'))
 call s:load_source(expand('~/.vimrc.local'))
+set secure
 " }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker
