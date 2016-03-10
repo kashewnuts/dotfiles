@@ -32,6 +32,8 @@ let s:env = VimrcEnvironment()
 
 " Misc {{{
 set guioptions+=M  " Disable menu.vim
+set guioptions-=T  " Disable Toolbar
+set guioptions-=m  " Disable Menu bar
 set number         " Show line number (nonumber: Hide)
 set autoindent smartindent  " Advanced automatic indentation when you made the new line
 set copyindent    " copy the structure of the existing lines indent when
@@ -47,7 +49,6 @@ set textwidth=0    " Disable new line to enter automatically
 set ruler          " show the current row and column
 set hlsearch       " highlight searches
 set incsearch      " do incremental searching
-set showmatch      " jump to matches when entering regexp
 set ignorecase     " ignore case when searching
 set smartcase      " no ignorecase if Uppercase char present
 set laststatus=2   " Always display status bar
@@ -240,7 +241,7 @@ if !isdirectory(expand($CACHE))
 endif
 
 " Load dein.vim
-if v:version >= 704
+if v:version >= 704 && isdirectory(expand('~/.vim'))
   " Begin dein.vim
   let s:dein_dir = finddir('dein.vim', '.;')
   if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
@@ -297,12 +298,7 @@ let g:loaded_LogiPat           = 1
 let g:loaded_logipat           = 1
 " Enable syntax highlighting
 syntax on
-" }}}
-
-" GUI {{{
-if !has('gui_running')
-  colorscheme desert
-endif
+colorscheme desert
 " }}}
 
 " Local settings {{{
