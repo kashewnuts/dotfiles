@@ -1,6 +1,5 @@
 # vim
-.vim/dein/
-.vim/autoload/
-.vim/ftdetect/
-.vim/syntax/
+files/.vim/autoload/
+files/.vim/ftdetect/
+files/.vim/syntax/
 .DS_Store

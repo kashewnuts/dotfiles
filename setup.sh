@@ -6,50 +6,31 @@ DOT_FILES=(
     .git-completion.bash \
     .git-prompt.sh       \
     .gitconfig           \
-    .hgrc                \
-    .pythonstartup       \
-)
-
-VIM_FILES=(
-    .vimrc               \
+    .gitconfig.unix      \
     .gvimrc              \
+    .pythonstartup       \
+    .vim                 \
+    .vimrc               \
 )
+GITCONFIGOS=.gitconfig.os
 
-# For dot files
 for file in ${DOT_FILES[@]}
 do
-  # Set Symbolic Link
-  if [ -a $HOME/$file ]; then
-    echo "Already exists file: $file"
+  # Set Symbolic Link .gitconfig.os
+  if [ $file = .gitconfig.unix ]; then
+    if [ -a $HOME/${GITCONFIGOS} ]; then
+      echo "Already exists file: ${GITCONFIGOS}"
+    else
+      ln -s $HOME/dotfiles/files/.gitconfig.unix $HOME/${GITCONFIGOS}
+      echo "Put Symbolic Link: ${GITCONFIGOS}"
+    fi
   else
-    ln -s $HOME/dotfiles/.config/$file $HOME/$file
-    echo "Put Symbolic Link: $file"
+    # Set Symbolic Link
+    if [ -a $HOME/$file ]; then
+      echo "Already exists file: $file"
+    else
+      ln -s $HOME/dotfiles/files/$file $HOME/$file
+      echo "Put Symbolic Link: $file"
+    fi
   fi
 done
-
-# For Vim
-if [ -a $HOME/.vim ]; then
-  echo "Already exists file: .vim"
-else
-  ln -s $HOME/dotfiles/.vim $HOME/.vim
-  echo "Put Symbolic Link: .vim"
-fi
-for file in ${VIM_FILES[@]}
-do
-  # Set Symbolic Link
-  if [ -a $HOME/$file ]; then
-    echo "Already exists file: $file"
-  else
-    ln -s $HOME/dotfiles/.vim/$file $HOME/$file
-    echo "Put Symbolic Link: $file"
-  fi
-done
-
-# Set Symbolic Link .gitconfig.os
-GITCONFIGOS=.gitconfig.os
-if [ -a $HOME/${GITCONFIGOS} ]; then
-  echo "Already exists file: ${GITCONFIGOS}"
-else
-  ln -s $HOME/dotfiles/.config/.gitconfig.unix $HOME/${GITCONFIGOS}
-  echo "Put Symbolic Link: ${GITCONFIGOS}"
-fi
