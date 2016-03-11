@@ -1,12 +1,12 @@
 @set DOTFILES=%USERPROFILE%\dotfiles
 
-mklink %USERPROFILE%\.vimrc %DOTFILES%\.vimrc
-mklink %USERPROFILE%\.gvimrc %DOTFILES%\.gvimrc
-mklink /d %USERPROFILE%\vimfiles %DOTFILES%\.vim
-mklink /d %USERPROFILE%\.vim %DOTFILES%\.vim
-mklink %USERPROFILE%\.gitconfig %DOTFILES%\.gitconfig
-mklink %USERPROFILE%\.gitconfig.os %DOTFILES%\.gitconfig.win
-mklink %USERPROFILE%\.gitignore %DOTFILES%\.gitignore
-mklink %USERPROFILE%\.pythonstartup %DOTFILES%\.pythonstartup
+mklink %USERPROFILE%\.vimrc %DOTFILES%\files\.vimrc
+mklink %USERPROFILE%\.gvimrc %DOTFILES%\files\.gvimrc
+mklink /d %USERPROFILE%\vimfiles %DOTFILES%\files\.vim
+mklink /d %USERPROFILE%\.vim %DOTFILES%\files\.vim
+mklink %USERPROFILE%\.gitconfig %DOTFILES%\files\.gitconfig
+mklink %USERPROFILE%\.gitconfig.os %DOTFILES%\files\.gitconfig.win
+mklink %USERPROFILE%\.gitignore %DOTFILES%\files\.gitignore
+mklink %USERPROFILE%\.pythonstartup %DOTFILES%\files\.pythonstartup
 
 @pause

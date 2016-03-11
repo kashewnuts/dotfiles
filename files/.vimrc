@@ -252,7 +252,7 @@ if v:version >= 704 && isdirectory(expand('~/.vim'))
     endif
     set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
   endif
-  let s:path = expand('$CACHE/dein')
+  let s:path = expand('~/.cache/dein')
   let s:toml_path = '~/.vim/rc/dein.toml'
   let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
 
