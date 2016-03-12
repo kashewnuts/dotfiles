@@ -6,8 +6,19 @@
 " NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
+" guioptions {{{
+set guioptions-=T  " Disable Toolbar
+set guioptions-=m  " Disable Menu bar
+" }}}
+
 " Env {{{
 let s:env = VimrcEnvironment()
+" }}}
+
+" ColorScheme {{{
+if has('gui_running')
+  colorscheme desert
+endif
 " }}}
 
 " Font {{{

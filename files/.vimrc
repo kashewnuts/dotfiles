@@ -278,7 +278,7 @@ endif
 " }}}
 
 " Others {{{
-" STOP default plugins
+" STOP default plugins {{{{
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
@@ -296,10 +296,13 @@ let g:loaded_netrwSettings     = 1
 let g:loaded_netrwFileHandlers = 1
 let g:loaded_LogiPat           = 1
 let g:loaded_logipat           = 1
+" }}}
 " Enable syntax highlighting
 syntax on
 " ColorScheme
-colorscheme desert
+if !has('gui_running')
+  colorscheme desert
+endif
 " }}}
 
 " Local settings {{{
