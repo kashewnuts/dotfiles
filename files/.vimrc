@@ -36,8 +36,8 @@ set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
 set number         " Show line number (nonumber: Hide)
 set autoindent smartindent  " Advanced automatic indentation when you made the new line
-set copyindent    " copy the structure of the existing lines indent when
-                  " autoindenting a new line
+set copyindent     " copy the structure of the existing lines indent when
+                   " autoindenting a new line
 set showmatch matchtime=1   " The highlight matching brackets
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
@@ -52,6 +52,8 @@ set incsearch      " do incremental searching
 set ignorecase     " ignore case when searching
 set smartcase      " no ignorecase if Uppercase char present
 set laststatus=2   " Always display status bar
+" For when no lightline.vim
+set statusline=%F%m%r%h%w\%=[TYPE=%Y]\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
 set cmdheight=2    " cmdline height
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -278,7 +280,16 @@ endif
 " }}}
 
 " Others {{{
-" STOP default plugins
+" IME setting {{{
+if s:env.is_ime
+  " Insert, Search mode: ime setting
+  set iminsert=0
+  set imsearch=-1
+  " Normal mode: IME off
+  inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+endif " }}}
+
+" STOP default plugins {{{
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
@@ -296,9 +307,11 @@ let g:loaded_netrwSettings     = 1
 let g:loaded_netrwFileHandlers = 1
 let g:loaded_LogiPat           = 1
 let g:loaded_logipat           = 1
+" }}}
 " Enable syntax highlighting
 syntax on
 " ColorScheme
+set t_Co=256
 colorscheme desert
 " }}}
 

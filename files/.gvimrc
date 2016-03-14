@@ -6,6 +6,7 @@
 " NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
+
 " Env {{{
 let s:env = VimrcEnvironment()
 " }}}
@@ -39,15 +40,6 @@ if has('gui_running')
   endif
 endif
 " }}}
-
-" IME setting {{{
-if s:env.is_ime
-  " Insert , Search mode: ime setting
-  set iminsert=2
-  set imsearch=2
-  " Normal mode: IME off
-  inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
-endif " }}}
 
 " Semitransparency {{{
 if s:env.is_windows
