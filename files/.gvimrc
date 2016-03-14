@@ -6,9 +6,14 @@
 " NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
-
 " Env {{{
 let s:env = VimrcEnvironment()
+" }}}
+
+" ColorScheme {{{
+if has('gui_running')
+  colorscheme desert
+endif
 " }}}
 
 " Font {{{
