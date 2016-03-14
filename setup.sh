@@ -21,7 +21,7 @@ do
     if [ -a $HOME/${GITCONFIGOS} ]; then
       echo "Already exists file: ${GITCONFIGOS}"
     else
-      ln -s $HOME/dotfiles/files/.gitconfig.unix $HOME/${GITCONFIGOS}
+      ln -s $HOME/dotfiles/files/$file $HOME/${GITCONFIGOS}
       echo "Put Symbolic Link: ${GITCONFIGOS}"
     fi
   else

@@ -311,8 +311,9 @@ let g:loaded_logipat           = 1
 " Enable syntax highlighting
 syntax on
 " ColorScheme
-set t_Co=256
-colorscheme desert
+if !(has('gui_running') && filereadable(expand('~/.gvimrc')))
+  colorscheme desert
+endif
 " }}}
 
 " Local settings {{{
