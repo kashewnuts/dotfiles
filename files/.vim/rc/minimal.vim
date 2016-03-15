@@ -1,0 +1,48 @@
+if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
+
+set nocompatible
+set encoding=utf-8
+set fileformats=unix,dos,mac
+scriptencoding utf-8
+
+set guioptions+=M  " Disable menu.vim
+set guioptions-=Tm " Disable Tool & Menu bar
+
+set number         " Show line number (nonumber: Hide)
+set history=1000   " history
+set ai smartindent " Advanced automatic indentation when you made the new line
+set copyindent     " copy the structure of the existing lines indent when
+                   " autoindenting a new line
+set tabstop=4      " Width on the screen of the tab
+set softtabstop=4  " Number of spaces in the file space is the corresponding
+set expandtab      " noexpand tabs to spaces (expandtab: expand)
+set shiftwidth=4   " Shift move width
+set smarttab       " Indent by the number of 'shiftwidth'.
+set textwidth=0    " Disable new line to enter automatically
+
+set hlsearch       " highlight searches
+set incsearch      " do incremental searching
+set ignorecase     " ignore case when searching
+set smartcase      " no ignorecase if Uppercase char present
+" Turn off the highlight by pressing twice the ESC.
+nmap <silent> <Esc><Esc> :nohlsearch<CR>
+
+set cmdheight=2                 " Cmdline height
+set wildmenu wildmode=list:full " Command-line completion
+set display=lastline            " enable view long line
+set laststatus=2                " Always display status bar
+set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
+
+set ambiwidth=double            " Use twice the width of ASCII characters
+set showmatch matchtime=1       " The highlight matching brackets
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set backspace=indent,eol,start  " Can erase everything in the back space
+set clipboard+=unnamed,autoselect
+set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
+
+set noerrorbells novisualbell t_vb=             " Disable annoying bells
+set noswapfile nobackup nowritebackup undofile  " Doesn't generate backup files
+
+syntax on  " Enable syntax highlight
+colorscheme desert
+set secure

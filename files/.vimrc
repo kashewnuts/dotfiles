@@ -231,54 +231,54 @@ function! s:load_source(path)
   endif
 endfunction
 " }}}
-
-" dein.vim {{{
-" ------------------------------------------------------------------------------
-" Cache
-let $CACHE = expand('~/.cache')
-if !isdirectory(expand($CACHE))
-  call mkdir(expand($CACHE), 'p')
-endif
-
-" Load dein.vim
-if v:version >= 704 && isdirectory(expand('~/.vim'))
-  " Begin dein.vim
-  let s:dein_dir = finddir('dein.vim', '.;')
-  if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
-    if s:dein_dir ==# '' && &runtimepath !~# '/dein.vim'
-      let s:dein_dir = expand('$CACHE/dein') . '/repos/github.com/Shougo/dein.vim'
-
-      if !isdirectory(s:dein_dir)
-        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
-      endif
-    endif
-    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-  endif
-  let s:path = expand('~/.cache/dein')
-  let s:toml_path = '~/.vim/rc/dein.toml'
-  let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
-
-  " Read TOML & cache
-  if dein#load_state(s:path)
-    call dein#begin(s:path)
-    call dein#load_toml(s:toml_path, {'lazy': 0})
-    call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
-    call dein#end()
-    call dein#save_state()
-    call s:load_source(expand('~/.vim/rc/plugins.vim'))
-  endif
-
-  let g:dein#types#git#clone_depth = 1
-  " Install plugins to asynchronous
-  if dein#check_install(['vimproc.vim'])
-    call dein#install(['vimproc.vim'])
-  endif
-  if dein#check_install()
-    call dein#install()
-  endif
-endif
-" }}}
-
+" 
+" " dein.vim {{{
+" " ------------------------------------------------------------------------------
+" " Cache
+" let $CACHE = expand('~/.cache')
+" if !isdirectory(expand($CACHE))
+"   call mkdir(expand($CACHE), 'p')
+" endif
+" 
+" " Load dein.vim
+" if v:version >= 704 && isdirectory(expand('~/.vim'))
+"   " Begin dein.vim
+"   let s:dein_dir = finddir('dein.vim', '.;')
+"   if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
+"     if s:dein_dir ==# '' && &runtimepath !~# '/dein.vim'
+"       let s:dein_dir = expand('$CACHE/dein') . '/repos/github.com/Shougo/dein.vim'
+" 
+"       if !isdirectory(s:dein_dir)
+"         execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
+"       endif
+"     endif
+"     set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+"   endif
+"   let s:path = expand('~/.cache/dein')
+"   let s:toml_path = '~/.vim/rc/dein.toml'
+"   let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
+" 
+"   " Read TOML & cache
+"   if dein#load_state(s:path)
+"     call dein#begin(s:path)
+"     call dein#load_toml(s:toml_path, {'lazy': 0})
+"     call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
+"     call dein#end()
+"     call dein#save_state()
+"     call s:load_source(expand('~/.vim/rc/plugins.vim'))
+"   endif
+" 
+"   let g:dein#types#git#clone_depth = 1
+"   " Install plugins to asynchronous
+"   if dein#check_install(['vimproc.vim'])
+"     call dein#install(['vimproc.vim'])
+"   endif
+"   if dein#check_install()
+"     call dein#install()
+"   endif
+" endif
+" " }}}
+" 
 " Others {{{
 " IME setting {{{
 if s:env.is_ime
@@ -307,6 +307,13 @@ let g:loaded_netrwSettings     = 1
 let g:loaded_netrwFileHandlers = 1
 let g:loaded_LogiPat           = 1
 let g:loaded_logipat           = 1
+let g:plugin_autodate_disable  = 1
+let g:plugin_cmdex_disable     = 1
+let g:plugin_dicwin_disable    = 1
+let g:plugin_format_disable    = 1
+let g:plugin_hz_ja_disable     = 1
+let g:plugin_scrnmode_disable  = 1
+let g:plugin_verifyenc_disable = 1
 " }}}
 " Enable syntax highlighting
 syntax on
