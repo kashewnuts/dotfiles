@@ -48,7 +48,7 @@ set ignorecase     " ignore case when searching
 set smartcase      " no ignorecase if Uppercase char present
 set laststatus=2   " Always display status bar
 " For when no lightline.vim
-set statusline=%F%m%r%h%w\%=[TYPE=%Y]\[FORMAT=%{&ff}]\[ENC=%{&fileencoding}]\[LOW=%l/%L]
+set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
 set cmdheight=2    " cmdline height
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -118,7 +118,7 @@ command! Sjis Cp932
 " autocmd group {{{
 augroup MyAutoCmd
   " Grep {{{
-  au  QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+  au QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
   " }}}
 
   " FileType {{{
@@ -232,50 +232,7 @@ endfunction
 " }}}
 
 " dein.vim {{{
-" ------------------------------------------------------------------------------
-" Cache
-let $CACHE = expand('~/.cache')
-if !isdirectory(expand($CACHE))
-  call mkdir(expand($CACHE), 'p')
-endif
-
-" Load dein.vim
-if v:version >= 704 && isdirectory(expand('~/.vim'))
-  " Begin dein.vim
-  let s:dein_dir = finddir('dein.vim', '.;')
-  if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
-    if s:dein_dir ==# '' && &runtimepath !~# '/dein.vim'
-      let s:dein_dir = expand('$CACHE/dein') . '/repos/github.com/Shougo/dein.vim'
-
-      if !isdirectory(s:dein_dir)
-        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
-      endif
-    endif
-    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-  endif
-  let s:path = expand('~/.cache/dein')
-  let s:toml_path = '~/.vim/rc/dein.toml'
-  let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
-
-  " Read TOML & cache
-  if dein#load_state(s:path)
-    call dein#begin(s:path)
-    call dein#load_toml(s:toml_path, {'lazy': 0})
-    call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
-    call dein#end()
-    call dein#save_state()
-    call s:load_source(expand('~/.vim/rc/plugins.vim'))
-  endif
-
-  let g:dein#types#git#clone_depth = 1
-  " Install plugins to asynchronous
-  if dein#check_install(['vimproc.vim'])
-    call dein#install(['vimproc.vim'])
-  endif
-  if dein#check_install()
-    call dein#install()
-  endif
-endif
+call s:load_source(expand('~/.vim/rc/dein.vim'))
 " }}}
 
 " Others {{{
@@ -319,6 +276,7 @@ if has("gui_running") && !filereadable(expand('~/.gvimrc'))
   set lines=45 columns=100
   winpos 0 0
 endif
+
 " Enable syntax highlighting
 syntax on
 " ColorScheme

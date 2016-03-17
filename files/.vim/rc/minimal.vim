@@ -25,8 +25,6 @@ set hlsearch       " highlight searches
 set incsearch      " do incremental searching
 set ignorecase     " ignore case when searching
 set smartcase      " no ignorecase if Uppercase char present
-" Turn off the highlight by pressing twice the ESC.
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
 
 set cmdheight=2                 " Cmdline height
 set wildmenu wildmode=list:full " Command-line completion
@@ -41,8 +39,8 @@ set backspace=indent,eol,start  " Can erase everything in the back space
 set clipboard+=unnamed,autoselect
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
 
-set noerrorbells novisualbell t_vb=             " Disable annoying bells
-set noswapfile nobackup nowritebackup undofile  " Doesn't generate backup files
+set noerrorbells novisualbell t_vb=              " Disable annoying bells
+set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
 
 syntax on  " Enable syntax highlight
 colorscheme desert

@@ -123,12 +123,7 @@ if dein#tap('Align') " {{{
 endif " }}}
 
 if dein#tap('simplenote.vim') " {{{
-  let s:env = VimrcEnvironment()
-  if s:env.is_windows
-    let g:SimplenoteListHeight=50
-  else
-    let g:SimplenoteListHeight=35
-  endif
+  let g:SimplenoteListHeight=50
   let g:SimplenoteFiletype ='rst'
 endif " }}}
 
