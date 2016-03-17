@@ -144,4 +144,11 @@ if dein#tap('vim-trailing-whitespace') " {{{
   let g:extra_whitespace_ignored_filetypes = ['unite']
 endif " }}}
 
+if dein#tap('vim-zenspace') " {{{
+  augroup vimrc-highlight
+    autocmd!
+    autocmd ColorScheme * highlight ZenSpace cterm=underline ctermfg=LightGray guibg=DarkGray
+  augroup END
+endif " }}}
+
 " vim: tw=78 et st=2 sw=2 foldmethod=marker

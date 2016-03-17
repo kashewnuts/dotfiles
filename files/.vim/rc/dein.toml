@@ -15,6 +15,9 @@ repo = 'Shougo/vimproc.vim'
 
 # Edit plugins {{{
 [[plugins]]
+repo = 'thinca/vim-zenspace'
+
+[[plugins]]
 repo = 'kashewnuts/vim-ft-rst_header'
 
 [[plugins]]

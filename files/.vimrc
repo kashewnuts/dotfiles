@@ -208,20 +208,6 @@ endif "}}}
 
 " Function {{{
 " ------------------------------------------------------------------------------
-" Display full-width space
-function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=LightGray guibg=DarkGray
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-    au!
-    au ColorScheme * call ZenkakuSpace()
-    au VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
-  augroup END
-  call ZenkakuSpace()
-endif
-
 " load_source
 function! s:load_source(path)
   let l:path = expand(a:path)
