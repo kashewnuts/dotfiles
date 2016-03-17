@@ -6,7 +6,8 @@ set fileformats=unix,dos,mac
 scriptencoding utf-8
 
 set guioptions+=M  " Disable menu.vim
-set guioptions-=Tm " Disable Tool & Menu bar
+set guioptions-=T  " Disable Toolbar
+set guioptions-=m  " Disable Menu bar
 
 set number         " Show line number (nonumber: Hide)
 set history=1000   " history

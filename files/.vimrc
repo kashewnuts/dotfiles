@@ -14,11 +14,6 @@ if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 set encoding=utf-8
 scriptencoding utf-8
 
-" release autogroup in MyAutoCmd
-augroup MyAutoCmd
-  au!
-augroup END
-
 " Environment
 function! VimrcEnvironment()
   let l:env = {}
@@ -120,40 +115,45 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 " }}}
 
-" Grep {{{
-au MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
-" }}}
+" autocmd group {{{
+augroup MyAutoCmd
+  " Grep {{{
+  au  QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+  " }}}
 
-" FileType {{{
-" ------------------------------------------------------------------------------
-" ts   : tabstop
-" sw   : shiftwidth
-" sts  : softtabstop
-" et   : expandtab
-" noet : noexpandtab
-" si   : smartindent
-" cinw : cinwords
-au MyAutoCmd FileType html       setl ts=4 sw=4 sts=4 et
-au MyAutoCmd FileType htmldjango setl ts=2 sw=2 sts=2 et
-au MyAutoCmd FileType javascript setl ts=4 sw=4 sts=4 et
-au MyAutoCmd FileType ruby       setl ts=2 sw=2 sts=2 et
-au MyAutoCmd FileType go         setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType vim        setl ts=2 sw=2 sts=2 et
-au MyAutoCmd FileType make       setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
-au MyAutoCmd FileType rst        setl ts=4 sw=4 sts=4 et
-au MyAutoCmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType jsp        setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType java       setl ts=4 sw=4 sts=4 noet
-au MyAutoCmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
-au MyAutoCmd FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
-au MyAutoCmd FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
-au MyAutoCmd FileType scp        setl dictionary='~/.vim/dict/scp.dict' suffixesadd+=.scp
+  " FileType {{{
+  " ts   : tabstop
+  " sw   : shiftwidth
+  " sts  : softtabstop
+  " et   : expandtab
+  " noet : noexpandtab
+  " si   : smartindent
+  " cinw : cinwords
+  au FileType html       setl ts=4 sw=4 sts=4 et
+  au FileType htmldjango setl ts=2 sw=2 sts=2 et
+  au FileType javascript setl ts=4 sw=4 sts=4 et
+  au FileType ruby       setl ts=2 sw=2 sts=2 et
+  au FileType go         setl ts=4 sw=4 sts=4 noet
+  au FileType vim        setl ts=2 sw=2 sts=2 et
+  au FileType make       setl ts=4 sw=4 sts=4 noet
+  au FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+  au FileType rst        setl ts=4 sw=4 sts=4 et
+  au FileType gitconfig  setl ts=4 sw=4 sts=4 noet
+  au FileType jsp        setl ts=4 sw=4 sts=4 noet
+  au FileType java       setl ts=4 sw=4 sts=4 noet
+  au FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+  au FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
+  au FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
+  au FileType scp        setl dictionary='~/.vim/dict/scp.dict' suffixesadd+=.scp
 
-" When the '#' character in the first line of the newly created,
-" it isn't unindent
-au MyAutoCmd FileType python inoremap # X#
-au MyAutoCmd BufNewFile *.py 0r ~/.vim/template/python.txt
+  " When the '#' character in the first line of the newly created,
+  " it isn't unindent
+  au FileType python inoremap # X#
+  au BufNewFile *.py 0r ~/.vim/template/python.txt
+  " Auto Fmt
+  au BufWritePre *.go Fmt
+augroup END " }}}
+
 
 " Golang settings {{{
 if $GOROOT !=# ''
@@ -168,7 +168,6 @@ if $GOROOT !=# ''
   " grep
   set grepprg=jvgrep
 endif
-au MyAutoCmd BufWritePre *.go Fmt
 " }}}
 
 " Java settings {{{
@@ -231,54 +230,54 @@ function! s:load_source(path)
   endif
 endfunction
 " }}}
-" 
-" " dein.vim {{{
-" " ------------------------------------------------------------------------------
-" " Cache
-" let $CACHE = expand('~/.cache')
-" if !isdirectory(expand($CACHE))
-"   call mkdir(expand($CACHE), 'p')
-" endif
-" 
-" " Load dein.vim
-" if v:version >= 704 && isdirectory(expand('~/.vim'))
-"   " Begin dein.vim
-"   let s:dein_dir = finddir('dein.vim', '.;')
-"   if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
-"     if s:dein_dir ==# '' && &runtimepath !~# '/dein.vim'
-"       let s:dein_dir = expand('$CACHE/dein') . '/repos/github.com/Shougo/dein.vim'
-" 
-"       if !isdirectory(s:dein_dir)
-"         execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
-"       endif
-"     endif
-"     set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-"   endif
-"   let s:path = expand('~/.cache/dein')
-"   let s:toml_path = '~/.vim/rc/dein.toml'
-"   let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
-" 
-"   " Read TOML & cache
-"   if dein#load_state(s:path)
-"     call dein#begin(s:path)
-"     call dein#load_toml(s:toml_path, {'lazy': 0})
-"     call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
-"     call dein#end()
-"     call dein#save_state()
-"     call s:load_source(expand('~/.vim/rc/plugins.vim'))
-"   endif
-" 
-"   let g:dein#types#git#clone_depth = 1
-"   " Install plugins to asynchronous
-"   if dein#check_install(['vimproc.vim'])
-"     call dein#install(['vimproc.vim'])
-"   endif
-"   if dein#check_install()
-"     call dein#install()
-"   endif
-" endif
-" " }}}
-" 
+
+" dein.vim {{{
+" ------------------------------------------------------------------------------
+" Cache
+let $CACHE = expand('~/.cache')
+if !isdirectory(expand($CACHE))
+  call mkdir(expand($CACHE), 'p')
+endif
+
+" Load dein.vim
+if v:version >= 704 && isdirectory(expand('~/.vim'))
+  " Begin dein.vim
+  let s:dein_dir = finddir('dein.vim', '.;')
+  if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
+    if s:dein_dir ==# '' && &runtimepath !~# '/dein.vim'
+      let s:dein_dir = expand('$CACHE/dein') . '/repos/github.com/Shougo/dein.vim'
+
+      if !isdirectory(s:dein_dir)
+        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
+      endif
+    endif
+    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+  endif
+  let s:path = expand('~/.cache/dein')
+  let s:toml_path = '~/.vim/rc/dein.toml'
+  let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
+
+  " Read TOML & cache
+  if dein#load_state(s:path)
+    call dein#begin(s:path)
+    call dein#load_toml(s:toml_path, {'lazy': 0})
+    call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
+    call dein#end()
+    call dein#save_state()
+    call s:load_source(expand('~/.vim/rc/plugins.vim'))
+  endif
+
+  let g:dein#types#git#clone_depth = 1
+  " Install plugins to asynchronous
+  if dein#check_install(['vimproc.vim'])
+    call dein#install(['vimproc.vim'])
+  endif
+  if dein#check_install()
+    call dein#install()
+  endif
+endif
+" }}}
+
 " Others {{{
 " IME setting {{{
 if s:env.is_ime
@@ -315,6 +314,11 @@ let g:plugin_hz_ja_disable     = 1
 let g:plugin_scrnmode_disable  = 1
 let g:plugin_verifyenc_disable = 1
 " }}}
+" Default Window Size
+if has("gui_running") && !filereadable(expand('~/.gvimrc'))
+  set lines=45 columns=100
+  winpos 0 0
+endif
 " Enable syntax highlighting
 syntax on
 " ColorScheme

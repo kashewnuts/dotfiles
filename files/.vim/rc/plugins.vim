@@ -18,6 +18,7 @@ if dein#tap('neocomplete.vim') " {{{
     \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
   let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
+  let g:neocomplete#sources#dictionary#dictionaries = {'default': ''}
   " let g:neocomplete#sources#dictionary#dictionaries = {
   "   \ 'default':    '',
   "   \ 'vimshell':   $HOME.'/.vimshell_hist',
