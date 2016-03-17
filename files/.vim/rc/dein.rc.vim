@@ -6,6 +6,11 @@ function! s:load_source(path)
   endif
 endfunction
 
+" autocmd group
+augroup MyAutoCmd
+  au!
+augroup END
+
 " Cache
 let $CACHE = expand('~/.cache')
 if !isdirectory(expand($CACHE))

@@ -218,7 +218,7 @@ endfunction
 " }}}
 
 " dein.vim {{{
-call s:load_source(expand('~/.vim/rc/dein.vim'))
+call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
 " }}}
 
 " Others {{{

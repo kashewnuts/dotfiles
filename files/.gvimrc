@@ -6,23 +6,19 @@
 " NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
-" Env {{{
-let s:env = VimrcEnvironment()
-" }}}
+function! VimrcEnvironment() " {{{
+  let l:env = {}
+  let l:env.is_windows = has('win16') || has('win32') || has('win64')
+  let l:env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
+  let l:env.is_ime     = has('multi byte_ime') || has('xim') || has('gui_macvim')
+  return l:env
+endfunction
+let s:env = VimrcEnvironment() " }}}
 
 " ColorScheme {{{
 if has('gui_running')
   colorscheme desert
-endif
-" }}}
-
-" Font {{{
-if s:env.is_windows
-  set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10
-elseif s:env.is_darwin
-  set guifont=Osaka-Mono:h14
-endif
-" }}}
+endif " }}}
 
 " Hack #120: Store the location and size of the window by gVim {{{
 if has('gui_running')
@@ -43,8 +39,7 @@ if has('gui_running')
   if filereadable(s:save_window_file)
     execute 'source' s:save_window_file
   endif
-endif
-" }}}
+endif " }}}
 
 " Semitransparency {{{
 if s:env.is_windows
