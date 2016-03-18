@@ -10,6 +10,10 @@
 " ------------------------------------------------------------------------------
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 
+if &compatible
+  set nocompatible
+endif
+
 " Encoding
 set encoding=utf-8
 scriptencoding utf-8
@@ -29,6 +33,7 @@ let s:env = VimrcEnvironment()
 set guioptions+=M  " Disable menu.vim
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
+
 set number         " Show line number (nonumber: Hide)
 set autoindent smartindent  " Advanced automatic indentation when you made the new line
 set copyindent     " copy the structure of the existing lines indent when
