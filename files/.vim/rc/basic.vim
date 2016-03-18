@@ -45,9 +45,6 @@ set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
 
 set noerrorbells novisualbell t_vb=              " Disable annoying bells
 set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
-set nofixeol
-set breakindent
-set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
 
 function! s:load_source(path) " {{{
   let l:path = expand(a:path)
@@ -60,5 +57,4 @@ call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
 call s:load_source(expand('~/.vimrc.local'))
 
 syntax on  " Enable syntax highlight
-colorscheme desert
 set secure

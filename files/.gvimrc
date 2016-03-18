@@ -15,6 +15,10 @@ function! VimrcEnvironment() " {{{
 endfunction
 let s:env = VimrcEnvironment() " }}}
 
+" Font {{{
+set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
+" }}}
+
 " ColorScheme {{{
 if has('gui_running')
   colorscheme desert
