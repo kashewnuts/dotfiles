@@ -16,6 +16,7 @@ endif
 
 " Encoding
 set encoding=utf-8
+set fileformats=unix,dos,mac
 scriptencoding utf-8
 
 " Environment
@@ -57,23 +58,15 @@ set cmdheight=2    " cmdline height
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 set wildmenu wildmode=list:full " Command-line completion
-" Use the OS clipboard
 if has('clipboard')
-  set clipboard+=unnamed,autoselect
+  set clipboard+=unnamed,autoselect    " Use the OS clipboard
 endif
-set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set display=lastline                   " enable view long line
-" disable annoying errorbells and visual bell completely
-set noerrorbells novisualbell t_vb=
+set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+set noerrorbells novisualbell t_vb=    " disable annoying bells
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
-" Visualize character
-if s:env.is_windows
-  set list listchars=tab:>-,trail:-,extends:>,precedes:<
-else
-  set imdisable    " When you exit or enter, IME is turned off
-  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-endif
+set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
 " }}}
 
 " KeyMaping {{{
@@ -121,6 +114,7 @@ command! Sjis Cp932
 
 " autocmd group {{{
 augroup MyAutoCmd
+  au!
   " Grep {{{
   au QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
   " }}}
@@ -192,9 +186,8 @@ let g:php_sql_query     = 1
 " }}}
 
 " After Vim7.4 {{{
-" Don't make *.un~ files {{{
-if exists('&undofile')
-  set noundofile
+if exists('&undofile') " {{{
+  set noundofile  " Don't make *.un~ files
 endif "}}}
 
 " breakindent {{{
@@ -204,16 +197,12 @@ if v:version >= 704 && has('patch338')
   set breakindent
 endif "}}}
 
-" nofixeol {{{
-if exists('&nofixeol')
+if exists('&nofixeol') " {{{
   set nofixeol
 endif "}}}
 " }}}
 
-" Function {{{
-" ------------------------------------------------------------------------------
-" load_source
-function! s:load_source(path)
+function! s:load_source(path) " {{{
   let l:path = expand(a:path)
   if filereadable(l:path)
     execute 'source ' . l:path
@@ -223,14 +212,12 @@ endfunction
 
 " dein.vim {{{
 call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
+call s:load_source(expand('~/.vim/rc/plugins.vim'))
 " }}}
 
 " Others {{{
-" IME setting {{{
-if s:env.is_ime
-  " Insert, Search mode: ime setting
-  set iminsert=0
-  set imsearch=-1
+if s:env.is_ime " {{{
+  set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
   " Normal mode: IME off
   inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
 endif " }}}
@@ -261,22 +248,21 @@ let g:plugin_hz_ja_disable     = 1
 let g:plugin_scrnmode_disable  = 1
 let g:plugin_verifyenc_disable = 1
 " }}}
-" Default Window Size
-if has("gui_running") && !filereadable(expand('~/.gvimrc'))
+
+" Default Window Size {{{
+if has("gui_running") && !filereadable(expand('~/.vimwinpos'))
   set lines=45 columns=100
   winpos 0 0
-endif
+endif " }}}
 
-" Enable syntax highlighting
-syntax on
-" ColorScheme
+syntax on  " Enable syntax highlighting
+" ColorScheme {{{
 if !(has('gui_running') && filereadable(expand('~/.gvimrc')))
   colorscheme desert
-endif
+endif " }}}
 " }}}
 
 " Local settings {{{
-call s:load_source(expand('~/.vim/plugins/recognize_charcode.vim'))
 call s:load_source(expand('~/.vimrc.local'))
 set secure
 " }}}
