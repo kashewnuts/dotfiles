@@ -1,13 +1,12 @@
-" ==============================================================================
+" ==========================================================================
 " Vim Configuration
 "
 " Author:   Kashun YOSHIDA
 " Platform: Windows, Linux, MacOSX
 " NOTE:     To use this, copy to your home directory.
-" ==============================================================================
+" ==========================================================================
 
 " Basic Settings {{{
-" ------------------------------------------------------------------------------
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 
 if &compatible
@@ -67,6 +66,7 @@ set noerrorbells novisualbell t_vb=    " disable annoying bells
 set fillchars=vert:\|
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
 set fileformats=unix,dos,mac
+set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
 " }}}
 
 " KeyMaping {{{

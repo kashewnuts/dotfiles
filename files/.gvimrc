@@ -1,17 +1,19 @@
-" ==============================================================================
+" ==========================================================================
 " Vim GUI Configuration
 "
 " Author:   Kashun YOSHIDA
 " Platform: Windows, Linux, MacOSX
 " NOTE:     To use this, copy to your home directory.
-" ==============================================================================
+" ==========================================================================
 
-" Env {{{
+function! VimrcEnvironment() " {{{
+  let s:env = {}
+  let s:env.IsWindows = has('win16') || has('win32') || has('win64')
+  let s:env.IsDarwin  = has('mac') || has('macunix') || has('gui_macvim')
+  let s:env.IsIme     = has('multi byte_ime') || has('xim') || has('gui_macvim')
+  return s:env
+endfunction
 let s:env = VimrcEnvironment() " }}}
-
-" Font {{{
-set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
-" }}}
 
 " ColorScheme {{{
 if has('gui_running')
@@ -41,7 +43,7 @@ endif " }}}
 
 " Semitransparency {{{
 if s:env.IsWindows
-  au MyAutoCmd GUIEnter * set transparency=220
+  au! GUIEnter * set transparency=220
 elseif s:env.IsDarwin
   set transparency=20
 endif " }}}
