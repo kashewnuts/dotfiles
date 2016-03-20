@@ -1,4 +1,5 @@
 augroup MyAutoCmd
+  au!
   " Grep
   au QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 
@@ -35,3 +36,8 @@ augroup MyAutoCmd
   " Auto Fmt
   au BufWritePre *.go Fmt
 augroup END
+
+silent! filetype plugin indent on
+filetype detect
+
+" vim: tw=78 et sw=2 foldmethod=marker

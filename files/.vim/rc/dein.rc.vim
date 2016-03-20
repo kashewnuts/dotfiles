@@ -1,16 +1,3 @@
-" load_source
-function! s:load_source(path)
-  let l:path = expand(a:path)
-  if filereadable(l:path)
-    execute 'source ' . l:path
-  endif
-endfunction
-
-" autocmd group
-augroup MyAutoCmd
-  au!
-augroup END
-
 " Cache
 let $CACHE = expand('~/.cache')
 if !isdirectory(expand($CACHE))
@@ -42,7 +29,6 @@ if v:version >= 704 && isdirectory(expand('~/.vim'))
     call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
     call dein#end()
     call dein#save_state()
-    call s:load_source(expand('~/.vim/rc/plugins.vim'))
   endif
 
   let g:dein#types#git#clone_depth = 1

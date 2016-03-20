@@ -10,6 +10,10 @@
 " ------------------------------------------------------------------------------
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 
+if &compatible
+  set nocompatible
+endif
+
 " Encoding
 set encoding=utf-8
 scriptencoding utf-8

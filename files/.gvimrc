@@ -6,7 +6,12 @@
 " NOTE:     To use this, copy to your home directory.
 " ==============================================================================
 
-function! VimrcEnvironment() " {{{
+" Env {{{
+augroup MyAutoCmd
+  au!
+augroup END
+
+function! VimrcEnvironment()
   let l:env = {}
   let l:env.is_windows = has('win16') || has('win32') || has('win64')
   let l:env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
