@@ -7,17 +7,6 @@
 " ==============================================================================
 
 " Env {{{
-augroup MyAutoCmd
-  au!
-augroup END
-
-function! VimrcEnvironment()
-  let l:env = {}
-  let l:env.is_windows = has('win16') || has('win32') || has('win64')
-  let l:env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
-  let l:env.is_ime     = has('multi byte_ime') || has('xim') || has('gui_macvim')
-  return l:env
-endfunction
 let s:env = VimrcEnvironment() " }}}
 
 " Font {{{
@@ -51,9 +40,9 @@ if has('gui_running')
 endif " }}}
 
 " Semitransparency {{{
-if s:env.is_windows
+if s:env.IsWindows
   au MyAutoCmd GUIEnter * set transparency=220
-elseif s:env.is_darwin
+elseif s:env.IsDarwin
   set transparency=20
 endif " }}}
 

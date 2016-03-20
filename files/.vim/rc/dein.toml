@@ -17,8 +17,8 @@ repo = 'Shougo/vimproc.vim'
 [[plugins]]
 repo = 'thinca/vim-zenspace'
 
-[[plugins]]
-repo = 'kashewnuts/vim-ft-rst_header'
+#. [[plugins]]
+#. repo = 'kashewnuts/vim-ft-rst_header'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -33,4 +33,4 @@ repo = 'tpope/vim-fugitive'
 #. repo = 'tomtom/tcomment_vim'
 #. }}}
 
-#. vim:se fdm=marker:
+#. toml:se fdm=marker:

@@ -37,7 +37,7 @@ augroup MyAutoCmd
   au BufWritePre *.go Fmt
 augroup END
 
-silent! filetype plugin indent on
-filetype detect
+" silent! filetype plugin indent on
+" filetype detect
 
 " vim: tw=78 et sw=2 foldmethod=marker

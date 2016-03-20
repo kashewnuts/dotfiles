@@ -11,21 +11,20 @@
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 
 if &compatible
-  set nocompatible
+  set nocompatible  " For dein.vim
 endif
 
 " Encoding
 set encoding=utf-8
-set fileformats=unix,dos,mac
 scriptencoding utf-8
 
 " Environment
 function! VimrcEnvironment()
-  let l:env = {}
-  let l:env.is_windows = has('win16') || has('win32') || has('win64')
-  let l:env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
-  let l:env.is_ime     = has('multi byte_ime') || has('xim') || has('gui_macvim')
-  return l:env
+  let s:env = {}
+  let s:env.IsWindows = has('win16') || has('win32') || has('win64')
+  let s:env.IsDarwin  = has('mac') || has('macunix') || has('gui_macvim')
+  let s:env.IsIme     = has('multi byte_ime') || has('xim') || has('gui_macvim')
+  return s:env
 endfunction
 let s:env = VimrcEnvironment()
 " }}}
@@ -67,6 +66,7 @@ set noerrorbells novisualbell t_vb=    " disable annoying bells
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
+set fileformats=unix,dos,mac
 " }}}
 
 " KeyMaping {{{
@@ -215,8 +215,7 @@ call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
 call s:load_source(expand('~/.vim/rc/plugins.vim'))
 " }}}
 
-" Others {{{
-if s:env.is_ime " {{{
+if s:env.IsIme " {{{
   set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
   " Normal mode: IME off
   inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
@@ -250,20 +249,19 @@ let g:plugin_verifyenc_disable = 1
 " }}}
 
 " Default Window Size {{{
-if has("gui_running") && !filereadable(expand('~/.vimwinpos'))
+if has('gui_running') && !filereadable(expand('~/.vimwinpos'))
   set lines=45 columns=100
   winpos 0 0
 endif " }}}
 
-syntax on  " Enable syntax highlighting
 " ColorScheme {{{
 if !(has('gui_running') && filereadable(expand('~/.gvimrc')))
   colorscheme desert
 endif " }}}
-" }}}
 
-" Local settings {{{
+" Others {{{
 call s:load_source(expand('~/.vimrc.local'))
+" syntax on
 set secure
 " }}}
 

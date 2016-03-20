@@ -1,13 +1,15 @@
 #. Shougo plugins {{{
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+if = "has('lua')"
 on_i = 1
-if   = '''has('lua')'''
+hook_source = "let g:neocomplete#enable_at_startup = 1"
 
 [[plugins]]
 repo = 'Shougo/neocomplcache.vim'
 on_i = 1
-if   = '''! has('lua')'''
+if = "!has('lua')"
+hook_source = "let g:neocomplcache#enable_at_startup = 1"
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
@@ -38,9 +40,14 @@ on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
 #. }}}
 
 #. Python plugins {{{
-[[plugins]]
 repo = 'davidhalter/jedi-vim'
 on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
+hook_source = '''
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#smart_auto_mappings = 0
+  let g:jedi#show_call_signatures = 0
+'''
 
   [plugins.build]
   others = 'pip install jedi'
@@ -133,6 +140,14 @@ on_cmd = 'SQLUFormatter'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 on_cmd = 'FixWhitespace'
+
+[[plugins]]
+repo = 'kashewnuts/vim-ft-rst_header'
+on_ft = 'rst'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
 #. }}}
 
 #. Twitter {{{
@@ -176,4 +191,4 @@ on_cmd = [
 ]
 #. }}}
 
-#. vim:se fdm=marker:
+#. toml:se fdm=marker:
