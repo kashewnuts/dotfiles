@@ -123,7 +123,7 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 
 " Turn off the highlight by pressing twice the ESC.
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
