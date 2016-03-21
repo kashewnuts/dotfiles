@@ -15,11 +15,6 @@ function! VimrcEnvironment() " {{{
 endfunction
 let s:env = VimrcEnvironment() " }}}
 
-" ColorScheme {{{
-if has('gui_running')
-  colorscheme desert
-endif " }}}
-
 " Hack #120: Store the location and size of the window by gVim {{{
 if has('gui_running')
   let s:save_window_file = expand('~/.vimwinpos')

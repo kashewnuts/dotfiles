@@ -28,48 +28,85 @@ endfunction
 let s:env = VimrcEnvironment()
 " }}}
 
-" Misc {{{
+" GUI {{{
+set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
 set guioptions+=M  " Disable menu.vim
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
-set number         " Show line number (nonumber: Hide)
-set autoindent smartindent  " Advanced automatic indentation when you made the new line
-set copyindent     " copy the structure of the existing lines indent when
-                   " autoindenting a new line
-set showmatch matchtime=1   " The highlight matching brackets
-set tabstop=4      " Width on the screen of the tab
-set softtabstop=4  " Number of spaces in the file space is the corresponding
-set expandtab      " noexpand tabs to spaces (expandtab: expand)
-set shiftwidth=4   " Shift move width
-set smarttab       " Indent by the number of 'shiftwidth'.
-set history=1000   " history
-set textwidth=0    " Disable new line to enter automatically
-set ruler          " show the current row and column
-set hlsearch       " highlight searches
-set incsearch      " do incremental searching
-set ignorecase     " ignore case when searching
-set smartcase      " no ignorecase if Uppercase char present
-set laststatus=2   " Always display status bar
-" For when no lightline.vim
-set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
-set cmdheight=2    " cmdline height
-set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+" }}}
+
+" STOP default plugins {{{
+let g:loaded_gzip              = 1
+let g:loaded_tar               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_zip               = 1
+let g:loaded_zipPlugin         = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_vimball           = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_getscript         = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_netrwFileHandlers = 1
+let g:loaded_LogiPat           = 1
+let g:loaded_logipat           = 1
+let g:plugin_autodate_disable  = 1
+let g:plugin_cmdex_disable     = 1
+let g:plugin_dicwin_disable    = 1
+let g:plugin_format_disable    = 1
+let g:plugin_hz_ja_disable     = 1
+let g:plugin_scrnmode_disable  = 1
+let g:plugin_verifyenc_disable = 1
+" }}}
+
+" Misc {{{
+set autoindent     " For smartindent
 set backspace=indent,eol,start  " Can erase everything in the back space
-set wildmenu wildmode=list:full " Command-line completion
 if has('clipboard')
   set clipboard+=unnamed,autoselect    " Use the OS clipboard
 endif
-set display=lastline                   " enable view long line
-set noswapfile nobackup nowritebackup  " doesn't generate a backup file
-set noerrorbells novisualbell t_vb=    " disable annoying bells
+set cmdheight=2    " cmdline height
+set copyindent     " copy the structure of the existing lines indent when
+                   " autoindenting a new line
+set display=lastline                 " enable view long line
+set expandtab      " noexpand tabs to spaces (expandtab: expand)
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
+set fileformats=unix,dos,mac  " This gives the end-of-line (<EOL>) formats
+set history=1000   " history
+set hlsearch       " highlight searches
+set ignorecase     " ignore case when searching
+set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
+set incsearch      " do incremental searching
+set laststatus=2   " Always display status bar
+set lazyredraw
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
-set fileformats=unix,dos,mac
-set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set noerrorbells novisualbell t_vb=    " disable annoying bells
+set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+set number         " Show line number (nonumber: Hide)
+set ruler          " show the current row and column
+set shiftwidth=4   " Shift move width
+set showmatch matchtime=1   " The highlight matching brackets
+set smartcase      " no ignorecase if Uppercase char present
+set smartindent    " Advanced automatic indentation when you made the new line
+set smarttab       " Indent by the number of 'shiftwidth'.
+set softtabstop=4  " Number of spaces in the file space is the corresponding
+" For when no lightline.vim
+set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
+set tabstop=4      " Width on the screen of the tab
+set textwidth=0    " Disable new line to enter automatically
+set ttyfast
+set wildmenu wildmode=list:full " Command-line completion
 " }}}
 
 " KeyMaping {{{
+" Normal mode: IME off
+inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+
 " Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
 nnoremap <silent> <S-Right> :5wincmd ><CR>
@@ -170,11 +207,11 @@ endif
 
 " Java settings {{{
 " Syntax highlight
-let g:java_highlight_all=1
-let g:java_highlight_debug=1
-let g:java_allow_cpp_keywords=1
-let g:java_space_errors=1
-let g:java_highlight_functions=1
+let g:java_highlight_all       = 1
+let g:java_highlight_debug     = 1
+let g:java_allow_cpp_keywords  = 1
+let g:java_space_errors        = 1
+let g:java_highlight_functions = 1
 " }}}
 
 " PHP settings {{{
@@ -215,53 +252,16 @@ call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
 call s:load_source(expand('~/.vim/rc/plugins.vim'))
 " }}}
 
-if s:env.IsIme " {{{
-  set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
-  " Normal mode: IME off
-  inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
-endif " }}}
-
-" STOP default plugins {{{
-let g:loaded_gzip              = 1
-let g:loaded_tar               = 1
-let g:loaded_tarPlugin         = 1
-let g:loaded_zip               = 1
-let g:loaded_zipPlugin         = 1
-let g:loaded_rrhelper          = 1
-let g:loaded_2html_plugin      = 1
-let g:loaded_vimball           = 1
-let g:loaded_vimballPlugin     = 1
-let g:loaded_getscript         = 1
-let g:loaded_getscriptPlugin   = 1
-let g:loaded_netrw             = 1
-let g:loaded_netrwPlugin       = 1
-let g:loaded_netrwSettings     = 1
-let g:loaded_netrwFileHandlers = 1
-let g:loaded_LogiPat           = 1
-let g:loaded_logipat           = 1
-let g:plugin_autodate_disable  = 1
-let g:plugin_cmdex_disable     = 1
-let g:plugin_dicwin_disable    = 1
-let g:plugin_format_disable    = 1
-let g:plugin_hz_ja_disable     = 1
-let g:plugin_scrnmode_disable  = 1
-let g:plugin_verifyenc_disable = 1
-" }}}
-
 " Default Window Size {{{
 if has('gui_running') && !filereadable(expand('~/.vimwinpos'))
   set lines=45 columns=100
   winpos 0 0
 endif " }}}
 
-" ColorScheme {{{
-if !(has('gui_running') && filereadable(expand('~/.gvimrc')))
-  colorscheme desert
-endif " }}}
-
 " Others {{{
 call s:load_source(expand('~/.vimrc.local'))
-" syntax on
+colorscheme desert
+syntax on
 set secure
 " }}}
 
