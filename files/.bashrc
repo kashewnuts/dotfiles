@@ -5,7 +5,7 @@ alias vi='vim'
 export PYTHONSTARTUP=~/.pythonstartup
 export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
 
-### Virtualenvwrapper
+# Virtualenvwrapper
 if [ -f virtualenvwrapper.sh ]; then
     export WORKON_HOME=$HOME/.virtualenvs
     source virtualenvwrapper.sh
@@ -23,17 +23,11 @@ export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)
 case "$OSTYPE" in
     # BSD (contains Mac)
     darwin*)
+
     # Editor
     export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-    alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
     alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-    alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
     alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
-    export VIM=/Applications/MacVim.app/Contents/Resources/vim
-    export VIMRUNTIME=/Applications/MacVim.app/Contents/Resources/vim/runtime
-
-    # vagrant
-    # export PATH=/opt/vagrant/embedded/gems/bin:$PATH
 
     # Open
     alias firefox="open -a Firefox"
