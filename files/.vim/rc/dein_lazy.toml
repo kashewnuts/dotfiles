@@ -93,11 +93,7 @@ depends = ['osyo-manga/shabadou.vim', 'jceb/vim-hier', 'dannyob/quickfixstatus']
 
 #. Golang plugins {{{
 [[plugins]]
-repo = 'nsf/gocode'
-on_ft = 'go'
-
-[[plugins]]
-repo = 'Blackrush/vim-gocode'
+repo = 'fatih/vim-go'
 on_ft = 'go'
 #. }}}
 
