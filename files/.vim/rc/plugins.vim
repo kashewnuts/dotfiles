@@ -1,9 +1,5 @@
 " Plugin settings
 
-augroup MyAutoCmd " {{{
-  au!
-augroup END " }}}
-
 if dein#tap('neocomplete.vim') " {{{
   let g:acp_enableAtStartup = 0            " NeoCompleteEnable
   let g:neocomplete#enable_smart_case = 1  " Use smartcase.

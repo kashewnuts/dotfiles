@@ -189,7 +189,6 @@ augroup MyAutoCmd
   au BufWritePre *.go Fmt
 augroup END " }}}
 
-
 " Golang settings {{{
 if $GOROOT !=# ''
   set runtimepath+=$GOROOT/misc/vim
@@ -260,8 +259,8 @@ endif " }}}
 
 " Others {{{
 call s:load_source(expand('~/.vimrc.local'))
-colorscheme desert
 syntax on
+colorscheme desert
 set secure
 " }}}
 
