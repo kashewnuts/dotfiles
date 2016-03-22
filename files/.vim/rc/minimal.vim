@@ -8,6 +8,7 @@ scriptencoding utf-8
 set guioptions+=M  " Disable menu.vim
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
+set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
 
 set number         " Show line number (nonumber: Hide)
 set history=1000   " history

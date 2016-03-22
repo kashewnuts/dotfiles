@@ -1,17 +1,16 @@
-" ==============================================================================
+" ==========================================================================
 " Vim Configuration
 "
 " Author:   Kashun YOSHIDA
 " Platform: Windows, Linux, MacOSX
 " NOTE:     To use this, copy to your home directory.
-" ==============================================================================
+" ==========================================================================
 
 " Basic Settings {{{
-" ------------------------------------------------------------------------------
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 
 if &compatible
-  set nocompatible
+  set nocompatible  " For dein.vim
 endif
 
 " Encoding
@@ -20,64 +19,94 @@ scriptencoding utf-8
 
 " Environment
 function! VimrcEnvironment()
-  let l:env = {}
-  let l:env.is_windows = has('win16') || has('win32') || has('win64')
-  let l:env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
-  let l:env.is_ime     = has('multi byte_ime') || has('xim') || has('gui_macvim')
-  return l:env
+  let s:env = {}
+  let s:env.IsWindows = has('win16') || has('win32') || has('win64')
+  let s:env.IsDarwin  = has('mac') || has('macunix') || has('gui_macvim')
+  let s:env.IsIme     = has('multi byte_ime') || has('xim') || has('gui_macvim')
+  return s:env
 endfunction
 let s:env = VimrcEnvironment()
 " }}}
 
-" Misc {{{
+" GUI {{{
+set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
 set guioptions+=M  " Disable menu.vim
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
+" }}}
 
-set number         " Show line number (nonumber: Hide)
-set autoindent smartindent  " Advanced automatic indentation when you made the new line
+" STOP default plugins {{{
+let g:loaded_gzip              = 1
+let g:loaded_tar               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_zip               = 1
+let g:loaded_zipPlugin         = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_vimball           = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_getscript         = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_netrwFileHandlers = 1
+let g:loaded_LogiPat           = 1
+let g:loaded_logipat           = 1
+let g:plugin_autodate_disable  = 1
+let g:plugin_cmdex_disable     = 1
+let g:plugin_dicwin_disable    = 1
+let g:plugin_format_disable    = 1
+let g:plugin_hz_ja_disable     = 1
+let g:plugin_scrnmode_disable  = 1
+let g:plugin_verifyenc_disable = 1
+" }}}
+
+" Misc {{{
+set autoindent     " For smartindent
+set backspace=indent,eol,start  " Can erase everything in the back space
+if has('clipboard')
+  set clipboard+=unnamed,autoselect    " Use the OS clipboard
+endif
+set cmdheight=2    " cmdline height
 set copyindent     " copy the structure of the existing lines indent when
                    " autoindenting a new line
-set showmatch matchtime=1   " The highlight matching brackets
-set tabstop=4      " Width on the screen of the tab
-set softtabstop=4  " Number of spaces in the file space is the corresponding
+set display=lastline                 " enable view long line
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
-set shiftwidth=4   " Shift move width
-set smarttab       " Indent by the number of 'shiftwidth'.
-set history=1000   " history
-set textwidth=0    " Disable new line to enter automatically
-set ruler          " show the current row and column
-set hlsearch       " highlight searches
-set incsearch      " do incremental searching
-set ignorecase     " ignore case when searching
-set smartcase      " no ignorecase if Uppercase char present
-set laststatus=2   " Always display status bar
-" For when no lightline.vim
-set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
-set cmdheight=2    " cmdline height
-set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
-set backspace=indent,eol,start  " Can erase everything in the back space
-set wildmenu wildmode=list:full " Command-line completion
-" Use the OS clipboard
-if has('clipboard')
-  set clipboard+=unnamed,autoselect
-endif
-set noswapfile nobackup nowritebackup  " doesn't generate a backup file
-set display=lastline                   " enable view long line
-" disable annoying errorbells and visual bell completely
-set noerrorbells novisualbell t_vb=
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
-" Visualize character
-if s:env.is_windows
-  set list listchars=tab:>-,trail:-,extends:>,precedes:<
-else
-  set imdisable    " When you exit or enter, IME is turned off
-  set list listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-endif
+set fileformats=unix,dos,mac  " This gives the end-of-line (<EOL>) formats
+set history=1000   " history
+set hlsearch       " highlight searches
+set ignorecase     " ignore case when searching
+set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
+set incsearch      " do incremental searching
+set laststatus=2   " Always display status bar
+set lazyredraw
+set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set noerrorbells novisualbell t_vb=    " disable annoying bells
+set noswapfile nobackup nowritebackup  " doesn't generate a backup file
+set number         " Show line number (nonumber: Hide)
+set ruler          " show the current row and column
+set shiftwidth=4   " Shift move width
+set showmatch matchtime=1   " The highlight matching brackets
+set smartcase      " no ignorecase if Uppercase char present
+set smartindent    " Advanced automatic indentation when you made the new line
+set smarttab       " Indent by the number of 'shiftwidth'.
+set softtabstop=4  " Number of spaces in the file space is the corresponding
+" For when no lightline.vim
+set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
+set tabstop=4      " Width on the screen of the tab
+set textwidth=0    " Disable new line to enter automatically
+set ttyfast
+set wildmenu wildmode=list:full " Command-line completion
 " }}}
 
 " KeyMaping {{{
+" Normal mode: IME off
+inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+
 " Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
 nnoremap <silent> <S-Right> :5wincmd ><CR>
@@ -94,7 +123,7 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 
 " Turn off the highlight by pressing twice the ESC.
-nmap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
@@ -122,6 +151,7 @@ command! Sjis Cp932
 
 " autocmd group {{{
 augroup MyAutoCmd
+  au!
   " Grep {{{
   au QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
   " }}}
@@ -177,11 +207,11 @@ endif
 
 " Java settings {{{
 " Syntax highlight
-let g:java_highlight_all=1
-let g:java_highlight_debug=1
-let g:java_allow_cpp_keywords=1
-let g:java_space_errors=1
-let g:java_highlight_functions=1
+let g:java_highlight_all       = 1
+let g:java_highlight_debug     = 1
+let g:java_allow_cpp_keywords  = 1
+let g:java_space_errors        = 1
+let g:java_highlight_functions = 1
 " }}}
 
 " PHP settings {{{
@@ -193,9 +223,8 @@ let g:php_sql_query     = 1
 " }}}
 
 " After Vim7.4 {{{
-" Don't make *.un~ files {{{
-if exists('&undofile')
-  set noundofile
+if exists('&undofile') " {{{
+  set noundofile  " Don't make *.un~ files
 endif "}}}
 
 " breakindent {{{
@@ -205,16 +234,12 @@ if v:version >= 704 && has('patch338')
   set breakindent
 endif "}}}
 
-" nofixeol {{{
-if exists('&nofixeol')
+if exists('&nofixeol') " {{{
   set nofixeol
 endif "}}}
 " }}}
 
-" Function {{{
-" ------------------------------------------------------------------------------
-" load_source
-function! s:load_source(path)
+function! s:load_source(path) " {{{
   let l:path = expand(a:path)
   if filereadable(l:path)
     execute 'source ' . l:path
@@ -224,61 +249,19 @@ endfunction
 
 " dein.vim {{{
 call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
+call s:load_source(expand('~/.vim/rc/plugins.vim'))
 " }}}
 
-" Others {{{
-" IME setting {{{
-if s:env.is_ime
-  " Insert, Search mode: ime setting
-  set iminsert=0
-  set imsearch=-1
-  " Normal mode: IME off
-  inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
-endif " }}}
-
-" STOP default plugins {{{
-let g:loaded_gzip              = 1
-let g:loaded_tar               = 1
-let g:loaded_tarPlugin         = 1
-let g:loaded_zip               = 1
-let g:loaded_zipPlugin         = 1
-let g:loaded_rrhelper          = 1
-let g:loaded_2html_plugin      = 1
-let g:loaded_vimball           = 1
-let g:loaded_vimballPlugin     = 1
-let g:loaded_getscript         = 1
-let g:loaded_getscriptPlugin   = 1
-let g:loaded_netrw             = 1
-let g:loaded_netrwPlugin       = 1
-let g:loaded_netrwSettings     = 1
-let g:loaded_netrwFileHandlers = 1
-let g:loaded_LogiPat           = 1
-let g:loaded_logipat           = 1
-let g:plugin_autodate_disable  = 1
-let g:plugin_cmdex_disable     = 1
-let g:plugin_dicwin_disable    = 1
-let g:plugin_format_disable    = 1
-let g:plugin_hz_ja_disable     = 1
-let g:plugin_scrnmode_disable  = 1
-let g:plugin_verifyenc_disable = 1
-" }}}
-" Default Window Size
-if has("gui_running") && !filereadable(expand('~/.gvimrc'))
+" Default Window Size {{{
+if has('gui_running') && !filereadable(expand('~/.vimwinpos'))
   set lines=45 columns=100
   winpos 0 0
-endif
+endif " }}}
 
-" Enable syntax highlighting
-syntax on
-" ColorScheme
-if !(has('gui_running') && filereadable(expand('~/.gvimrc')))
-  colorscheme desert
-endif
-" }}}
-
-" Local settings {{{
-call s:load_source(expand('~/.vim/plugins/recognize_charcode.vim'))
+" Others {{{
 call s:load_source(expand('~/.vimrc.local'))
+colorscheme desert
+syntax on
 set secure
 " }}}
 

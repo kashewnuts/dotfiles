@@ -1,4 +1,4 @@
-# Common {{{
+#. Common {{{
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
@@ -11,14 +11,14 @@ repo = 'Shougo/vimproc.vim'
   mac     = 'make -f make_mac.mak'
   linux   = 'make'
   unix    = 'gmake'
-# }}}
+#. }}}
 
-# Edit plugins {{{
+#. Edit plugins {{{
 [[plugins]]
 repo = 'thinca/vim-zenspace'
 
-[[plugins]]
-repo = 'kashewnuts/vim-ft-rst_header'
+#. [[plugins]]
+#. repo = 'kashewnuts/vim-ft-rst_header'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -29,8 +29,8 @@ repo = 'itchyny/lightline.vim'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
-# [[plugins]]
-# repo = 'tomtom/tcomment_vim'
-# }}}
+#. [[plugins]]
+#. repo = 'tomtom/tcomment_vim'
+#. }}}
 
-# vim:se fdm=marker:
+#. toml:se fdm=marker:

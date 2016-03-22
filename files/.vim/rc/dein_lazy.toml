@@ -1,29 +1,27 @@
-# Shougo plugins {{{
+#. Shougo plugins {{{
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+if = "has('lua')"
 on_i = 1
-if   = '''has('lua')'''
+hook_source = "let g:neocomplete#enable_at_startup = 1"
 
 [[plugins]]
 repo = 'Shougo/neocomplcache.vim'
 on_i = 1
-if   = '''! has('lua')'''
+if = "!has('lua')"
+hook_source = "let g:neocomplcache#enable_at_startup = 1"
 
 [[plugins]]
 repo = 'Shougo/unite.vim'
-# }}}
+#. }}}
 
-# thinca plugins {{{
+#. thinca plugins {{{
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_cmd = 'Quickrun'
+#. }}}
 
-[[plugins]]
-repo = 'thinca/vim-scouter'
-on_cmd = 'Scouter'
-# }}}
-
-# Web plugins {{{
+#. Web plugins {{{
 [[plugins]]
 repo = 'hail2u/vim-css3-syntax'
 on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
@@ -39,12 +37,17 @@ on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
-# }}}
+#. }}}
 
-# Python plugins {{{
-[[plugins]]
+#. Python plugins {{{
 repo = 'davidhalter/jedi-vim'
 on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
+hook_source = '''
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#smart_auto_mappings = 0
+  let g:jedi#show_call_signatures = 0
+'''
 
   [plugins.build]
   others = 'pip install jedi'
@@ -70,9 +73,9 @@ on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
 [[plugins]]
 repo = 'lambdalisue/vim-django-support'
 on_ft = ['python', 'python3', 'djangohtml']
-# }}}
+#. }}}
 
-# Syntastic {{{
+#. Syntastic {{{
 [[plugins]]
 repo = 'osyo-manga/shabadou.vim'
 
@@ -86,9 +89,9 @@ repo = 'dannyob/quickfixstatus'
 repo = 'osyo-manga/vim-watchdogs'
 on_cmd = 'WatchdogsRun'
 depends = ['osyo-manga/shabadou.vim', 'jceb/vim-hier', 'dannyob/quickfixstatus']
-# }}}
+#. }}}
 
-# Golang plugins {{{
+#. Golang plugins {{{
 [[plugins]]
 repo = 'nsf/gocode'
 on_ft = 'go'
@@ -96,49 +99,9 @@ on_ft = 'go'
 [[plugins]]
 repo = 'Blackrush/vim-gocode'
 on_ft = 'go'
-# }}}
+#. }}}
 
-# Java plugins {{{
-[[plugins]]
-repo ='vim-scripts/javacomplete'
-on_ft = 'java'
-# }}}
-
-# Scala plugins {{{
-[[plugins]]
-repo = 'derekwyatt/vim-scala'
-on_ft = 'scala'
-# }}}
-
-# Haskell plugins {{{
-[[plugins]]
-repo = 'kana/vim-filetype-haskell'
-on_ft = 'haskell'
-
-[[plugins]]
-repo = 'eagletmt/ghcmod-vim'
-on_ft = 'haskell'
-
-[[plugins]]
-repo = 'eagletmt/neco-ghc'
-on_ft = 'haskell'
-
-[[plugins]]
-repo = 'ujihisa/ref-hoogle'
-on_ft = 'haskell'
-
-[[plugins]]
-repo = 'ujihisa/unite-haskellimport'
-on_ft = 'haskell'
-depends = ['unite.vim', 'ref-hoogle']
-
-[[plugins]]
-repo = 'eagletmt/unite-haddock'
-on_ft = 'haskell'
-depends = 'unite.vim'
-# }}}
-
-# Git plugins {{{
+#. Git plugins {{{
 [[plugins]]
 repo = 'mattn/gist-vim'
 on_cmd = 'Gist'
@@ -147,15 +110,15 @@ on_cmd = 'Gist'
 repo = 'gregsexton/gitv'
 on_source = 'vim-fugitive'
 on_cmd = 'Gitv'
-# }}}
+#. }}}
 
-# Keyence Script plugins {{{
+#. Keyence Script plugins {{{
 [[plugins]]
 repo = 'kashewnuts/vim-scp'
 on_ft = 'scp'
-# }}}
+#. }}}
 
-# Edit plugins {{{
+#. Edit plugins {{{
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
 on_cmd = 'h'
@@ -177,9 +140,17 @@ on_cmd = 'SQLUFormatter'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 on_cmd = 'FixWhitespace'
-# }}}
 
-# Twitter {{{
+[[plugins]]
+repo = 'kashewnuts/vim-ft-rst_header'
+on_ft = 'rst'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+#. }}}
+
+#. Twitter {{{
 [[plugins]]
 repo = 'tyru/open-browser.vim'
 
@@ -218,12 +189,6 @@ on_cmd = [
   'TweetVimSearch',
   'TweetVimMentions'
 ]
-# }}}
+#. }}}
 
-# Other {{{
-[[plugins]]
-repo = 'mattn/benchvimrc-vim'
-on_cmd = 'BenchVimrc'
-# }}}
-
-# vim:se fdm=marker:
+#. toml:se fdm=marker:

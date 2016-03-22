@@ -1,24 +1,19 @@
-" ==============================================================================
+" ==========================================================================
 " Vim GUI Configuration
 "
 " Author:   Kashun YOSHIDA
 " Platform: Windows, Linux, MacOSX
 " NOTE:     To use this, copy to your home directory.
-" ==============================================================================
+" ==========================================================================
 
 function! VimrcEnvironment() " {{{
-  let l:env = {}
-  let l:env.is_windows = has('win16') || has('win32') || has('win64')
-  let l:env.is_darwin  = has('mac') || has('macunix') || has('gui_macvim')
-  let l:env.is_ime     = has('multi byte_ime') || has('xim') || has('gui_macvim')
-  return l:env
+  let s:env = {}
+  let s:env.IsWindows = has('win16') || has('win32') || has('win64')
+  let s:env.IsDarwin  = has('mac') || has('macunix') || has('gui_macvim')
+  let s:env.IsIme     = has('multi byte_ime') || has('xim') || has('gui_macvim')
+  return s:env
 endfunction
 let s:env = VimrcEnvironment() " }}}
-
-" ColorScheme {{{
-if has('gui_running')
-  colorscheme desert
-endif " }}}
 
 " Hack #120: Store the location and size of the window by gVim {{{
 if has('gui_running')
@@ -42,9 +37,9 @@ if has('gui_running')
 endif " }}}
 
 " Semitransparency {{{
-if s:env.is_windows
-  au MyAutoCmd GUIEnter * set transparency=220
-elseif s:env.is_darwin
+if s:env.IsWindows
+  au! GUIEnter * set transparency=220
+elseif s:env.IsDarwin
   set transparency=20
 endif " }}}
 
