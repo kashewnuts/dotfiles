@@ -89,6 +89,10 @@ if dein#tap('vimfiler') " {{{
       \ winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
 endif " }}}
 
+if dein#tap('vim-flake8') " {{{
+  " au MyAutoCmd BufWritePost *.py call Flake()
+endif " }}}
+
 if dein#tap('vim-quickrun') " {{{
   nmap <Leader>r <Plug>(quickrun)
   " Open at the height of 10-digit buffer window by horizontal split at the bottom

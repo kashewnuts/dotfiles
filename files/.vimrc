@@ -63,7 +63,8 @@ let g:plugin_verifyenc_disable = 1
 " }}}
 
 " Misc {{{
-set autoindent     " For smartindent
+set ambiwidth=double            " Use twice the width of ASCII characters
+set autoindent                  " For smartindent
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard')
   set clipboard+=unnamed,autoselect    " Use the OS clipboard
@@ -71,7 +72,7 @@ endif
 set cmdheight=2    " cmdline height
 set copyindent     " copy the structure of the existing lines indent when
                    " autoindenting a new line
-set display=lastline                 " enable view long line
+set display=lastline            " enable view long line
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
@@ -185,22 +186,11 @@ augroup MyAutoCmd
   " it isn't unindent
   au FileType python inoremap # X#
   au BufNewFile *.py 0r ~/.vim/template/python.txt
-  " Auto Fmt
-  " au BufWritePre *.go Fmt
 augroup END " }}}
 
 " Golang settings {{{
 if $GOROOT !=# ''
-"   set runtimepath+=$GOROOT/misc/vim
-"   set completeopt=menu,preview
-"   if $GOPATH !=# ''
-"     " gocode
-"     exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/nsf/gocode/vim')
-"     " golint
-"     exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/golang/lint/misc/vim')
-"   endif
-"   " grep
-  set grepprg=jvgrep
+  set grepprg=jvgrep  " grep
 endif
 " }}}
 

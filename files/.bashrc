@@ -1,6 +1,9 @@
 export EDITOR=vim
 alias vi='vim'
 
+alias la='ls -al'
+alias ll='ls -l'
+
 # Python
 export PYTHONSTARTUP=~/.pythonstartup
 export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
