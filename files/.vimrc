@@ -186,20 +186,20 @@ augroup MyAutoCmd
   au FileType python inoremap # X#
   au BufNewFile *.py 0r ~/.vim/template/python.txt
   " Auto Fmt
-  au BufWritePre *.go Fmt
+  " au BufWritePre *.go Fmt
 augroup END " }}}
 
 " Golang settings {{{
 if $GOROOT !=# ''
-  set runtimepath+=$GOROOT/misc/vim
-  set completeopt=menu,preview
-  if $GOPATH !=# ''
-    " gocode
-    exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/nsf/gocode/vim')
-    " golint
-    exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/golang/lint/misc/vim')
-  endif
-  " grep
+"   set runtimepath+=$GOROOT/misc/vim
+"   set completeopt=menu,preview
+"   if $GOPATH !=# ''
+"     " gocode
+"     exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/nsf/gocode/vim')
+"     " golint
+"     exe 'set runtimepath+='.globpath($GOPATH, 'src/github.com/golang/lint/misc/vim')
+"   endif
+"   " grep
   set grepprg=jvgrep
 endif
 " }}}
@@ -259,6 +259,7 @@ endif " }}}
 
 " Others {{{
 call s:load_source(expand('~/.vimrc.local'))
+filetype plugin indent on
 syntax on
 colorscheme desert
 set secure

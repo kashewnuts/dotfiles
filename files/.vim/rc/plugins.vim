@@ -77,7 +77,7 @@ if dein#tap('neosnippet.vim') " {{{
   let g:neosnippet#enable_snipmate_compatibility = 1
 
   " Tell Neosnippet about the other snippets
-  let g:neosnippet#snippets_directory=dein#tapir.'/vim-snippets/snippets'
+  " let g:neosnippet#snippets_directory=dein#tapir.'/vim-snippets/snippets'
 endif " }}}
 
 if dein#tap('vimfiler') " {{{
@@ -111,10 +111,6 @@ if dein#tap('jedi-vim') " {{{
   let g:jedi#popup_select_first = 0
   au MyAutoCmd FileType python let b:did_ftplugin = 1
   au MyAutoCmd FileType python setl completeopt-=preview " disable docstring
-endif " }}}
-
-if dein#tap('vim-flake8') " {{{
-  au MyAutoCmd BufWritePost *.py call Flake8()
 endif " }}}
 
 if dein#tap('Align') " {{{
