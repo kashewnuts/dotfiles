@@ -33,8 +33,6 @@ augroup MyAutoCmd
   " it isn't unindent
   au FileType python inoremap # X#
   au BufNewFile *.py 0r ~/.vim/template/python.txt
-  " Auto Fmt
-  au BufWritePre *.go Fmt
 augroup END
 
 " silent! filetype plugin indent on

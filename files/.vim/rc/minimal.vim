@@ -5,16 +5,17 @@ set encoding=utf-8
 set fileformats=unix,dos,mac
 scriptencoding utf-8
 
+set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
 set guioptions+=M  " Disable menu.vim
 set guioptions-=T  " Disable Toolbar
 set guioptions-=m  " Disable Menu bar
-set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
 
 set number         " Show line number (nonumber: Hide)
 set history=1000   " history
-set ai smartindent " Advanced automatic indentation when you made the new line
-set copyindent     " copy the structure of the existing lines indent when
-                   " autoindenting a new line
+set autoindent     " For smartindent
+set smartindent    " Advanced automatic indentation when you made the new line
+set copyindent     " copy the indent structure of existing lines
+
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
@@ -43,6 +44,7 @@ set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
 set noerrorbells novisualbell t_vb=              " Disable annoying bells
 set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
 
-syntax on  " Enable syntax highlight
+filetype plugin indent on       " Load plugins according to detected filetype.
+syntax on                       " Enable syntax highlight
 colorscheme desert
 set secure

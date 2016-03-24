@@ -10,7 +10,7 @@
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
 
 if &compatible
-  set nocompatible  " For dein.vim
+  set nocompatible      " For dein.vim
 endif
 
 " Encoding
@@ -69,38 +69,37 @@ set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard')
   set clipboard+=unnamed,autoselect    " Use the OS clipboard
 endif
-set cmdheight=2    " cmdline height
-set copyindent     " copy the structure of the existing lines indent when
-                   " autoindenting a new line
+set cmdheight=2                 " cmdline height
+set copyindent                  " copy the indent structure of existing lines
 set display=lastline            " enable view long line
-set expandtab      " noexpand tabs to spaces (expandtab: expand)
+set expandtab                   " noexpand tabs to spaces (expandtab: expand)
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
-set fileformats=unix,dos,mac  " This gives the end-of-line (<EOL>) formats
-set history=1000   " history
-set hlsearch       " highlight searches
-set ignorecase     " ignore case when searching
+set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
+set history=1000                " history
+set hlsearch                    " highlight searches
+set ignorecase                  " ignore case when searching
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
-set incsearch      " do incremental searching
-set laststatus=2   " Always display status bar
-set lazyredraw
+set incsearch                   " do incremental searching
+set laststatus=2                " Always display status bar
+set lazyredraw                  " Only redraw when necessary.
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set noerrorbells novisualbell t_vb=    " disable annoying bells
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
-set number         " Show line number (nonumber: Hide)
-set ruler          " show the current row and column
-set shiftwidth=4   " Shift move width
-set showmatch matchtime=1   " The highlight matching brackets
+set number                      " Show line number (nonumber: Hide)
+set ruler                       " show the current row and column
+set shiftwidth=4                " Shift move width
+set showmatch matchtime=1       " The highlight matching brackets
 set smartcase      " no ignorecase if Uppercase char present
 set smartindent    " Advanced automatic indentation when you made the new line
 set smarttab       " Indent by the number of 'shiftwidth'.
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 " For when no lightline.vim
 set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
-set tabstop=4      " Width on the screen of the tab
-set textwidth=0    " Disable new line to enter automatically
-set ttyfast
+set tabstop=4                   " Width on the screen of the tab
+set textwidth=0                 " Disable new line to enter automatically
+set ttyfast                     " Faster redrawing.
 set wildmenu wildmode=list:full " Command-line completion
 " }}}
 
@@ -249,8 +248,8 @@ endif " }}}
 
 " Others {{{
 call s:load_source(expand('~/.vimrc.local'))
-filetype plugin indent on
-syntax on
+filetype plugin indent on       " Load plugins according to detected filetype.
+syntax on                       " Enable syntax highlight
 colorscheme desert
 set secure
 " }}}
