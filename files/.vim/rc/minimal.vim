@@ -21,7 +21,6 @@ set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " noexpand tabs to spaces (expandtab: expand)
 set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
-set textwidth=0    " Disable new line to enter automatically
 
 set hlsearch       " highlight searches
 set incsearch      " do incremental searching

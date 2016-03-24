@@ -30,9 +30,9 @@ let s:env = VimrcEnvironment()
 
 " GUI {{{
 set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
-set guioptions+=M  " Disable menu.vim
-set guioptions-=T  " Disable Toolbar
-set guioptions-=m  " Disable Menu bar
+set guioptions+=M       " Disable menu.vim
+set guioptions-=T       " Disable Toolbar
+set guioptions-=m       " Disable Menu bar
 " }}}
 
 " STOP default plugins {{{
@@ -98,7 +98,6 @@ set softtabstop=4  " Number of spaces in the file space is the corresponding
 " For when no lightline.vim
 set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
 set tabstop=4                   " Width on the screen of the tab
-set textwidth=0                 " Disable new line to enter automatically
 set ttyfast                     " Faster redrawing.
 set wildmenu wildmode=list:full " Command-line completion
 " }}}
