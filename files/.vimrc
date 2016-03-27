@@ -8,10 +8,7 @@
 
 " Basic Settings {{{
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
-
-if &compatible
-  set nocompatible      " For dein.vim
-endif
+if &compatible | set nocompatible | endif  " For dein.vim
 
 " Encoding
 set encoding=utf-8
@@ -66,9 +63,7 @@ let g:plugin_verifyenc_disable = 1
 set ambiwidth=double            " Use twice the width of ASCII characters
 set autoindent                  " For smartindent
 set backspace=indent,eol,start  " Can erase everything in the back space
-if has('clipboard')
-  set clipboard+=unnamed,autoselect    " Use the OS clipboard
-endif
+if has('clipboard') | set clipboard+=unnamed | endif  " Use the OS clipboard
 set cmdheight=2                 " cmdline height
 set copyindent                  " copy the indent structure of existing lines
 set display=lastline            " enable view long line
@@ -187,9 +182,7 @@ augroup MyAutoCmd
 augroup END " }}}
 
 " Golang settings {{{
-if $GOROOT !=# ''
-  set grepprg=jvgrep  " grep
-endif
+if $GOROOT !=# '' | set grepprg=jvgrep | endif
 " }}}
 
 " Java settings {{{
@@ -210,19 +203,12 @@ let g:php_sql_query     = 1
 " }}}
 
 " After Vim7.4 {{{
-if exists('&undofile') " {{{
-  set noundofile  " Don't make *.un~ files
-endif "}}}
-
-" breakindent {{{
-if v:version >= 704 && has('patch338')
+if exists('&undofile') | set noundofile | endif  " Don't make *.un~ files
+if exists('&nofixeol') | set nofixeol | endif
+if v:version >= 704 && has('patch338')  " breakindent {{{
   " https://github.com/vim-jp/issues/issues/114
   " http://ftp.vim.org/vim/patches/7.4/7.4.338
   set breakindent
-endif "}}}
-
-if exists('&nofixeol') " {{{
-  set nofixeol
 endif "}}}
 " }}}
 
