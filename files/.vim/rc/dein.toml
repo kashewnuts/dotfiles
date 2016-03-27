@@ -16,9 +16,12 @@ repo = 'Shougo/vimproc.vim'
 #. Edit plugins {{{
 [[plugins]]
 repo = 'thinca/vim-zenspace'
-
-#. [[plugins]]
-#. repo = 'kashewnuts/vim-ft-rst_header'
+hook_add = '''
+  augroup vimrc-highlight
+    autocmd!
+    autocmd ColorScheme * highlight ZenSpace cterm=underline ctermfg=LightGray guibg=DarkGray
+  augroup END
+'''
 
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -28,9 +31,6 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
-
-#. [[plugins]]
-#. repo = 'tomtom/tcomment_vim'
 #. }}}
 
 #. toml:se fdm=marker:

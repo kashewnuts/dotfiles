@@ -35,7 +35,23 @@ augroup MyAutoCmd
   au BufNewFile *.py 0r ~/.vim/template/python.txt
 augroup END
 
-" silent! filetype plugin indent on
-" filetype detect
+" Golang settings {{{
+if $GOROOT !=# '' | set grepprg=jvgrep | endif " }}}
+
+" Java settings {{{
+" Syntax highlight
+let g:java_highlight_all       = 1
+let g:java_highlight_debug     = 1
+let g:java_allow_cpp_keywords  = 1
+let g:java_space_errors        = 1
+let g:java_highlight_functions = 1
+" }}}
+
+" PHP settings {{{
+let g:php_baselib       = 1
+let g:php_htmlInStrings = 1
+let g:php_noShortTags   = 1
+let g:php_sql_query     = 1
+" }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker
