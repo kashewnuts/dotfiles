@@ -1,6 +1,6 @@
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
+if &compatible | set nocompatible | endif
 
-set nocompatible
 set encoding=utf-8
 set fileformats=unix,dos,mac
 scriptencoding utf-8

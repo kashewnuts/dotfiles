@@ -1,9 +1,7 @@
 " Basic {{{
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
-
-if &compatible
-  set nocompatible
-endif " }}}
+if &compatible | set nocompatible  | endif
+" }}}
 
 " Encoding {{{
 set encoding=utf-8
@@ -73,9 +71,11 @@ call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
 call s:load_source(expand('~/.vim/rc/plugins.vim'))
 call s:load_source(expand('~/.vimrc.local')) " }}}
 
+" Other {{{
 filetype plugin indent on
 syntax on
 colorscheme desert
 set secure
+" }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker

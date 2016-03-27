@@ -27,7 +27,7 @@ if v:version >= 704
 
   " Read TOML & cache
   if dein#load_state(s:path)
-    call dein#begin(s:path)
+    call dein#begin(s:path, [$MYVIMRC, s:toml_path, s:toml_lazy_path])
     call dein#load_toml(s:toml_path, {'lazy': 0})
     call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
     call dein#end()

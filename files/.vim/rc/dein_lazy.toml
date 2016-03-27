@@ -109,12 +109,6 @@ on_source = 'vim-fugitive'
 on_cmd = 'Gitv'
 #. }}}
 
-#. Keyence Script plugins {{{
-[[plugins]]
-repo = 'kashewnuts/vim-scp'
-on_ft = 'scp'
-#. }}}
-
 #. Edit plugins {{{
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'
@@ -137,6 +131,12 @@ on_cmd = 'SQLUFormatter'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 on_cmd = 'FixWhitespace'
+#. }}}
+
+#. FileType plugins {{{
+[[plugins]]
+repo = 'kashewnuts/vim-scp'
+on_ft = 'scp'
 
 [[plugins]]
 repo = 'kashewnuts/vim-ft-rst_header'
