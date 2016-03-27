@@ -38,7 +38,10 @@ endif " }}}
 
 " Semitransparency {{{
 if s:env.IsWindows
-  au! GUIEnter * set transparency=220
+  augroup Semitransparency
+    au!
+    au GUIEnter * set transparency=220
+  augroup END
 elseif s:env.IsDarwin
   set transparency=20
 endif " }}}
