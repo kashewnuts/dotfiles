@@ -24,6 +24,7 @@ function! VimrcEnvironment()
 endfunction
 let s:env = VimrcEnvironment()
 
+" autocmd
 augroup MyAutoCmd
   au!
 augroup END

@@ -1,4 +1,4 @@
-augroup MyAutoCmd
+augroup FileTypeAutoCmd
   au!
   " Grep
   au QuickFixCmdPost *grep* cwindow " Auto open quickfix-window

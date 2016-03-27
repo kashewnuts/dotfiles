@@ -17,10 +17,7 @@ repo = 'Shougo/vimproc.vim'
 [[plugins]]
 repo = 'thinca/vim-zenspace'
 hook_add = '''
-  augroup vimrc-highlight
-    autocmd!
-    autocmd ColorScheme * highlight ZenSpace cterm=underline ctermfg=LightGray guibg=DarkGray
-  augroup END
+  au MyAutoCmd ColorScheme * highlight ZenSpace ctermfg=LightGray guibg=DarkGray
 '''
 
 [[plugins]]
