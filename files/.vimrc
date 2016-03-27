@@ -182,8 +182,7 @@ augroup MyAutoCmd
 augroup END " }}}
 
 " Golang settings {{{
-if $GOROOT !=# '' | set grepprg=jvgrep | endif
-" }}}
+if $GOROOT !=# '' | set grepprg=jvgrep | endif " }}}
 
 " Java settings {{{
 " Syntax highlight
@@ -217,8 +216,7 @@ function! s:load_source(path) " {{{
   if filereadable(l:path)
     execute 'source ' . l:path
   endif
-endfunction
-" }}}
+endfunction " }}}
 
 " dein.vim {{{
 call s:load_source(expand('~/.vim/rc/dein.rc.vim'))

@@ -5,7 +5,13 @@ if !isdirectory(expand($CACHE))
 endif
 
 " Load dein.vim
-if v:version >= 704 && isdirectory(expand('~/.vim'))
+let s:path = expand('~/.cache/dein')
+let s:toml_path = '~/.vim/rc/dein.toml'
+let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
+
+if v:version >= 704
+      \ && filereadable(expand(s:toml_path))
+      \ && filereadable(expand(s:toml_lazy_path))
   " Begin dein.vim
   let s:dein_dir = finddir('dein.vim', '.;')
   if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
@@ -18,9 +24,6 @@ if v:version >= 704 && isdirectory(expand('~/.vim'))
     endif
     set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
   endif
-  let s:path = expand('~/.cache/dein')
-  let s:toml_path = '~/.vim/rc/dein.toml'
-  let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
 
   " Read TOML & cache
   if dein#load_state(s:path)
