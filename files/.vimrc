@@ -13,21 +13,6 @@ if &compatible | set nocompatible | endif  " For dein.vim
 " Encoding
 set encoding=utf-8
 scriptencoding utf-8
-
-" Environment
-function! VimrcEnvironment()
-  let s:env = {}
-  let s:env.IsWindows = has('win16') || has('win32') || has('win64')
-  let s:env.IsDarwin  = has('mac') || has('macunix') || has('gui_macvim')
-  let s:env.IsIme     = has('multi byte_ime') || has('xim') || has('gui_macvim')
-  return s:env
-endfunction
-let s:env = VimrcEnvironment()
-
-" autocmd
-augroup MyAutoCmd
-  au!
-augroup END
 " }}}
 
 " GUI {{{
