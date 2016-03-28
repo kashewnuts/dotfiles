@@ -7,10 +7,8 @@ DOT_FILES=(
     .git-prompt.sh       \
     .gitconfig           \
     .gitconfig.unix      \
-    .gvimrc              \
     .pythonstartup       \
     .vim                 \
-    .vimrc               \
 )
 GITCONFIGOS=.gitconfig.os
 
