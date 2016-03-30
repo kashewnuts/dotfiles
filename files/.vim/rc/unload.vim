@@ -1,8 +1,3 @@
-" guioptions
-set guioptions+=M               " Disable menu.vim
-set guioptions-=T               " Disable Toolbar
-set guioptions-=m               " Disable Menu bar
-
 " STOP default plugins
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
@@ -29,7 +24,7 @@ let g:plugin_hz_ja_disable     = 1
 let g:plugin_scrnmode_disable  = 1
 let g:plugin_verifyenc_disable = 1
 
-if !(has('unix') && !has('mac'))
+if has('kaoriya')
   " Don't Read $VIM/vimrc
   let s:vimrclocal = '$VIM/vimrc_local.vim'
   if !filereadable(s:vimrclocal)

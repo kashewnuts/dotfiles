@@ -14,6 +14,12 @@ if &compatible | set nocompatible | endif  " For dein.vim
 set encoding=utf-8
 scriptencoding utf-8
 
+" guioptions {{{
+set guioptions+=M               " Disable menu.vim
+set guioptions-=T               " Disable Toolbar
+set guioptions-=m               " Disable Menu bar
+" }}}
+
 function! s:load_source(path)
   let l:path = expand(a:path)
   if filereadable(l:path)
@@ -102,6 +108,64 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 " }}}
 
+" FileType {{{
+augroup MyAutoCmd
+  au!
+  " Grep
+  au QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+
+  " FileType {{{
+  " ts   : tabstop
+  " sw   : shiftwidth
+  " sts  : softtabstop
+  " et   : expandtab
+  " noet : noexpandtab
+  " si   : smartindent
+  " cinw : cinwords
+  au FileType html       setl ts=4 sw=4 sts=4 et
+  au FileType htmldjango setl ts=2 sw=2 sts=2 et
+  au FileType javascript setl ts=4 sw=4 sts=4 et
+  au FileType ruby       setl ts=2 sw=2 sts=2 et
+  au FileType go         setl ts=4 sw=4 sts=4 noet
+  au FileType vim        setl ts=2 sw=2 sts=2 et
+  au FileType make       setl ts=4 sw=4 sts=4 noet
+  au FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+  au FileType rst        setl ts=4 sw=4 sts=4 et
+  au FileType gitconfig  setl ts=4 sw=4 sts=4 noet
+  au FileType jsp        setl ts=4 sw=4 sts=4 noet
+  au FileType java       setl ts=4 sw=4 sts=4 noet
+  au FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+  au FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
+  au FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
+  au FileType scp        setl dictionary='~/.vim/dict/scp.dict' suffixesadd+=.scp
+  " }}}
+
+  " When the '#' character in the first line of the newly created,
+  " it isn't unindent
+  au FileType python inoremap # X#
+  au BufNewFile *.py 0r ~/.vim/template/python.txt
+augroup END
+
+" Golang settings {{{
+if $GOROOT !=# '' | set grepprg=jvgrep | endif " }}}
+
+" Java settings {{{
+" Syntax highlight
+let g:java_highlight_all       = 1
+let g:java_highlight_debug     = 1
+let g:java_allow_cpp_keywords  = 1
+let g:java_space_errors        = 1
+let g:java_highlight_functions = 1
+" }}}
+
+" PHP settings {{{
+let g:php_baselib       = 1
+let g:php_htmlInStrings = 1
+let g:php_noShortTags   = 1
+let g:php_sql_query     = 1
+" }}}
+" }}}
+
 " After Vim7.4 {{{
 if exists('&undofile') | set noundofile | endif  " Don't make *.un~ files
 if exists('&nofixeol') | set nofixeol | endif
@@ -112,8 +176,7 @@ if v:version >= 704 && has('patch338')  " breakindent {{{
 endif "}}}
 " }}}
 
-" load_source {{{
-call s:load_source(expand('~/.vim/rc/filetype.rc.vim'))
+" dein.vim {{{
 call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
 " }}}
 
@@ -147,10 +210,7 @@ if has('gui_running')
 
   " Semitransparency {{{
   if has('win32') || has('win64')
-    augroup Semitransparency
-      au!
-      au GUIEnter * set transparency=220
-    augroup END
+    au MyAutoCmd GUIEnter * set transparency=220
   elseif has('mac') || has('macunix') || has('gui_macvim')
     set transparency=20
   endif " }}}

@@ -1,8 +1,3 @@
-" autocmd
-augroup MyAutoCmd
-  au!
-augroup END
-
 " Cache
 let $CACHE = expand('~/.cache')
 if !isdirectory(expand($CACHE))
