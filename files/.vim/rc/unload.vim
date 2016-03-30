@@ -1,3 +1,8 @@
+" guioptions
+set guioptions+=M               " Disable menu.vim
+set guioptions-=T               " Disable Toolbar
+set guioptions-=m               " Disable Menu bar
+
 " STOP default plugins
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
@@ -31,6 +36,7 @@ if !filereadable(s:vimrclocal)
   silent! echon 'let g:vimrc_local_finish = 1'
   redir END
 endif
+
 " Don't Read $VIM/gvimrc
 let s:gvimrclocal = '$VIM/gvimrc_local.vim'
 if !filereadable(s:gvimrclocal)

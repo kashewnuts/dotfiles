@@ -23,13 +23,6 @@ endfunction
 call s:load_source('~/.vim/rc/unload.vim')
 " }}}
 
-" GUI {{{
-set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
-set guioptions+=M               " Disable menu.vim
-set guioptions-=T               " Disable Toolbar
-set guioptions-=m               " Disable Menu bar
-" }}}
-
 " Misc {{{
 set ambiwidth=double            " Use twice the width of ASCII characters
 set autoindent                  " For smartindent
@@ -124,10 +117,43 @@ call s:load_source(expand('~/.vim/rc/filetype.rc.vim'))
 call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
 " }}}
 
-" Default Window Size {{{
-if has('gui_running') && !filereadable(expand('~/.vimwinpos'))
-  set lines=45 columns=100
-  winpos 0 0
+" GUI {{{
+if has('gui_running')
+  " Fonts {{{
+  set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
+  " }}}
+
+  " Default Window Size {{{
+  if !filereadable(expand('~/.vimwinpos'))
+    set lines=45 columns=100
+    winpos 0 0
+  endif " }}}
+
+  " Hack #120: Store the location and size of the window by gVim {{{
+  let s:save_window_file = expand('~/.vimwinpos')
+  augroup SaveWindow
+    autocmd!
+    autocmd VimLeavePre * call s:save_window()
+    function! s:save_window()
+      let options = [
+        \ 'set columns=' . &columns,
+        \ 'set lines=' . &lines,
+        \ 'winpos ' . getwinposx() . ' ' . getwinposy(),
+        \ ]
+      call writefile(options, s:save_window_file)
+    endfunction
+  augroup END
+  call s:load_source(s:save_window_file) " }}}
+
+  " Semitransparency {{{
+  if has('win32') || has('win64')
+    augroup Semitransparency
+      au!
+      au GUIEnter * set transparency=220
+    augroup END
+  elseif has('mac') || has('macunix') || has('gui_macvim')
+    set transparency=20
+  endif " }}}
 endif " }}}
 
 " Others {{{
