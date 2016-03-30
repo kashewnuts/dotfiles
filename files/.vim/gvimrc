@@ -15,13 +15,6 @@ function! VimrcEnvironment() " {{{
 endfunction
 let s:env = VimrcEnvironment() " }}}
 
-" Font {{{
-if s:env.IsWindows
-  set guifont=Ricty\ Diminished:h12
-elseif s:env.IsDarwin
-  set guifont=Ricty\ Diminished:h14
-endif " }}}
-
 " Hack #120: Store the location and size of the window by gVim {{{
 if has('gui_running')
   let s:save_window_file = expand('~/.vimwinpos')
