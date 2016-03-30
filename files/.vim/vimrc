@@ -55,6 +55,7 @@ set noerrorbells novisualbell t_vb=    " disable annoying bells
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set number                      " Show line number (nonumber: Hide)
 set ruler                       " show the current row and column
+set scrolloff=999               " Keep above and below the cursor
 set shiftwidth=4                " Shift move width
 set showmatch matchtime=1       " The highlight matching brackets
 set smartcase      " no ignorecase if Uppercase char present
@@ -97,12 +98,6 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj
 nnoremap k gk
-
-" Fix to become last line
-noremap <expr> <C-b> max([winheight(0) - 2, 1]) . "\<C-u>" . (line('.') < 1         + winheight(0) ? 'H' : 'L')
-noremap <expr> <C-f> max([winheight(0) - 2, 1]) . "\<C-d>" . (line('.') > line('$') - winheight(0) ? 'L' : 'H')
-noremap <expr> <C-y> (line('w0') <= 1         ? 'k' : "\<C-y>")
-noremap <expr> <C-e> (line('w$') >= line('$') ? 'j' : "\<C-e>")
 " }}}
 
 " ReOpen Encoding {{{
