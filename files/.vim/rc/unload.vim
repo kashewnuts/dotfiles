@@ -24,19 +24,22 @@ let g:plugin_hz_ja_disable     = 1
 let g:plugin_scrnmode_disable  = 1
 let g:plugin_verifyenc_disable = 1
 
-" Don't Read $VIM/vimrc
-let s:vimrclocal = '$VIM/vimrc_local.vim'
-if !filereadable(s:vimrclocal)
-  execute ':redir! >'. s:vimrclocal
-  silent! echon 'let g:vimrc_local_finish = 1'
-  redir END
-endif
-" Don't Read $VIM/gvimrc
-let s:gvimrclocal = '$VIM/gvimrc_local.vim'
-if !filereadable(s:gvimrclocal)
-  execute ':redir! >'. s:gvimrclocal
-  silent! echon 'let g:gvimrc_local_finish = 1'
-  redir END
+if has('kaoriya')
+  " Don't Read $VIM/vimrc
+  let s:vimrclocal = '$VIM/vimrc_local.vim'
+  if !filereadable(s:vimrclocal)
+    execute ':redir! >'. s:vimrclocal
+    silent! echon 'let g:vimrc_local_finish = 1'
+    redir END
+  endif
+
+  " Don't Read $VIM/gvimrc
+  let s:gvimrclocal = '$VIM/gvimrc_local.vim'
+  if !filereadable(s:gvimrclocal)
+    execute ':redir! >'. s:gvimrclocal
+    silent! echon 'let g:gvimrc_local_finish = 1'
+    redir END
+  endif
 endif
 
 " vim: tw=78 et sw=2 foldmethod=marker
