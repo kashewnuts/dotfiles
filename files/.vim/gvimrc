@@ -20,6 +20,7 @@ augroup SaveWindow
     call writefile(options, s:save_window_file)
   endfunction
 augroup END
+
 if filereadable(s:save_window_file)
   execute 'source ' . s:save_window_file
 endif " }}}
@@ -33,3 +34,5 @@ if has('win32') || has('win64')
 elseif has('mac') || has('macunix') || has('gui_macvim')
   set transparency=20
 endif " }}}
+
+" vim: tw=78 et sw=2 foldmethod=marker
