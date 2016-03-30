@@ -55,7 +55,7 @@ set noerrorbells novisualbell t_vb=    " disable annoying bells
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set number                      " Show line number (nonumber: Hide)
 set ruler                       " show the current row and column
-set scrolloff=3                 " Keep above and below the cursor
+set scrolloff=999               " Keep above and below the cursor
 set shiftwidth=4                " Shift move width
 set showmatch matchtime=1       " The highlight matching brackets
 set smartcase      " no ignorecase if Uppercase char present
