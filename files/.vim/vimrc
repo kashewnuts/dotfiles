@@ -14,6 +14,13 @@ if &compatible | set nocompatible | endif  " For dein.vim
 set encoding=utf-8
 scriptencoding utf-8
 
+" guioptions {{{
+set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
+set guioptions+=M               " Disable menu.vim
+set guioptions-=T               " Disable Toolbar
+set guioptions-=m               " Disable Menu bar
+" }}}
+
 function! s:load_source(path)
   let l:path = expand(a:path)
   if filereadable(l:path)
@@ -22,15 +29,6 @@ function! s:load_source(path)
 endfunction
 call s:load_source('~/.vim/rc/unload.vim')
 " }}}
-
-" GUI {{{
-" set guifont=MeiryoKe_Gothic:h10,MS_Gothic:h10,Osaka-Mono:h14
-set guifont=Ricty\ Diminished:h14
-set guioptions+=M       " Disable menu.vim
-set guioptions-=T       " Disable Toolbar
-set guioptions-=m       " Disable Menu bar
-" }}}
-
 
 " Misc {{{
 set ambiwidth=double            " Use twice the width of ASCII characters
@@ -57,6 +55,7 @@ set noerrorbells novisualbell t_vb=    " disable annoying bells
 set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set number                      " Show line number (nonumber: Hide)
 set ruler                       " show the current row and column
+set scrolloff=3                 " Keep above and below the cursor
 set shiftwidth=4                " Shift move width
 set showmatch matchtime=1       " The highlight matching brackets
 set smartcase      " no ignorecase if Uppercase char present
@@ -99,12 +98,6 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj
 nnoremap k gk
-
-" Fix to become last line
-noremap <expr> <C-b> max([winheight(0) - 2, 1]) . "\<C-u>" . (line('.') < 1         + winheight(0) ? 'H' : 'L')
-noremap <expr> <C-f> max([winheight(0) - 2, 1]) . "\<C-d>" . (line('.') > line('$') - winheight(0) ? 'L' : 'H')
-noremap <expr> <C-y> (line('w0') <= 1         ? 'k' : "\<C-y>")
-noremap <expr> <C-e> (line('w$') >= line('$') ? 'j' : "\<C-e>")
 " }}}
 
 " ReOpen Encoding {{{
@@ -116,6 +109,64 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 " }}}
 
+" FileType {{{
+augroup MyAutoCmd
+  au!
+  " Grep
+  au QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+
+  " FileType {{{
+  " ts   : tabstop
+  " sw   : shiftwidth
+  " sts  : softtabstop
+  " et   : expandtab
+  " noet : noexpandtab
+  " si   : smartindent
+  " cinw : cinwords
+  au FileType html       setl ts=4 sw=4 sts=4 et
+  au FileType htmldjango setl ts=2 sw=2 sts=2 et
+  au FileType javascript setl ts=4 sw=4 sts=4 et
+  au FileType ruby       setl ts=2 sw=2 sts=2 et
+  au FileType go         setl ts=4 sw=4 sts=4 noet
+  au FileType vim        setl ts=2 sw=2 sts=2 et
+  au FileType make       setl ts=4 sw=4 sts=4 noet
+  au FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+  au FileType rst        setl ts=4 sw=4 sts=4 et
+  au FileType gitconfig  setl ts=4 sw=4 sts=4 noet
+  au FileType jsp        setl ts=4 sw=4 sts=4 noet
+  au FileType java       setl ts=4 sw=4 sts=4 noet
+  au FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
+  au FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
+  au FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
+  au FileType scp        setl dictionary='~/.vim/dict/scp.dict' suffixesadd+=.scp
+  " }}}
+
+  " When the '#' character in the first line of the newly created,
+  " it isn't unindent
+  au FileType python inoremap # X#
+  au BufNewFile *.py 0r ~/.vim/template/python.txt
+augroup END
+
+" Golang settings {{{
+if $GOROOT !=# '' | set grepprg=jvgrep | endif " }}}
+
+" Java settings {{{
+" Syntax highlight
+let g:java_highlight_all       = 1
+let g:java_highlight_debug     = 1
+let g:java_allow_cpp_keywords  = 1
+let g:java_space_errors        = 1
+let g:java_highlight_functions = 1
+" }}}
+
+" PHP settings {{{
+let g:php_baselib       = 1
+let g:php_htmlInStrings = 1
+let g:php_noShortTags   = 1
+let g:php_sql_query     = 1
+" }}}
+" }}}
+
 " After Vim7.4 {{{
 if exists('&undofile') | set noundofile | endif  " Don't make *.un~ files
 if exists('&nofixeol') | set nofixeol | endif
@@ -124,18 +175,7 @@ if v:version >= 704 && has('patch338')  " breakindent {{{
   " http://ftp.vim.org/vim/patches/7.4/7.4.338
   set breakindent
 endif "}}}
-" }}}
-
-" load_source {{{
-call s:load_source(expand('~/.vim/rc/filetype.rc.vim'))
-call s:load_source(expand('~/.vim/rc/dein.rc.vim'))
-" }}}
-
-" Default Window Size {{{
-if has('gui_running') && !filereadable(expand('~/.vimwinpos'))
-  set lines=45 columns=100
-  winpos 0 0
-endif " }}}
+call s:load_source(expand('~/.vim/rc/dein.rc.vim')) " }}}
 
 " Others {{{
 call s:load_source(expand('~/.vimrc.local'))
