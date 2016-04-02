@@ -21,12 +21,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'itchyny/lightline.vim'
-
-[[plugins]]
 repo = 'tpope/vim-fugitive'
 #. }}}
 
