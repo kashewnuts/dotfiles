@@ -219,9 +219,8 @@ repo = 'mattn/gist-vim'
 on_cmd = 'Gist'
 
 [[plugins]]
-repo = 'gregsexton/gitv'
-on_source = 'vim-fugitive'
-on_cmd = 'Gitv'
+repo = 'cohama/agit.vim'
+on_cmd = 'Agit'
 # }}}
 
 # Edit plugins {{{
