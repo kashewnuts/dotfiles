@@ -62,7 +62,7 @@ set smartcase      " no ignorecase if Uppercase char present
 set smartindent    " Advanced automatic indentation when you made the new line
 set smarttab       " Indent by the number of 'shiftwidth'.
 set softtabstop=4  " Number of spaces in the file space is the corresponding
-" For when no lightline.vim
+" determines the content of the status line.
 set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
 set tabstop=4                   " Width on the screen of the tab
 set ttyfast                     " Faster redrawing.
@@ -170,11 +170,7 @@ let g:php_sql_query     = 1
 " After Vim7.4 {{{
 if exists('&undofile') | set noundofile | endif  " Don't make *.un~ files
 if exists('&nofixeol') | set nofixeol | endif
-if v:version >= 704 && has('patch338')  " breakindent {{{
-  " https://github.com/vim-jp/issues/issues/114
-  " http://ftp.vim.org/vim/patches/7.4/7.4.338
-  set breakindent
-endif "}}}
+if exists('&breakindent') | set breakindent | endif
 call s:load_source(expand('~/.vim/rc/dein.rc.vim')) " }}}
 
 " Others {{{
