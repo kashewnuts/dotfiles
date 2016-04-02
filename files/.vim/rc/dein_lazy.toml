@@ -147,6 +147,18 @@ on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
 repo = 'pangloss/vim-javascript'
 on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
 
+# [[plugins]]
+# repo = 'jQuery'
+# #on_ft = ['javascript', 'coffeescript', 'typescript']
+#
+# [[plugins]]
+# repo = 'jelera/vim-javascript-syntax'
+# #on_ft = ['javascript', 'typescript']
+#
+# [[plugins]]
+# repo = 'jason0x43/vim-js-indent'
+# #on_ft = ['javascript', 'typescript']
+
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
@@ -160,6 +172,7 @@ hook_add = '''
 # }}}
 
 # Python plugins {{{
+if = "executable('pip')"
 repo = 'davidhalter/jedi-vim'
 on_i = 1
 on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
@@ -172,12 +185,14 @@ hook_source = '''
 build = 'pip install jedi'
 
 [[plugins]]
+if = "executable('pip')"
 repo = 'nvie/vim-flake8'
 on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
 build = 'pip install flake8'
 # hook_add = "au MyAutoCmd BufWritePost *.py call Flake()"
 
 [[plugins]]
+if = "executable('pip')"
 repo = 'tell-k/vim-autopep8'
 on_ft = ['python', 'python3']
 build = 'pip install autopep8'
@@ -215,8 +230,9 @@ on_ft = 'go'
 
 # Git plugins {{{
 [[plugins]]
-repo = 'mattn/gist-vim'
-on_cmd = 'Gist'
+repo = 'lambdalisue/vim-gista'
+on_cmd = 'Gista'
+hook_source = "let g:gista#client#default_username = 'kashewnuts'"
 
 [[plugins]]
 repo = 'cohama/agit.vim'
