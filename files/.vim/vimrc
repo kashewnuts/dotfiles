@@ -177,7 +177,12 @@ call s:load_source(expand('~/.vim/rc/dein.rc.vim')) " }}}
 call s:load_source(expand('~/.vimrc.local'))
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
-colorscheme desert
+try
+  colorscheme molokai
+catch
+  colorscheme desert
+endtry
+
 set secure
 " }}}
 
