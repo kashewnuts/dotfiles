@@ -7,26 +7,29 @@ repo = 'Shougo/neocomplete.vim'
 if = "has('lua')"
 on_i = 1
 hook_source = '''
-  let g:neocomplete#enable_at_startup = 1  " Use neocomplete.
-  let g:acp_enableAtStartup = 0            " Disable AutoComplPop.
-  let g:neocomplete#nable_smart_case = 1   " Use smartcase.
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use smartcase.
+  let g:neocomplete#nable_smart_case = 1
 
   " Set minimum syntax keyword length.
   let g:neocomplete#ources#yntax#in_keyword_length = 3
 
   " jedi omni completion
-  au MyAutoCmd FileType python setl omnifunc=jedi#ompletions
+  au MyAutoCmd FileType python setl omnifunc=jedi#completions
 
-  let g:jedi#uto_vim_configuration = 0
-  if !exists('g:neocomplete#orce_omni_input_patterns')
-    let g:neocomplete#orce_omni_input_patterns = {}
+  let g:jedi#auto_vim_configuration = 0
+  if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
   endif
-  let g:neocomplete#orce_omni_input_patterns.python =
+  let g:neocomplete#force_omni_input_patterns.python =
     \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  let g:neocomplete#orce_omni_input_patterns.go = '[^. \t]\.\w*'
+  let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
-  let g:neocomplete#ources#ictionary#ictionaries = {'default': ''}
-  " let g:neocomplete#ources#ictionary#ictionaries = {
+  " let g:neocomplete#fources#dictionary#ictionaries = {'default': ''}
+  " let g:neocomplete#fources#dictionary#ictionaries = {
   "   \ 'default':    '',
   "   \ 'vimshell':   $HOME.'/.vimshell_hist',
   "   \ 'scala':      $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
@@ -53,13 +56,16 @@ repo = 'Shougo/neocomplcache.vim'
 on_i = 1
 if = "!has('lua')"
 hook_source = '''
-  let g:neocomplcache#nable_at_startup = 1  " Use neocomplcache.
-  let g:acp_enableAtStartup = 0             " Disable AutoComplPop.
-  let g:neocomplcache_enable_smart_case = 1 " Use smartcase.
+  " Use neocomplcache.
+  let g:neocomplcache#enable_at_startup = 1
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use smartcase.
+  let g:neocomplcache_enable_smart_case = 1
 
   " jedi omni completion
-  au MyAutoCmd FileType python setl omnifunc=jedi#ompletions
-  let g:jedi#uto_vim_configuration = 0
+  au MyAutoCmd FileType python setl omnifunc=jedi#completions
+  let g:jedi#auto_vim_configuration = 0
   if !exists('g:neocomplcache_force_omni_patterns')
     let g:neocomplcache_force_omni_patterns = {}
   endif
@@ -248,8 +254,10 @@ on_cmd = 'h'
 repo = 'vim-scripts/Align'
 on_cmd = 'Align'
 hook_add = '''
-  let g:Align_xstrlen = 3       " for japanese string
-  let g:DrChipTopLvlMenu = ''   " remove 'DrChip' menu
+  " for japanese string
+  let g:Align_xstrlen = 3
+  " remove 'DrChip' menu
+  let g:DrChipTopLvlMenu = ''
 '''
 
 [[plugins]]

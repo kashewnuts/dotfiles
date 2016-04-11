@@ -16,13 +16,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
-on_cmd = [
-    'Git', 'Gcd', 'Glcd', 'Gstatus', 'Gcommit', 'Gmerge',
-    'Gpull', 'Gpush', 'Gfetch', 'Ggrep', 'Glgrep', 'Glog',
-    'Gllog', 'Gedit', 'Gsplit', 'Gvsplit', 'Gtabedit', 'Gpedit',
-    'Gread', 'Gwrite', 'Gwq', 'Gdiff', 'Gsdiff', 'Gvdiff',
-    'Gmove', 'Gremove', 'Gblame', 'Gbrowse',
-]
 
 # [[plugins]]
 # repo = 'tpope/vim-surround'
