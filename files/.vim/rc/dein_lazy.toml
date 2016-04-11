@@ -26,22 +26,23 @@ hook_source = '''
   endif
   let g:neocomplete#force_omni_input_patterns.python =
     \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
+  " let g:neocomplete#sources#omni#functions.go = 'gocomplete#Complete'
+  " let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
-  " let g:neocomplete#fources#dictionary#ictionaries = {'default': ''}
-  " let g:neocomplete#fources#dictionary#ictionaries = {
+  " let g:neocomplete#fources#dictionary#dictionaries = {'default': ''}
+  " let g:neocomplete#fources#dictionary#dictionaries = {
   "   \ 'default':    '',
-  "   \ 'vimshell':   $HOME.'/.vimshell_hist',
-  "   \ 'scala':      $HOME.'/.vim/bundle/vim-scala/dict/scala.dict',
-  "   \ 'c':          $HOME.'/.vim/dict/c.dict',
-  "   \ 'cpp':        $HOME.'/.vim/dict/cpp.dict',
-  "   \ 'java':       $HOME.'/.vim/dict/java.dict',
-  "   \ 'lua':        $HOME.'/.vim/dict/lua.dict',
-  "   \ 'ocaml':      $HOME.'/.vim/dict/ocaml.dict',
-  "   \ 'perl':       $HOME.'/.vim/dict/perl.dict',
-  "   \ 'php':        $HOME.'/.vim/dict/php.dict',
-  "   \ 'scheme':     $HOME.'/.vim/dict/scheme.dict',
-  "   \ 'vim':        $HOME.'/.vim/dict/vim.dict'
+  "   \ 'vimshell':   '~/.vimshell_hist',
+  "   \ 'scala':      '~/.vim/bundle/vim-scala/dict/scala.dict',
+  "   \ 'c':          '~/.vim/dict/c.dict',
+  "   \ 'cpp':        '~/.vim/dict/cpp.dict',
+  "   \ 'java':       '~/.vim/dict/java.dict',
+  "   \ 'lua':        '~/.vim/dict/lua.dict',
+  "   \ 'ocaml':      '~/.vim/dict/ocaml.dict',
+  "   \ 'perl':       '~/.vim/dict/perl.dict',
+  "   \ 'php':        '~/.vim/dict/php.dict',
+  "   \ 'scheme':     '~/.vim/dict/scheme.dict',
+  "   \ 'vim':        '~/.vim/dict/vim.dict'
   "   \ }
 
   " Enable omni completion.
@@ -204,12 +205,9 @@ on_ft = ['python', 'python3']
 build = 'pip install autopep8'
 
 [[plugins]]
+if = "executable('virtualenv')"
 repo = 'jmcantrell/vim-virtualenv'
 on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
-
-[[plugins]]
-repo = 'lambdalisue/vim-django-support'
-on_ft = ['python', 'python3', 'djangohtml']
 # }}}
 
 # Syntastic {{{
