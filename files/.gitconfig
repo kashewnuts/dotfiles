@@ -5,6 +5,8 @@
 	editor = vim
 	excludesfile = ~/.gitignore
 	quotepath = false
+	preloadindex = true
+	fscache = true
 [color]
 	ui = true
 [push]
