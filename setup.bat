@@ -8,5 +8,7 @@ mklink %USERPROFILE%\.gitignore %DOTFILES%\files\.gitignore
 mklink %USERPROFILE%\.hgrc %DOTFILES%\files\.hgrc_win
 mklink %USERPROFILE%\.gitignore %DOTFILES%\files\.gitignore
 mklink %USERPROFILE%\.pythonstartup %DOTFILES%\files\.pythonstartup
+mklink %USERPROFILE%\.bashrc %DOTFILES%\files\.bashrc
+mklink %USERPROFILE%\.bash_profile %DOTFILES%\files\.bash_profile
 
 @pause
