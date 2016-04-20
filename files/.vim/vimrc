@@ -148,7 +148,7 @@ augroup MyAutoCmd
 augroup END
 
 " Golang settings {{{
-if $GOROOT !=# '' | set grepprg=jvgrep | endif " }}}
+if executable('jvgrep') | set grepprg=jvgrep | endif " }}}
 
 " Java settings {{{
 " Syntax highlight
