@@ -14,8 +14,8 @@ hook_add = '''
   au MyAutoCmd ColorScheme * highlight ZenSpace ctermfg=LightGray guibg=DarkGray
 '''
 
-[[plugins]]
-repo = 'tpope/vim-fugitive'
+# [[plugins]]
+# repo = 'tpope/vim-fugitive'
 
 # [[plugins]]
 # repo = 'tpope/vim-surround'
