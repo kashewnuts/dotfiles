@@ -14,21 +14,21 @@ GITCONFIGOS=.gitconfig.os
 
 for file in ${DOT_FILES[@]}
 do
-  if [ $file = .gitconfig.unix ]; then
-    # Set Symbolic Link .gitconfig.os
-    if [ -a $HOME/${GITCONFIGOS} ]; then
-      echo "Already exists file: ${GITCONFIGOS}"
+    if [ $file = .gitconfig.unix ]; then
+        put_symbolic_link() ${GITCONFIGOS}
+    elif [ $file = .bashrc -a $HOME/$file ]; then
+        put_symbolic_link() .bash_aliases
     else
-      ln -s $HOME/dotfiles/files/$file $HOME/${GITCONFIGOS}
-      echo "Put Symbolic Link: ${GITCONFIGOS}"
+        put_symbolic_link() $file
     fi
-  else
-    # Set Symbolic Link others
-    if [ -a $HOME/$file ]; then
-      echo "Already exists file: $file"
-    else
-      ln -s $HOME/dotfiles/files/$file $HOME/$file
-      echo "Put Symbolic Link: $file"
-    fi
-  fi
 done
+
+# Put Symbolic Link $1
+put_symbolic_link() {
+    if [ -a $HOME/$1 ]; then
+        echo "Already exists file: $1"
+    else
+        ln -s $HOME/dotfiles/files/$file $HOME/$1
+        echo "Put Symbolic Link: $1"
+    fi
+}

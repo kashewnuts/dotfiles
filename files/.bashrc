@@ -1,10 +1,11 @@
 export EDITOR=vim
-alias vi='vim'
 
 alias la='ls -al'
 alias ll='ls -l'
 
 if [ "$(expr substr $(uname -s) 1 4)" != 'MSYS' ]; then
+    alias vi='vim'
+
     # Python
     export PYTHONSTARTUP=~/.pythonstartup
     export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
@@ -47,6 +48,7 @@ darwin*)
 
 # MSYS
 msys*)
+    alias vi='winpty /c/Application/vim/vi.exe'
     alias vim='/c/Application/vim/vim.exe'
     alias vagrant='/c/HashiCorp/Vagrant/bin/vagrant.exe'
     ;;
