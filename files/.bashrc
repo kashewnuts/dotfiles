@@ -34,7 +34,6 @@ fi
 case "$OSTYPE" in
 # BSD (contains Mac)
 darwin*)
-
     # Editor
     export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
     alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
@@ -53,3 +52,8 @@ msys*)
     alias vagrant='/c/HashiCorp/Vagrant/bin/vagrant.exe'
     ;;
 esac
+
+# local setting
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
