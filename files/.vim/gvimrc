@@ -26,13 +26,15 @@ if filereadable(s:save_window_file)
 endif " }}}
 
 " Semitransparency {{{
-if has('win32') || has('win64')
-  augroup Semitransparency
-    au!
-    au GUIEnter * set transparency=220
-  augroup END
-elseif has('mac') || has('macunix') || has('gui_macvim')
-  set transparency=20
+if exists('&transparency')
+  if has('win32') || has('win64')
+    augroup Semitransparency
+      au!
+      au GUIEnter * set transparency=220
+    augroup END
+  elseif has('mac') || has('macunix') || has('gui_macvim')
+    set transparency=20
+  endif
 endif " }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker
