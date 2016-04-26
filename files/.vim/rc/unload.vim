@@ -1,3 +1,6 @@
+" Disable the loading of plugins.
+set noloadplugins
+
 " STOP default plugins
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1

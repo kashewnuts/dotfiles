@@ -27,8 +27,6 @@ function! s:load_source(path)
     execute 'source ' . l:path
   endif
 endfunction
-set noloadplugins
-let no_buffers_menu = 1
 call s:load_source('~/.vim/rc/unload.vim')
 " }}}
 
