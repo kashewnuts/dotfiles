@@ -11,6 +11,7 @@ let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
 
 if v:version >= 704
       \ && executable('git')
+      \ && executable('rsync')
       \ && filereadable(expand(s:toml_path))
       \ && filereadable(expand(s:toml_lazy_path))
   " Begin dein.vim

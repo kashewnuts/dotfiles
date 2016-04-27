@@ -1,9 +1,15 @@
 # Shougo plugins {{{
 [[plugins]]
 repo = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_path = '.*'
 
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+depends = 'context_filetype.vim'
 if = "has('lua')"
 on_i = 1
 hook_source = '''
@@ -77,8 +83,8 @@ endif
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
 on_i = 1
-on_source = 'neosnippet-snippets'
-depends = 'neosnippet-snippets'
+depends = ['neosnippet-snippets', 'context_filetype.vim']
+on_source = ['neosnippet-snippets', 'context_filetype.vim']
 hook_add = '''
   " Plugin key-mappings.
   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -109,19 +115,8 @@ hook_add = '''
 repo = 'Shougo/neosnippet-snippets'
 on_i = 1
 
-# [[plugins]]
-# repo = 'Shougo/vimfiler'
-# depends = 'unite.vim'
-# on_map = '<Plug>'
-# on_path = '.*'
-# hook_add = '''
-#   let g:vimfiler_as_default_explorer = 1
-#   let g:vimfiler_safe_mode_by_default = 0
-#   " close vimfiler automatically when there are only vimfiler open
-#   nnoremap <Leader>e :VimFilerExplorer<CR>
-#   au MyAutoCmd BufEnter * if (
-#       \ winnr('$') == 1 && &filetype ==#'vimfiler') | q | endif
-# '''
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
 # }}}
 
 # thinca plugins {{{
