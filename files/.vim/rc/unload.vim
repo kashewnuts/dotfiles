@@ -28,21 +28,17 @@ let g:plugin_scrnmode_disable  = 1
 let g:plugin_verifyenc_disable = 1
 
 if has('kaoriya')
-  " Don't Read $VIM/vimrc
-  let s:vimrclocal = '$VIM/vimrc_local.vim'
-  if !filereadable(s:vimrclocal)
-    execute ':redir! >'. s:vimrclocal
-    silent! echon 'let g:vimrc_local_finish = 1'
-    redir END
-  endif
-
-  " Don't Read $VIM/gvimrc
-  let s:gvimrclocal = '$VIM/gvimrc_local.vim'
-  if !filereadable(s:gvimrclocal)
-    execute ':redir! >'. s:gvimrclocal
-    silent! echon 'let g:gvimrc_local_finish = 1'
-    redir END
-  endif
+  " Don't read $VIM/(g)vimrc
+  function! s:disable_source(vimrclocal, message)
+    let l:path = expand($VIM . '/' . a:vimrclocal)
+    if !filereadable(l:path)
+      execute ':redir! >' . l:path
+      silent! echon a:message
+      redir END
+    endif
+  endfunction
+  call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
+  call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
 endif
 
 " vim: tw=78 et sw=2 foldmethod=marker

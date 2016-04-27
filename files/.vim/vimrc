@@ -171,10 +171,10 @@ let g:php_sql_query     = 1
 if exists('&undofile') | set noundofile | endif  " Don't make *.un~ files
 if exists('&nofixeol') | set nofixeol | endif
 if exists('&breakindent') | set breakindent | endif
-call s:load_source(expand('~/.vim/rc/dein.rc.vim')) " }}}
+call s:load_source('~/.vim/rc/dein.rc.vim') " }}}
 
 " Others {{{
-call s:load_source(expand('~/.vimrc.local'))
+call s:load_source('~/.vimrc.local')
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
 try
