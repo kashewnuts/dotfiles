@@ -291,6 +291,15 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_mruf_max            = 500
 let g:ctrlp_open_new_file       = 1
 '''
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+on_ft = ['html', 'css', 'javascript']
+hook_add = '''
+  " Switch comment by typing \c
+  nmap <Leader>c <Plug>(caw:i:toggle)
+  vmap <Leader>c <Plug>(caw:i:toggle)
+'''
 # }}}
 
 # FileType plugins {{{
