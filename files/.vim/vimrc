@@ -178,14 +178,11 @@ call s:load_source('~/.vim/rc/dein.rc.vim') " }}}
 call s:load_source('~/.vimrc.local')
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
-
-try
-  colorscheme molokai
+try | colorscheme molokai
 catch
-  colorscheme desert
+  try | colorscheme desert | catch | endtry
 endtry
-
-set secure
+set secure                      " Safely use Vim
 " }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker
