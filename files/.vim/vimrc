@@ -42,6 +42,7 @@ set expandtab                   " noexpand tabs to spaces (expandtab: expand)
 " Delete - characters that are displayed on the right side of the folding time
 set fillchars=vert:\|
 set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
+set helpheight=999              " Open help to fill the screen
 set history=1000                " history
 set hlsearch                    " highlight searches
 set ignorecase                  " ignore case when searching
@@ -177,6 +178,7 @@ call s:load_source('~/.vim/rc/dein.rc.vim') " }}}
 call s:load_source('~/.vimrc.local')
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
+
 try
   colorscheme molokai
 catch
