@@ -8,7 +8,9 @@
 
 " Basic Settings {{{
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
-if &compatible | set nocompatible | endif  " For dein.vim
+if &compatible && has('vim_starting')
+  set nocompatible      " For dein.vim
+endif
 
 " Encoding
 set encoding=utf-8

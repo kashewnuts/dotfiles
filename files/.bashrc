@@ -3,7 +3,7 @@ export EDITOR=vim
 alias la='ls -al'
 alias ll='ls -l'
 
-if [ "$(expr substr $(uname -s) 1 4)" != 'MSYS' ]; then
+if [ "$OSTYPE" != 'msys' ]; then
     alias vi='vim'
 
     # Python
