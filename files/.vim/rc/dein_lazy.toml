@@ -43,7 +43,10 @@ hook_source = '''
   " let g:neocomplete#sources#omni#functions.go = 'gocomplete#Complete'
   " let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
-  " let g:neocomplete#fources#dictionary#dictionaries = {'default': ''}
+  let g:neocomplete#fources#dictionary#dictionaries = {
+    \ 'default':    '',
+    \ 'scp':        '~/.vim/dict/scp.dict'
+    \ }
   " let g:neocomplete#fources#dictionary#dictionaries = {
   "   \ 'default':    '',
   "   \ 'vimshell':   '~/.vimshell_hist',

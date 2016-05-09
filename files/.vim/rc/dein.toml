@@ -1,24 +1,18 @@
-#. Common {{{
+# Common {{{
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
-#. }}}
+# }}}
 
-#. Edit plugins {{{
+# Edit plugins {{{
 [[plugins]]
 repo = 'thinca/vim-zenspace'
 hook_add = '''
   au MyAutoCmd ColorScheme * highlight ZenSpace ctermfg=LightGray guibg=DarkGray
 '''
+# }}}
 
-# [[plugins]]
-# repo = 'tpope/vim-fugitive'
-
-# [[plugins]]
-# repo = 'tpope/vim-surround'
-#. }}}
-
-#. toml:se fdm=marker:
+# toml:se fdm=marker:
