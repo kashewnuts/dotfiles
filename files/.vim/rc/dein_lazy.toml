@@ -47,20 +47,6 @@ hook_source = '''
     \ 'default':    '',
     \ 'scp':        '~/.vim/dict/scp.dict'
     \ }
-  " let g:neocomplete#fources#dictionary#dictionaries = {
-  "   \ 'default':    '',
-  "   \ 'vimshell':   '~/.vimshell_hist',
-  "   \ 'scala':      '~/.vim/bundle/vim-scala/dict/scala.dict',
-  "   \ 'c':          '~/.vim/dict/c.dict',
-  "   \ 'cpp':        '~/.vim/dict/cpp.dict',
-  "   \ 'java':       '~/.vim/dict/java.dict',
-  "   \ 'lua':        '~/.vim/dict/lua.dict',
-  "   \ 'ocaml':      '~/.vim/dict/ocaml.dict',
-  "   \ 'perl':       '~/.vim/dict/perl.dict',
-  "   \ 'php':        '~/.vim/dict/php.dict',
-  "   \ 'scheme':     '~/.vim/dict/scheme.dict',
-  "   \ 'vim':        '~/.vim/dict/vim.dict'
-  "   \ }
 
   " Enable omni completion.
   au MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
@@ -284,15 +270,6 @@ on_cmd = 'SQLUFormatter'
 repo = 'bronson/vim-trailing-whitespace'
 on_cmd = 'FixWhitespace'
 hook_add = "let g:extra_whitespace_ignored_filetypes = ['unite']"
-
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-on_cmd = ['CtrlP', 'CtrlPBuffer', 'CtrlPMRU', 'CtrlPMixed']
-hook_add = '''
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_mruf_max            = 500
-let g:ctrlp_open_new_file       = 1
-'''
 
 [[plugins]]
 repo = 'tyru/caw.vim'
