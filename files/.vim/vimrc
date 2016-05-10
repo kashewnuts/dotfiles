@@ -18,6 +18,7 @@ scriptencoding utf-8            " Specify encoding used in the script
 
 " GUI
 set guifont=Ricty\ Diminished\ Regular:h11,MS_Gothic:h10,Osaka-Mono:h14
+set guioptions&
 set guioptions+=M               " Disable menu.vim
 set guioptions-=T               " Disable Toolbar
 set guioptions-=m               " Disable Menu bar
@@ -43,7 +44,9 @@ endif " }}}
 set ambiwidth=double            " Use twice the width of ASCII characters
 set autoindent                  " For smartindent
 set backspace=indent,eol,start  " Can erase everything in the back space
-if has('clipboard') | set clipboard+=unnamed | endif  " Use the OS clipboard
+if has('clipboard')
+  set clipboard& clipboard+=unnamed  " Use the OS clipboard
+endif
 set cmdheight=2                 " cmdline height
 set copyindent                  " copy the indent structure of existing lines
 set display=lastline            " enable view long line
@@ -149,7 +152,8 @@ augroup MyAutoCmd
   au FileType java       setl ts=4 sw=4 sts=4 noet
   au FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
   au FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
-  au FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos suffixesadd+=.scp
+  au FileType scp        setl ts=4 sw=4 sts=4 noet fenc=shift_jis ff=dos
+  au FileType scp        setl suffixesadd& suffixesadd+=.scp
   " }}}
 
   " When the '#' character in the first line of the newly created,
@@ -214,7 +218,7 @@ if v:version >= 704
         execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
       endif
     endif
-    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+    set runtimepath& runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
   endif
 
   " Read TOML & cache
