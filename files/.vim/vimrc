@@ -140,6 +140,7 @@ augroup MyAutoCmd
   au FileType ruby       setl ts=2 sw=2 sts=2 et
   au FileType go         setl ts=4 sw=4 sts=4 noet
   au FileType vim        setl ts=2 sw=2 sts=2 et
+  au FileType toml       setl ts=2 sw=2 sts=2 et
   au FileType make       setl ts=4 sw=4 sts=4 noet
   au FileType rst        setl ts=4 sw=4 sts=4 et
   au FileType text       setl ts=4 sw=4 sts=4 et ft=rst
