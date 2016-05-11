@@ -13,7 +13,12 @@ if &compatible && has('vim_starting')
 endif
 
 " Encoding
-set encoding=utf-8              " Default encoding
+if (has('win32') || has('win64')) && !has('gui_running')
+    set encoding=cp932
+else
+  let &termencoding = &encoding
+  set encoding=utf-8
+endif
 scriptencoding utf-8            " Specify encoding used in the script
 
 " GUI
@@ -107,6 +112,10 @@ nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+
+" To Enable filtering the command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj

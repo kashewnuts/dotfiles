@@ -47,7 +47,7 @@ darwin*)
 
 # MSYS
 msys*)
-    alias vi='winpty /c/Application/vim/vi.exe'
+    alias vi='TERM=xterm-256color /usr/bin/vim.exe'
     alias vim='/c/Application/vim/vim.exe'
     alias vagrant='/c/HashiCorp/Vagrant/bin/vagrant.exe'
     ;;
