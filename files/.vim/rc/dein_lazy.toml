@@ -10,6 +10,7 @@ hook_source = '''
   let g:unite_enable_ignore_case = 1
   let g:unite_enable_smart_case = 1
 
+  nnoremap <silent> ,b  :<C-u>Unite buffer<CR>
   " grep search
   nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
   " grep search for the word at the cursor position
@@ -45,7 +46,7 @@ hook_source = '''
   let g:neocomplete#ources#syntax#in_keyword_length = 3
 
   " jedi omni completion
-  au MyAutoCmd FileType python setl omnifunc=jedi#completions
+  autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
 
   let g:jedi#auto_vim_configuration = 0
   if !exists('g:neocomplete#force_omni_input_patterns')
@@ -62,10 +63,10 @@ hook_source = '''
     \ }
 
   " Enable omni completion.
-  au MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
-  au MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-  au MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
-  au MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
+  autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
+  autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+  autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+  autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
 '''
 
 [[plugins]]
@@ -81,7 +82,7 @@ hook_source = '''
   let g:neocomplcache_enable_smart_case = 1
 
   " jedi omni completion
-  au MyAutoCmd FileType python setl omnifunc=jedi#completions
+  autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
   let g:jedi#auto_vim_configuration = 0
   if !exists('g:neocomplcache_force_omni_patterns')
     let g:neocomplcache_force_omni_patterns = {}
@@ -203,7 +204,7 @@ if = "executable('pip')"
 repo = 'nvie/vim-flake8'
 on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
 build = 'pip install flake8'
-# hook_add = "au MyAutoCmd BufWritePost *.py call Flake()"
+# hook_add = "autocmd MyAutoCmd BufWritePost *.py call Flake()"
 
 [[plugins]]
 if = "executable('pip')"
