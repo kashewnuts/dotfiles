@@ -12,24 +12,26 @@ if &compatible && has('vim_starting')
   set nocompatible              " For dein.vim
 endif
 
-" Encoding
-if (has('win32') || has('win64')) && !has('gui_running')
-    set encoding=cp932
+" Encoding {{{
+if has('win32') && !has('gui_running')
+  set encoding=cp932
 else
   let &termencoding = &encoding
   set encoding=utf-8
 endif
 scriptencoding utf-8            " Specify encoding used in the script
+set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
+" }}}
 
 " GUI
-set guifont=Ricty\ Diminished\ Regular:h11,MS_Gothic:h10,Osaka-Mono:h14
-set guioptions&
-set guioptions+=M               " Disable menu.vim
-set guioptions-=T               " Disable Toolbar
-set guioptions-=m               " Disable Menu bar
+set guifont=Ricty\ Diminished:h11
+set guioptions=Mc               " Disable menu.vim & Use console dialog
 
 " Disable {{{
-set noloadplugins               " Disable the loading of plugins.
+set noerrorbells novisualbell t_vb=   " Disable annoying bells
+set noswapfile nobackup nowritebackup " Doesn't generate a backup file
+set noloadplugins                     " Disable the loading of plugins.
+
 " Don't read $VIM/(g)vimrc
 if has('kaoriya')
   function! s:disable_source(vimrc_local, message)
@@ -46,45 +48,51 @@ endif " }}}
 " }}}
 
 " Misc {{{
+" Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
-set autoindent                  " For smartindent
-set backspace=indent,eol,start  " Can erase everything in the back space
-if has('clipboard')
-  set clipboard& clipboard+=unnamed  " Use the OS clipboard
-endif
-set cmdheight=2                 " cmdline height
-set copyindent                  " copy the indent structure of existing lines
-set display=lastline            " enable view long line
-set expandtab                   " noexpand tabs to spaces (expandtab: expand)
-" Delete - characters that are displayed on the right side of the folding time
-set fillchars=vert:\|
-set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
+set fillchars=vert:\|,fold:\    " Characters to fill the separators
 set helpheight=999              " Open help to fill the screen
 set history=1000                " history
-set hlsearch                    " highlight searches
-set ignorecase                  " ignore case when searching
-set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
-set incsearch                   " do incremental searching
-set laststatus=2                " Always display status bar
-set lazyredraw                  " Only redraw when necessary.
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
-set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
-set noerrorbells novisualbell t_vb=    " disable annoying bells
-set noswapfile nobackup nowritebackup  " doesn't generate a backup file
 set number                      " Show line number (nonumber: Hide)
-set ruler                       " show the current row and column
 set scrolloff=999               " Keep above and below the cursor
-set shiftwidth=4                " Shift move width
 set showmatch matchtime=1       " The highlight matching brackets
-set smartcase      " no ignorecase if Uppercase char present
+
+" Edit
+set backspace=indent,eol,start  " Can erase everything in the back space
+if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
+set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+
+" Indent
+set autoindent     " For smartindent
 set smartindent    " Advanced automatic indentation when you made the new line
-set smarttab       " Indent by the number of 'shiftwidth'.
+set copyindent     " copy the indent structure of existing lines
+
+" Tab
+set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
-" determines the content of the status line.
-set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c]
-set tabstop=4                   " Width on the screen of the tab
-set ttyfast                     " Faster redrawing.
+set expandtab      " noexpand tabs to spaces (expandtab: expand)
+set shiftwidth=4   " Shift move width
+set smarttab       " Indent by the number of 'shiftwidth'.
+
+" Search
+set hlsearch       " highlight searches
+set incsearch      " do incremental searching
+set ignorecase     " ignore case when searching
+set smartcase      " no ignorecase if Uppercase char present
+
+" Cmdline & Statusline
+set cmdheight=2                 " Cmdline height
 set wildmenu wildmode=list:full " Command-line completion
+set display=lastline            " enable view long line
+set laststatus=2                " Always display status bar
+" Determines the content of the status line.
+set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c/%L]
+
+" Terminal
+set lazyredraw                  " Only redraw when necessary.
+set ttyfast                     " Faster redrawing.
 " }}}
 
 " KeyMaping {{{
@@ -195,7 +203,9 @@ let g:php_sql_query     = 1
 if exists('&undofile') | set noundofile | endif  " Don't make *.un~ files
 if exists('&nofixeol') | set nofixeol | endif
 if exists('&breakindent') | set breakindent | endif
+" }}}
 
+" dein.vim {{{
 " Cache
 let $CACHE = expand('~/.cache')
 if !isdirectory(expand($CACHE))
@@ -246,14 +256,17 @@ if v:version >= 704
 endif " }}}
 
 " Others {{{
+" Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
 
+" Colorscheme
 try | colorscheme molokai
 catch
   try | colorscheme desert | catch | endtry
 endtry
 
+" Load local settings
 if filereadable(expand('~/.vimrc.local'))
   execute 'source ~/.vimrc.local'
 endif
