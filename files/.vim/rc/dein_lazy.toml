@@ -295,6 +295,19 @@ hook_add = '''
 '''
 
 [[plugins]]
+if = "executable('pip')"
+repo = 'kannokanno/previm'
+on_ft = ['md', 'rst']
+hook_add = '''
+  let g:previm_disable_vimproc = 1
+  augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+  augroup END
+'''
+build = 'pip install docutils'
+
+[[plugins]]
 repo = 'mattn/benchvimrc-vim'
 on_cmd = 'BenchVimrc'
 # }}}
