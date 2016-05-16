@@ -14,9 +14,9 @@ endif
 
 " Encoding {{{
 if has('win32') && !has('gui_running')
+  let &termencoding = &encoding
   set encoding=cp932
 else
-  let &termencoding = &encoding
   set encoding=utf-8
 endif
 scriptencoding utf-8            " Specify encoding used in the script
