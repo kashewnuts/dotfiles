@@ -307,6 +307,7 @@ on_ft = 'scp'
 [[plugins]]
 repo = 'kashewnuts/vim-ft-rst_header'
 on_ft = 'rst'
+hook_source = 'autocmd MyAutoCmd FileType text setl  ft=rst'
 
 [[plugins]]
 repo = 'cespare/vim-toml'
