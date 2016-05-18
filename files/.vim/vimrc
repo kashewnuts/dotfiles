@@ -176,7 +176,7 @@ augroup MyAutoCmd
   " When the '#' character in the first line of the newly created,
   " it isn't unindent
   autocmd FileType python inoremap # X#
-  autocmd BufNewFile *.py 0r ~/.vim/template/python.txt
+  " autocmd BufNewFile *.py 0r ~/.vim/template/python.txt
 augroup END
 
 " Golang settings {{{
@@ -261,7 +261,12 @@ filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
 
 " Colorscheme
-try | colorscheme molokai
+try
+  if has('win32') && !has('gui_running')
+    colorscheme industry
+  else
+    colorscheme molokai
+  endif
 catch
   try | colorscheme desert | catch | endtry
 endtry

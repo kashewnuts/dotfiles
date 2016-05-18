@@ -297,6 +297,8 @@ hook_add = '''
 [[plugins]]
 if = "executable('pip')"
 repo = 'kannokanno/previm'
+on_source = 'open-browser.vim'
+depends = 'open-browser.vim'
 on_ft = ['md', 'rst']
 hook_add = '''
   let g:previm_disable_vimproc = 1
