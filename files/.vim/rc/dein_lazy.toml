@@ -145,6 +145,19 @@ hook_add = '''
 [[plugins]]
 repo = 'thinca/vim-scouter'
 on_cmd = 'Scouter'
+
+[[plugins]]
+repo = 'thinca/vim-ft-rst_header'
+on_ft = 'rst'
+hook_source = 'autocmd MyAutoCmd FileType text setl  ft=rst'
+
+[[plugins]]
+repo = 'thinca/vim-fontzoom'
+on_map = [['n', '<Plug>']]
+hook_add = '''
+  nmap + <Plug>(fontzoom-larger)
+  nmap _ <Plug>(fontzoom-smaller)
+'''
 # }}}
 
 # Web plugins {{{
@@ -240,6 +253,15 @@ repo = 'fatih/vim-go'
 on_ft = 'go'
 # }}}
 
+# Java plugins {{{
+[[plugins]]
+repo = 'artur-shaik/vim-javacomplete2'
+on_ft = 'java'
+hook_source = '''
+  autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
+'''
+# }}}
+
 # Git plugins {{{
 [[plugins]]
 repo = 'lambdalisue/vim-gista'
@@ -251,11 +273,7 @@ repo = 'cohama/agit.vim'
 on_cmd = 'Agit'
 # }}}
 
-# Edit plugins {{{
-[[plugins]]
-repo = 'vim-jp/vimdoc-ja'
-on_cmd = 'h'
-
+# Formater plugins {{{
 [[plugins]]
 repo = 'vim-scripts/Align'
 on_cmd = 'Align'
@@ -264,14 +282,6 @@ hook_add = '''
   let g:Align_xstrlen = 3
   " remove 'DrChip' menu
   let g:DrChipTopLvlMenu = ''
-'''
-
-[[plugins]]
-repo = 'mrtazz/simplenote.vim'
-on_cmd = 'Simplenote'
-hook_add = '''
-  let g:SimplenoteListHeight=50
-  let g:SimplenoteFiletype ='rst'
 '''
 
 [[plugins]]
@@ -284,6 +294,22 @@ on_cmd = 'SQLUFormatter'
 repo = 'bronson/vim-trailing-whitespace'
 on_cmd = 'FixWhitespace'
 hook_add = "let g:extra_whitespace_ignored_filetypes = ['unite']"
+# }}}
+
+# Reference plugins {{{
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+on_cmd = 'h'
+# }}}
+
+# Edit plugins {{{
+[[plugins]]
+repo = 'mrtazz/simplenote.vim'
+on_cmd = 'Simplenote'
+hook_add = '''
+  let g:SimplenoteListHeight=50
+  let g:SimplenoteFiletype ='rst'
+'''
 
 [[plugins]]
 repo = 'tyru/caw.vim'
@@ -299,6 +325,7 @@ if = "executable('pip')"
 repo = 'kannokanno/previm'
 on_source = 'open-browser.vim'
 depends = 'open-browser.vim'
+on_cmd = 'PrevimOpen'
 on_ft = ['md', 'rst']
 hook_add = '''
   let g:previm_disable_vimproc = 1
@@ -307,8 +334,11 @@ hook_add = '''
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
   augroup END
 '''
+hook_source = 'let g:previm_show_header = 0'
 build = 'pip install docutils'
+# }}}
 
+# measure plugins {{{
 [[plugins]]
 repo = 'mattn/benchvimrc-vim'
 on_cmd = 'BenchVimrc'
@@ -318,11 +348,6 @@ on_cmd = 'BenchVimrc'
 [[plugins]]
 repo = 'kashewnuts/vim-scp'
 on_ft = 'scp'
-
-[[plugins]]
-repo = 'kashewnuts/vim-ft-rst_header'
-on_ft = 'rst'
-hook_source = 'autocmd MyAutoCmd FileType text setl  ft=rst'
 
 [[plugins]]
 repo = 'cespare/vim-toml'
