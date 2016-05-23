@@ -1,11 +1,11 @@
 " Basic
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
-if &compatible | set nocompatible | endif
+if &compatible | set nocompatible | endif " make Vim behave in a more useful way
 
 " Encoding
-set encoding=utf-8
-set fileformats=unix,dos,mac
-scriptencoding utf-8
+set encoding=utf-8           " Sets the character encoding used inside Vim
+set fileformats=unix,dos,mac " This gives the <EOL>
+scriptencoding utf-8         " Specify the character encoding used in the script
 
 " Disable
 set guioptions=Mc  " Disable menu.vim & Use console dialog

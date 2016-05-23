@@ -1,0 +1,10 @@
+BoldAsFont=no
+Font=Ricty Diminished
+FontHeight=11
+Columns=100
+Rows=50
+Term=xterm-256color
+Transparency=medium
+OpaqueWhenFocused=no
+Locale=ja_JP
+Charset=UTF-8

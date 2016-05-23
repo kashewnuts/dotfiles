@@ -10,5 +10,6 @@ mklink %USERPROFILE%\.gitignore %DOTFILES%\files\.gitignore
 mklink %USERPROFILE%\.pythonstartup %DOTFILES%\files\.pythonstartup
 mklink %USERPROFILE%\.bashrc %DOTFILES%\files\.bashrc
 mklink %USERPROFILE%\.bash_profile %DOTFILES%\files\.bash_profile
+mklink %USERPROFILE%\.minttyrc %DOTFILES%\files\.minttyrc
 
 @pause
