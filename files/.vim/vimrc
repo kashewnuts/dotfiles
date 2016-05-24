@@ -91,8 +91,11 @@ set laststatus=2                " Always display status bar
 set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c/%L]
 
 " Terminal
-set lazyredraw                  " Only redraw when necessary.
-set ttyfast                     " Faster redrawing.
+if !has('gui_running')
+  set lazyredraw                  " Only redraw when necessary.
+  set ttyfast                     " Faster redrawing.
+  set timeout timeoutlen=1000 ttimeoutlen=50  " speedup for ESC
+endif
 " }}}
 
 " KeyMaping {{{
