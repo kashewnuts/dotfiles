@@ -322,6 +322,14 @@ hook_add = '''
   nmap <Leader>c <Plug>(caw:i:toggle)
   vmap <Leader>c <Plug>(caw:i:toggle)
 '''
+# }}}
+
+# Markup plugins {{{
+[[plugins]]
+# repo = 'vim-scripts/RST-Tables'
+# repo = 'vim-scripts/RST-Tables-CJK'
+repo = 'vim-scripts/Unicode-RST-Tables'
+on_ft = 'rst'
 
 [[plugins]]
 if = "executable('pip')"
