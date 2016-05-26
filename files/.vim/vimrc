@@ -207,12 +207,6 @@ if exists('&breakindent') | set breakindent | endif
 " }}}
 
 " dein.vim {{{
-" Cache
-let s:cache_dir = expand('~/.cache')
-if !isdirectory(s:cache_dir)
-  call mkdir(s:cache_dir, 'p')
-endif
-
 " Load dein.vim
 let s:toml_path = '~/.vim/rc/dein.toml'
 let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
