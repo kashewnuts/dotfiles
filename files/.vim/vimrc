@@ -207,14 +207,7 @@ if exists('&breakindent') | set breakindent | endif
 " }}}
 
 " dein.vim {{{
-" Cache
-let $CACHE = expand('~/.cache')
-if !isdirectory(expand($CACHE))
-  call mkdir(expand($CACHE), 'p')
-endif
-
 " Load dein.vim
-let s:root_dein_path = expand('~/.cache/dein')
 let s:toml_path = '~/.vim/rc/dein.toml'
 let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
 if v:version >= 704
@@ -229,17 +222,12 @@ if v:version >= 704
   let g:dein#enable_notification = 1
 
   " Begin dein.vim
-  let s:dein_dir = finddir('dein.vim', '.;')
-  if s:dein_dir !=# '' || &runtimepath !~# '/dein.vim'
-    if s:dein_dir ==# '' && &runtimepath !~# '/dein.vim'
-      let s:dein_dir = s:root_dein_path . '/repos/github.com/Shougo/dein.vim'
-
-      if !isdirectory(s:dein_dir)
-        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
-      endif
-    endif
-    set runtimepath& runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+  let s:root_dein_path = expand('~/.cache/dein')
+  let s:dein_dir = s:root_dein_path . '/repos/github.com/Shougo/dein.vim'
+  if !isdirectory(s:dein_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
   endif
+  set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
   " Read TOML & cache
   if dein#load_state(s:root_dein_path)
@@ -274,7 +262,7 @@ endtry
 
 " Load local settings
 if filereadable(expand('~/.vimrc.local'))
-  execute 'source ~/.vimrc.local'
+  source ~/.vimrc.local
 endif
 set secure                      " Safely use Vim
 " }}}
