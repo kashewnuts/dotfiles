@@ -22,6 +22,8 @@
 	co = checkout
 	df = diff
 	st = status
+	unstage = reset -q HEAD --
+	uncommit = reset --mixed HEAD~
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f

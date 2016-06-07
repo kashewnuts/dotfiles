@@ -1,6 +1,5 @@
 " Basic
 if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
-if &compatible | set nocompatible | endif " make Vim behave in a more useful way
 
 " Encoding
 set encoding=utf-8           " Sets the character encoding used inside Vim

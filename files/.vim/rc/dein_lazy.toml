@@ -303,12 +303,6 @@ on_cmd = 'FixWhitespace'
 hook_add = "let g:extra_whitespace_ignored_filetypes = ['unite']"
 # }}}
 
-# Reference plugins {{{
-[[plugins]]
-repo = 'vim-jp/vimdoc-ja'
-on_cmd = 'h'
-# }}}
-
 # Edit plugins {{{
 [[plugins]]
 repo = 'mrtazz/simplenote.vim'
@@ -329,11 +323,11 @@ hook_add = '''
 # }}}
 
 # Markup plugins {{{
-[[plugins]]
-# repo = 'vim-scripts/RST-Tables'
-# repo = 'vim-scripts/RST-Tables-CJK'
-repo = 'vim-scripts/Unicode-RST-Tables'
-on_ft = 'rst'
+# [[plugins]]
+# # repo = 'vim-scripts/RST-Tables'
+# # repo = 'vim-scripts/RST-Tables-CJK'
+# repo = 'vim-scripts/Unicode-RST-Tables'
+# on_ft = 'rst'
 
 [[plugins]]
 if = "executable('pip')"
@@ -344,12 +338,9 @@ on_cmd = 'PrevimOpen'
 on_ft = ['md', 'rst']
 hook_add = '''
   let g:previm_disable_vimproc = 1
-  augroup PrevimSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-  augroup END
+  let g:previm_show_header = 0
+  command! PrevimRefresh :call previm#refresh()
 '''
-hook_source = 'let g:previm_show_header = 0'
 build = 'pip install docutils'
 # }}}
 

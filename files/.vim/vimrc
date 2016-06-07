@@ -8,9 +8,6 @@
 
 " Basic Settings {{{
 if !1 | finish | endif          " skip if the live Vim is vim-tiny or vim-small
-if &compatible && has('vim_starting')
-  set nocompatible              " For dein.vim
-endif
 
 " Encoding {{{
 if has('win32') && !has('gui_running')
@@ -51,6 +48,7 @@ endif " }}}
 " Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
 set fillchars=vert:\|,fold:\    " Characters to fill the separators
+set helplang& helplang=ja
 set helpheight=999              " Open help to fill the screen
 set history=1000                " history
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
