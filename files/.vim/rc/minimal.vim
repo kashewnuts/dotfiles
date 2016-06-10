@@ -1,5 +1,5 @@
 " Basic
-if !1 | finish | endif  " skip if the live Vim is vim-tiny or vim-small
+if !1 | finish | endif       " skip if the live Vim is vim-tiny or vim-small
 
 " Encoding
 set encoding=utf-8           " Sets the character encoding used inside Vim
@@ -7,7 +7,7 @@ set fileformats=unix,dos,mac " This gives the <EOL>
 scriptencoding utf-8         " Specify the character encoding used in the script
 
 " Disable
-set guioptions=Mc  " Disable menu.vim & Use console dialog
+set guioptions=Mc            " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=              " Disable annoying bells
 set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
 
@@ -50,4 +50,4 @@ set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
 colorscheme desert
-set secure
+set secure                      " Safely use Vim

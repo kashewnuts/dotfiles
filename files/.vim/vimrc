@@ -47,10 +47,11 @@ endif " }}}
 " Misc {{{
 " Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
+set display=lastline            " Enable view long line
 set fillchars=vert:\|,fold:\    " Characters to fill the separators
-set helplang& helplang=ja
 set helpheight=999              " Open help to fill the screen
-set history=1000                " history
+set helplang& helplang=ja
+set history=1000                " History
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
 set number                      " Show line number (nonumber: Hide)
 set scrolloff=999               " Keep above and below the cursor
@@ -65,34 +66,44 @@ set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 " Indent
 set autoindent     " For smartindent
 set smartindent    " Advanced automatic indentation when you made the new line
-set copyindent     " copy the indent structure of existing lines
+set copyindent     " Copy the indent structure of existing lines
 
 " Tab
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
-set expandtab      " noexpand tabs to spaces (expandtab: expand)
+set expandtab      " No expand tabs to spaces (expandtab: expand)
 set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
 
 " Search
-set hlsearch       " highlight searches
-set incsearch      " do incremental searching
-set ignorecase     " ignore case when searching
-set smartcase      " no ignorecase if Uppercase char present
+set hlsearch       " Highlight searches
+set incsearch      " Do incremental searching
+set ignorecase     " Ignore case when searching
+set smartcase      " No ignorecase if Uppercase char present
 
-" Cmdline & Statusline
-set cmdheight=2                 " Cmdline height
+" Command-line
+set cmdheight=2                 " Command-line height
 set wildmenu wildmode=list:full " Command-line completion
-set display=lastline            " enable view long line
+
+" Statusline
 set laststatus=2                " Always display status bar
-" Determines the content of the status line.
-set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c/%L]
+set statusline=                 " Init
+set statusline+=%F              " FileName(Relative Pathname)
+set statusline+=%m              " Fix flag([+] or [-])
+set statusline+=%r              " Read only flg([RO])
+set statusline+=%h              " Help buffer
+set statusline+=%w              " Preview window flag
+set statusline+=%=              " Separated left & right item
+set statusline+=[%{&ff}]                        " View FileFormat
+set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
+set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
+set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " Terminal
 if !has('gui_running')
   set lazyredraw                  " Only redraw when necessary.
   set ttyfast                     " Faster redrawing.
-  set timeout timeoutlen=1000 ttimeoutlen=50  " speedup for ESC
+  set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
 endif
 " }}}
 
@@ -164,7 +175,7 @@ augroup MyAutoCmd
   autocmd FileType toml       setl ts=2 sw=2 sts=2 et
   autocmd FileType make       setl ts=4 sw=4 sts=4 noet
   autocmd FileType rst        setl ts=4 sw=4 sts=4 et
-  autocmd FileType text       setl ts=4 sw=4 sts=4 et ft=rst
+  autocmd FileType text       setl ts=4 sw=4 sts=4 et ft=markdown
   autocmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
   autocmd FileType jsp        setl ts=4 sw=4 sts=4 noet
   autocmd FileType java       setl ts=4 sw=4 sts=4 noet
@@ -175,7 +186,6 @@ augroup MyAutoCmd
   " When the '#' character in the first line of the newly created,
   " it isn't unindent
   autocmd FileType python inoremap # X#
-  " autocmd BufNewFile *.py 0r ~/.vim/template/python.txt
 augroup END
 
 " Golang settings {{{
@@ -205,7 +215,6 @@ if exists('&breakindent') | set breakindent | endif
 " }}}
 
 " dein.vim {{{
-" Load dein.vim
 let s:toml_path = '~/.vim/rc/dein.toml'
 let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
 if v:version >= 704

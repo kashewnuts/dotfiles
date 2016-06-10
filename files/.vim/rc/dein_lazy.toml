@@ -171,14 +171,14 @@ hook_source = 'autocmd MyAutoCmd FileType text setl ft=rst'
 # [[plugins]]
 # repo = 'hail2u/vim-css3-syntax'
 # on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
-#
-# [[plugins]]
-# repo = 'othree/html5.vim'
-# on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
-#
-# [[plugins]]
-# repo = 'pangloss/vim-javascript'
-# on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+
+[[plugins]]
+repo = 'othree/html5.vim'
+on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
 
 # [[plugins]]
 # repo = 'jQuery'
@@ -192,17 +192,17 @@ hook_source = 'autocmd MyAutoCmd FileType text setl ft=rst'
 # repo = 'jason0x43/vim-js-indent'
 # #on_ft = ['javascript', 'typescript']
 
-# [[plugins]]
-# repo = 'mattn/emmet-vim'
-# on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
-# hook_add = '''
-#   let g:user_emmet_settings = {
-#   \  'variables' : { 'lang' : 'ja' },
-#   \  'php' : { 'extends' : 'html', 'filters' : 'c', },
-#   \  'xml' : { 'extends' : 'html', },
-#   \  'haml': { 'extends' : 'html', },
-#   \ }
-# '''
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
+hook_add = '''
+  let g:user_emmet_settings = {
+  \  'variables' : { 'lang' : 'ja' },
+  \  'php' : { 'extends' : 'html', 'filters' : 'c', },
+  \  'xml' : { 'extends' : 'html', },
+  \  'haml': { 'extends' : 'html', },
+  \ }
+'''
 # }}}
 
 # Python plugins {{{
@@ -303,6 +303,12 @@ on_cmd = 'FixWhitespace'
 hook_add = "let g:extra_whitespace_ignored_filetypes = ['unite']"
 # }}}
 
+# Reference plugins {{{
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+on_cmd = 'h'
+# }}}
+
 # Edit plugins {{{
 [[plugins]]
 repo = 'mrtazz/simplenote.vim'
@@ -311,6 +317,13 @@ hook_add = '''
   let g:SimplenoteListHeight=50
   let g:SimplenoteFiletype ='rst'
 '''
+
+[[plugins]]
+if = "executable('curl')"
+repo = 'mattn/vimplenote-vim'
+on_source = 'webapi-vim'
+depends = 'webapi-vim'
+on_cmd = 'VimpleNote'
 
 [[plugins]]
 repo = 'tyru/caw.vim'
@@ -335,7 +348,7 @@ repo = 'kannokanno/previm'
 on_source = 'open-browser.vim'
 depends = 'open-browser.vim'
 on_cmd = 'PrevimOpen'
-on_ft = ['md', 'rst']
+# on_ft = ['md', 'rst']
 hook_add = '''
   let g:previm_disable_vimproc = 1
   let g:previm_show_header = 0
