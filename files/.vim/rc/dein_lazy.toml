@@ -147,9 +147,9 @@ hook_add = '''
   \ }
 '''
 
-[[plugins]]
-repo = 'thinca/vim-scouter'
-on_cmd = 'Scouter'
+# [[plugins]]
+# repo = 'thinca/vim-scouter'
+# on_cmd = 'Scouter'
 
 [[plugins]]
 repo = 'thinca/vim-ft-rst_header'
@@ -158,27 +158,27 @@ hook_add = 'let g:rst_header_chars = "#*=-^~""'
 hook_source = 'autocmd MyAutoCmd FileType text setl ft=rst'
 
 
-[[plugins]]
-repo = 'thinca/vim-fontzoom'
-on_map = [['n', '<Plug>']]
-hook_add = '''
-  nmap + <Plug>(fontzoom-larger)
-  nmap _ <Plug>(fontzoom-smaller)
-'''
+# [[plugins]]
+# repo = 'thinca/vim-fontzoom'
+# on_map = [['n', '<Plug>']]
+# hook_add = '''
+#   nmap + <Plug>(fontzoom-larger)
+#   nmap _ <Plug>(fontzoom-smaller)
+# '''
 # }}}
 
 # Web plugins {{{
-[[plugins]]
-repo = 'hail2u/vim-css3-syntax'
-on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
-
-[[plugins]]
-repo = 'othree/html5.vim'
-on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
-
-[[plugins]]
-repo = 'pangloss/vim-javascript'
-on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+# [[plugins]]
+# repo = 'hail2u/vim-css3-syntax'
+# on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+#
+# [[plugins]]
+# repo = 'othree/html5.vim'
+# on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
+#
+# [[plugins]]
+# repo = 'pangloss/vim-javascript'
+# on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
 
 # [[plugins]]
 # repo = 'jQuery'
@@ -192,17 +192,17 @@ on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
 # repo = 'jason0x43/vim-js-indent'
 # #on_ft = ['javascript', 'typescript']
 
-[[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
-hook_add = '''
-  let g:user_emmet_settings = {
-  \  'variables' : { 'lang' : 'ja' },
-  \  'php' : { 'extends' : 'html', 'filters' : 'c', },
-  \  'xml' : { 'extends' : 'html', },
-  \  'haml': { 'extends' : 'html', },
-  \ }
-'''
+# [[plugins]]
+# repo = 'mattn/emmet-vim'
+# on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
+# hook_add = '''
+#   let g:user_emmet_settings = {
+#   \  'variables' : { 'lang' : 'ja' },
+#   \  'php' : { 'extends' : 'html', 'filters' : 'c', },
+#   \  'xml' : { 'extends' : 'html', },
+#   \  'haml': { 'extends' : 'html', },
+#   \ }
+# '''
 # }}}
 
 # Python plugins {{{
@@ -219,12 +219,12 @@ hook_source = '''
 '''
 build = 'pip install jedi'
 
-[[plugins]]
-if = "executable('pip')"
-repo = 'nvie/vim-flake8'
-on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
-build = 'pip install flake8'
-# hook_add = "autocmd MyAutoCmd BufWritePost *.py call Flake()"
+# [[plugins]]
+# if = "executable('pip')"
+# repo = 'nvie/vim-flake8'
+# on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
+# build = 'pip install flake8'
+# # hook_add = "autocmd MyAutoCmd BufWritePost *.py call Flake()"
 
 [[plugins]]
 if = "executable('pip')"
@@ -239,19 +239,19 @@ on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
 # }}}
 
 # Syntastic {{{
-[[plugins]]
-repo = 'osyo-manga/shabadou.vim'
-
-[[plugins]]
-repo = 'jceb/vim-hier'
-
-[[plugins]]
-repo = 'dannyob/quickfixstatus'
-
-[[plugins]]
-repo = 'osyo-manga/vim-watchdogs'
-on_cmd = 'WatchdogsRun'
-depends = ['shabadou.vim', 'vim-hier', 'quickfixstatus']
+# [[plugins]]
+# repo = 'osyo-manga/shabadou.vim'
+#
+# [[plugins]]
+# repo = 'jceb/vim-hier'
+#
+# [[plugins]]
+# repo = 'dannyob/quickfixstatus'
+#
+# [[plugins]]
+# repo = 'osyo-manga/vim-watchdogs'
+# on_cmd = 'WatchdogsRun'
+# depends = ['shabadou.vim', 'vim-hier', 'quickfixstatus']
 # }}}
 
 # Golang plugins {{{
@@ -261,19 +261,19 @@ on_ft = 'go'
 # }}}
 
 # Java plugins {{{
-[[plugins]]
-repo = 'artur-shaik/vim-javacomplete2'
-on_ft = 'java'
-hook_source = '''
-  autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
-'''
+# [[plugins]]
+# repo = 'artur-shaik/vim-javacomplete2'
+# on_ft = 'java'
+# hook_source = '''
+#   autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
+# '''
 # }}}
 
 # Git plugins {{{
-[[plugins]]
-repo = 'lambdalisue/vim-gista'
-on_cmd = 'Gista'
-hook_source = "let g:gista#client#default_username = 'kashewnuts'"
+# [[plugins]]
+# repo = 'lambdalisue/vim-gista'
+# on_cmd = 'Gista'
+# hook_source = "let g:gista#client#default_username = 'kashewnuts'"
 
 [[plugins]]
 repo = 'cohama/agit.vim'
@@ -345,9 +345,9 @@ build = 'pip install docutils'
 # }}}
 
 # measure plugins {{{
-[[plugins]]
-repo = 'mattn/benchvimrc-vim'
-on_cmd = 'BenchVimrc'
+# [[plugins]]
+# repo = 'mattn/benchvimrc-vim'
+# on_cmd = 'BenchVimrc'
 # }}}
 
 # FileType plugins {{{
@@ -389,7 +389,7 @@ depends = [
 ]
 on_cmd = [
   'TweetVimHomeTimeline', 'TweetVimSay', 'TweetVimListStatus',
-  'TweetVimSearch', 'TweetVimMentions'
+  'TweetVimSearch', 'TweetVimMentions', 'TweetVimCurrentLineSay'
 ]
 hook_source = '''
   let g:tweetvim_display_time = 1
