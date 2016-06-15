@@ -7,24 +7,21 @@
 " ==========================================================================
 
 " Basic Settings {{{
-if !1 | finish | endif          " skip if the live Vim is vim-tiny or vim-small
+if !1 | finish | endif          " Skip if the live Vim is vim-tiny or vim-small
 
 " Encoding {{{
 if has('win32') && !has('gui_running')
   let &termencoding = &encoding
   set encoding=cp932
 else
-  set encoding=utf-8
+  set encoding=utf-8            " Sets the character encoding used inside Vim
 endif
 scriptencoding utf-8            " Specify encoding used in the script
 set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 " }}}
 
-" GUI
-set guifont=Ricty\ Diminished:h11
-set guioptions=Mc               " Disable menu.vim & Use console dialog
-
 " Disable {{{
+set guioptions=Mc                     " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate a backup file
 set noloadplugins                     " Disable the loading of plugins.
@@ -49,10 +46,10 @@ endif " }}}
 set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
 set fillchars=vert:\|,fold:\    " Characters to fill the separators
+set guifont=Ricty\ Diminished:h11
 set helpheight=999              " Open help to fill the screen
-set helplang& helplang=ja
 set history=1000                " History
-set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
+set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
 set scrolloff=999               " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
@@ -87,7 +84,7 @@ set wildmenu wildmode=list:full " Command-line completion
 
 " Statusline
 set laststatus=2                " Always display status bar
-set statusline=                 " Init
+set statusline&                 " Init
 set statusline+=%F              " FileName(Relative Pathname)
 set statusline+=%m              " Fix flag([+] or [-])
 set statusline+=%r              " Read only flg([RO])
@@ -168,7 +165,6 @@ augroup MyAutoCmd
   autocmd FileType html       setl ts=4 sw=4 sts=4 et
   autocmd FileType htmldjango setl ts=2 sw=2 sts=2 et
   autocmd FileType javascript setl ts=4 sw=4 sts=4 et
-  autocmd FileType js         setl ft=javascript
   autocmd FileType ruby       setl ts=2 sw=2 sts=2 et
   autocmd FileType go         setl ts=4 sw=4 sts=4 noet
   autocmd FileType vim        setl ts=2 sw=2 sts=2 et
