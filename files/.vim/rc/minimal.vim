@@ -11,15 +11,19 @@ set guioptions=Mc            " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=              " Disable annoying bells
 set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
 
-" Edit
+" Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
-set backspace=indent,eol,start  " Can erase everything in the back space
-set clipboard=unnamed           " Use OS clipboard
-set history=1000                " history
+set display=lastline            " Enable view long line
+set history=1000                " History
 set list listchars=tab:>-,trail:-,extends:>,precedes:<  " Visualize character
-set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set number                      " Show line number (nonumber: Hide)
 set showmatch matchtime=1       " The highlight matching brackets
+
+" Edit
+set backspace=indent,eol,start  " Can erase everything in the back space
+if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
+set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 
 " Indent
 set autoindent     " For smartindent
@@ -39,10 +43,9 @@ set incsearch      " do incremental searching
 set ignorecase     " ignore case when searching
 set smartcase      " no ignorecase if Uppercase char present
 
-" Cmdline & Statusline
+" Commandline & Statusline
 set cmdheight=2                 " Cmdline height
 set wildmenu wildmode=list:full " Command-line completion
-set display=lastline            " enable view long line
 set laststatus=2                " Always display status bar
 set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft)?&ft:'no\ ft'}]\[%l-%c/%L]
 
@@ -50,4 +53,3 @@ set statusline=%F%m%r%h%w\%=\[%{&ff}]\[%{strlen(&fenc)?&fenc:&enc}][%{strlen(&ft
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
 colorscheme desert
-set secure                      " Safely use Vim
