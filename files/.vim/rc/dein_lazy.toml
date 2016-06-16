@@ -147,9 +147,9 @@ hook_add = '''
   \ }
 '''
 
-# [[plugins]]
-# repo = 'thinca/vim-scouter'
-# on_cmd = 'Scouter'
+[[plugins]]
+repo = 'thinca/vim-scouter'
+on_cmd = 'Scouter'
 
 [[plugins]]
 repo = 'thinca/vim-ft-rst_header'
@@ -158,13 +158,13 @@ hook_add = 'let g:rst_header_chars = "#*=-^~""'
 hook_source = 'autocmd MyAutoCmd FileType text setl ft=rst'
 
 
-# [[plugins]]
-# repo = 'thinca/vim-fontzoom'
-# on_map = [['n', '<Plug>']]
-# hook_add = '''
-#   nmap + <Plug>(fontzoom-larger)
-#   nmap _ <Plug>(fontzoom-smaller)
-# '''
+[[plugins]]
+repo = 'thinca/vim-fontzoom'
+on_map = [['n', '<Plug>']]
+hook_add = '''
+  nmap + <Plug>(fontzoom-larger)
+  nmap _ <Plug>(fontzoom-smaller)
+'''
 # }}}
 
 # Web plugins {{{
@@ -261,19 +261,19 @@ on_ft = 'go'
 # }}}
 
 # Java plugins {{{
-# [[plugins]]
-# repo = 'artur-shaik/vim-javacomplete2'
-# on_ft = 'java'
-# hook_source = '''
-#   autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
-# '''
+[[plugins]]
+repo = 'artur-shaik/vim-javacomplete2'
+on_ft = 'java'
+hook_source = '''
+  autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
+'''
 # }}}
 
 # Git plugins {{{
-# [[plugins]]
-# repo = 'lambdalisue/vim-gista'
-# on_cmd = 'Gista'
-# hook_source = "let g:gista#client#default_username = 'kashewnuts'"
+[[plugins]]
+repo = 'lambdalisue/vim-gista'
+on_cmd = 'Gista'
+hook_source = "let g:gista#client#default_username = 'kashewnuts'"
 
 [[plugins]]
 repo = 'cohama/agit.vim'
