@@ -185,6 +185,9 @@ augroup MyAutoCmd
 augroup END
 
 " Golang settings {{{
+if executable('go') && !executable('jvgrep')
+  execute '!go get github.com/mattn/jvgrep'
+endif
 if executable('jvgrep')
   " Present Garbled characters
   if has('win32') && !has('gui_running')
