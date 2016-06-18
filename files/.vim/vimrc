@@ -191,9 +191,9 @@ endif
 if executable('jvgrep')
   " Present Garbled characters
   if has('win32') && !has('gui_running')
-    set grepprg=jvgrep\ -R
+    set grepprg=jvgrep\ -iIR
   else
-    set grepprg=jvgrep\ -8\ -R
+    set grepprg=jvgrep\ -8iIR
   endif
 endif " }}}
 
