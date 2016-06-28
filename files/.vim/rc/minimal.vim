@@ -5,16 +5,17 @@ if &compatible | set nocompatible | endif " Make Vim behave in a more useful way
 " Encoding
 set encoding=utf-8              " Sets the character encoding used inside Vim
 scriptencoding utf-8            " Specify encoding used in the script
-set fileformats=unix,dos,mac    " This gives the <EOL>
+set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 
 " Disable
-set guioptions=Mc               " Disable menu.vim & Use console dialog
-set noerrorbells novisualbell t_vb=              " Disable annoying bells
+set guioptions=Mc                     " Disable menu.vim & Use console dialog
+set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
 
 " Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
+set guifont=Ricty\ Diminished:h11
 set history=1000                " History
 set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
@@ -35,7 +36,7 @@ set copyindent     " Copy the structure of the existing lines indent
 " Tab
 set tabstop=4      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
-set expandtab      " noexpand tabs to spaces (expandtab: expand)
+set expandtab      " No expand tabs to spaces (expandtab: expand)
 set shiftwidth=4   " Shift move width
 set smarttab       " Indent by the number of 'shiftwidth'.
 
@@ -66,4 +67,5 @@ set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
+" colorscheme desert
 try | colorscheme molokai | catch colorscheme desert | endtry
