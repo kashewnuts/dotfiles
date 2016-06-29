@@ -8,3 +8,4 @@ Transparency=medium
 OpaqueWhenFocused=no
 Locale=ja_JP
 Charset=UTF-8
+CursorType=block
