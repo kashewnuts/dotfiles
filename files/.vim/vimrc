@@ -21,7 +21,7 @@ set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 " }}}
 
 " Disable {{{
-set guioptions=Mc                     " Disable menu.vim & Use console dialog
+set guioptions=M                      " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 set noloadplugins                     " Disable the loading of plugins.
@@ -171,7 +171,7 @@ augroup MyAutoCmd
   autocmd FileType toml       setl ts=2 sw=2 sts=2 et
   autocmd FileType make       setl ts=4 sw=4 sts=4 noet
   autocmd FileType rst        setl ts=4 sw=4 sts=4 et
-  autocmd FileType text       setl ts=4 sw=4 sts=4 et ft=markdown
+  autocmd FileType text       setl ts=8 sw=8 sts=8 noet ft=markdown
   autocmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
   autocmd FileType jsp        setl ts=4 sw=4 sts=4 noet
   autocmd FileType java       setl ts=4 sw=4 sts=4 noet

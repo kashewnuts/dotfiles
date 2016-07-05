@@ -8,7 +8,7 @@ scriptencoding utf-8            " Specify encoding used in the script
 set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 
 " Disable
-set guioptions=Mc                     " Disable menu.vim & Use console dialog
+set guioptions=M                      " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
 
@@ -64,8 +64,13 @@ set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
 set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
 set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
+" KeyMaping
+" Turn off the highlight by pressing twice the ESC.
+nnoremap <silent> <Esc><Esc>:nohlsearch<CR>
+" Normal mode: IME off
+inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
-" colorscheme desert
 try | colorscheme molokai | catch colorscheme desert | endtry
