@@ -64,7 +64,7 @@ set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
 set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
 set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
-" KeyMaping
+" Mapping
 " Turn off the highlight by pressing twice the ESC.
 nnoremap <silent> <Esc><Esc>:nohlsearch<CR>
 " Normal mode: IME off

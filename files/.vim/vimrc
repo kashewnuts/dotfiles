@@ -139,6 +139,7 @@ nnoremap j gj
 nnoremap k gk
 " }}}
 
+" Commands {{{
 " ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -146,6 +147,30 @@ command! Iso2022jp edit ++enc=iso-2022-jp
 command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
+" }}}
+
+" :Tutorial
+"   Start vim training. Copy from cmdex.vim made in kaoriya
+command! -nargs=0 Tutorial call <SID>StartTutorial()
+function! s:StartTutorial()
+  let tutor = 'tutor'
+  if $LANG !=# ''
+    let tutor = tutor . '.' . strpart($LANG, 0, 2)
+  endif
+  " Japan special
+  if $LANG =~ '^ja'
+    let enc = 'utf-8'
+    if &encoding ==# 'cp932'
+      let enc='sjis'
+    elseif &encoding =~ 'euc'
+      let enc = 'euc'
+    endif
+    let tutor = tutor . '.' . enc
+  endif
+  execute "edit! $VIMRUNTIME/tutor/" . tutor
+  execute "file TUTORCOPY"
+  execute "write!"
+endfunction
 " }}}
 
 " FileType {{{
