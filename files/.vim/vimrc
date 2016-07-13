@@ -106,7 +106,8 @@ endif
 
 " KeyMaping {{{
 " Normal mode: IME off
-inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+" inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+inoremap <ESC> <ESC>:set iminsert=0<CR>
 
 " Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
