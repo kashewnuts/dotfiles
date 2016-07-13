@@ -1,0 +1,1088 @@
+# この viminfo ファイルは Vim 7.4 によって生成されました.
+# 変更する際には十分注意してください!
+
+# Viminfo version
+|1,4
+
+# このファイルが書かれた時の 'encoding' の値
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~h
+# 最後の 検索パターン:
+~MSle0~/italic
+
+# 最後の Substitute 検索パターン:
+~MSle0&000.000
+
+# 最後に置換された文字列:
+$
+
+# 検索文字列 項目の履歴 (新しいものから古いものへ):
+? \\\@<!\s\+$
+|2,1,1468341862,,"\\\\\\@<!\\s\\+$"
+?/italic
+|2,1,1468341847,47,"italic"
+?/command
+|2,1,1468239773,47,"command"
+?/Tutorial
+|2,1,1468239656,47,"Tutorial"
+?/tuto
+|2,1,1468239649,47,"tuto"
+? \s\+$
+|2,1,1468239183,,"\\s\\+$"
+? @$
+|2,1,1468239175,,"@$"
+? ^$
+|2,1,1468239175,,"^$"
+?/tooto
+|2,1,1468239061,47,"tooto"
+?/tutor
+|2,1,1468235728,47,"tutor"
+?/tut
+|2,1,1468235691,47,"tut"
+?/iminsert
+|2,1,1467323102,47,"iminsert"
+?/noh
+|2,1,1467323087,47,"noh"
+?/hlsearch
+|2,1,1467322941,47,"hlsearch"
+?/no
+|2,1,1467322929,47,"no"
+?/ime
+|2,1,1467322352,47,"ime"
+?/[
+|2,1,1467320772,47,"["
+?/ctrl-[
+|2,1,1467320770,47,"ctrl-["
+?/###
+|2,1,1467320661,47,"###"
+?/encoding
+|2,1,1467036455,47,"encoding"
+?/if has('win32') && !has('gui_running')
+|2,1,1467033196,47,"if has('win32') && !has('gui_running')"
+?/vim
+|2,1,1466985727,47,"vim"
+? 000.000
+|2,1,1466981422,,"000.000"
+?/\~
+|2,1,1466605963,47,"\\~"
+?/~
+|2,1,1466605957,47,"~"
+?/$HOME
+|2,1,1466605955,47,"$HOME"
+?/gui
+|2,1,0,47,"gui"
+?/g
+|2,1,0,47,"g"
+?/wrap
+|2,1,0,47,"wrap"
+?/help
+|2,1,0,47,"help"
+?/fill
+|2,1,0,47,"fill"
+?/guifo
+|2,1,0,47,"guifo"
+?/listchars
+|2,1,0,47,"listchars"
+?/display
+|2,1,0,47,"display"
+?/pull
+|2,1,0,47,"pull"
+?/fetch
+|2,1,0,47,"fetch"
+?/tag
+|2,1,0,47,"tag"
+?/rebase
+|2,1,0,47,"rebase"
+?/merge
+|2,1,0,47,"merge"
+?/diff
+|2,1,0,47,"diff"
+?/branch
+|2,1,0,47,"branch"
+?/status
+|2,1,0,47,"status"
+?/show
+|2,1,0,47,"show"
+?/log
+|2,1,0,47,"log"
+?/grep
+|2,1,0,47,"grep"
+?/reset
+|2,1,0,47,"reset"
+?/mv
+|2,1,0,47,"mv"
+?/add
+|2,1,0,47,"add"
+? \$\(cursor\|select\)\$
+|2,1,0,,"\\$\\(cursor\\|select\\)\\$"
+?/python
+|2,1,0,47,"python"
+?/s:toml_lazy_path
+|2,1,0,47,"s:toml_lazy_path"
+?/s:toml_path
+|2,1,0,47,"s:toml_path"
+
+# 式 項目の履歴 (新しいものから古いものへ):
+
+# 入力行 項目の履歴 (新しいものから古いものへ):
+@y
+|2,3,1468241840,,"y"
+@n
+|2,3,0,,"n"
+@repo
+|2,3,0,,"repo"
+@.
+|2,3,0,,"."
+@jjjjjjj
+|2,3,0,,"jjjjjjj"
+@exists
+|2,3,0,,"exists"
+@*.vim
+|2,3,0,,"*.vim"
+@'*.vim'
+|2,3,0,,"'*.vim'"
+@*.im
+|2,3,0,,"*.im"
+@-name '*.vim'
+|2,3,0,,"-name '*.vim'"
+@:
+|2,3,0,,":"
+@9271203
+|2,3,0,,"9271203"
+@1626795
+|2,3,0,,"1626795"
+@	
+|2,3,0,,"	"
+@@gmail.com
+|2,3,0,,"@gmail.com"
+@q
+|2,3,0,,"q"
+@2350395
+|2,3,0,,"2350395"
+@kkkkkkkk
+|2,3,0,,"kkkkkkkk"
+
+# Debug Line 項目の履歴 (新しいものから古いものへ):
+
+# レジスタ:
+"0	LINE	0
+	 set viminfo='100,<50,s10,h,rA:,rB:,n~/.vim/viminfo
+|3,0,0,1,1,0,1468409895," set viminfo='100,<50,s10,h,rA:,rB:,n~/.vim/viminfo"
+"1	BLOCK	5
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+|3,0,1,2,11,5,1468409067,"	","	","	","	","	","	","	","	","	","	","	"
+"2	LINE	0
+	set viminfo=n~/_viminfo
+|3,0,2,1,1,0,1468408742,"set viminfo=n~/_viminfo"
+"3	LINE	0
+	
+|3,0,3,1,1,0,1468408737,""
+"4	LINE	0
+	set history=1000                " History
+|3,0,4,1,1,0,1468408423,"set history=1000                \" History"
+"5	LINE	0
+	" set noloadplugins                     " Disable the loading of plugins.
+|3,0,5,1,1,0,1468408411,"\" set noloadplugins                     \" Disable the loading of plugins."
+"6	LINE	0
+	" inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+|3,0,6,1,1,0,1468408393,"\" inoremap <silent> <Esc><Esc>:set iminsert=0<CR>"
+"7	LINE	0
+	inoremap <Esc> <Esc>:set iminsert=0<CR>
+|3,0,7,1,1,0,1468408390,"inoremap <Esc> <Esc>:set iminsert=0<CR>"
+"8	LINE	0
+	>>>>>>> Stashed changes
+|3,0,8,1,1,0,1468408390,">>>>>>> Stashed changes"
+"9	LINE	0
+	=======
+|3,0,9,1,1,0,1468408388,"======="
+"a	CHAR	0
+	
+|3,0,10,0,1,0,0,""
+"j	CHAR	0
+	kjkjkkkkkkkkkkkkk
+|3,0,19,0,1,0,0,"kjkjkkkkkkkkkkkkk"
+"k	CHAR	0
+	kkkkkkkk
+|3,0,20,0,1,0,0,"kkkkkkkk"
+"q	CHAR	0
+	:q:q
+|3,0,26,0,1,0,0,":q:q"
+"w	CHAR	0
+	
+|3,0,32,0,1,0,0,""
+""-	CHAR	0
+	5
+|3,1,36,0,1,0,1468409903,"5"
+
+# ファイルマーク:
+'0  69  27  ~\vimfiles\vimrc
+|4,48,69,27,1468409908,"~\\vimfiles\\vimrc"
+'1  67  33  ~\vimfiles\vimrc
+|4,49,67,33,1468408782,"~\\vimfiles\\vimrc"
+'2  57  33  ~\vimfiles\vimrc
+|4,50,57,33,1468408782,"~\\vimfiles\\vimrc"
+'3  67  22  ~\vimfiles\vimrc
+|4,51,67,22,1468408444,"~\\vimfiles\\vimrc"
+'4  57  22  ~\vimfiles\vimrc
+|4,52,57,22,1468408444,"~\\vimfiles\\vimrc"
+'5  27  0  ~\vimfiles\vimrc
+|4,53,27,0,1468408412,"~\\vimfiles\\vimrc"
+'6  27  0  ~\vimfiles\vimrc
+|4,54,27,0,1468408412,"~\\vimfiles\\vimrc"
+'7  27  0  ~\vimfiles\vimrc
+|4,55,27,0,1468408412,"~\\vimfiles\\vimrc"
+'8  27  0  ~\vimfiles\vimrc
+|4,56,27,0,1468408412,"~\\vimfiles\\vimrc"
+'9  27  0  ~\vimfiles\vimrc
+|4,57,27,0,1468408412,"~\\vimfiles\\vimrc"
+
+# ジャンプリスト (新しいものが先):
+-'  69  27  ~\vimfiles\vimrc
+|4,39,69,27,1468409908,"~\\vimfiles\\vimrc"
+-'  68  18  ~\vimfiles\vimrc
+|4,39,68,18,1468409894,"~\\vimfiles\\vimrc"
+-'  306  20  ~\vimfiles\vimrc
+|4,39,306,20,1468409057,"~\\vimfiles\\vimrc"
+-'  66  2  ~\vimfiles\vimrc
+|4,39,66,2,1468409046,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408994,"~\\vimfiles\\vimrc"
+-'  67  33  ~\vimfiles\vimrc
+|4,39,67,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  57  33  ~\vimfiles\vimrc
+|4,39,57,33,1468408782,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408730,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  57  22  ~\vimfiles\vimrc
+|4,39,57,22,1468408444,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  1  0  ~\vimfiles\vimrc
+|4,39,1,0,1468408417,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+-'  27  0  ~\vimfiles\vimrc
+|4,39,27,0,1468408412,"~\\vimfiles\\vimrc"
+
+# ファイル内マークの履歴 (新しいものから古いもの):
+
+> ~\vimfiles\vimrc
+	"	69	27
+	^	69	28
+	.	69	27
+	+	123	0
+	+	124	0
+	+	124	0
+	+	123	0
+	+	27	0
+	+	50	0
+	+	54	0
+	+	56	0
+	+	55	8
+	+	67	22
+	+	67	0
+	+	70	0
+	+	67	33
+	+	57	1
+	+	57	58
+	+	306	20
+	+	57	57
+	+	58	0
+	+	57	57
+	+	59	0
+	+	58	62
+	+	63	64
+	+	65	0
+	+	64	17
+	+	67	1
+	+	68	0
+	+	69	0
+	+	68	2
+	+	69	27
+
+> ~\vimfiles\gvimrc
+	"	1	0
+	^	10	40
+	.	10	39
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	10	39
+
+> ~\dotfiles\setup.sh
+	"	8	0
+	^	29	39
+	.	28	0
+	+	36	0
+	+	36	0
+	+	36	0
+	+	36	0
+	+	30	32
+	+	32	5
+	+	32	0
+	+	32	0
+	+	31	0
+	+	32	1
+	+	32	0
+	+	32	5
+	+	32	1
+	+	32	0
+	+	32	0
+	+	32	59
+	+	32	45
+	+	36	0
+	+	36	1
+	+	5	0
+	+	6	0
+	+	32	0
+	+	36	0
+	+	6	0
+	+	36	0
+	+	36	0
+	+	36	0
+	+	36	19
+	+	36	36
+	+	36	48
+	+	36	34
+	+	29	27
+	+	30	0
+	+	29	28
+	+	30	0
+	+	31	44
+	+	32	0
+	+	33	32
+	+	35	0
+	+	32	0
+	+	34	0
+	+	32	0
+	+	32	0
+	+	31	0
+	+	32	0
+	+	31	0
+	+	34	0
+	+	32	0
+	+	36	0
+	+	36	4
+	+	30	0
+	+	31	0
+	+	30	41
+	+	31	0
+	+	32	0
+	+	30	0
+	+	32	0
+	+	30	0
+	+	4	0
+	+	5	25
+	+	36	0
+	+	15	0
+	+	24	0
+	+	36	0
+	+	16	0
+	+	29	0
+	+	25	26
+	+	4	0
+	+	3	6
+	+	14	0
+	+	29	38
+	+	14	0
+	+	28	0
+
+> ~\.vim\colors\molokai.vim
+	"	1	0
+	.	60	0
+	+	44	0
+	+	44	51
+	+	60	46
+	+	61	46
+	+	83	46
+	+	93	45
+	+	95	44
+	+	60	0
+
+> ~\dotfiles\setup.bat
+	"	1	0
+	^	13	4
+	.	13	3
+	+	13	3
+
+> C:\Application\vim\vimrc
+	"	247	0
+
+> ~\.cache\dein\.dein\doc\options.jax
+	"	4308	0
+
+> ~\AppData\Local\Temp\$tutor$
+	"	49	0
+
+> ~\project\vim\vimtutor.bat
+	"	67	0
+
+> C:\Application\vim\TUTORCOPY
+	"	1	0
+
+> C:\Application\vim\]
+	"	1	0
+
+> ~\dotfiles\files\.vim\rc\minimal.vim
+	"	1	0
+	.	72	0
+	+	68	0
+	+	67	0
+	+	68	0
+	+	72	0
+	+	67	0
+	+	72	0
+
+> ~\.cache\dein\.dein\doc\usr_01.jax
+	"	192	56
+
+> ~\dotfiles\TUTORCOPY
+	"	1	0
+
+> ~\TUTORCOPY
+	"	1	0
+
+> ~\.vim\rc\minimal.vim
+	"	1	0
+	^	72	0
+	.	72	0
+	+	18	33
+	+	11	33
+	+	16	0
+	+	18	34
+	+	11	31
+	+	65	0
+	+	51	0
+	+	51	0
+	+	49	0
+	+	45	15
+	+	49	2
+	+	45	12
+	+	6	0
+	+	7	0
+	+	3	41
+	+	2	31
+	+	7	0
+	+	8	0
+	+	6	29
+	+	2	29
+	+	7	0
+	+	31	18
+	+	31	19
+	+	32	0
+	+	31	21
+	+	31	19
+	+	31	0
+	+	32	87
+	+	33	0
+	+	32	67
+	+	32	19
+	+	33	0
+	+	37	67
+	+	37	0
+	+	45	21
+	+	43	0
+	+	47	9
+	+	49	46
+	+	74	0
+	+	2	31
+	+	3	44
+	+	7	0
+	+	8	31
+	+	6	31
+	+	7	0
+	+	2	31
+	+	31	49
+	+	31	0
+	+	18	0
+	+	2	0
+	+	6	0
+	+	11	0
+	+	16	0
+	+	25	0
+	+	31	0
+	+	36	0
+	+	43	0
+	+	49	0
+	+	53	0
+	+	73	0
+	+	1	0
+	+	68	0
+	+	67	8
+	+	68	0
+	+	69	0
+	+	68	0
+	+	73	0
+	+	70	0
+	+	72	0
+
+> ~\log\vimstartuptime20160711.txt
+	"	775	0
+
+> C:\Application\vim\CHANGES.txt
+	"	419	2
+
+> C:\Application\vim\plugins\kaoriya\plugin\cmdex.vim
+	"	3	2
+
+> C:\Application\vim\plugins\vimdoc-ja\syntax\help_ja.vim
+	"	1	0
+
+> C:\Application\vim\plugins\kaoriya\encode_japan.vim
+	"	67	6
+
+> C:\Application\vim\plugins\kaoriya\syntax\memo.vim
+	"	51	0
+
+> C:\Application\vim\plugins\kaoriya\plugin\verifyenc.vim
+	"	1	0
+
+> C:\Application\vim\plugins\kaoriya\keymap\japanese_cp932.vim
+	"	1	0
+
+> C:\Application\vim\plugins\kaoriya\keymap\tcode_cp932.vim
+	"	3	0
+
+> C:\Application\vim\plugins\kaoriya\keymap\tutcode_cp932.vim
+	"	1	0
+
+> C:\Application\vim\plugins\golang\README.md
+	"	1	0
+
+> C:\Application\vim\plugins\golang\autoload\go\complete.vim
+	"	1	0
+
+> C:\Application\vim\plugins\autofmt\README
+	"	1	0
+
+> C:\Application\vim\plugins\autofmt\memo.txt
+	"	67	4
+
+> C:\Application\vim\plugins\kaoriya\plugin\dicwin.vim
+	"	1	0
+
+> ~\vimfiles\.vimrc
+	"	1	0
+
+> ~\vimfiles\vimrc.html
+	"	47	0
+	^	2	0
+	.	1	90
+	+	1	90
+
+> C:\Application\vim\plugins\autofmt\tools\unicode.vim
+	"	104	0
+
+> C:\Application\vim\vim74\plugin\README.txt
+	"	1	0
+
+> ~\.cache\dein\.dein\doc\help.jax
+	"	1	0
+
+> C:\Application\vim\gvimrc
+	"	1	0
+
+> C:\Application\vim\vim74\gvimrc_example.vim
+	"	1	0
+
+> ~\project\shougo-s-github\vim\rc\init.rc.vim
+	"	1	0
+
+> ~\.cache\dein\.dein\doc\starting.jax
+	"	721	78
+
+> ~\project\shougo-s-github\vim\rc\vimrc
+	"	50	5
+
+> ~\.vimrc.local
+	"	1	0
+
+> C:\Application\vim\vim74\vimrc_example.vim
+	"	1	0
+
+> ~\[tweetvim]
+	"	20	0
+	.	50	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+	+	50	0
+
+> ~\[unite] - default
+	"	2	0
+	^	2	0
+	.	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	1	0
+	+	1	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	1	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	1	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+
+> ~\Simplenote
+	"	1638	51
+	.	1	0
+	+	1	0
+
+> ~\SN___5_10CUP2016_____________________5b36263a418811e6977a8d92cca255bc
+	"	20	46
+	.	1	0
+	+	1	0
+
+> ~\vagrant_work\test\Vagrantfile
+	"	1	0
+	.	15	0
+	+	15	0
+
+> ~\vagrant_work\xerus64\Vagrantfile
+	"	66	2
+
+> ~\hello.go
+	"	7	11
+	^	7	12
+	.	7	11
+	+	25	1
+	+	1	12
+	+	23	0
+	+	6	0
+	+	23	0
+	+	23	0
+	+	23	0
+	+	23	0
+	+	22	4
+	+	22	0
+	+	21	5
+	+	21	0
+	+	21	0
+	+	21	0
+	+	21	0
+	+	1	0
+	+	20	4
+	+	20	0
+	+	20	0
+	+	20	0
+	+	19	4
+	+	18	3
+	+	17	4
+	+	17	0
+	+	18	0
+	+	16	4
+	+	15	4
+	+	15	0
+	+	14	4
+	+	13	4
+	+	13	0
+	+	12	4
+	+	12	0
+	+	12	0
+	+	12	0
+	+	12	0
+	+	12	0
+	+	12	0
+	+	12	0
+	+	6	27
+	+	12	0
+	+	6	3
+	+	1	0
+	+	12	0
+	+	12	0
+	+	11	4
+	+	11	0
+	+	11	0
+	+	11	0
+	+	11	0
+	+	10	5
+	+	11	0
+	+	11	0
+	+	10	0
+	+	9	4
+	+	9	0
+	+	2	0
+	+	2	0
+	+	4	0
+	+	4	0
+	+	8	5
+	+	7	11

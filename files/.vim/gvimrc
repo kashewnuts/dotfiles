@@ -7,7 +7,7 @@
 " ==========================================================================
 
 " Hack #120: Store the location and size of the window by gVim {{{
-let s:save_window_file = expand('~/.vimwinpos')
+let s:save_window_file = expand('~/.vim/vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()

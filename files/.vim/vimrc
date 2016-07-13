@@ -24,7 +24,6 @@ set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 set guioptions=M                      " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
-set noloadplugins                     " Disable the loading of plugins.
 
 " Don't read $VIM/(g)vimrc
 if has('kaoriya')
@@ -48,11 +47,14 @@ set display=lastline            " Enable view long line
 set fillchars=vert:\|,fold:\    " Characters to fill the separators
 set guifont=Ricty\ Diminished:h11
 set helpheight=999              " Open help to fill the screen
-set history=1000                " History
 set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
 set scrolloff=999               " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
+
+" History
+set history=1000                " History
+set viminfo='100,<1000,s100,h,rA:,rB:,n~/.vim/viminfo " remember vim information
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -97,16 +99,15 @@ set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
 set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " Terminal
+set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
 if !has('gui_running')
   set lazyredraw                  " Only redraw when necessary.
   set ttyfast                     " Faster redrawing.
-  set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
 endif
 " }}}
 
 " KeyMaping {{{
 " Normal mode: IME off
-" inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
 inoremap <ESC> <ESC>:set iminsert=0<CR>
 
 " Adjust the window size to the window time-division. Shift + arrow key.
@@ -140,7 +141,6 @@ nnoremap j gj
 nnoremap k gk
 " }}}
 
-" Commands {{{
 " ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -148,30 +148,6 @@ command! Iso2022jp edit ++enc=iso-2022-jp
 command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
-" }}}
-
-" :Tutorial
-"   Start vim training. Copy from cmdex.vim made in kaoriya
-command! -nargs=0 Tutorial call <SID>StartTutorial()
-function! s:StartTutorial()
-  let tutor = 'tutor'
-  if $LANG !=# ''
-    let tutor = tutor . '.' . strpart($LANG, 0, 2)
-  endif
-  " Japan special
-  if $LANG =~ '^ja'
-    let enc = 'utf-8'
-    if &encoding ==# 'cp932'
-      let enc='sjis'
-    elseif &encoding =~ 'euc'
-      let enc = 'euc'
-    endif
-    let tutor = tutor . '.' . enc
-  endif
-  execute "edit! $VIMRUNTIME/tutor/" . tutor
-  execute "file TUTORCOPY"
-  execute "write!"
-endfunction
 " }}}
 
 " FileType {{{
@@ -246,7 +222,16 @@ if exists('&nofixeol') | set nofixeol | endif
 if exists('&breakindent') | set breakindent | endif
 " }}}
 
-" dein.vim {{{
+" Plugins {{{
+" Add directory under plugins to runtimepath
+for s:path in split(glob($VIM.'/plugins/*'), '\n')
+  if s:path !~# '\~$' && isdirectory(s:path)
+    let &runtimepath = &runtimepath.','.s:path
+  end
+endfor
+unlet s:path
+
+" dein.vim
 let s:toml_path = '~/.vim/rc/dein.toml'
 let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
 if v:version >= 704
