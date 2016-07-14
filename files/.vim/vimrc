@@ -38,6 +38,13 @@ if has('kaoriya')
   call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
   call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
 endif " }}}
+
+" Env
+if isdirectory(expand('~/.vim'))
+  let $VIMHOME=expand('~/.vim')
+else
+  let $VIMHOME=$VIM
+endif
 " }}}
 
 " Misc {{{
@@ -54,7 +61,7 @@ set showmatch matchtime=1       " The highlight matching brackets
 
 " History
 set history=1000                " History
-set viminfo='100,<1000,s100,h,rA:,rB:,n~/.vim/viminfo " remember vim information
+set viminfo='100,<1000,s100,h,rA:,rB:,n$VIMHOME/viminfo " remember vim information
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space

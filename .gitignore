@@ -1,4 +1,6 @@
 # vim
+files/.vim/viminfo
+files/.vim/vimwinpos
 files/.vim/autoload/
 files/.vim/ftdetect/
 files/.vim/syntax/
