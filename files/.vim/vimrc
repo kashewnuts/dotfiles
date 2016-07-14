@@ -66,6 +66,7 @@ set viminfo='100,<1000,s100,h,rA:,rB:,n$VIMHOME/viminfo " remember vim informati
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
+set hidden                      " When off a buffer is unloaded when it is abandon.
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 
@@ -148,6 +149,7 @@ nnoremap j gj
 nnoremap k gk
 " }}}
 
+" Commands {{{
 " ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -155,6 +157,18 @@ command! Iso2022jp edit ++enc=iso-2022-jp
 command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
+" }}}
+
+" :Qargs {{{
+command! -nargs=0 -bar Qargs execute ’args’ QuickfixFilenames()
+function! QuickfixFilenames()
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item[’bufnr’]] = bufname(quickfix
+    _item[’bufnr’])
+  endfor
+  return join(map(values(buffer_numbers), ’fnameescape(v:val)’))
+endfunction " }}}
 " }}}
 
 " FileType {{{
