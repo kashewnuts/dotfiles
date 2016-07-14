@@ -311,7 +311,11 @@ on_cmd = 'h'
 # Edit plugins {{{
 [[plugins]]
 repo = 'mrtazz/simplenote.vim'
-on_cmd = 'Simplenote'
+on_cmd = [
+  'SimplenoteDelete', 'SimplenoteList', 'SimplenoteNew', 'SimplenoteOpen',
+  'SimplenotePin', 'SimplenoteTag', 'SimplenoteTrash', 'SimplenoteUnpin', 
+  'SimplenoteUpdate', 'SimplenoteVersion', 'SimplenoteVersionInfo'
+]
 hook_add = '''
   let g:SimplenoteListHeight=50
   let g:SimplenoteFiletype ='markdown'
