@@ -9,8 +9,17 @@
 " Basic Settings {{{
 if !1 | finish | endif          " Skip if the live Vim is vim-tiny or vim-small
 
+" Env
+if isdirectory(expand('~/.vim'))
+  let $VIMHOME=expand('~/.vim')
+else
+  let $VIMHOME=$VIM
+endif
+let s:is_win = has('win32') || has('win64')
+let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
+
 " Encoding {{{
-if has('win32') && !has('gui_running')
+if s:is_win && !has('gui_running')
   let &termencoding = &encoding
   set encoding=cp932
 else
@@ -38,13 +47,6 @@ if has('kaoriya')
   call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
   call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
 endif " }}}
-
-" Env
-if isdirectory(expand('~/.vim'))
-  let $VIMHOME=expand('~/.vim')
-else
-  let $VIMHOME=$VIM
-endif
 " }}}
 
 " Misc {{{
@@ -212,7 +214,7 @@ if executable('go') && !executable('jvgrep')
 endif
 if executable('jvgrep')
   " Present Garbled characters
-  if has('win32') && !has('gui_running')
+  if s:is_win && !has('gui_running')
     set grepprg=jvgrep\ -iIR
   else
     set grepprg=jvgrep\ -8iIR
@@ -296,7 +298,7 @@ syntax on                       " Enable syntax highlight
 
 " Colorscheme
 try
-  if has('win32') && !has('gui_running')
+  if s:is_win && !has('gui_running')
     colorscheme industry
   else
     colorscheme molokai
