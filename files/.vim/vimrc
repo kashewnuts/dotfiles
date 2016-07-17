@@ -237,9 +237,11 @@ let g:php_sql_query     = 1
 " }}}
 
 " After Vim7.4 {{{
-if exists('&undofile') | set noundofile | endif  " Don't make *.un~ files
-if exists('&nofixeol') | set nofixeol | endif
-if exists('&breakindent') | set breakindent | endif
+if v:version >= 704
+  set noundofile  " Don't make *.un~ files
+  set nofixeol
+  set breakindent
+endif
 " }}}
 
 " Plugins {{{
@@ -249,7 +251,6 @@ for s:path in split(glob($VIM.'/plugins/*'), '\n')
     let &runtimepath = &runtimepath.','.s:path
   end
 endfor
-unlet s:path
 
 " dein.vim
 let s:toml_path = '~/.vim/rc/dein.toml'
