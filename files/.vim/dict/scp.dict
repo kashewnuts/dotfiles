@@ -80,3 +80,4 @@ toMethod
 toUpper
 true
 weq
+Handy:ShowMessageBox

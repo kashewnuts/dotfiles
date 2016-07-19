@@ -202,6 +202,7 @@ augroup MyAutoCmd
   autocmd FileType java       setl ts=4 sw=4 sts=4 noet
   autocmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
   autocmd FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
+  autocmd FileType scp        setl dictionary=~/.vim/dict/scp.dict
   " }}}
 
   " When the '#' character in the first line of the newly created,
