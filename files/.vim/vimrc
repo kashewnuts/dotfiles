@@ -10,9 +10,8 @@
 if !1 | finish | endif          " Skip if the live Vim is vim-tiny or vim-small
 
 " Env
-if isdirectory(expand('~/.vim'))
-  let $VIMHOME=expand('~/.vim')
-else
+let $VIMHOME=expand('~/.vim')
+if !isdirectory($VIMHOME)
   let $VIMHOME=$VIM
 endif
 let s:is_win = has('win32') || has('win64')
@@ -222,6 +221,7 @@ if executable('jvgrep')
     set grepprg=jvgrep\ -8iIR
   endif
 endif " }}}
+" }}}
 
 " Java settings {{{
 " Syntax highlight
@@ -237,7 +237,6 @@ let g:php_baselib       = 1
 let g:php_htmlInStrings = 1
 let g:php_noShortTags   = 1
 let g:php_sql_query     = 1
-" }}}
 " }}}
 
 " After Vim7.4 {{{

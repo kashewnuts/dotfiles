@@ -7,9 +7,8 @@
 " ==========================================================================
 
 " Env {{{
-if isdirectory(expand('~/.vim'))
-  let $VIMHOME=expand('~/.vim')
-else
+let $VIMHOME=expand('~/.vim')
+if !isdirectory($VIMHOME)
   let $VIMHOME=$VIM
 endif
 let s:is_win = has('win32') || has('win64')
