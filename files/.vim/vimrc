@@ -109,7 +109,8 @@ set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
 set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " Terminal
-set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
+" set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
+set timeout timeoutlen=0 ttimeoutlen=50  " Speedup for ESC
 if !has('gui_running')
   set lazyredraw                  " Only redraw when necessary.
   set ttyfast                     " Faster redrawing.
