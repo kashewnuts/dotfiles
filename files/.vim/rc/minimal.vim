@@ -68,7 +68,8 @@ set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 " Turn off the highlight by pressing twice the ESC.
 nnoremap <silent> <Esc><Esc>:nohlsearch<CR>
 " Normal mode: IME off
-inoremap <silent> <Esc><Esc>:set iminsert=0<CR>
+inoremap <ESC> <ESC>:set iminsert=0<CR>
+
 
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
