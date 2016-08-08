@@ -16,9 +16,10 @@ if !isdirectory($VIMHOME)
 endif
 let s:is_win = has('win32') || has('win64')
 let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
+let s:is_cui = !has('gui_running')
 
 " Encoding {{{
-if s:is_win && !has('gui_running')
+if s:is_win && s:is_cui
   let &termencoding = &encoding
   set encoding=cp932
 else
@@ -109,9 +110,8 @@ set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
 set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " Terminal
-" set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
 set timeout timeoutlen=0 ttimeoutlen=50  " Speedup for ESC
-if !has('gui_running')
+if s:is_cui
   set lazyredraw                  " Only redraw when necessary.
   set ttyfast                     " Faster redrawing.
 endif
@@ -216,7 +216,7 @@ if executable('go') && !executable('jvgrep')
 endif
 if executable('jvgrep')
   " Present Garbled characters
-  if s:is_win && !has('gui_running')
+  if s:is_win && s:is_cui
     set grepprg=jvgrep\ -iIR
   else
     set grepprg=jvgrep\ -8iIR
@@ -300,7 +300,7 @@ syntax on                       " Enable syntax highlight
 
 " Colorscheme
 try
-  if s:is_win && !has('gui_running')
+  if s:is_win && s:is_cui
     colorscheme industry
   else
     colorscheme molokai
