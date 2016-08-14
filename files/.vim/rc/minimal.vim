@@ -10,21 +10,26 @@ set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 " Disable
 set guioptions=M                      " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
-set noswapfile nobackup nowritebackup noundofile " Doesn't generate backup files
+set noswapfile nobackup nowritebackup noundofile " Doesn't make backup files
 
 " Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
 set guifont=Ricty\ Diminished:h11
+if executable('jvgrep') | set grepprg=jvgrep\ -8iIR | endif " grep
+set helpheight=999              " Open help to fill the screen
 set history=1000                " History
 set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
 set scrolloff=999               " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
+set timeout timeoutlen=0 ttimeoutlen=0  " Speedup for ESC
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
+set formatoptions& formatoptions+=mM  " Support Japanese to join lines
+set hidden                      " Hidden when it's abandoned
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 
@@ -59,17 +64,30 @@ set statusline+=%r              " Read only flg([RO])
 set statusline+=%h              " Help buffer
 set statusline+=%w              " Preview window flag
 set statusline+=%=              " Separated left & right item
-set statusline+=[%{&ff}]                        " View FileFormat
-set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
-set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
-set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
+set statusline+=[%{&ff}]                       " View FileFormat
+set statusline+=[%{strlen(&fenc)?&fenc:&enc}]  " FileEncording
+set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]  " FileType
+set statusline+=[%l-%c/%L]                     " Cursor-Now Column/Total Number
 
 " Mapping
 " Turn off the highlight by pressing twice the ESC.
-nnoremap <silent> <Esc><Esc>:nohlsearch<CR>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 " Normal mode: IME off
-inoremap <ESC> <ESC>:set iminsert=0<CR>
+inoremap <ESC><ESC>:set iminsert=0<CR>
+" Escape automatically according to the situation question and backslash.
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+" To Enable filtering the command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
+" Plugin
+" Add directory under plugins to runtimepath
+for s:path in split(glob($VIM.'/plugins/*'), '\n')
+  if s:path !~# '\~$' && isdirectory(s:path)
+    let &runtimepath = &runtimepath.','.s:path
+  end
+endfor
 
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
