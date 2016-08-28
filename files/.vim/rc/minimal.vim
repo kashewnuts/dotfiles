@@ -69,9 +69,15 @@ set statusline+=[%{strlen(&fenc)?&fenc:&enc}]  " FileEncording
 set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]  " FileType
 set statusline+=[%l-%c/%L]                     " Cursor-Now Column/Total Number
 
+" AutoCommand
+augroup MyAutoCmd
+  autocmd!
+  autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+augroup END
+
 " Mapping
 " Turn off the highlight by pressing twice the ESC.
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
 " Normal mode: IME off
 inoremap <ESC><ESC>:set iminsert=0<CR>
 " Escape automatically according to the situation question and backslash.

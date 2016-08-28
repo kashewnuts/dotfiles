@@ -15,6 +15,10 @@ let s:is_win = has('win32') || has('win64')
 let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
 " }}}
 
+" GUI options {{{
+set guifont=Ricty\ Diminished:h11
+" }}}
+
 " Hack #120: Store the location and size of the window by gVim {{{
 let s:save_window_file = expand($VIMHOME . '/vimwinpos')
 augroup SaveWindow

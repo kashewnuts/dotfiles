@@ -10,16 +10,16 @@
 if !1 | finish | endif          " Skip if the live Vim is vim-tiny or vim-small
 
 " Env
-if isdirectory(expand('~/.vim'))
-  let $VIMHOME=expand('~/.vim')
-else
+let $VIMHOME=expand('~/.vim')
+if !isdirectory($VIMHOME)
   let $VIMHOME=$VIM
 endif
 let s:is_win = has('win32') || has('win64')
 let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
+let s:is_cui = !has('gui_running')
 
 " Encoding {{{
-if s:is_win && !has('gui_running')
+if s:is_win && s:is_cui
   let &termencoding = &encoding
   set encoding=cp932
 else
@@ -54,7 +54,6 @@ endif " }}}
 set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
 set fillchars=vert:\|,fold:\    " Characters to fill the separators
-set guifont=Ricty\ Diminished:h11
 set helpheight=999              " Open help to fill the screen
 set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
@@ -87,6 +86,7 @@ set smarttab       " Indent by the number of 'shiftwidth'.
 
 " Search
 set hlsearch       " Highlight searches
+nohlsearch         " Prevent the highlights when reload
 set incsearch      " Do incremental searching
 set ignorecase     " Ignore case when searching
 set smartcase      " No ignorecase if Uppercase char present
@@ -111,7 +111,7 @@ set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " Terminal
 set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
-if !has('gui_running')
+if s:is_cui
   set lazyredraw                  " Only redraw when necessary.
   set ttyfast                     " Faster redrawing.
 endif
@@ -216,10 +216,9 @@ if executable('go') && !executable('jvgrep')
 endif
 if executable('jvgrep')
   " Present Garbled characters
-  if s:is_win && !has('gui_running')
+  set grepprg=jvgrep\ -8iIR
+  if s:is_win && s:is_cui
     set grepprg=jvgrep\ -iIR
-  else
-    set grepprg=jvgrep\ -8iIR
   endif
 endif " }}}
 
@@ -257,40 +256,9 @@ for s:path in split(glob($VIM.'/plugins/*'), '\n')
 endfor
 
 " dein.vim
-let s:toml_path = '~/.vim/rc/dein.toml'
-let s:toml_lazy_path = '~/.vim/rc/dein_lazy.toml'
-if v:version >= 704
-      \ && executable('git')
-      \ && executable('rsync')
-      \ && filereadable(expand(s:toml_path))
-      \ && filereadable(expand(s:toml_lazy_path))
-
-  " dein configurations.
-  let g:dein#install_progress_type = 'title'
-  let g:dein#install_message_type = 'none'
-  let g:dein#enable_notification = 1
-
-  " Begin dein.vim
-  let s:root_dein_path = expand('~/.cache/dein')
-  let s:dein_dir = s:root_dein_path . '/repos/github.com/Shougo/dein.vim'
-  if !isdirectory(s:dein_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
-  endif
-  set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-  " Read TOML & cache
-  if dein#load_state(s:root_dein_path)
-    call dein#begin(s:root_dein_path, [$MYVIMRC, s:toml_path, s:toml_lazy_path])
-    call dein#load_toml(s:toml_path, {'lazy': 0})
-    call dein#load_toml(s:toml_lazy_path, {'lazy' : 1})
-    call dein#end()
-    call dein#save_state()
-  endif
-
-  if !has('vim_starting') && dein#check_install()
-    " Installation check.
-    call dein#install()
-  endif
+let s:plugins_path = '~/.vim/rc/plugins.vim'
+if filereadable(expand(s:plugins_path))
+  execute 'source' . s:plugins_path
 endif " }}}
 
 " Others {{{
@@ -300,7 +268,7 @@ syntax on                       " Enable syntax highlight
 
 " Colorscheme
 try
-  if s:is_win && !has('gui_running')
+  if s:is_win && s:is_cui
     colorscheme industry
   else
     colorscheme molokai
