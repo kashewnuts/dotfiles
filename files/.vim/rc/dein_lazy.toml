@@ -30,10 +30,13 @@ repo = 'Shougo/neomru.vim'
 on_path = '.*'
 
 [[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
 repo = 'Shougo/neocomplete.vim'
 depends = 'context_filetype.vim'
 if = "has('lua')"
-on_i = 1
+on_event = 'InsertEnter'
 hook_source = '''
   " Use neocomplete.
   let g:neocomplete#enable_at_startup = 1
@@ -41,38 +44,36 @@ hook_source = '''
   let g:acp_enableAtStartup = 0
   " Use smartcase.
   let g:neocomplete#enable_smart_case = 1
-
   " Set minimum syntax keyword length.
   let g:neocomplete#ources#syntax#in_keyword_length = 3
 
-  " jedi omni completion
-  autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
+  " " jedi omni completion
+  " autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
 
-  let g:jedi#auto_vim_configuration = 0
-  if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-  endif
-  let g:neocomplete#force_omni_input_patterns.python =
-    \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+  " let g:jedi#auto_vim_configuration = 0
+  " if !exists('g:neocomplete#force_omni_input_patterns')
+  "   let g:neocomplete#force_omni_input_patterns = {}
+  " endif
+  " let g:neocomplete#force_omni_input_patterns.python =
+  "   \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
   " let g:neocomplete#sources#omni#functions.go = 'gocomplete#Complete'
   " let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
 
   let g:neocomplete#fources#dictionary#dictionaries = {
-    \ 'default':    '',
     \ 'scp':        '~/.vim/dict/scp.dict'
     \ }
 
-  " Enable omni completion.
-  autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
-  autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-  autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
-  autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
+  " " Enable omni completion.
+  " autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
+  " autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+  " autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+  " autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
 '''
 
 [[plugins]]
 repo = 'Shougo/neocomplcache.vim'
-on_i = 1
 if = "!has('lua')"
+on_event = 'InsertEnter'
 hook_source = '''
   " Use neocomplcache.
   let g:neocomplcache#enable_at_startup = 1
@@ -80,6 +81,8 @@ hook_source = '''
   let g:acp_enableAtStartup = 0
   " Use smartcase.
   let g:neocomplcache_enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplcache#ources#syntax#in_keyword_length = 3
 
   " jedi omni completion
   autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
@@ -88,15 +91,22 @@ hook_source = '''
     let g:neocomplcache_force_omni_patterns = {}
   endif
   let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
-endif
+
+  let g:neocomplcache#fources#dictionary#dictionaries = {
+    \ 'scp':        '~/.vim/dict/scp.dict'
+    \ }
 '''
 
 [[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_event = 'InsertCharPre'
+
+[[plugins]]
 repo = 'Shougo/neosnippet.vim'
-on_i = 1
 depends = ['neosnippet-snippets', 'context_filetype.vim']
-on_source = ['neosnippet-snippets', 'context_filetype.vim']
-hook_add = '''
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
+hook_source = '''
   " Plugin key-mappings.
   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
   smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -117,15 +127,8 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_i = 1
-
-[[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = ['context_filetype.vim']
-
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
 # }}}
 
 # thinca plugins {{{
@@ -211,7 +214,7 @@ hook_add = '''
 [[plugins]]
 if = "executable('pip')"
 repo = 'davidhalter/jedi-vim'
-on_i = 1
+on_event = 'InsertEnter'
 on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
 hook_source = '''
   let g:jedi#completions_enabled = 0
@@ -264,23 +267,23 @@ on_ft = 'go'
 # }}}
 
 # Java plugins {{{
-[[plugins]]
-repo = 'artur-shaik/vim-javacomplete2'
-on_ft = 'java'
-hook_source = '''
-  autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
-'''
+# [[plugins]]
+# repo = 'artur-shaik/vim-javacomplete2'
+# on_ft = 'java'
+# hook_source = '''
+#   autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
+# '''
 # }}}
 
 # Git plugins {{{
-[[plugins]]
-repo = 'lambdalisue/vim-gista'
-on_cmd = 'Gista'
-hook_source = "let g:gista#client#default_username = 'kashewnuts'"
-
-[[plugins]]
-repo = 'cohama/agit.vim'
-on_cmd = 'Agit'
+# [[plugins]]
+# repo = 'lambdalisue/vim-gista'
+# on_cmd = 'Gista'
+# hook_source = "let g:gista#client#default_username = 'kashewnuts'"
+#
+# [[plugins]]
+# repo = 'cohama/agit.vim'
+# on_cmd = 'Agit'
 # }}}
 
 # Formater plugins {{{
@@ -336,25 +339,25 @@ hook_add = '''
 # }}}
 
 # Markup plugins {{{
-[[plugins]]
-# repo = 'vim-scripts/RST-Tables'
-# repo = 'vim-scripts/RST-Tables-CJK'
-repo = 'vim-scripts/Unicode-RST-Tables'
-on_ft = 'rst'
-
-[[plugins]]
-if = "executable('pip')"
-repo = 'kannokanno/previm'
-on_source = 'open-browser.vim'
-depends = 'open-browser.vim'
-on_cmd = 'PrevimOpen'
-# on_ft = ['md', 'rst']
-hook_add = '''
-  let g:previm_disable_vimproc = 1
-  let g:previm_show_header = 0
-  command! PrevimRefresh :call previm#refresh()
-'''
-build = 'pip install docutils'
+# [[plugins]]
+# # repo = 'vim-scripts/RST-Tables'
+# # repo = 'vim-scripts/RST-Tables-CJK'
+# repo = 'vim-scripts/Unicode-RST-Tables'
+# on_ft = 'rst'
+#
+# [[plugins]]
+# if = "executable('pip')"
+# repo = 'kannokanno/previm'
+# on_source = 'open-browser.vim'
+# depends = 'open-browser.vim'
+# on_cmd = 'PrevimOpen'
+# # on_ft = ['md', 'rst']
+# hook_add = '''
+#   let g:previm_disable_vimproc = 1
+#   let g:previm_show_header = 0
+#   command! PrevimRefresh :call previm#refresh()
+# '''
+# build = 'pip install docutils'
 # }}}
 
 # measure plugins {{{

@@ -47,6 +47,7 @@ set smarttab       " Indent by the number of 'shiftwidth'.
 
 " Search
 set hlsearch       " Highlight searches
+nohlsearch         " Prevent the highlights when reload
 set incsearch      " Do incremental searching
 set ignorecase     " Ignore case when searching
 set smartcase      " No ignorecase if Uppercase char present

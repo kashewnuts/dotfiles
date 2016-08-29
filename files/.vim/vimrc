@@ -110,10 +110,10 @@ set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
 set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " Terminal
-set timeout timeoutlen=1000 ttimeoutlen=50  " Speedup for ESC
+set timeout timeoutlen=1000 ttimeoutlen=50      " Speedup for ESC
 if s:is_cui
-  set lazyredraw                  " Only redraw when necessary.
-  set ttyfast                     " Faster redrawing.
+  set lazyredraw                " Only redraw when necessary.
+  set ttyfast                   " Faster redrawing.
 endif
 " }}}
 
@@ -173,44 +173,12 @@ function! QuickfixFilenames()
 endfunction " }}}
 " }}}
 
-" FileType {{{
+" Grep settings {{{
 augroup MyAutoCmd
   autocmd!
-  " Grep
   autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
-
-  " FileType {{{
-  " ts   : tabstop
-  " sw   : shiftwidth
-  " sts  : softtabstop
-  " et   : expandtab
-  " noet : noexpandtab
-  " si   : smartindent
-  " cinw : cinwords
-  autocmd FileType html       setl ts=4 sw=4 sts=4 et
-  autocmd FileType htmldjango setl ts=2 sw=2 sts=2 et
-  autocmd FileType javascript setl ts=4 sw=4 sts=4 et
-  autocmd FileType ruby       setl ts=2 sw=2 sts=2 et
-  autocmd FileType go         setl ts=4 sw=4 sts=4 noet
-  autocmd FileType vim        setl ts=2 sw=2 sts=2 et
-  autocmd FileType toml       setl ts=2 sw=2 sts=2 et
-  autocmd FileType make       setl ts=4 sw=4 sts=4 noet
-  autocmd FileType rst        setl ts=4 sw=4 sts=4 et
-  autocmd FileType text       setl ts=8 sw=8 sts=8 noet ft=markdown
-  autocmd FileType gitconfig  setl ts=4 sw=4 sts=4 noet
-  autocmd FileType jsp        setl ts=4 sw=4 sts=4 noet
-  autocmd FileType java       setl ts=4 sw=4 sts=4 noet
-  autocmd FileType python     setl ts=4 sw=4 sts=4 et textwidth=80
-  autocmd FileType sql        setl ts=4 sw=4 sts=4 et fenc=shift_jis ff=dos
-  autocmd FileType scp        setl dictionary=~/.vim/dict/scp.dict
-  " }}}
-
-  " When the '#' character in the first line of the newly created,
-  " it isn't unindent
-  autocmd FileType python inoremap # X#
 augroup END
 
-" Golang settings {{{
 if executable('go') && !executable('jvgrep')
   execute '!go get github.com/mattn/jvgrep'
 endif
@@ -222,30 +190,11 @@ if executable('jvgrep')
   endif
 endif " }}}
 
-" Java settings {{{
-" Syntax highlight
-let g:java_highlight_all       = 1
-let g:java_highlight_debug     = 1
-let g:java_allow_cpp_keywords  = 1
-let g:java_space_errors        = 1
-let g:java_highlight_functions = 1
-" }}}
-
-" PHP settings {{{
-let g:php_baselib       = 1
-let g:php_htmlInStrings = 1
-let g:php_noShortTags   = 1
-let g:php_sql_query     = 1
-" }}}
-" }}}
-
-" After Vim7.4 {{{
-if v:version >= 704
+if v:version >= 704 " {{{
   set noundofile  " Don't make *.un~ files
   set nofixeol
   set breakindent
-endif
-" }}}
+endif " }}}
 
 " Plugins {{{
 " Add directory under plugins to runtimepath
