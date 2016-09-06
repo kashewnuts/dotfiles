@@ -32,48 +32,49 @@ on_path = '.*'
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-depends = 'context_filetype.vim'
-if = "has('lua')"
-on_event = 'InsertEnter'
-hook_source = '''
-  " Use neocomplete.
-  let g:neocomplete#enable_at_startup = 1
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#ources#syntax#in_keyword_length = 3
-
-  " " jedi omni completion
-  " autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
-
-  " let g:jedi#auto_vim_configuration = 0
-  " if !exists('g:neocomplete#force_omni_input_patterns')
-  "   let g:neocomplete#force_omni_input_patterns = {}
-  " endif
-  " let g:neocomplete#force_omni_input_patterns.python =
-  "   \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-  " let g:neocomplete#sources#omni#functions.go = 'gocomplete#Complete'
-  " let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
-
-  let g:neocomplete#fources#dictionary#dictionaries = {
-    \ 'scp':        '~/.vim/dict/scp.dict'
-    \ }
-
-  " " Enable omni completion.
-  " autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
-  " autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-  " autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
-  " autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
-'''
+# [[plugins]]
+# repo = 'Shougo/neocomplete.vim'
+# depends = 'context_filetype.vim'
+# if = "has('lua')"
+# # on_event = 'InsertEnter'
+# on_i = 1
+# hook_source = '''
+#   " Use neocomplete.
+#   let g:neocomplete#enable_at_startup = 1
+#   " Disable AutoComplPop.
+#   let g:acp_enableAtStartup = 0
+#   " Use smartcase.
+#   let g:neocomplete#enable_smart_case = 1
+#   " Set minimum syntax keyword length.
+#   let g:neocomplete#ources#syntax#in_keyword_length = 3
+# 
+#   " " jedi omni completion
+#   " autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
+# 
+#   " let g:jedi#auto_vim_configuration = 0
+#   " if !exists('g:neocomplete#force_omni_input_patterns')
+#   "   let g:neocomplete#force_omni_input_patterns = {}
+#   " endif
+#   " let g:neocomplete#force_omni_input_patterns.python =
+#   "   \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+#   " let g:neocomplete#sources#omni#functions.go = 'gocomplete#Complete'
+#   " let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
+# 
+#   let g:neocomplete#fources#dictionary#dictionaries = {
+#     \ 'scp':        '~/.vim/dict/scp.dict'
+#     \ }
+# 
+#   " " Enable omni completion.
+#   " autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
+#   " autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
+#   " autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+#   " autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
+# '''
 
 [[plugins]]
 repo = 'Shougo/neocomplcache.vim'
-if = "!has('lua')"
-on_event = 'InsertEnter'
+# if = "!has('lua')"
+on_i = 1
 hook_source = '''
   " Use neocomplcache.
   let g:neocomplcache#enable_at_startup = 1
@@ -99,12 +100,12 @@ hook_source = '''
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-on_event = 'InsertCharPre'
+on_i = 1
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
 depends = ['neosnippet-snippets', 'context_filetype.vim']
-on_event = 'InsertCharPre'
+on_i = 1
 on_ft = 'snippet'
 hook_source = '''
   " Plugin key-mappings.
@@ -276,14 +277,14 @@ on_ft = 'go'
 # }}}
 
 # Git plugins {{{
-# [[plugins]]
-# repo = 'lambdalisue/vim-gista'
-# on_cmd = 'Gista'
-# hook_source = "let g:gista#client#default_username = 'kashewnuts'"
-#
-# [[plugins]]
-# repo = 'cohama/agit.vim'
-# on_cmd = 'Agit'
+[[plugins]]
+repo = 'lambdalisue/vim-gista'
+on_cmd = 'Gista'
+hook_source = "let g:gista#client#default_username = 'kashewnuts'"
+
+[[plugins]]
+repo = 'cohama/agit.vim'
+on_cmd = 'Agit'
 # }}}
 
 # Formater plugins {{{
@@ -409,7 +410,7 @@ on_cmd = [
 ]
 hook_source = '''
   let g:tweetvim_display_time = 1
-  let g:tweetvim_async_post = 1
+  " let g:tweetvim_async_post = 1
 '''
 # }}}
 
