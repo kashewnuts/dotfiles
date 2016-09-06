@@ -1,1 +1,1 @@
-set dictionary=~/.vim/dict/scp.dict
+setlocal dictionary=~/.vim/dict/scp.dict

@@ -1,4 +1,4 @@
-set noexpandtab
+setlocal noexpandtab
 
 " Syntax highlight
 let g:java_highlight_all       = 1
