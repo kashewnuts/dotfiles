@@ -68,7 +68,6 @@ set viminfo='100,<1000,s100,h,rA:,rB:,n$VIMHOME/viminfo " remember vim informati
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
 set formatoptions& formatoptions+=mM  " Support Japanese to join lines
-set hidden                      " When off a buffer is unloaded when it is abandon.
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 

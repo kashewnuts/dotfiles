@@ -29,7 +29,6 @@ set timeout timeoutlen=0 ttimeoutlen=0  " Speedup for ESC
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
 set formatoptions& formatoptions+=mM  " Support Japanese to join lines
-set hidden                      " Hidden when it's abandoned
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 
@@ -87,14 +86,6 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " To Enable filtering the command history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-
-" Plugin
-" Add directory under plugins to runtimepath
-for s:path in split(glob($VIM.'/plugins/*'), '\n')
-  if s:path !~# '\~$' && isdirectory(s:path)
-    let &runtimepath = &runtimepath.','.s:path
-  end
-endfor
 
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
