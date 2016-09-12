@@ -17,6 +17,11 @@ let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
 
 " GUI options {{{
 set guifont=Ricty\ Diminished:h11
+try
+  colorscheme molokai
+catch
+  try | colorscheme desert | catch | endtry
+endtry
 " }}}
 
 " Hack #120: Store the location and size of the window by gVim {{{

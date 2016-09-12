@@ -23,7 +23,7 @@ set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
 set scrolloff=999               " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
-set timeout timeoutlen=0 ttimeoutlen=0  " Speedup for ESC
+set timeout timeoutlen=1000 ttimeoutlen=50      " Speedup for ESC
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -72,8 +72,8 @@ set statusline+=[%l-%c/%L]                     " Cursor-Now Column/Total Number
 " AutoCommand
 augroup MyAutoCmd
   autocmd!
-  autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 augroup END
+autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 
 " Mapping
 " Turn off the highlight by pressing twice the ESC.

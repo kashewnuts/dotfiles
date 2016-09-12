@@ -35,7 +35,7 @@ set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 
 " Don't read $VIM/(g)vimrc
-if has('kaoriya')
+if has('kaoriya') && v:version < 800
   function! s:disable_source(vimrc_local, message)
     let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
     if !filereadable(l:vimrc_local)
@@ -151,7 +151,6 @@ nnoremap j gj
 nnoremap k gk
 " }}}
 
-" Commands {{{
 " ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -161,22 +160,11 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 " }}}
 
-" :Qargs {{{
-command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
-function! QuickfixFilenames()
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
-endfunction " }}}
-" }}}
-
 " Grep settings {{{
 augroup MyAutoCmd
   autocmd!
-  autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 augroup END
+autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 
 if executable('go') && !executable('jvgrep')
   execute '!go get github.com/mattn/jvgrep'
@@ -213,17 +201,6 @@ endif " }}}
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
-
-" Colorscheme
-try
-  if s:is_win && s:is_cui
-    colorscheme industry
-  else
-    colorscheme molokai
-  endif
-catch
-  try | colorscheme desert | catch | endtry
-endtry
 
 " Load local settings
 if filereadable(expand('~/.vimrc.local'))

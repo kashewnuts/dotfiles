@@ -36,7 +36,6 @@ repo = 'Shougo/context_filetype.vim'
 # repo = 'Shougo/neocomplete.vim'
 # depends = 'context_filetype.vim'
 # if = "has('lua')"
-# # on_event = 'InsertEnter'
 # on_i = 1
 # hook_source = '''
 #   " Use neocomplete.
@@ -412,7 +411,7 @@ on_cmd = [
 hook_source = '''
   let g:tweetvim_display_time = 1
   let g:tweetvim_async_post = 1
-  let g:tweetvim_display_icon = 1
+  " let g:tweetvim_display_icon = 1
 '''
 # }}}
 
@@ -423,7 +422,7 @@ hook_add = '''
   let g:memolist_memo_suffix = "md"
   let g:memolist_path = "~/Dropbox/memo"
   let g:memolist_unite = 1
-  let g:memolist_unite_option = "-no-split"
+  let g:memolist_unite_option = "-winheight=99"
 
   nnoremap <Leader>mn  :MemoNew<CR>
   nnoremap <Leader>ml  :MemoList<CR>
