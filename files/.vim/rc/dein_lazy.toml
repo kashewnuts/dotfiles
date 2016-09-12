@@ -422,12 +422,8 @@ on_cmd = ['MemoGrep', 'MemoList', 'MemoNew']
 hook_add = '''
   let g:memolist_memo_suffix = "md"
   let g:memolist_path = "~/Dropbox/memo"
+  let g:memolist_unite = 1
 
-  " When use Lazy, Netrw doesn't work well.
-  " So redifine MemoList to call memolist#list() twice.
-  command! -nargs=0 MemoList  silent call memolist#list() | call memolist#list()
-
-  " Mapping
   nnoremap <Leader>mn  :MemoNew<CR>
   nnoremap <Leader>ml  :MemoList<CR>
   nnoremap <Leader>mg  :MemoGrep<CR>
