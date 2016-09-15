@@ -1,52 +1,17 @@
-My dotfiles
-===========
+# My dotfiles
 
 This is my dotfiles. To setup, run as below.
 
-Common
-------
+## Common
+At your home directory, `git clone https://github.com/kashewnuts/dotfiles`
 
-At your home directory,
+##  For Non-Windows (like Linux, Mac OSX)
+Just `dotfiles/setup.sh`
 
-.. code-block:: bash
+## For Windows
+1. Run as an administrator. `dotfiles/setup.bat`
+2. (Option) Add Path to environmental variables to register `vim.exe`.
+3. (Option) Run as an administrator. `reg import dotfiles\files\EditByVim.reg`
 
-    git clone https://github.com/kashewnuts/dotfiles
-
-
-For Non-Windows (like Linux, Mac OSX)
--------------------------------------
-
-Just
-
-.. code-block:: bash
-
-    dotfiles/setup.sh
-
-
-For Windows
------------
-
-1st, Run as an administrator.
-
-.. code-block:: bash
-
-    dotfiles/setup.bat
-
-
-2nd, Add Path to environmental variables.
-
-3rd, Edit registry, as below.
-
-::
-
-  regeditを起動
-
-  "HKEY_CLASSES_ROOT\*\shell"で、新規キーの作成。
-  名前を"Vimで編集"に変更。
-
-  "HKEY_CLASSES_ROOT\*\shell\Vimで編集"にて、新規キーの作成。
-  名前を"Command"に変更。
-
-  "HKEY_CLASSES_ROOT\*\shell\Vimで編集\Command"にて、"(既定)"を修正。
-  値のデータに以下の値を入力。
-  "C:\Program Files\vim\gvim.exe" "%1"
+## LICENSE
+MIT
