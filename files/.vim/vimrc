@@ -35,7 +35,7 @@ set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 
 " Don't read $VIM/(g)vimrc
-if has('kaoriya') && v:version < 800
+if has('kaoriya')
   function! s:disable_source(vimrc_local, message)
     let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
     if !filereadable(l:vimrc_local)
@@ -183,15 +183,7 @@ if v:version >= 704 " {{{
   set breakindent
 endif " }}}
 
-" Plugins {{{
-" Add directory under plugins to runtimepath
-for s:path in split(glob($VIM.'/plugins/*'), '\n')
-  if s:path !~# '\~$' && isdirectory(s:path)
-    let &runtimepath = &runtimepath.','.s:path
-  end
-endfor
-
-" dein.vim
+" dein.vim {{{
 let s:plugins_path = '~/.vim/rc/plugins.vim'
 if filereadable(expand(s:plugins_path))
   execute 'source' . s:plugins_path
@@ -201,6 +193,13 @@ endif " }}}
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
+if s:is_cui
+  try
+    colorscheme molokai
+  catch
+    try | colorscheme desert | catch | endtry
+  endtry
+endif
 
 " Load local settings
 if filereadable(expand('~/.vimrc.local'))
