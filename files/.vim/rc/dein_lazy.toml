@@ -32,72 +32,6 @@ on_path = '.*'
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
-# [[plugins]]
-# repo = 'Shougo/neocomplete.vim'
-# depends = 'context_filetype.vim'
-# if = "has('lua')"
-# on_i = 1
-# hook_source = '''
-#   " Use neocomplete.
-#   let g:neocomplete#enable_at_startup = 1
-#   " Disable AutoComplPop.
-#   let g:acp_enableAtStartup = 0
-#   " Use smartcase.
-#   let g:neocomplete#enable_smart_case = 1
-#   " Set minimum syntax keyword length.
-#   let g:neocomplete#ources#syntax#in_keyword_length = 3
-# 
-#   " " jedi omni completion
-#   " autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
-# 
-#   " let g:jedi#auto_vim_configuration = 0
-#   " if !exists('g:neocomplete#force_omni_input_patterns')
-#   "   let g:neocomplete#force_omni_input_patterns = {}
-#   " endif
-#   " let g:neocomplete#force_omni_input_patterns.python =
-#   "   \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-#   " let g:neocomplete#sources#omni#functions.go = 'gocomplete#Complete'
-#   " let g:neocomplete#force_omni_input_patterns.go = '[^. \t]\.\w*'
-# 
-#   let g:neocomplete#fources#dictionary#dictionaries = {
-#     \ 'scp':        '~/.vim/dict/scp.dict'
-#     \ }
-# 
-#   " " Enable omni completion.
-#   " autocmd MyAutoCmd FileType css setl omnifunc=csscomplete#CompleteCSS
-#   " autocmd MyAutoCmd FileType html,markdown setl omnifunc=htmlcomplete#CompleteTags
-#   " autocmd MyAutoCmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
-#   " autocmd MyAutoCmd FileType xml setl omnifunc=xmlcomplete#CompleteTags
-# '''
-
-[[plugins]]
-repo = 'Shougo/neocomplcache.vim'
-# if = "!has('lua')"
-on_i = 1
-hook_source = '''
-  " Use neocomplcache.
-  let g:neocomplcache#enable_at_startup = 1
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  " Use smartcase.
-  let g:neocomplcache_enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplcache#sources#syntax#in_keyword_length = 3
-
-  " jedi omni completion
-  autocmd MyAutoCmd FileType python setl omnifunc=jedi#completions
-  let g:jedi#auto_vim_configuration = 0
-  if !exists('g:neocomplcache_force_omni_patterns')
-    let g:neocomplcache_force_omni_patterns = {}
-  endif
-  let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
-
-  " dictionary
-  let g:neocomplcache#fources#dictionary#dictionaries = {
-    \ 'scp':        '~/.vim/dict/scp.dict'
-    \ }
-'''
-
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 on_i = 1
@@ -126,33 +60,25 @@ hook_source = '''
     set conceallevel=2 concealcursor=niv
   endif
 '''
-
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = ['context_filetype.vim']
 # }}}
 
 # thinca plugins {{{
-[[plugins]]
-repo = 'thinca/vim-quickrun'
-on_cmd = 'Quickrun'
-hook_add = '''
-  nmap <Leader>r <Plug>(quickrun)
-  " Open at the height of 10-digit buffer window by horizontal split at the bottom
-  " Enable asynchronous processing
-  " Disable the Sheban prevent garbled in a Windows environment
-  let g:quickrun_config = {
-  \  '_' : {
-  \      'outputter/buffer/split' : ':botright 10sp',
-  \      'runner' : 'vimproc',
-  \      'hook/shebang/enable' : 0,
-  \  }
-  \ }
-'''
-
-[[plugins]]
-repo = 'thinca/vim-scouter'
-on_cmd = 'Scouter'
+# [[plugins]]
+# repo = 'thinca/vim-quickrun'
+# on_cmd = 'Quickrun'
+# hook_add = '''
+#   nmap <Leader>r <Plug>(quickrun)
+#   " Open at the height of 10-digit buffer window by horizontal split at the bottom
+#   " Enable asynchronous processing
+#   " Disable the Sheban prevent garbled in a Windows environment
+#   let g:quickrun_config = {
+#   \  '_' : {
+#   \      'outputter/buffer/split' : ':botright 10sp',
+#   \      'runner' : 'vimproc',
+#   \      'hook/shebang/enable' : 0,
+#   \  }
+#   \ }
+# '''
 
 [[plugins]]
 repo = 'thinca/vim-ft-rst_header'
@@ -174,29 +100,9 @@ on_cmd = 'Qfreplace'
 # }}}
 
 # Web plugins {{{
-# [[plugins]]
-# repo = 'hail2u/vim-css3-syntax'
-# on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
-
 [[plugins]]
 repo = 'othree/html5.vim'
 on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
-
-# [[plugins]]
-# repo = 'pangloss/vim-javascript'
-# on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
-
-# [[plugins]]
-# repo = 'jQuery'
-# #on_ft = ['javascript', 'coffeescript', 'typescript']
-#
-# [[plugins]]
-# repo = 'jelera/vim-javascript-syntax'
-# #on_ft = ['javascript', 'typescript']
-#
-# [[plugins]]
-# repo = 'jason0x43/vim-js-indent'
-# #on_ft = ['javascript', 'typescript']
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
@@ -209,71 +115,15 @@ hook_add = '''
   \  'haml': { 'extends' : 'html', },
   \ }
 '''
-# }}}
 
-# Python plugins {{{
 [[plugins]]
-if = "executable('pip')"
-repo = 'davidhalter/jedi-vim'
-on_event = 'InsertEnter'
-on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
-hook_source = '''
-  let g:jedi#completions_enabled = 0
-  let g:jedi#auto_vim_configuration = 0
-  let g:jedi#smart_auto_mappings = 0
-  let g:jedi#show_call_signatures = 0
-  let g:jedi#force_py_version = 3
+repo = 'tyru/caw.vim'
+on_ft = ['html', 'css', 'javascript']
+hook_add = '''
+  " Switch comment by typing \c
+  nmap <Leader>c <Plug>(caw:i:toggle)
+  vmap <Leader>c <Plug>(caw:i:toggle)
 '''
-build = 'pip install -U jedi'
-
-# [[plugins]]
-# if = "executable('pip')"
-# repo = 'nvie/vim-flake8'
-# on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
-# build = 'pip install flake8'
-# # hook_add = "autocmd MyAutoCmd BufWritePost *.py call Flake()"
-
-[[plugins]]
-if = "executable('pip')"
-repo = 'tell-k/vim-autopep8'
-on_ft = ['python', 'python3']
-build = 'pip install -U autopep8'
-
-# [[plugins]]
-# if = "executable('virtualenv')"
-# repo = 'jmcantrell/vim-virtualenv'
-# on_ft = ['python', 'python3', 'djangohtml', 'jinja', 'htmljinja']
-# }}}
-
-# Syntastic {{{
-# [[plugins]]
-# repo = 'osyo-manga/shabadou.vim'
-#
-# [[plugins]]
-# repo = 'jceb/vim-hier'
-#
-# [[plugins]]
-# repo = 'dannyob/quickfixstatus'
-#
-# [[plugins]]
-# repo = 'osyo-manga/vim-watchdogs'
-# on_cmd = 'WatchdogsRun'
-# depends = ['shabadou.vim', 'vim-hier', 'quickfixstatus']
-# }}}
-
-# Golang plugins {{{
-[[plugins]]
-repo = 'fatih/vim-go'
-on_ft = 'go'
-# }}}
-
-# Java plugins {{{
-# [[plugins]]
-# repo = 'artur-shaik/vim-javacomplete2'
-# on_ft = 'java'
-# hook_source = '''
-#   autocmd MyAutoCmd FileType java setl omnifunc=javacomplete#Complete
-# '''
 # }}}
 
 # Git plugins {{{
@@ -288,21 +138,21 @@ on_cmd = 'Agit'
 # }}}
 
 # Formater plugins {{{
-[[plugins]]
-repo = 'vim-scripts/Align'
-on_cmd = 'Align'
-hook_add = '''
-  " for japanese string
-  let g:Align_xstrlen = 3
-  " remove 'DrChip' menu
-  let g:DrChipTopLvlMenu = ''
-'''
-
-[[plugins]]
-repo = 'vim-scripts/SQLUtilities'
-on_source = 'Align'
-depends = 'Align'
-on_cmd = 'SQLUFormatter'
+# [[plugins]]
+# repo = 'vim-scripts/Align'
+# on_cmd = 'Align'
+# hook_add = '''
+#   " for japanese string
+#   let g:Align_xstrlen = 3
+#   " remove 'DrChip' menu
+#   let g:DrChipTopLvlMenu = ''
+# '''
+# 
+# [[plugins]]
+# repo = 'vim-scripts/SQLUtilities'
+# on_source = 'Align'
+# depends = 'Align'
+# on_cmd = 'SQLUFormatter'
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
@@ -330,22 +180,21 @@ on_cmd = 'h'
 # '''
 
 [[plugins]]
-repo = 'tyru/caw.vim'
-on_ft = ['html', 'css', 'javascript']
+repo = 'glidenote/memolist.vim'
+on_cmd = ['MemoGrep', 'MemoList', 'MemoNew']
 hook_add = '''
-  " Switch comment by typing \c
-  nmap <Leader>c <Plug>(caw:i:toggle)
-  vmap <Leader>c <Plug>(caw:i:toggle)
+  let g:memolist_memo_suffix = "md"
+  let g:memolist_path = "~/Dropbox/memo"
+  let g:memolist_unite = 1
+  let g:memolist_unite_option = "-winheight=99"
+
+  nnoremap <Leader>mn  :MemoNew<CR>
+  nnoremap <Leader>ml  :MemoList<CR>
+  nnoremap <Leader>mg  :MemoGrep<CR>
 '''
 # }}}
 
 # Markup plugins {{{
-# [[plugins]]
-# # repo = 'vim-scripts/RST-Tables'
-# # repo = 'vim-scripts/RST-Tables-CJK'
-# repo = 'vim-scripts/Unicode-RST-Tables'
-# on_ft = 'rst'
-#
 # [[plugins]]
 # if = "executable('pip')"
 # repo = 'kannokanno/previm'
@@ -359,12 +208,6 @@ hook_add = '''
 #   command! PrevimRefresh :call previm#refresh()
 # '''
 # build = 'pip install docutils'
-# }}}
-
-# measure plugins {{{
-# [[plugins]]
-# repo = 'mattn/benchvimrc-vim'
-# on_cmd = 'BenchVimrc'
 # }}}
 
 # FileType plugins {{{
@@ -414,19 +257,5 @@ hook_source = '''
   " let g:tweetvim_display_icon = 1
 '''
 # }}}
-
-[[plugins]]
-repo = 'glidenote/memolist.vim'
-on_cmd = ['MemoGrep', 'MemoList', 'MemoNew']
-hook_add = '''
-  let g:memolist_memo_suffix = "md"
-  let g:memolist_path = "~/Dropbox/memo"
-  let g:memolist_unite = 1
-  let g:memolist_unite_option = "-winheight=99"
-
-  nnoremap <Leader>mn  :MemoNew<CR>
-  nnoremap <Leader>ml  :MemoList<CR>
-  nnoremap <Leader>mg  :MemoGrep<CR>
-'''
 
 # toml:se fdm=marker:
