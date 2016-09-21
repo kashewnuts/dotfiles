@@ -164,7 +164,7 @@ command! Sjis Cp932
 augroup MyAutoCmd
   autocmd!
 augroup END
-autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 
 if executable('go') && !executable('jvgrep')
   execute '!go get github.com/mattn/jvgrep'

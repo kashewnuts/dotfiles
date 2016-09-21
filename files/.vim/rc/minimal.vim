@@ -73,7 +73,7 @@ set statusline+=[%l-%c/%L]                     " Cursor-Now Column/Total Number
 augroup MyAutoCmd
   autocmd!
 augroup END
-autocmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 
 " Mapping
 " Turn off the highlight by pressing twice the ESC.
@@ -90,4 +90,4 @@ cnoremap <C-n> <Down>
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
-try | colorscheme molokai | catch colorscheme desert | endtry
+try | colorscheme molokai | catch | colorscheme desert | endtry
