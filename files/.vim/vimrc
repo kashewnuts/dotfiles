@@ -117,38 +117,21 @@ endif
 " }}}
 
 " KeyMaping {{{
+" Turn off the highlight by pressing twice the ESC.
+nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
 " Normal mode: IME off
-inoremap <ESC> <ESC>:set iminsert=0<CR>
-
+inoremap <ESC><ESC>:set iminsert=0<CR>
+" Escape automatically according to the situation question and backslash.
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+" To Enable filtering the command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 " Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
 nnoremap <silent> <S-Right> :5wincmd ><CR>
 nnoremap <silent> <S-Up>    :5wincmd -<CR>
 nnoremap <silent> <S-Down>  :5wincmd +<CR>
-
-" When you move in the search results,
-" and in the center of the screen that position.
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
-" Turn off the highlight by pressing twice the ESC.
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
-
-" Escape automatically according to the situation question and backslash.
-cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
-cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-
-" To Enable filtering the command history
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-
-" Even text wrapping movement by j or k, is modified to act naturally.
-nnoremap j gj
-nnoremap k gk
 " }}}
 
 " ReOpen Encoding {{{
