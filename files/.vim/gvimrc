@@ -8,19 +8,11 @@
 
 " Basic {{{
 " Env
-let $VIMHOME=expand('~/.vim')
-if !isdirectory($VIMHOME)
-  let $VIMHOME=$VIM
-endif
+let $VIMHOME = isdirectory(expand('~/.vim')) ? expand('~/.vim') : $VIM
 let s:is_win = has('win32') || has('win64')
 let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
 
-set guifont=Ricty\ Diminished:h11
-try
-  colorscheme molokai
-catch
-  try | colorscheme desert | catch | endtry
-endtry " }}}
+" set guifont=Ricty\ Diminished:h14 " }}}
 
 " Hack #120: Store the location and size of the window by gVim {{{
 let s:save_window_file = expand($VIMHOME . '/vimwinpos')
