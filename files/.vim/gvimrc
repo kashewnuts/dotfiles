@@ -6,16 +6,8 @@
 " NOTE:     To use this, copy to your home directory.
 " ==========================================================================
 
-" Basic {{{
-" Env
-let $VIMHOME = isdirectory(expand('~/.vim')) ? expand('~/.vim') : $VIM
-let s:is_win = has('win32') || has('win64')
-let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
-
-" set guifont=Ricty\ Diminished:h14 " }}}
-
 " Hack #120: Store the location and size of the window by gVim {{{
-let s:save_window_file = expand($VIMHOME . '/vimwinpos')
+let s:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()
@@ -35,12 +27,12 @@ endif " }}}
 
 " Semitransparency {{{
 if exists('&transparency')
-  if s:is_win
+  if has('win32')
     augroup Semitransparency
       autocmd!
       autocmd GUIEnter * set transparency=220
     augroup END
-  elseif s:is_mac
+  elseif has('mac') || has('macunix') || has('gui_macvim')
     set transparency=20
   endif
 endif " }}}

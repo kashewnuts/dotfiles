@@ -8,17 +8,12 @@
 
 " Basic Settings {{{
 if !1 | finish | endif          " Skip if the live Vim is vim-tiny or vim-small
-
-" Env
-let $VIMHOME = isdirectory(expand('~/.vim')) ? expand('~/.vim') : $VIM
-let s:is_win = has('win32') || has('win64')
-let s:is_mac = has('mac') || has('macunix') || has('gui_macvim')
-let s:is_cui = !has('gui_running')
+let s:is_cmd = has('win32') && !has('gui_running')
 
 " Encoding {{{
 " Sets the character encoding used inside Vim
 let &termencoding = &encoding
-let &encoding = (s:is_win && s:is_cui) ? 'cp932' : 'utf-8'
+let &encoding = s:is_cmd ? 'cp932' : 'utf-8'
 scriptencoding utf-8            " Specify encoding used in the script
 set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 " }}}
@@ -27,6 +22,23 @@ set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 set guioptions=M                      " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
+
+let g:loaded_getscript         = 1 "$VIMRUNTIME/autoload/getscript.vim
+let g:loaded_getscriptPlugin   = 1 "$VIMRUNTIME/plugin/getscriptPlugin.vim
+let g:loaded_gzip              = 1 "$VIMRUNTIME/plugin/gzip.vim
+let g:loaded_logipat           = 1 "$VIMRUNTIME/plugin/logiPat.vim
+let g:loaded_logiPat           = 1 "$VIMRUNTIME/plugin/logiPat.vim
+let g:loaded_netrw             = 1 "$VIMRUNTIME/autoload/netrw.vim
+let g:loaded_netrwFileHandlers = 1 "$VIMRUNTIME/autoload/netrwFileHandlers.vim
+let g:loaded_netrwPlugin       = 1 "$VIMRUNTIME/plugin/netrwPlugin.vim
+let g:loaded_netrwSettings     = 1 "$VIMRUNTIME/autoload/netrwSettings.vim
+let g:loaded_rrhelper          = 1 "$VIMRUNTIME/plugin/rrhelper.vim
+let g:loaded_tar               = 1 "$VIMRUNTIME/autoload/tar.vim
+let g:loaded_tarPlugin         = 1 "$VIMRUNTIME/plugin/tarPlugin.vim
+let g:loaded_vimball           = 1 "$VIMRUNTIME/autoload/vimball.vim
+let g:loaded_vimballPlugin     = 1 "$VIMRUNTIME/plugin/vimballPlugin.vim
+let g:loaded_zip               = 1 "$VIMRUNTIME/autoload/zip.vim
+let g:loaded_zipPlugin         = 1 "$VIMRUNTIME/plugin/zipPlugin.vim
 
 " Don't read $VIM/(g)vimrc
 if has('kaoriya')
@@ -49,14 +61,11 @@ set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
 set fillchars=vert:\|,fold:\    " Characters to fill the separators
 set helpheight=999              " Open help to fill the screen
+set history=1000                " History
 set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
 set scrolloff=999               " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
-
-" History
-set history=1000                " History
-set viminfo='100,<1000,s100,h,rA:,rB:,n$VIMHOME/viminfo " remember vim information
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -71,7 +80,7 @@ set smartindent    " Do smart autoindenting when starting a new line
 set copyindent     " Copy the structure of the existing lines indent
 
 " Tab
-set tabstop=4      " Width on the screen of the tab
+set tabstop=8      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " No expand tabs to spaces (expandtab: expand)
 set shiftwidth=4   " Shift move width
@@ -104,7 +113,7 @@ set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " Terminal
 set timeout timeoutlen=1000 ttimeoutlen=50      " Speedup for ESC
-if s:is_cui
+if !has('gui_running')
   set lazyredraw                " Only redraw when necessary.
   set ttyfast                   " Faster redrawing.
 endif
@@ -148,7 +157,7 @@ if executable('go') && !executable('jvgrep')
   execute '!go get github.com/mattn/jvgrep'
 endif
 if executable('jvgrep')
-  let &grepprg = (s:is_win && s:is_cui) ? 'jvgrep\ -iIR' : 'jvgrep\ -8iIR'
+  let &grepprg = s:is_cmd ? 'jvgrep\ -iIR' : 'jvgrep\ -8iIR'
 endif " }}}
 
 if v:version >= 704 " {{{
@@ -168,7 +177,7 @@ endif " }}}
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
 try
-  execute 'colorscheme ' . ((s:is_win && s:is_cui) ? 'industry' : 'molokai')
+  execute 'colorscheme ' . (s:is_cmd ? 'industry' : 'molokai')
 catch
   try | colorscheme desert | catch | endtry
 endtry
