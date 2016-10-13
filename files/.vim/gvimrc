@@ -7,7 +7,7 @@
 " ==========================================================================
 
 " Hack #120: Store the location and size of the window by gVim {{{
-let s:save_window_file = expand('~/vimwinpos')
+let s:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
   autocmd!
   autocmd VimLeavePre * call s:save_window()
@@ -27,7 +27,7 @@ endif " }}}
 
 " Semitransparency {{{
 if exists('&transparency')
-  if has('win32') || has('win64')
+  if has('win32')
     augroup Semitransparency
       autocmd!
       autocmd GUIEnter * set transparency=220

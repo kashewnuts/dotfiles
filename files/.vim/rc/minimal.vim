@@ -15,7 +15,6 @@ set noswapfile nobackup nowritebackup noundofile " Doesn't make backup files
 " Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
-set guifont=Ricty\ Diminished:h11
 if executable('jvgrep') | set grepprg=jvgrep\ -8iIR | endif " grep
 set helpheight=999              " Open help to fill the screen
 set history=1000                " History
@@ -70,9 +69,7 @@ set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]  " FileType
 set statusline+=[%l-%c/%L]                     " Cursor-Now Column/Total Number
 
 " AutoCommand
-augroup MyAutoCmd
-  autocmd!
-augroup END
+augroup MyAutoCmd | autocmd! | augroup END       " init augroup
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 
 " Mapping
@@ -86,6 +83,9 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 " To Enable filtering the command history
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+" Even text wrapping movement by j or k, is modified to act naturally.
+nnoremap j gj
+nnoremap k gk
 
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
