@@ -140,6 +140,7 @@ nnoremap j gj
 nnoremap k gk
 " }}}
 
+" Commands {{{
 " ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -147,6 +148,15 @@ command! Iso2022jp edit ++enc=iso-2022-jp
 command! Utf8 edit ++enc=utf-8
 command! Jis Iso2022jp
 command! Sjis Cp932
+" }}}
+
+" Format JSON
+if executable('jq') " {{{
+  command! -nargs=? Jq call s:Jq(<f-args>)
+  function! s:jq(...)
+    execute '%!jq' (a:0 == 0 ? '.' : a:1)
+  endfunction
+endif " }}}
 " }}}
 
 " Grep settings {{{
