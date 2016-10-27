@@ -120,10 +120,11 @@ endif
 " }}}
 
 " KeyMaping {{{
+let mapleader = ","
 " Turn off the highlight by pressing twice the ESC.
 nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
 " Normal mode: IME off
-inoremap <ESC><ESC>:set iminsert=0<CR>
+inoremap <silent> <Esc> <Esc>:set iminsert=0<CR>
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -167,7 +168,7 @@ if executable('go') && !executable('jvgrep')
   execute '!go get github.com/mattn/jvgrep'
 endif
 if executable('jvgrep')
-  let &grepprg = s:is_cmd ? 'jvgrep\ -iIR' : 'jvgrep\ -8iIR'
+  let &grepprg = s:is_cmd ? 'jvgrep -iIR' : 'jvgrep -8iIR'
 endif " }}}
 
 if v:version >= 704 " {{{
