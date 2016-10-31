@@ -37,7 +37,7 @@ set smartindent    " Do smart autoindenting when starting a new line
 set copyindent     " Copy the structure of the existing lines indent
 
 " Tab
-set tabstop=4      " Width on the screen of the tab
+set tabstop=8      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " No expand tabs to spaces (expandtab: expand)
 set shiftwidth=4   " Shift move width
@@ -63,20 +63,23 @@ set statusline+=%r              " Read only flg([RO])
 set statusline+=%h              " Help buffer
 set statusline+=%w              " Preview window flag
 set statusline+=%=              " Separated left & right item
-set statusline+=[%{&ff}]                       " View FileFormat
-set statusline+=[%{strlen(&fenc)?&fenc:&enc}]  " FileEncording
-set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]  " FileType
-set statusline+=[%l-%c/%L]                     " Cursor-Now Column/Total Number
+set statusline+=[%{&ff}]                        " View FileFormat
+set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
+set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
+set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 
 " AutoCommand
-augroup MyAutoCmd | autocmd! | augroup END       " init augroup
+" init augroup (Write the following in order of less than patch 7.4.2103)
+augroup MyAutoCmd
+  autocmd!
+augroup END
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 
 " Mapping
 " Turn off the highlight by pressing twice the ESC.
 nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
 " Normal mode: IME off
-inoremap <ESC><ESC>:set iminsert=0<CR>
+inoremap <silent> <Esc> <Esc>:set iminsert=0<CR>
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
