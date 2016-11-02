@@ -139,7 +139,7 @@ command! Sjis Cp932
 " Format JSON
 if executable('jq') " {{{
   command! -nargs=? Jq call s:Jq(<f-args>)
-  function! s:jq(...)
+  function! s:Jq(...)
     execute '%!jq' (a:0 == 0 ? '.' : a:1)
   endfunction
 endif " }}}
