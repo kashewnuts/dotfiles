@@ -5,27 +5,8 @@ depends = 'neomru.vim'
 hook_source = '''
   let g:unite_enable_auto_select = 0
   let g:unite_enable_start_insert = 1
-
-  " Case-insensitive
   let g:unite_enable_ignore_case = 1
   let g:unite_enable_smart_case = 1
-
-  nnoremap <silent> ,b  :<C-u>Unite buffer<CR>
-  " grep search
-  nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
-  " grep search for the word at the cursor position
-  nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
-  " Recall of grep search results
-  nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
-  " " file search
-  " nnoremap <silent> ,fg  :<C-u>Unite file_rec/git<CR>
-  " nnoremap <silent> ,fr  :<C-u>Unite file_rec<CR>
-
-  if executable('jvgrep')
-    let g:unite_source_grep_command = 'jvgrep'
-    let g:unite_source_grep_default_opts = '-8iI --exclude ""\.(git|svn|hg|bzr)""'
-    let g:unite_source_grep_recursive_opt = '-R'
-  endif
 '''
 
 [[plugins]]
@@ -43,13 +24,13 @@ hook_add = '''
 '''
 hook_post_source = '''
   " Change file_rec command.
-  if executable('files')
-    call denite#custom#var('file_rec', 'command', ['files'])
-  endif
-
+  call denite#custom#var('file_rec', 'command', ['files'])
   " Change mappings.
   call denite#custom#map('_', "\<C-j>", 'move_to_next_line')
   call denite#custom#map('_', "\<C-k>", 'move_to_prev_line')
+  " Define alias
+  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+  call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
 '''
 
 [[plugins]]
@@ -206,19 +187,19 @@ on_cmd = 'h'
 repo = 'glidenote/memolist.vim'
 on_cmd = ['MemoGrep', 'MemoList', 'MemoNew']
 hook_add = '''
-  let g:memolist_memo_suffix = "md"
   let g:memolist_path = "~/Dropbox/memo"
 
   " For unite.vim
-  let g:memolist_unite = 1
-  let g:memolist_unite_option = "-winheight=99"
+  " let g:memolist_unite = 1
+  " let g:memolist_unite_option = "-winheight=99"
+  " nnoremap <Leader>ml  :MemoList<CR>
 
   " For denite.nvim
   " let g:memolist_denite = 1
   " let g:memolist_denite_option = "-winheight=99"
+  nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
   nnoremap <Leader>mn  :MemoNew<CR>
-  nnoremap <Leader>ml  :MemoList<CR>
   nnoremap <Leader>mg  :MemoGrep<CR>
 '''
 # }}}
