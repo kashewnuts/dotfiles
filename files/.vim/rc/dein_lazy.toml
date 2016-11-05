@@ -26,8 +26,8 @@ hook_post_source = '''
   " Change file_rec command.
   call denite#custom#var('file_rec', 'command', ['files'])
   " Change mappings.
-  call denite#custom#map('_', "\<C-j>", 'move_to_next_line')
-  call denite#custom#map('_', "\<C-k>", 'move_to_prev_line')
+  call denite#custom#map('insert', "\<C-j>", 'move_to_next_line')
+  call denite#custom#map('insert', "\<C-k>", 'move_to_prev_line')
   " Define alias
   call denite#custom#alias('source', 'file_rec/git', 'file_rec')
   call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
