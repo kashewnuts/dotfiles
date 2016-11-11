@@ -56,6 +56,7 @@ set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
+set complete=.,w,b,u,k          " Complete
 set formatoptions& formatoptions+=mM  " Support Japanese to join lines
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 

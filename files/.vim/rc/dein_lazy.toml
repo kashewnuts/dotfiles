@@ -15,19 +15,20 @@ on_path = '.*'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-if = "(v:version >= 800 && has('python3')) || has('nvim')"
+rev = '8c2f5d4'
+if = "(v:version >= 800 || has('nvim')) && has('python3')"
 on_cmd = ['Denite']
 hook_add = '''
-  nnoremap <silent> ,fm  :<C-u>Denite file_mru<CR>
-  nnoremap <silent> ,fr  :<C-u>Denite file_rec<CR>
-  nnoremap <silent> ,fl  :<C-u>Denite line<CR>
+  nnoremap <silent> <Leader>fm  :<C-u>Denite file_mru<CR>
+  nnoremap <silent> <Leader>fr  :<C-u>Denite file_rec<CR>
+  nnoremap <silent> <Leader>fl  :<C-u>Denite line<CR>
 '''
 hook_post_source = '''
   " Change file_rec command.
   call denite#custom#var('file_rec', 'command', ['files'])
-  " Change mappings.
-  call denite#custom#map('_', "\<C-j>", 'move_to_next_line')
-  call denite#custom#map('_', "\<C-k>", 'move_to_prev_line')
+  " " Change mappings.
+  " call denite#custom#map('insert', "\<C-j>", 'move_to_next_line')
+  " call denite#custom#map('insert', "\<C-k>", 'move_to_prev_line')
   " Define alias
   call denite#custom#alias('source', 'file_rec/git', 'file_rec')
   call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
@@ -87,8 +88,11 @@ hook_source = '''
 [[plugins]]
 repo = 'thinca/vim-ft-rst_header'
 on_ft = 'rst'
-hook_add = 'let g:rst_header_chars = "#*=-^~""'
-hook_source = 'autocmd MyAutoCmd FileType text setl ft=rst'
+# hook_add = 'let g:rst_header_chars = "#*=-^~""'
+hook_source = '''
+  let g:rst_header_chars = "#*=-^~""
+  autocmd MyAutoCmd FileType text setl ft=rst
+'''
 
 [[plugins]]
 repo = 'thinca/vim-fontzoom'
@@ -111,7 +115,7 @@ on_ft = ['html', 'css', 'javascript', 'jinja', 'htmljinja']
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'ruby', 'php', 'css', 'haml', 'xml']
-hook_add = '''
+hook_source = '''
   let g:user_emmet_settings = {
   \  'variables' : { 'lang' : 'ja' },
   \  'php' : { 'extends' : 'html', 'filters' : 'c', },
@@ -122,11 +126,10 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tyru/caw.vim'
-on_ft = ['html', 'css', 'javascript']
 hook_add = '''
   " Switch comment by typing \c
-  nmap <Leader>c <Plug>(caw:i:toggle)
-  vmap <Leader>c <Plug>(caw:i:toggle)
+  nnoremap <Leader>c <Plug>(caw:i:toggle)
+  vnoremap <Leader>c <Plug>(caw:i:toggle)
 '''
 # }}}
 
@@ -145,7 +148,7 @@ on_cmd = 'Agit'
 [[plugins]]
 repo = 'vim-scripts/Align'
 on_cmd = 'Align'
-hook_add = '''
+hook_source = '''
   " for japanese string
   let g:Align_xstrlen = 3
   " remove 'DrChip' menu
@@ -161,7 +164,7 @@ on_cmd = 'SQLUFormatter'
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
 on_cmd = 'FixWhitespace'
-hook_add = "let g:extra_whitespace_ignored_filetypes = ['unite']"
+hook_source = "let g:extra_whitespace_ignored_filetypes = ['unite']"
 # }}}
 
 # Reference plugins {{{
@@ -199,6 +202,10 @@ hook_add = '''
   " let g:memolist_denite_option = "-winheight=99"
   nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
+  " " ctrlp.vim
+  " let g:memolist_ex_cmd = 'CtrlP'
+  " nnoremap <Leader>ml  :MemoList<CR>
+
   nnoremap <Leader>mn  :MemoNew<CR>
   nnoremap <Leader>mg  :MemoGrep<CR>
 '''
@@ -212,7 +219,8 @@ on_source = 'open-browser.vim'
 depends = 'open-browser.vim'
 on_cmd = 'PrevimOpen'
 # on_ft = ['md', 'rst']
-hook_add = '''
+# hook_add = '''
+hook_source = '''
   let g:previm_disable_vimproc = 1
   let g:previm_show_header = 0
   command! PrevimRefresh :call previm#refresh()
@@ -267,5 +275,18 @@ hook_source = '''
   " let g:tweetvim_display_icon = 1
 '''
 # }}}
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+on_cmd = ['CtrlP', '']
+hook_add = '''
+  nnoremap <silent> <C-p> :<C-u>CtrlP<CR>
+'''
+hook_source = '''
+  let g:ctrlp_user_command = 'files -a %s'
+  let g:ctrlp_key_loop = 1  " Support multi-byte character
+  let g:ctrlp_clear_cache_on_exit = 0 " no cache
+  let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:1000,results:1000'
+'''
 
 # toml:se fdm=marker:
