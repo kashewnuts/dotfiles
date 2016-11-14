@@ -106,7 +106,7 @@ endif
 " }}}
 
 " KeyMaping {{{
-let mapleader = ","
+let g:mapleader = ','
 " Turn off the highlight by pressing twice the ESC.
 nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
 " Normal mode: IME off

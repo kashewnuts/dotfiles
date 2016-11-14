@@ -25,9 +25,9 @@ hook_add = '''
 hook_post_source = '''
   " Change file_rec command.
   call denite#custom#var('file_rec', 'command', ['files'])
-  " " Change mappings.
-  " call denite#custom#map('insert', "\<C-j>", 'move_to_next_line')
-  " call denite#custom#map('insert', "\<C-k>", 'move_to_prev_line')
+  " Change mappings.
+  call denite#custom#map('insert', "\<C-j>", 'move_to_next_line')
+  call denite#custom#map('insert', "\<C-k>", 'move_to_prev_line')
   " Define alias
   call denite#custom#alias('source', 'file_rec/git', 'file_rec')
   call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
@@ -277,7 +277,7 @@ hook_source = '''
 
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
-on_cmd = ['CtrlP', '']
+on_cmd = ['CtrlP']
 hook_add = '''
   nnoremap <silent> <C-p> :<C-u>CtrlP<CR>
 '''
