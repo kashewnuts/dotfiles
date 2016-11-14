@@ -24,7 +24,9 @@ hook_add = '''
 '''
 hook_post_source = '''
   " Change file_rec command.
-  call denite#custom#var('file_rec', 'command', ['files'])
+  if executable('files')
+    call denite#custom#var('file_rec', 'command', ['files'])
+  endif
   " Change mappings.
   call denite#custom#map('insert', "\<C-j>", 'move_to_next_line')
   call denite#custom#map('insert', "\<C-k>", 'move_to_prev_line')
@@ -282,15 +284,12 @@ hook_add = '''
   nnoremap <silent> <C-p> :<C-u>CtrlP<CR>
 '''
 hook_source = '''
-  let g:ctrlp_user_command = 'files -a %s'
+  if executable('files')
+    let g:ctrlp_user_command = 'files -a %s'
+  endif
   let g:ctrlp_key_loop = 1  " Support multi-byte character
   let g:ctrlp_clear_cache_on_exit = 0 " no cache
-  let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:1000,results:1000'
-  let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+  let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:1000,results:1000'
 '''
 
 # toml:se fdm=marker:
