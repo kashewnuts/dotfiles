@@ -1,5 +1,6 @@
 export EDITOR=vim
 
+alias ls='ls --show-control-chars'
 alias la='ls -al'
 alias ll='ls -l'
 
