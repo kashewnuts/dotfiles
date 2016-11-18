@@ -200,11 +200,19 @@ hook_add = '''
   " For denite.nvim
   " let g:memolist_denite = 1
   " let g:memolist_denite_option = "-winheight=99"
-  nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+  " nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 
   " " ctrlp.vim
   " let g:memolist_ex_cmd = 'CtrlP'
   " nnoremap <Leader>ml  :MemoList<CR>
+
+  if (v:version >= 800 || has('nvim')) && has('python3')
+    nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+  else
+    let g:memolist_unite = 1
+    let g:memolist_unite_option = "-winheight=99"
+    nnoremap <Leader>ml  :MemoList<CR>
+  endif
 
   nnoremap <Leader>mn  :MemoNew<CR>
   nnoremap <Leader>mg  :MemoGrep<CR>
