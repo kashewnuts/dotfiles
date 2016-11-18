@@ -159,6 +159,8 @@ if executable('go') && !executable('jvgrep')
 endif
 if executable('jvgrep')
   let &grepprg = s:is_cmd ? 'jvgrep -iIR' : 'jvgrep -8iIR'
+elseif executable('grep')
+  set grepprg=grep\ -nH
 endif " }}}
 
 if v:version >= 704 " {{{
