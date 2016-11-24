@@ -22,21 +22,28 @@ set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 set guioptions=M                      " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
-set noloadplugins
 
-" Don't read $VIM/(g)vimrc
-if has('kaoriya')
-  function! s:disable_source(vimrc_local, message)
-    let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
-    if !filereadable(l:vimrc_local)
-      execute ':redir! >' . l:vimrc_local
-      silent! echon a:message
-      redir END
-    endif
-  endfunction
-  call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
-  call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
-endif " }}}
+" " Don't read $VIM/(g)vimrc
+" if has('kaoriya')
+"   function! s:disable_source(vimrc_local, message)
+"     let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
+"     if !filereadable(l:vimrc_local)
+"       execute ':redir! >' . l:vimrc_local
+"       silent! echon a:message
+"       redir END
+"     endif
+"   endfunction
+"   " call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
+"   call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
+" 
+"   " " Add under plugins directory to runtimepath
+"   " for s:path in split(glob($VIM.'/plugins/*'), '\n')
+"   "   if s:path !~# '\~$' && isdirectory(s:path)
+"   "     let &runtimepath = &runtimepath.','.s:path
+"   "   end
+"   " endfor
+"   " unlet s:path
+" endif " }}}
 " }}}
 
 " Misc {{{
@@ -49,7 +56,6 @@ set history=1000                " History
 set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
 set scrolloff=999               " Keep above and below the cursor
-source $VIMRUNTIME/macros/matchit.vim
 set showmatch matchtime=1       " The highlight matching brackets
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 
@@ -57,8 +63,13 @@ set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
 set complete=.,w,b,u,k          " Complete
-set formatoptions& formatoptions+=mM  " Support Japanese to join lines
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
+
+" Format
+" source $VIM/plugins/kaoriya/encode_japan.vim
+set formatoptions& formatoptions+=mM  " Support Japanese to join lines
+set formatexpr=autofmt#japanese#formatexpr()
+let autofmt_allow_over_tw=1
 
 " Indent
 set autoindent     " Copy indent from current line when starting a new line
@@ -95,7 +106,8 @@ set statusline+=%=              " Separated left & right item
 set statusline+=[%{&ff}]                        " View FileFormat
 set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
 set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
-set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
+" set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
+set statusline+=(%v,%l)/%L%6P                   " Cursor-Now Column/Total Number
 
 " Terminal
 set timeout timeoutlen=1000 ttimeoutlen=50      " Speedup for ESC
@@ -179,11 +191,13 @@ endif " }}}
 " Essential
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
-try
-  execute 'colorscheme ' . (s:is_cmd ? 'industry' : 'molokai')
-catch
-  try | colorscheme desert | catch | endtry
-endtry
+if !has('gui_running')
+  try
+    execute 'colorscheme ' . (s:is_cmd ? 'industry' : 'molokai')
+  catch
+    try | colorscheme desert | catch | endtry
+  endtry
+endif
 
 " Load local settings
 if filereadable(expand('~/.vimrc.local'))

@@ -6,6 +6,13 @@
 " NOTE:     To use this, copy to your home directory.
 " ==========================================================================
 
+" Colorscheme {{{
+try
+  colorscheme molokai
+catch
+  try | colorscheme desert | catch | endtry
+endtry " }}}
+
 " Hack #120: Store the location and size of the window by gVim {{{
 let s:save_window_file = expand('~/.vimwinpos')
 augroup SaveWindow
