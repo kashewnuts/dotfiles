@@ -23,27 +23,19 @@ set guioptions=M                      " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 
-" " Don't read $VIM/(g)vimrc
-" if has('kaoriya')
-"   function! s:disable_source(vimrc_local, message)
-"     let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
-"     if !filereadable(l:vimrc_local)
-"       execute ':redir! >' . l:vimrc_local
-"       silent! echon a:message
-"       redir END
-"     endif
-"   endfunction
-"   " call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
-"   call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
-" 
-"   " " Add under plugins directory to runtimepath
-"   " for s:path in split(glob($VIM.'/plugins/*'), '\n')
-"   "   if s:path !~# '\~$' && isdirectory(s:path)
-"   "     let &runtimepath = &runtimepath.','.s:path
-"   "   end
-"   " endfor
-"   " unlet s:path
-" endif " }}}
+" Don't read $VIM/(g)vimrc
+if has('kaoriya')
+  function! s:disable_source(vimrc_local, message)
+    let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
+    if !filereadable(l:vimrc_local)
+      execute ':redir! >' . l:vimrc_local
+      silent! echon a:message
+      redir END
+    endif
+  endfunction
+  call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
+  call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
+endif " }}}
 " }}}
 
 " Misc {{{
@@ -62,11 +54,11 @@ set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
-set complete=.,w,b,u,k          " Complete
+set complete& complete+=k       " Specifies how keyword completion
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
+set tags=./tags;,tags;          " Refer to projects root tags file
 
 " Format
-" source $VIM/plugins/kaoriya/encode_japan.vim
 set formatoptions& formatoptions+=mM  " Support Japanese to join lines
 set formatexpr=autofmt#japanese#formatexpr()
 let autofmt_allow_over_tw=1
