@@ -55,6 +55,7 @@ set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
 set complete& complete+=k       " Specifies how keyword completion
+set completeopt=menu,noselect   " Force the user to select one & No preview
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set tags=./tags;,tags;          " Refer to projects root tags file
 
