@@ -17,7 +17,9 @@ if v:version >= 704
   if !isdirectory(s:dein_dir)
     execute '!git clone https://github.com/Shougo/dein.vim' s:dein_dir
   endif
-  set runtimepath& runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+  if has('vim_starting')
+    set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+  endif
 
   " Read TOML & cache
   if dein#load_state(s:root_dein_path)

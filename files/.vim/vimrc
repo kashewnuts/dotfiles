@@ -60,6 +60,7 @@ set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set tags=./tags;,tags;          " Refer to projects root tags file
 
 " Format
+if has('vim_starting') | set runtimepath+=$VIM/plugins/autofmt | endif
 set formatoptions& formatoptions+=mM  " Support Japanese to join lines
 set formatexpr=autofmt#japanese#formatexpr()
 let autofmt_allow_over_tw=1
