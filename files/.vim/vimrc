@@ -163,7 +163,7 @@ if executable('go') && !executable('jvgrep')
   execute '!go get github.com/mattn/jvgrep'
 endif
 if executable('jvgrep')
-  let &grepprg = s:is_cmd ? 'jvgrep -iIR' : 'jvgrep -8iIR'
+  let &grepprg = 'jvgrep -iIR --findasync ' . (s:is_cmd ? '' : '-8')
 elseif executable('grep')
   set grepprg=grep\ -nH
 endif " }}}
