@@ -13,11 +13,12 @@ call plug#begin('~/.vim/plugged')
 " FuzzyFinder
 Plug 'ctrlpvim/ctrlp.vim'
 " ShougoWare
-Plug 'Shougo/context_filetype.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/context_filetype.vim', {'on': []}
+Plug 'Shougo/neosnippet-snippets',  {'on': []}
+Plug 'Shougo/neosnippet.vim',       {'on': []}
 " thinca Plugins
-Plug 'thinca/vim-fontzoom'  " Requirement 'set guifont='
+Plug 'thinca/vim-fontzoom'  " Requirement 'set guifont'
 Plug 'thinca/vim-ft-rst_header', {'for': 'rst'}
 " Web
 Plug 'othree/html5.vim', {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
@@ -49,15 +50,16 @@ Plug 'mattn/webapi-vim',        {'on': b:TweetVimCommands}
 Plug 'mattn/favstar-vim',       {'on': b:TweetVimCommands}
 Plug 'Shougo/unite.vim',        {'on': b:TweetVimCommands}
 Plug 'Shougo/unite-outline',    {'on': b:TweetVimCommands}
-Plug 'Shougo/vimproc.vim',      {'on': b:TweetVimCommands,
-  \ 'build': {
-  \   'windows' : 'tools\\update-dll-mingw',
-  \   'cygwin'  : 'make -f make_cygwin.mak',
-  \   'mac'     : 'make -f make_mac.mak',
-  \   'linux'   : 'make',
-  \   'unix'    : 'make',
-  \   },
-  \ }
+Plug 'Shougo/vimproc.vim',      {'on': b:TweetVimCommands}
+" Plug 'Shougo/vimproc.vim',      {'on': b:TweetVimCommands,
+"   \ 'build': {
+"   \   'windows' : 'tools\\update-dll-mingw',
+"   \   'cygwin'  : 'make -f make_cygwin.mak',
+"   \   'mac'     : 'make -f make_mac.mak',
+"   \   'linux'   : 'make',
+"   \   'unix'    : 'make',
+"   \   },
+"   \ }
 unlet b:TweetVimCommands
 
 " List ends here. Plugins become visible to Vim after this call.
@@ -69,6 +71,22 @@ function! s:plug.is_installed(name)
   return has_key(self.plugs, a:name) ? isdirectory(self.plugs[a:name].dir) : 0
 endfunction " }}}
 
+if s:plug.is_installed('denite.nvim') " {{{
+  nnoremap <silent> <Leader>fm  :<C-u>Denite file_mru<CR>
+  nnoremap <silent> <Leader>fr  :<C-u>Denite file_rec<CR>
+  nnoremap <silent> <Leader>fl  :<C-u>Denite line<CR>
+  " Change file_rec command.
+  if executable('files')
+    call denite#custom#var('file_rec', 'command', ['files'])
+  endif
+  " Change mappings.
+  call denite#custom#map('insert', "\<C-j>", 'move_to_next_line')
+  call denite#custom#map('insert', "\<C-k>", 'move_to_prev_line')
+  " Define alias
+  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+  call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+endif " }}}
+
 if s:plug.is_installed('ctrlp.vim') " {{{
   if executable('files')
     let g:ctrlp_user_command = 'files -a %s'
@@ -78,6 +96,7 @@ if s:plug.is_installed('ctrlp.vim') " {{{
   let g:ctrlp_use_caching = 0 " no cache
   let g:ctrlp_key_loop = 1    " Support multi-byte character
   let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:1000,results:1000'
+  let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
@@ -161,5 +180,16 @@ if s:plug.is_installed('TweetVim') " {{{
   let g:tweetvim_display_time = 1
   let g:tweetvim_async_post = 1
 endif " }}}
+
+" Load InsertMode Plugin {{{
+augroup load_insert
+  autocmd!
+  autocmd InsertEnter * call plug#load(
+\   'context_filetype.vim',
+\   'neosnippet.vim',
+\   'neosnippet-snippets',
+\ )
+\ | autocmd! load_insert
+augroup END " }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker
