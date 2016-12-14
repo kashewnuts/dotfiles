@@ -5,4 +5,5 @@ files/.vim/.netrwhist
 files/.vim/autoload/
 files/.vim/ftdetect/
 files/.vim/syntax/
+files/.vim/plugged/
 .DS_Store
