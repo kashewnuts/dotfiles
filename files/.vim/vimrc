@@ -174,8 +174,9 @@ if v:version >= 704 " {{{
   set breakindent
 endif " }}}
 
-" dein.vim {{{
-let s:plugins_path = '~/.vim/rc/plugins.vim'
+" Plugin Config {{{
+" let s:plugins_path = '~/.vim/rc/dein.vim'
+let s:plugins_path = '~/.vim/rc/plug.vim'
 if filereadable(expand(s:plugins_path))
   execute 'source' . s:plugins_path
 endif " }}}
