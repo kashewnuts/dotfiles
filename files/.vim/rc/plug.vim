@@ -12,11 +12,12 @@ call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 " FuzzyFinder
 Plug 'ctrlpvim/ctrlp.vim'
-" ShougoWare
 Plug 'Shougo/denite.nvim'
+" Snippets
 Plug 'Shougo/context_filetype.vim', {'on': []}
 Plug 'Shougo/neosnippet-snippets',  {'on': []}
 Plug 'Shougo/neosnippet.vim',       {'on': []}
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " thinca Plugins
 Plug 'thinca/vim-fontzoom'  " Requirement 'set guifont'
 Plug 'thinca/vim-ft-rst_header', {'for': 'rst'}
@@ -38,7 +39,6 @@ Plug 'vim-scripts/SQLUtilities', {'on': b:AligCommands}
 unlet b:AligCommands
 " Reference & View
 Plug 'kannokanno/previm', {'on': 'PrevimOpen'}
-" Plug 'vim-jp/vimdoc-ja', {'on': '<Plug>h'}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 let b:TweetVimCommands = ['TweetVimSay', 'TweetVimSearch', 'TweetVimMentions', 'TweetVimCurrentLineSay']
@@ -101,8 +101,13 @@ endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_path = "~/Dropbox/memo"
-  let g:memolist_ex_cmd = 'CtrlP'
-  nnoremap <Leader>ml :MemoList<CR>
+
+  if (v:version >= 800 || has('nvim')) && has('python3')
+    nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+  else
+    let g:memolist_ex_cmd = 'CtrlP'
+    nnoremap <Leader>ml :MemoList<CR>
+  endif
   nnoremap <Leader>mn :MemoNew<CR>
   nnoremap <Leader>mg :MemoGrep<CR>
 endif " }}}
