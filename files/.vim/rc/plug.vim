@@ -12,7 +12,9 @@ call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 " FuzzyFinder
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/denite.nvim'
+if (v:version >= 800 || has('nvim')) && has('python3')
+  Plug 'Shougo/denite.nvim'
+endif
 " Snippets
 Plug 'Shougo/context_filetype.vim', {'on': []}
 Plug 'Shougo/neosnippet-snippets',  {'on': []}
@@ -88,11 +90,10 @@ if s:plug.is_installed('denite.nvim') " {{{
 endif " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
-  if executable('files')
-    let g:ctrlp_user_command = 'files -a %s'
-  else
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  endif
+  let s:ctrlpUserCommand = executable('files') ?
+        \ 'files -a %s' : \
+        \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_user_command = 'files -a %s'
   let g:ctrlp_use_caching = 0 " no cache
   let g:ctrlp_key_loop = 1    " Support multi-byte character
   let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:1000,results:1000'
@@ -102,10 +103,10 @@ endif " }}}
 if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_path = "~/Dropbox/memo"
 
-  if (v:version >= 800 || has('nvim')) && has('python3')
+  if s:plug.is_installed('denite.nvim')
     nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
   else
-    let g:memolist_ex_cmd = 'CtrlP'
+    if s:plug.is_installed('ctrlp.vim') | let g:memolist_ex_cmd = 'CtrlP' | endif
     nnoremap <Leader>ml :MemoList<CR>
   endif
   nnoremap <Leader>mn :MemoNew<CR>
@@ -187,14 +188,14 @@ if s:plug.is_installed('TweetVim') " {{{
 endif " }}}
 
 " Load InsertMode Plugin {{{
-augroup load_insert
+augroup load_insert_snippet_plugins
   autocmd!
   autocmd InsertEnter * call plug#load(
 \   'context_filetype.vim',
 \   'neosnippet.vim',
 \   'neosnippet-snippets',
 \ )
-\ | autocmd! load_insert
+\ | autocmd! load_insert_snippet_plugins
 augroup END " }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker
