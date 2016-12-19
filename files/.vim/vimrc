@@ -131,6 +131,8 @@ nnoremap <silent> <S-Down>  :5wincmd +<CR>
 " Even text wrapping movement by j or k, is modified to act naturally.
 nnoremap j gj
 nnoremap k gk
+" MRU
+nnoremap <Leader>e  :<C-u>/ oldfiles<Home>browse filter /
 " }}}
 
 " Commands {{{
