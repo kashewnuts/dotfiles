@@ -24,6 +24,10 @@
 	st = status
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
+[merge]
+	ff = false
+[pull]
+	ff = only
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
