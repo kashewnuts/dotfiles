@@ -16,45 +16,44 @@ if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim'
 endif
 " Snippets
-Plug 'Shougo/context_filetype.vim',      {'on': []}
-Plug 'Shougo/neosnippet-snippets',       {'on': []}
-Plug 'Shougo/neosnippet.vim',            {'on': []}
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'Shougo/context_filetype.vim',     {'on': []}
+Plug 'Shougo/neosnippet-snippets',      {'on': []}
+Plug 'Shougo/neosnippet.vim',           {'on': []}
 " thinca Plugins
-Plug 'thinca/vim-fontzoom'  " Requirement 'set guifont'
-Plug 'thinca/vim-ft-rst_header',         {'for': 'rst'}
+Plug 'thinca/vim-fontzoom',             {'on': ['<Plug>(fontzoom-larger)', '<Plug>(fontzoom-smaller)']}
+Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 " Web
-Plug 'othree/html5.vim',                 {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
-Plug 'mattn/emmet-vim',                  {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
+Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
+Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
 " Git
-Plug 'lambdalisue/vim-gista',            {'on': 'Gista'}
-Plug 'cohama/agit.vim',                  {'on': 'Agit'}
+Plug 'lambdalisue/vim-gista',           {'on': 'Gista'}
+Plug 'cohama/agit.vim',                 {'on': 'Agit'}
 " Edit
-Plug 'bronson/vim-trailing-whitespace',  {'on':  'FixWhitespace'}
-Plug 'fatih/vim-go',                     {'for': 'go'}
-Plug 'glidenote/memolist.vim',           {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-Plug 'tyru/caw.vim'     " Only type 'gcc' when visual or normal mode
+Plug 'bronson/vim-trailing-whitespace', {'on':  'FixWhitespace'}
+Plug 'fatih/vim-go',                    {'for': 'go'}
+Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
+Plug 'tyru/caw.vim'
 " Formater
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
 let b:AligCommands = ['Align', 'SQLUFormatter']
-Plug 'vim-scripts/Align',                {'on': b:AligCommands}
-Plug 'vim-scripts/SQLUtilities',         {'on': b:AligCommands}
+Plug 'vim-scripts/Align',               {'on': b:AligCommands}
+Plug 'vim-scripts/SQLUtilities',        {'on': b:AligCommands}
 unlet b:AligCommands
 " Reference & View
-Plug 'kannokanno/previm',                {'on': 'PrevimOpen'}
+Plug 'kannokanno/previm',               {'on': 'PrevimOpen'}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 let b:TweetVimCommands = ['TweetVimSay', 'TweetVimSearch', 'TweetVimMentions', 'TweetVimCurrentLineSay']
-Plug 'basyura/TweetVim',                 {'on': b:TweetVimCommands}
-Plug 'basyura/twibill.vim',              {'on': b:TweetVimCommands}
-Plug 'basyura/bitly.vim',                {'on': b:TweetVimCommands}
-Plug 'tyru/open-browser.vim',            {'on': b:TweetVimCommands}
-Plug 'mattn/webapi-vim',                 {'on': b:TweetVimCommands}
-Plug 'mattn/favstar-vim',                {'on': b:TweetVimCommands}
-Plug 'Shougo/unite.vim',                 {'on': b:TweetVimCommands}
-Plug 'Shougo/unite-outline',             {'on': b:TweetVimCommands}
-Plug 'Shougo/vimproc.vim',               {'on': b:TweetVimCommands}
-" Plug 'Shougo/vimproc.vim',               {'on': b:TweetVimCommands,
+Plug 'basyura/TweetVim',                {'on': b:TweetVimCommands}
+Plug 'basyura/twibill.vim',             {'on': b:TweetVimCommands}
+Plug 'basyura/bitly.vim',               {'on': b:TweetVimCommands}
+Plug 'tyru/open-browser.vim',           {'on': b:TweetVimCommands}
+Plug 'mattn/webapi-vim',                {'on': b:TweetVimCommands}
+Plug 'mattn/favstar-vim',               {'on': b:TweetVimCommands}
+Plug 'Shougo/unite.vim',                {'on': b:TweetVimCommands}
+Plug 'Shougo/unite-outline',            {'on': b:TweetVimCommands}
+Plug 'Shougo/vimproc.vim',              {'on': b:TweetVimCommands}
+" Plug 'Shougo/vimproc.vim',              {'on': b:TweetVimCommands,
 "   \ 'build': {
 "   \   'windows' : 'tools\\update-dll-mingw',
 "   \   'cygwin'  : 'make -f make_cygwin.mak',
@@ -196,8 +195,7 @@ if s:plug.is_installed('TweetVim') " {{{
   let g:tweetvim_async_post = 1
 endif " }}}
 
-" Load InsertMode Plugin {{{
-augroup load_insert_snippet_plugins
+augroup load_insert_snippet_plugins " {{{
   autocmd!
   autocmd InsertEnter * call plug#load(
 \   'context_filetype.vim',
