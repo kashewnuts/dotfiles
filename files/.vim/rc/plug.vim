@@ -16,44 +16,45 @@ if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim'
 endif
 " Snippets
-Plug 'Shougo/context_filetype.vim', {'on': []}
-Plug 'Shougo/neosnippet-snippets',  {'on': []}
-Plug 'Shougo/neosnippet.vim',       {'on': []}
+Plug 'Shougo/context_filetype.vim',      {'on': []}
+Plug 'Shougo/neosnippet-snippets',       {'on': []}
+Plug 'Shougo/neosnippet.vim',            {'on': []}
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " thinca Plugins
 Plug 'thinca/vim-fontzoom'  " Requirement 'set guifont'
-Plug 'thinca/vim-ft-rst_header', {'for': 'rst'}
+Plug 'thinca/vim-ft-rst_header',         {'for': 'rst'}
 " Web
-Plug 'othree/html5.vim', {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
-Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
+Plug 'othree/html5.vim',                 {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
+Plug 'mattn/emmet-vim',                  {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
 " Git
-Plug 'lambdalisue/vim-gista', {'on': 'Gista'}
-Plug 'cohama/agit.vim', {'on': 'Agit'}
+Plug 'lambdalisue/vim-gista',            {'on': 'Gista'}
+Plug 'cohama/agit.vim',                  {'on': 'Agit'}
 " Edit
-Plug 'bronson/vim-trailing-whitespace', {'on':  'FixWhitespace'}
-Plug 'fatih/vim-go', {'for': 'go'}
-Plug 'glidenote/memolist.vim', {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
+Plug 'bronson/vim-trailing-whitespace',  {'on':  'FixWhitespace'}
+Plug 'fatih/vim-go',                     {'for': 'go'}
+Plug 'glidenote/memolist.vim',           {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
 Plug 'tyru/caw.vim'     " Only type 'gcc' when visual or normal mode
 " Formater
+Plug 'junegunn/vim-easy-align'
 let b:AligCommands = ['Align', 'SQLUFormatter']
-Plug 'vim-scripts/Align',        {'on': b:AligCommands}
-Plug 'vim-scripts/SQLUtilities', {'on': b:AligCommands}
+Plug 'vim-scripts/Align',                {'on': b:AligCommands}
+Plug 'vim-scripts/SQLUtilities',         {'on': b:AligCommands}
 unlet b:AligCommands
 " Reference & View
-Plug 'kannokanno/previm', {'on': 'PrevimOpen'}
+Plug 'kannokanno/previm',                {'on': 'PrevimOpen'}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 let b:TweetVimCommands = ['TweetVimSay', 'TweetVimSearch', 'TweetVimMentions', 'TweetVimCurrentLineSay']
-Plug 'basyura/TweetVim',        {'on': b:TweetVimCommands}
-Plug 'basyura/twibill.vim',     {'on': b:TweetVimCommands}
-Plug 'basyura/bitly.vim',       {'on': b:TweetVimCommands}
-Plug 'tyru/open-browser.vim',   {'on': b:TweetVimCommands}
-Plug 'mattn/webapi-vim',        {'on': b:TweetVimCommands}
-Plug 'mattn/favstar-vim',       {'on': b:TweetVimCommands}
-Plug 'Shougo/unite.vim',        {'on': b:TweetVimCommands}
-Plug 'Shougo/unite-outline',    {'on': b:TweetVimCommands}
-Plug 'Shougo/vimproc.vim',      {'on': b:TweetVimCommands}
-" Plug 'Shougo/vimproc.vim',      {'on': b:TweetVimCommands,
+Plug 'basyura/TweetVim',                 {'on': b:TweetVimCommands}
+Plug 'basyura/twibill.vim',              {'on': b:TweetVimCommands}
+Plug 'basyura/bitly.vim',                {'on': b:TweetVimCommands}
+Plug 'tyru/open-browser.vim',            {'on': b:TweetVimCommands}
+Plug 'mattn/webapi-vim',                 {'on': b:TweetVimCommands}
+Plug 'mattn/favstar-vim',                {'on': b:TweetVimCommands}
+Plug 'Shougo/unite.vim',                 {'on': b:TweetVimCommands}
+Plug 'Shougo/unite-outline',             {'on': b:TweetVimCommands}
+Plug 'Shougo/vimproc.vim',               {'on': b:TweetVimCommands}
+" Plug 'Shougo/vimproc.vim',               {'on': b:TweetVimCommands,
 "   \ 'build': {
 "   \   'windows' : 'tools\\update-dll-mingw',
 "   \   'cygwin'  : 'make -f make_cygwin.mak',
@@ -77,6 +78,7 @@ if s:plug.is_installed('denite.nvim') " {{{
   nnoremap <silent> <Leader>fm  :<C-u>Denite file_mru<CR>
   nnoremap <silent> <Leader>fr  :<C-u>Denite file_rec<CR>
   nnoremap <silent> <Leader>fl  :<C-u>Denite line<CR>
+  nnoremap <silent> <Leader>fb  :<C-u>Denite buffer<CR>
   " Change file_rec command.
   if executable('files')
     call denite#custom#var('file_rec', 'command', ['files'])
@@ -170,6 +172,13 @@ endif " }}}
 
 if s:plug.is_installed('SQLUtilities') " {{{
   let g:sqlutil_align_comma = 1
+endif " }}}
+
+if s:plug.is_installed('vim-easy-align') " {{{
+  " Start interactive EasyAlign in visual mode (e.g. vipga)
+  xmap ga <Plug>(EasyAlign)
+  " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+  nmap ga <Plug>(EasyAlign)
 endif " }}}
 
 if s:plug.is_installed('vim-trailing-whitespace') " {{{
