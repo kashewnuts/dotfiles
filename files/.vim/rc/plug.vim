@@ -13,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 " FuzzyFinder
 Plug 'ctrlpvim/ctrlp.vim'
 if (v:version >= 800 || has('nvim')) && has('python3')
-  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
 endif
 " Snippets
 Plug 'Shougo/context_filetype.vim',     {'on': []}
@@ -68,7 +68,7 @@ unlet b:TweetVimCommands
 call plug#end() " }}}
 
 " Plugins Config {{{
-let s:plug = { "plugs": get(g:, 'plugs', {}) }
+let s:plug = { 'plugs': get(g:, 'plugs', {}) }
 function! s:plug.is_installed(name)
   return has_key(self.plugs, a:name) ? isdirectory(self.plugs[a:name].dir) : 0
 endfunction " }}}
@@ -119,7 +119,7 @@ if s:plug.is_installed('caw.vim') " {{{
 endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
-  let g:memolist_path = "~/Dropbox/memo"
+  let g:memolist_path = '~/Dropbox/memo'
 
   if s:plug.is_installed('denite.nvim')
     nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
@@ -164,7 +164,7 @@ if s:plug.is_installed('neosnippet.vim') " {{{
 endif " }}}
 
 if s:plug.is_installed('vim-ft-rst_header') " {{{
-  let g:rst_header_chars = "#*=-^~""
+  let g:rst_header_chars = '#*=-^~"'
   autocmd MyAutoCmd FileType text setl ft=rst
 endif " }}}
 
