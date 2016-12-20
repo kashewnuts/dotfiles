@@ -32,7 +32,7 @@ Plug 'cohama/agit.vim',                 {'on': 'Agit'}
 Plug 'bronson/vim-trailing-whitespace', {'on':  'FixWhitespace'}
 Plug 'fatih/vim-go',                    {'for': 'go'}
 Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-Plug 'tyru/caw.vim'
+Plug 'tyru/caw.vim',                    {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
 " Formater
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
 let b:AligCommands = ['Align', 'SQLUFormatter']
@@ -99,6 +99,23 @@ if s:plug.is_installed('ctrlp.vim') " {{{
   let g:ctrlp_key_loop = 1    " Support multi-byte character
   let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:1000,results:1000'
   let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+endif " }}}
+
+if s:plug.is_installed('caw.vim') " {{{
+  function! InitCaw() abort
+    if !&l:modifiable
+      silent! nunmap <buffer> gc
+      silent! xunmap <buffer> gc
+      silent! nunmap <buffer> gcc
+      silent! xunmap <buffer> gcc
+    else
+      nmap <buffer> gc <Plug>(caw:prefix)
+      xmap <buffer> gc <Plug>(caw:prefix)
+      nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+      xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+    endif
+  endfunction
+  autocmd MyAutoCmd FileType * call InitCaw()
 endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
