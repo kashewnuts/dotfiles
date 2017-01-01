@@ -40,7 +40,7 @@ Plug 'vim-scripts/Align',               {'on': b:AligCommands}
 Plug 'vim-scripts/SQLUtilities',        {'on': b:AligCommands}
 unlet b:AligCommands
 " Reference & View
-Plug 'kannokanno/previm',               {'on': 'PrevimOpen'}
+Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 let b:TweetVimCommands = ['TweetVimSay', 'TweetVimSearch', 'TweetVimMentions', 'TweetVimCurrentLineSay']
@@ -82,9 +82,6 @@ if s:plug.is_installed('denite.nvim') " {{{
   if executable('files')
     call denite#custom#var('file_rec', 'command', ['files'])
   endif
-  " Change mappings.
-  call denite#custom#map('insert', "\<C-j>", 'move_to_next_line')
-  call denite#custom#map('insert', "\<C-k>", 'move_to_prev_line')
   " Define alias
   call denite#custom#alias('source', 'file_rec/git', 'file_rec')
   call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
@@ -97,7 +94,8 @@ if s:plug.is_installed('ctrlp.vim') " {{{
   let g:ctrlp_user_command = 'files -a %s'
   let g:ctrlp_use_caching = 0 " no cache
   let g:ctrlp_key_loop = 1    " Support multi-byte character
-  let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:1000,results:1000'
+  " let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:1000,results:1000'
+  let g:ctrlp_match_window = 'bottom,order:ttb,min:1'
   let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 endif " }}}
 
