@@ -57,7 +57,7 @@ if has('clipboard') | set clipboard=unnamed | endif " Use the OS clipboard
 set complete& complete+=k       " Specifies how keyword completion
 set completeopt=menuone         " Force the user to select one & No preview
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
-set tags=./tags;,tags;          " Refer to projects root tags file
+set tags=./tags;                " Refer to projects root tags file
 
 " Format
 if has('vim_starting') | set runtimepath+=$VIM/plugins/autofmt | endif
@@ -133,6 +133,8 @@ nnoremap j gj
 nnoremap k gk
 " MRU
 nnoremap <Leader>e  :<C-u>/ oldfiles<Home>browse filter /
+" Like CTRL-], but use ":tjump" instead of ":tag".
+nnoremap <C-]> g<C-]>zz
 " }}}
 
 " Commands {{{
