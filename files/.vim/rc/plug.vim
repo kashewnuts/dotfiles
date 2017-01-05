@@ -16,7 +16,6 @@ if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
 endif
 " Snippets
-Plug 'Shougo/context_filetype.vim',     {'on': []}
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
 Plug 'Shougo/neosnippet.vim',           {'on': []}
 " thinca Plugins
@@ -27,33 +26,18 @@ Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'j
 Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
 " Git
 Plug 'lambdalisue/vim-gista',           {'on': 'Gista'}
-Plug 'cohama/agit.vim',                 {'on': 'Agit'}
 " Edit
 Plug 'bronson/vim-trailing-whitespace', {'on':  'FixWhitespace'}
 Plug 'fatih/vim-go',                    {'for': 'go'}
 Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-Plug 'tyru/caw.vim',                    {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
 " Formater
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
-let b:AligCommands = ['Align', 'SQLUFormatter']
-Plug 'vim-scripts/Align',               {'on': b:AligCommands}
-Plug 'vim-scripts/SQLUtilities',        {'on': b:AligCommands}
-unlet b:AligCommands
+Plug 'vim-scripts/SQLUtilities' | Plug 'vim-scripts/Align', {'on': 'SQLUFormatter'}
 " Reference & View
 Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
-let b:TweetVimCommands = ['TweetVimSay', 'TweetVimSearch', 'TweetVimMentions', 'TweetVimCurrentLineSay']
-Plug 'basyura/TweetVim',                {'on': b:TweetVimCommands}
-Plug 'basyura/twibill.vim',             {'on': b:TweetVimCommands}
-Plug 'basyura/bitly.vim',               {'on': b:TweetVimCommands}
-Plug 'tyru/open-browser.vim',           {'on': b:TweetVimCommands}
-Plug 'mattn/webapi-vim',                {'on': b:TweetVimCommands}
-Plug 'mattn/favstar-vim',               {'on': b:TweetVimCommands}
-Plug 'Shougo/unite.vim',                {'on': b:TweetVimCommands}
-Plug 'Shougo/unite-outline',            {'on': b:TweetVimCommands}
-Plug 'Shougo/vimproc.vim',              {'on': b:TweetVimCommands}
-unlet b:TweetVimCommands
+Plug 'twitvim/twitvim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end() " }}}
@@ -89,23 +73,6 @@ if s:plug.is_installed('ctrlp.vim') " {{{
   let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 endif " }}}
 
-if s:plug.is_installed('caw.vim') " {{{
-  function! InitCaw() abort
-    if !&l:modifiable
-      silent! nunmap <buffer> gc
-      silent! xunmap <buffer> gc
-      silent! nunmap <buffer> gcc
-      silent! xunmap <buffer> gcc
-    else
-      nmap <buffer> gc <Plug>(caw:prefix)
-      xmap <buffer> gc <Plug>(caw:prefix)
-      nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
-      xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
-    endif
-  endfunction
-  autocmd MyAutoCmd FileType * call InitCaw()
-endif " }}}
-
 if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_path = '~/Dropbox/memo'
   let g:memolist_memo_suffix = 'txt'
@@ -118,13 +85,6 @@ if s:plug.is_installed('memolist.vim') " {{{
   endif
   nnoremap <Leader>mn :MemoNew<CR>
   nnoremap <Leader>mg :MemoGrep<CR>
-endif " }}}
-
-if s:plug.is_installed('unite.vim') " {{{
-  let g:unite_enable_auto_select = 0
-  let g:unite_enable_start_insert = 1
-  let g:unite_enable_ignore_case = 1
-  let g:unite_enable_smart_case = 1
 endif " }}}
 
 if s:plug.is_installed('vim-fontzoom') " {{{
@@ -196,15 +156,30 @@ if s:plug.is_installed('previm') " {{{
   command! PrevimRefresh :call previm#refresh()
 endif " }}}
 
-if s:plug.is_installed('TweetVim') " {{{
-  let g:tweetvim_display_time = 1
-  let g:tweetvim_async_post = 1
+if s:plug.is_installed('twitvim') " {{{
+  " basic
+  let twitvim_browser_cmd = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+  let twitvim_force_ssl = 1
+  let twitvim_count = 40
+  let twitvim_enable_python3 = 1
+  let twitvim_allow_multiline = 1
+  " Filter
+  let twitvim_filter_enable = 1
+  let twitvim_filter_regex = '!\v^【(自動|定期).*|(.*https?://ask\.fm.*)|#(countkun|1topi|bookmeter)|(.*(#|#)[^\s]+){5,}|#RTした人全員|.*分以内に.*RTされたら|^!(RT)|^[^RT].*RT|RT\s.*RT\s'
+
+  " Mapping
+  nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
+  nnoremap <Leader>tm :<C-u>MentionsTwitter<CR>
+  nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
+  nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
+  nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
+  nnoremap <Leader>tn :<C-u>NextTwitter<CR>
+  nnoremap <Leader>tl :<C-u>ListTwitter<CR>
 endif " }}}
 
 augroup load_insert_snippet_plugins " {{{
   autocmd!
   autocmd InsertEnter * call plug#load(
-\   'context_filetype.vim',
 \   'neosnippet.vim',
 \   'neosnippet-snippets',
 \ )
