@@ -53,15 +53,6 @@ Plug 'mattn/favstar-vim',               {'on': b:TweetVimCommands}
 Plug 'Shougo/unite.vim',                {'on': b:TweetVimCommands}
 Plug 'Shougo/unite-outline',            {'on': b:TweetVimCommands}
 Plug 'Shougo/vimproc.vim',              {'on': b:TweetVimCommands}
-" Plug 'Shougo/vimproc.vim',              {'on': b:TweetVimCommands,
-"   \ 'build': {
-"   \   'windows' : 'tools\\update-dll-mingw',
-"   \   'cygwin'  : 'make -f make_cygwin.mak',
-"   \   'mac'     : 'make -f make_mac.mak',
-"   \   'linux'   : 'make',
-"   \   'unix'    : 'make',
-"   \   },
-"   \ }
 unlet b:TweetVimCommands
 
 " List ends here. Plugins become visible to Vim after this call.
@@ -94,7 +85,6 @@ if s:plug.is_installed('ctrlp.vim') " {{{
   let g:ctrlp_user_command = 'files -a %s'
   let g:ctrlp_use_caching = 0 " no cache
   let g:ctrlp_key_loop = 1    " Support multi-byte character
-  " let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:1000,results:1000'
   let g:ctrlp_match_window = 'bottom,order:ttb,min:1'
   let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 endif " }}}
@@ -118,6 +108,7 @@ endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_path = '~/Dropbox/memo'
+  let g:memolist_memo_suffix = 'txt'
 
   if s:plug.is_installed('denite.nvim')
     nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
