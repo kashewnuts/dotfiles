@@ -17,7 +17,7 @@ augroup filetypedetect
 
 " Ignored extensions
 if exists("*fnameescape")
-au BufNewFile,BufRead ?\+.orig,?\+.bak,?\+.old,?\+.new,?\+.dpkg-dist,?\+.dpkg-old,?\+.dpkg-new,?\+.dpkg-bak,?\+.rpmsave,?\+.rpmnew
+au BufNewFile,BufRead ?\+.orig,?\+.bak,?\+.old,?\+.new,?\+.dpkg-dist,?\+.dpkg-old,?\+.dpkg-new,?\+.dpkg-bak,?\+.rpmsave,?\+.rpmnew,?\+.pacsave,?\+.pacnew
 	\ exe "doau filetypedetect BufRead " . fnameescape(expand("<afile>:r"))
 au BufNewFile,BufRead *~
 	\ let s:name = expand("<afile>") |
@@ -192,8 +192,7 @@ au BufNewFile,BufRead *.diff,*.rej,*.patch	setf diff
 au BufNewFile,BufRead .dir_colors,.dircolors,*/etc/DIR_COLORS	setf dircolors
 
 " Git
-au BufNewFile,BufRead COMMIT_EDITMSG		setf gitcommit
-au BufNewFile,BufRead MERGE_MSG			setf gitcommit
+au BufNewFile,BufRead COMMIT_EDITMSG,MERGE_MSG,TAG_EDITMSG setf gitcommit
 au BufNewFile,BufRead *.git/config,.gitconfig,.gitmodules setf gitconfig
 au BufNewFile,BufRead *.git/modules/*/config	setf gitconfig
 au BufNewFile,BufRead */.config/git/config	setf gitconfig
@@ -510,14 +509,6 @@ au filetypedetect BufNewFile,BufRead,StdinReadPost *
 	\	|| getline(4) =~ '^#' || getline(5) =~ '^#') |
 	\   setf conf |
 	\ endif
-
-
-" If the GUI is already running, may still need to install the Syntax menu.
-" Don't do it when the 'M' flag is included in 'guioptions'.
-if has("menu") && has("gui_running")
-      \ && !exists("did_install_syntax_menu") && &guioptions !~# "M"
-  source <sfile>:p:h/menu.vim
-endif
 
 " Function called for testing all functions defined here.  These are
 " script-local, thus need to be executed here.
