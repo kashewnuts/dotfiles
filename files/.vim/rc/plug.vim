@@ -33,13 +33,16 @@ Plug 'fatih/vim-go',                    {'for': 'go'}
 Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
 " Formater
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
-Plug 'vim-scripts/SQLUtilities' | Plug 'vim-scripts/Align', {'on': 'SQLUFormatter'}
+let b:AlignCommands = ['Align', 'SQLUFormatter']
+Plug 'vim-scripts/Align',               {'on': b:AlignCommands}
+Plug 'vim-scripts/SQLUtilities',        {'on': b:AlignCommands}
+unlet b:AlignCommands
 " Reference & View
 " Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
 Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
-Plug 'twitvim/twitvim'
+Plug 'twitvim/twitvim',                 {'on': ['SearchTwitter', 'ListTwitter', 'PosttoTwitter']}
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end() " }}}
