@@ -190,7 +190,7 @@ if s:plug.is_installed('twitvim') " {{{
   command! ListPython ListTwitter python-su
   command! ListJava ListTwitter Ewigkeit java-ja
   command! ListPyfes ListTwitter takuan_osho pyfes-2010-10
-  command! ListPyhackSummer ListTwitter tananory pyhacksummer2013
+  command! ListPyhackSummer ListTwitter takanory pyhacksummer2013
   command! ListPyhackSnow ListTwitter inoshiro pyhack-snow201301
 endif " }}}
 
