@@ -11,9 +11,10 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 " FuzzyFinder
-Plug 'ctrlpvim/ctrlp.vim'
 if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
+else
+  Plug 'ctrlpvim/ctrlp.vim'
 endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
@@ -34,7 +35,8 @@ Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
 Plug 'vim-scripts/SQLUtilities' | Plug 'vim-scripts/Align', {'on': 'SQLUFormatter'}
 " Reference & View
-Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
+" Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
+Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 Plug 'twitvim/twitvim'
@@ -76,6 +78,7 @@ endif " }}}
 if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_path = '~/Dropbox/memo'
   let g:memolist_memo_suffix = 'txt'
+  let g:memolist_template_dir_path = '~/.vim/template/memolist'
 
   if s:plug.is_installed('denite.nvim')
     nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
@@ -153,11 +156,12 @@ endif " }}}
 if s:plug.is_installed('previm') " {{{
   let g:previm_disable_vimproc = 1
   let g:previm_show_header = 0
+  " let g:previm_custom_css_path = '~/.vim/template/previm/github-markdown.css'
   command! PrevimRefresh :call previm#refresh()
 endif " }}}
 
 if s:plug.is_installed('twitvim') " {{{
-  " basic
+  " Basic
   let twitvim_browser_cmd = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
   let twitvim_force_ssl = 1
   let twitvim_count = 40
@@ -165,16 +169,26 @@ if s:plug.is_installed('twitvim') " {{{
   let twitvim_allow_multiline = 1
   " Filter
   let twitvim_filter_enable = 1
-  let twitvim_filter_regex = '!\v^【(自動|定期).*|(.*https?://ask\.fm.*)|#(countkun|1topi|bookmeter)|(.*(#|#)[^\s]+){5,}|#RTした人全員|.*分以内に.*RTされたら|^!(RT)|^[^RT].*RT|RT\s.*RT\s'
+  let twitvim_filter_regex = '!\v^【(自動|定期).*|(.*https?://ask\.fm.*)|#(countkun|1topi|bookmeter)|(.*(#|#)[^\s]+){5,}|#RTした人全員|.*分以内に.*RTされたら|^!(RT)|^[^RT].*RT|RT\s.*RT\s|^!(BOT)|^[^BOT].*BOT|BOT\s.*BOT\s'
 
   " Mapping
   nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
+  nnoremap <Leader>tc :<C-u>CPosttoTwitter<CR>
+  nnoremap <Leader>tb :<C-u>BPosttoTwitter<CR>
   nnoremap <Leader>tm :<C-u>MentionsTwitter<CR>
   nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
   nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
   nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
   nnoremap <Leader>tn :<C-u>NextTwitter<CR>
-  nnoremap <Leader>tl :<C-u>ListTwitter<CR>
+
+  " ListTwitter
+  command! ListCliming ListTwitter climbing
+  command! ListVim ListTwitter vim
+  command! ListPython ListTwitter python-su
+  command! ListJava ListTwitter Ewigkeit java-ja
+  command! ListPyfes ListTwitter takuan_osho pyfes-2010-10
+  command! ListPyhackSummer ListTwitter tananory pyhacksummer2013
+  command! ListPyhackSnow ListTwitter inoshiro pyhack-snow201301
 endif " }}}
 
 augroup load_insert_snippet_plugins " {{{
