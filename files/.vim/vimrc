@@ -183,12 +183,13 @@ endif " }}}
 let s:plugins_path = '~/.vim/rc/plug.vim'
 if filereadable(expand(s:plugins_path))
   execute 'source' . s:plugins_path
+else
+  " Essential
+  filetype plugin indent on       " Load plugins according to detected filetype.
+  syntax on                       " Enable syntax highlight
 endif " }}}
 
 " Others {{{
-" Essential
-filetype plugin indent on       " Load plugins according to detected filetype.
-syntax on                       " Enable syntax highlight
 if !has('gui_running')
   try
     execute 'colorscheme ' . (s:is_cmd ? 'industry' : 'molokai')
@@ -201,7 +202,6 @@ endif
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
-set secure                      " Safely use Vim
 " }}}
 
 " vim: tw=78 et sw=2 foldmethod=marker
