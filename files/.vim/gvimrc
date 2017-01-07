@@ -6,6 +6,10 @@
 " NOTE:     To use this, copy to your home directory.
 " ==========================================================================
 
+" Font {{{
+let &guifont=(has('win32') ? 'MS_Gothic:h10' : 'Ricty_Diminished:h12')
+" }}}
+
 " Colorscheme {{{
 try
   colorscheme molokai
