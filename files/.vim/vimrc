@@ -100,7 +100,6 @@ set statusline+=%=              " Separated left & right item
 set statusline+=[%{&ff}]                        " View FileFormat
 set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
 set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
-" set statusline+=[%l-%c/%L]                      " Cursor-Now Column/Total Number
 set statusline+=(%v,%l)/%L%6P                   " Cursor-Now Column/Total Number
 
 " Terminal
@@ -179,7 +178,6 @@ if v:version >= 704 " {{{
 endif " }}}
 
 " Plugin Config {{{
-" let s:plugins_path = '~/.vim/rc/dein.vim'
 let s:plugins_path = '~/.vim/rc/plug.vim'
 if filereadable(expand(s:plugins_path))
   execute 'source' . s:plugins_path

@@ -11,10 +11,9 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 " FuzzyFinder
+Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlP'}
 if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
-else
-  Plug 'ctrlpvim/ctrlp.vim'
 endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
@@ -38,11 +37,11 @@ Plug 'vim-scripts/Align',               {'on': b:AlignCommands}
 Plug 'vim-scripts/SQLUtilities',        {'on': b:AlignCommands}
 unlet b:AlignCommands
 " Reference & View
-" Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
 Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
-Plug 'twitvim/twitvim',                 {'on': ['SearchTwitter', 'ListTwitter', 'PosttoTwitter']}
+Plug 'twitvim/twitvim',                 {'on': [
+  \ 'SearchTwitter', 'ListTwitter', 'PosttoTwitter', 'CPosttoTwitter']}
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end() " }}}
