@@ -31,6 +31,8 @@ Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew
 Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag' : 'v2.3.3'}
 " Reference & View
 Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
+" Plug 'kannokanno/previm',               {'on': ['PrevimOpen', 'PrevimRefresh']}
+" Plug 'tyru/open-browser.vim',           {'on': ['PrevimOpen', 'PrevimRefresh']}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 Plug 'twitvim/twitvim',                 {'on': [
@@ -81,13 +83,17 @@ if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_template_dir_path = '~/.vim/template/memolist'
 
   if s:plug.is_installed('denite.nvim')
-    nnoremap <Leader>ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+    function! LoadDeniteForMemoList()
+      call plug#load('denite.nvim')
+      call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])
+    endfunction
+    nnoremap <silent> <Leader>ml :<C-u>call LoadDeniteForMemoList()<CR>
   else
     if s:plug.is_installed('ctrlp.vim') | let g:memolist_ex_cmd = 'CtrlP' | endif
-    nnoremap <Leader>ml :MemoList<CR>
+    nnoremap <silent> <Leader>ml :MemoList<CR>
   endif
-  nnoremap <Leader>mn :MemoNew<CR>
-  nnoremap <Leader>mg :MemoGrep<CR>
+  nnoremap <silent> <Leader>mn :MemoNew<CR>
+  nnoremap <silent> <Leader>mg :MemoGrep<CR>
 endif " }}}
 
 if s:plug.is_installed('neosnippet.vim') " {{{
