@@ -45,6 +45,8 @@ function! s:plug.is_installed(name)
 endfunction " }}}
 
 if s:plug.is_installed('denite.nvim') " {{{
+  " NOTE: In the case of vim-plug, calling from another plug-in will be slower,
+  " so denite.nvim will not lazy-load.
   nnoremap <silent> <Leader>fm  :<C-u>Denite file_mru<CR>
   nnoremap <silent> <Leader>fr  :<C-u>Denite file_rec<CR>
   nnoremap <silent> <Leader>fg  :<C-u>Denite file_rec/git<CR>
@@ -129,6 +131,7 @@ if s:plug.is_installed('vim-easy-align') " {{{
 endif " }}}
 
 if s:plug.is_installed('previm') " {{{
+  " NOTE: In the case of vim-plug, startup will fail, so leave as not lazy-load.
   let g:previm_disable_vimproc = 1
   let g:previm_show_header = 0
   " let g:previm_custom_css_path = '~/.vim/template/previm/github-markdown.css'
