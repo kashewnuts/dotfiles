@@ -11,9 +11,10 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 " FuzzyFinder
-Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlP'}
 if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
+else
+  Plug 'ctrlpvim/ctrlp.vim'
 endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
@@ -190,13 +191,13 @@ if s:plug.is_installed('twitvim') " {{{
   nnoremap <Leader>tn :<C-u>NextTwitter<CR>
 
   " ListTwitter
-  command! ListCliming ListTwitter climbing
-  command! ListVim ListTwitter vim
-  command! ListPython ListTwitter python-su
-  command! ListJava ListTwitter Ewigkeit java-ja
-  command! ListPyfes ListTwitter takuan_osho pyfes-2010-10
-  command! ListPyhackSummer ListTwitter takanory pyhacksummer2013
-  command! ListPyhackSnow ListTwitter inoshiro pyhack-snow201301
+  command! LTCliming ListTwitter climbing
+  command! LTVim ListTwitter vim
+  command! LTPython ListTwitter python-su
+  command! LTJava ListTwitter Ewigkeit java-ja
+  command! LTPyfes ListTwitter takuan_osho pyfes-2010-10
+  command! LTPyhackSummer ListTwitter takanory pyhacksummer2013
+  command! LTPyhackSnow ListTwitter inoshiro pyhack-snow201301
 endif " }}}
 
 augroup load_insert_snippet_plugins " {{{
