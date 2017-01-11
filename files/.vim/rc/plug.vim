@@ -13,8 +13,6 @@ call plug#begin('~/.vim/plugged')
 " FuzzyFinder
 if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
-else
-  Plug 'ctrlpvim/ctrlp.vim'
 endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
@@ -26,8 +24,9 @@ Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
 Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
 " Git
-Plug 'mattn/webapi-vim',                {'on': 'Gist'}
-Plug 'mattn/gist-vim',                  {'on': 'Gist'}
+Plug 'lambdalisue/vim-gista',           {'on': ['Gista', 'CtrlPGista'], 'tag' : 'v2.3.3'}
+Plug 'lambdalisue/vim-gista-ctrlp',     {'on': 'CtrlPGista'}
+Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlPGista'}
 " Edit
 Plug 'bronson/vim-trailing-whitespace', {'on':  'FixWhitespace'}
 Plug 'fatih/vim-go',                    {'for': 'go'}
@@ -131,14 +130,6 @@ if s:plug.is_installed('emmet-vim') " {{{
   \  'xml' : { 'extends' : 'html', },
   \  'haml': { 'extends' : 'html', },
   \ }
-endif " }}}
-
-if s:plug.is_installed('vim-gista') " {{{
-  let g:gista#client#default_username = 'kashewnuts'
-endif " }}}
-
-if s:plug.is_installed('gist-vim') " {{{
-  let g:gist_open_browser_after_post = 1
 endif " }}}
 
 if s:plug.is_installed('Align') " {{{
