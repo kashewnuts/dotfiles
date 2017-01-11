@@ -25,7 +25,8 @@ Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
 Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
 " Git
-Plug 'lambdalisue/vim-gista',           {'on': 'Gista'}
+Plug 'mattn/webapi-vim',                {'on': 'Gist'}
+Plug 'mattn/gist-vim',                  {'on': 'Gist'}
 " Edit
 Plug 'bronson/vim-trailing-whitespace', {'on':  'FixWhitespace'}
 Plug 'fatih/vim-go',                    {'for': 'go'}
@@ -133,6 +134,10 @@ endif " }}}
 
 if s:plug.is_installed('vim-gista') " {{{
   let g:gista#client#default_username = 'kashewnuts'
+endif " }}}
+
+if s:plug.is_installed('gist-vim') " {{{
+  let g:gist_open_browser_after_post = 1
 endif " }}}
 
 if s:plug.is_installed('Align') " {{{
