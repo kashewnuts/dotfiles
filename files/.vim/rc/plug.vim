@@ -11,32 +11,25 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 " FuzzyFinder
+Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlP'}
 if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
 endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
 Plug 'Shougo/neosnippet.vim',           {'on': []}
-" thinca Plugins
-Plug 'thinca/vim-fontzoom',             {'on': ['<Plug>(fontzoom-larger)', '<Plug>(fontzoom-smaller)']}
-Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
-" Web
-Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
-Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
-" Git
-Plug 'lambdalisue/vim-gista',           {'on': ['Gista', 'CtrlPGista'], 'tag' : 'v2.3.3'}
-Plug 'lambdalisue/vim-gista-ctrlp',     {'on': 'CtrlPGista'}
-Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlPGista'}
-" Edit
-Plug 'bronson/vim-trailing-whitespace', {'on':  'FixWhitespace'}
+" FileType
 Plug 'fatih/vim-go',                    {'for': 'go'}
-Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
+Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
+Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
+Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 " Formater
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
-let b:AlignCommands = ['Align', 'SQLUFormatter']
-Plug 'vim-scripts/Align',               {'on': b:AlignCommands}
-Plug 'vim-scripts/SQLUtilities',        {'on': b:AlignCommands}
-unlet b:AlignCommands
+Plug 'vim-scripts/Align',               {'on': 'SQLUFormatter'}
+Plug 'vim-scripts/SQLUtilities',        {'on': 'SQLUFormatter'}
+" Memo
+Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
+Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag' : 'v2.3.3'}
 " Reference & View
 Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
 Plug 'vim-jp/vimdoc-ja'
@@ -93,11 +86,6 @@ if s:plug.is_installed('memolist.vim') " {{{
   nnoremap <Leader>mg :MemoGrep<CR>
 endif " }}}
 
-if s:plug.is_installed('vim-fontzoom') " {{{
-  nmap + <Plug>(fontzoom-larger)
-  nmap _ <Plug>(fontzoom-smaller)
-endif "}}}
-
 if s:plug.is_installed('neosnippet.vim') " {{{
   " Plugin key-mappings.
   imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -146,10 +134,6 @@ if s:plug.is_installed('vim-easy-align') " {{{
   xmap ga <Plug>(EasyAlign)
   " Start interactive EasyAlign for a motion/text object (e.g. gaip)
   nmap ga <Plug>(EasyAlign)
-endif " }}}
-
-if s:plug.is_installed('vim-trailing-whitespace') " {{{
-  let g:extra_whitespace_ignored_filetypes = ['unite']
 endif " }}}
 
 if s:plug.is_installed('previm') " {{{
