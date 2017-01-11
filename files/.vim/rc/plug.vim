@@ -23,15 +23,13 @@ Plug 'fatih/vim-go',                    {'for': 'go'}
 Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 " Formater
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
-Plug 'vim-scripts/Align',               {'on': 'SQLUFormatter'}
 Plug 'vim-scripts/SQLUtilities',        {'on': 'SQLUFormatter'}
+  \ | Plug 'vim-scripts/Align',         {'on': 'SQLUFormatter'}
 " Memo
 Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
 Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag' : 'v2.3.3'}
 " Reference & View
 Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
-" Plug 'kannokanno/previm',               {'on': ['PrevimOpen', 'PrevimRefresh']}
-" Plug 'tyru/open-browser.vim',           {'on': ['PrevimOpen', 'PrevimRefresh']}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 Plug 'twitvim/twitvim',                 {'on': [
