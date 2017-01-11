@@ -47,6 +47,7 @@ endfunction " }}}
 if s:plug.is_installed('denite.nvim') " {{{
   nnoremap <silent> <Leader>fm  :<C-u>Denite file_mru<CR>
   nnoremap <silent> <Leader>fr  :<C-u>Denite file_rec<CR>
+  nnoremap <silent> <Leader>fg  :<C-u>Denite file_rec/git<CR>
   nnoremap <silent> <Leader>fl  :<C-u>Denite line<CR>
   nnoremap <silent> <Leader>fb  :<C-u>Denite buffer<CR>
   " Change file_rec command.
@@ -59,14 +60,13 @@ if s:plug.is_installed('denite.nvim') " {{{
 endif " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
-  nnoremap <c-p> :<c-u>CtrlP<cr>
-  let s:ctrlpUserCommand = executable('files') ?
+  nnoremap <C-p> :<C-u>CtrlP<CR>
+  let s:ctrlpUserCommand    = executable('files') ?
         \ 'files -a %s' :
         \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_user_command = 'files -a %s'
-  let g:ctrlp_use_caching = 0 " no cache
-  let g:ctrlp_key_loop = 1    " Support multi-byte character
-  let g:ctrlp_match_window = 'bottom,order:ttb,min:1'
+  let g:ctrlp_use_caching   = 0  " no cache
+  let g:ctrlp_key_loop      = 1  " Support multi-byte character
+  let g:ctrlp_match_window  = 'bottom,order:ttb,min:1'
   let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 endif " }}}
 
