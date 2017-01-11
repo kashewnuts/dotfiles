@@ -19,9 +19,11 @@ endif
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
 Plug 'Shougo/neosnippet.vim',           {'on': []}
 " FileType
-Plug 'fatih/vim-go',                    {'for': 'go'}
-Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
-Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
+" Plug 'artur-shaik/vim-javacomplete2',   {'for': 'java'}
+" Plug 'davidhalter/jedi-vim',            {'for': 'python'}
+" Plug 'fatih/vim-go',                    {'for': 'go'}
+" Plug 'mattn/emmet-vim',                 {'for': ['html', 'css', 'ruby', 'php', 'haml', 'xml']}
+" Plug 'othree/html5.vim',                {'for': ['html', 'css', 'javascript', 'jinja', 'htmljinja']}
 Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 " Formater
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
@@ -118,6 +120,17 @@ if s:plug.is_installed('emmet-vim') " {{{
   \  'xml' : { 'extends' : 'html', },
   \  'haml': { 'extends' : 'html', },
   \ }
+endif " }}}
+
+if s:plug.is_installed('jedi-vim') " {{{
+  let g:jedi#completions_enabled = 0
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#smart_auto_mappings = 0
+  let g:jedi#show_call_signatures = 0
+endif " }}}
+
+if s:plug.is_installed('vim-javacomplete2') " {{{
+  autocmd MyAutoCmd FileType java setlocal omnifunc=javacomplete#Complete
 endif " }}}
 
 if s:plug.is_installed('Align') " {{{
