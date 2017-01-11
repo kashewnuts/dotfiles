@@ -13,7 +13,8 @@ call plug#begin('~/.vim/plugged')
 " FuzzyFinder
 Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlP'}
 if (v:version >= 800 || has('nvim')) && has('python3')
-  Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
+  Plug 'Shougo/denite.nvim',            {'on': 'Denite'}
+  Plug 'Shougo/neomru.vim',             {'on': 'Denite'}
 endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
@@ -50,13 +51,17 @@ if s:plug.is_installed('denite.nvim') " {{{
   nnoremap <silent> <Leader>fg  :<C-u>Denite file_rec/git<CR>
   nnoremap <silent> <Leader>fl  :<C-u>Denite line<CR>
   nnoremap <silent> <Leader>fb  :<C-u>Denite buffer<CR>
-  " Change file_rec command.
-  if executable('files')
-    call denite#custom#var('file_rec', 'command', ['files'])
-  endif
-  " Define alias
-  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-  call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+
+  autocmd MyAutoCmd User denite.nvim call s:LoadDenite()
+  function! s:LoadDenite()
+    " Change file_rec command.
+    if executable('files')
+      call denite#custom#var('file_rec', 'command', ['files'])
+    endif
+    " Define alias
+    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+    call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
+  endfunction
 endif " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
