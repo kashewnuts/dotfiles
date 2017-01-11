@@ -59,6 +59,7 @@ if s:plug.is_installed('denite.nvim') " {{{
 endif " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
+  nnoremap <c-p> :<c-u>CtrlP<cr>
   let s:ctrlpUserCommand = executable('files') ?
         \ 'files -a %s' :
         \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
