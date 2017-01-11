@@ -13,8 +13,7 @@ call plug#begin('~/.vim/plugged')
 " FuzzyFinder
 Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlP'}
 if (v:version >= 800 || has('nvim')) && has('python3')
-  Plug 'Shougo/denite.nvim',            {'on': 'Denite'}
-  Plug 'Shougo/neomru.vim',             {'on': 'Denite'}
+  Plug 'Shougo/denite.nvim' | Plug 'Shougo/neomru.vim'
 endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
@@ -54,16 +53,13 @@ if s:plug.is_installed('denite.nvim') " {{{
   nnoremap <silent> <Leader>fl  :<C-u>Denite line<CR>
   nnoremap <silent> <Leader>fb  :<C-u>Denite buffer<CR>
 
-  autocmd MyAutoCmd User denite.nvim call s:LoadDenite()
-  function! s:LoadDenite()
-    " Change file_rec command.
-    if executable('files')
-      call denite#custom#var('file_rec', 'command', ['files'])
-    endif
-    " Define alias
-    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-    call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
-  endfunction
+  " Change file_rec command.
+  if executable('files')
+    call denite#custom#var('file_rec', 'command', ['files'])
+  endif
+  " Define alias
+  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+  call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
 endif " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
@@ -83,11 +79,8 @@ if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_template_dir_path = '~/.vim/template/memolist'
 
   if s:plug.is_installed('denite.nvim')
-    function! LoadDeniteForMemoList()
-      call plug#load('denite.nvim')
-      call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])
-    endfunction
-    nnoremap <silent> <Leader>ml :<C-u>call LoadDeniteForMemoList()<CR>
+    nnoremap <silent> <Leader>ml :
+      \ <C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
   else
     if s:plug.is_installed('ctrlp.vim') | let g:memolist_ex_cmd = 'CtrlP' | endif
     nnoremap <silent> <Leader>ml :MemoList<CR>
