@@ -7,7 +7,7 @@ endif " }}}
 
 " Plugins List {{{
 " Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.cache/plugged')
 
 " Declare the list of plugins.
 " FuzzyFinder
@@ -27,7 +27,7 @@ Plug 'vim-scripts/SQLUtilities',        {'on': 'SQLUFormatter'}
   \ | Plug 'vim-scripts/Align',         {'on': 'SQLUFormatter'}
 " Memo
 Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag' : 'v2.3.3'}
+Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag': 'v2.3.3'}
 " Reference & View
 Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
 Plug 'vim-jp/vimdoc-ja'
@@ -140,7 +140,8 @@ endif " }}}
 
 if s:plug.is_installed('twitvim') " {{{
   " Basic
-  let twitvim_browser_cmd = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+  let twitvim_browser_cmd =
+    \ 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
   let twitvim_force_ssl = 1
   let twitvim_count = 40
   let twitvim_enable_python3 = 1
