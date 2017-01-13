@@ -114,10 +114,6 @@ endif
 
 " KeyMaping {{{
 let g:mapleader = "\<Space>"
-" Turn off the highlight by pressing twice the ESC.
-nnoremap <silent> <Esc> <Esc>:nohlsearch<CR>
-" Normal mode: IME off
-inoremap <silent> <Esc> <Esc>:set iminsert=0<CR>
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -165,13 +161,16 @@ if executable('jq') " {{{
 endif " }}}
 " }}}
 
-" Grep settings {{{
+" AutoCommand {{{
 " init augroup (Write the following in order of less than patch 7.4.2103)
 augroup MyAutoCmd
   autocmd!
 augroup END
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
+autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1  " IME off
+" }}}
 
+" Grep settings {{{
 if executable('go') && !executable('jvgrep')
   execute '!go get github.com/mattn/jvgrep'
 endif
