@@ -167,7 +167,7 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
-autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1  " IME off
+autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 " IME off
 " }}}
 
 " Grep settings {{{
@@ -181,7 +181,7 @@ elseif executable('grep')
 endif " }}}
 
 if v:version >= 704 " {{{
-  set noundofile  " Don't make *.un~ files
+  set undofile undodir=$HOME/.cache/tmp
   set nofixeol
   set breakindent
 endif " }}}

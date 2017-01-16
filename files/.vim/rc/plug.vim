@@ -75,7 +75,7 @@ endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
   let g:memolist_path = '~/Dropbox/memo'
-  let g:memolist_memo_suffix = 'txt'
+  let g:memolist_memo_suffix = 'md'
   let g:memolist_template_dir_path = '~/.vim/template/memolist'
 
   if s:plug.is_installed('denite.nvim')
@@ -159,7 +159,7 @@ if s:plug.is_installed('twitvim') " {{{
   nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
   nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
   nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
-  nnoremap <Leader>tn :<C-u>NextTwitter<CR>
+  nnoremap ff :<C-u>NextTwitter<CR>
 
   " ListTwitter
   command! LTCliming ListTwitter climbing

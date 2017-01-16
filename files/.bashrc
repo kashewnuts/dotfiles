@@ -51,6 +51,7 @@ msys*)
     alias vi='TERM=xterm-256color /usr/bin/vim.exe'
     alias vim='/c/Application/vim/vim.exe'
     alias vagrant='/c/HashiCorp/Vagrant/bin/vagrant.exe'
+    alias python='winpty python.exe'
     ;;
 esac
 
