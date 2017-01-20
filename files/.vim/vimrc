@@ -119,8 +119,8 @@ set statusline+=%=              " Separated left & right item
 set statusline+=[%{&ff}]                        " View FileFormat
 set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
 set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
-" set statusline+=[%v,%l]/%L%6P                   " Cursor-Now Column/Total Number
 set statusline+=%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}
+set statusline+=%4v                             "virtual column number
 set statusline+=%5P             " Cursor-Now Column/Total Number
 
 " Terminal
@@ -190,13 +190,13 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 " IME off
 " }}}
 
 " Grep settings {{{
-if executable('go') && !executable('jvgrep')
-  execute '!go get github.com/mattn/jvgrep'
+if executable('go') && !executable('pt')
+  execute '!go get github.com/monochromegane/the_platinum_searcher'
 endif
-if executable('jvgrep')
-  let &grepprg = 'jvgrep -iIR --findasync ' . (s:is_cmd ? '' : '-8')
+if executable('pt')
+  let &grepprg = 'pt /nogroup /nocolor /column /S /i'
 elseif executable('grep')
-  set grepprg=grep\ -nH
+  let &grepprg = 'grep -nH'
 endif " }}}
 
 if v:version >= 704 " {{{

@@ -54,9 +54,12 @@ if s:plug.is_installed('denite.nvim') " {{{
   nnoremap <silent> <Leader>fb  :<C-u>Denite buffer<CR>
 
   " Change file_rec command.
-  if executable('files')
-    call denite#custom#var('file_rec', 'command', ['files'])
+  if executable('pt')
+    call denite#custom#var('file_rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '-g:', ''])
   endif
+  call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+  call denite#custom#var('grep', 'default_opts', [])
+  call denite#custom#var('grep', 'recursive_opts', [])
   " Define alias
   call denite#custom#alias('source', 'file_rec/git', 'file_rec')
   call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
