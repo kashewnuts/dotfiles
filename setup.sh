@@ -8,6 +8,7 @@ DOT_FILES=(
     .git-prompt.sh       \
     .gitconfig           \
     .gitconfig.unix      \
+    .ptconfig.toml       \
     .pythonstartup       \
     .vim                 \
 )

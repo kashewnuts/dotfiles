@@ -120,7 +120,7 @@ set statusline+=[%{&ff}]                        " View FileFormat
 set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
 set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
 set statusline+=%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}
-set statusline+=%4v                             "virtual column number
+set statusline+=%4v             " Virtual column number
 set statusline+=%5P             " Cursor-Now Column/Total Number
 
 " Terminal
@@ -133,6 +133,7 @@ endif
 
 " KeyMaping {{{
 let g:mapleader = "\<Space>"
+" nnoremap <silent> <ESC> <ESC>:nohlsearch<CR>
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -190,13 +191,10 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 " IME off
 " }}}
 
 " Grep settings {{{
-if executable('go') && !executable('pt')
-  execute '!go get github.com/monochromegane/the_platinum_searcher'
-endif
 if executable('pt')
-  let &grepprg = 'pt /nogroup /nocolor /column /S /i'
+  set grepprg=pt    " https://github.com/monochromegane/the_platinum_searcher
 elseif executable('grep')
-  let &grepprg = 'grep -nH'
+  set grepprg=grep\ -nH
 endif " }}}
 
 if v:version >= 704 " {{{

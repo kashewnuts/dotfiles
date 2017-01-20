@@ -1,0 +1,8 @@
+nocolor = true
+nogroup = true
+smart-case = true
+hidden = true
+vcs-ignore = ['.gitignore','.git/info/exclude']
+ignore = ['.git', '.svn', '.hg', '.exe', '.tags']
+
+# vim: ft=config

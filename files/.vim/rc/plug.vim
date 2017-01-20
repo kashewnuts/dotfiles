@@ -55,11 +55,11 @@ if s:plug.is_installed('denite.nvim') " {{{
 
   " Change file_rec command.
   if executable('pt')
-    call denite#custom#var('file_rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '-g:', ''])
+    call denite#custom#var('file_rec', 'command', ['pt', '--follow', '-g:', ''])
+    call denite#custom#var('grep', 'command', ['pt'])
+    call denite#custom#var('grep', 'default_opts', [])
+    call denite#custom#var('grep', 'recursive_opts', [])
   endif
-  call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
-  call denite#custom#var('grep', 'default_opts', [])
-  call denite#custom#var('grep', 'recursive_opts', [])
   " Define alias
   call denite#custom#alias('source', 'file_rec/git', 'file_rec')
   call denite#custom#var('file_rec/git', 'command', ['git', 'ls-files', '-co', '--exclude-standard'])
@@ -67,12 +67,12 @@ endif " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
   nnoremap <C-p> :<C-u>CtrlP<CR>
-  let s:ctrlpUserCommand    = executable('files') ?
-        \ 'files -a %s' :
+  let s:ctrlpUserCommand    = executable('pt') ?
+        \ 'pt --follow -g:' :
         \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
   let g:ctrlp_use_caching   = 0  " no cache
   let g:ctrlp_key_loop      = 1  " Support multi-byte character
-  let g:ctrlp_match_window  = 'bottom,order:ttb,min:1'
+  let g:ctrlp_match_window  = 'bottom,order:btt,min:1'
   let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 endif " }}}
 
