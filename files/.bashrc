@@ -27,9 +27,8 @@ if [ "$OSTYPE" != 'msys' ]; then
     export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
 
     # Golang
-    export GOROOT=/usr/local/go
-    export GOPATH=$HOME/project/go
-    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    export GOPATH=$HOME/.go
+    export PATH=$PATH:$GOPATH/bin
 fi
 
 case "$OSTYPE" in
