@@ -55,7 +55,8 @@ if s:plug.is_installed('denite.nvim') " {{{
 
   " Change file_rec command.
   if executable('pt')
-    call denite#custom#var('file_rec', 'command', ['pt', '--follow', '-g:', ''])
+    call denite#custom#var('file_rec', 'command',
+        \ ['pt', '--follow', '-g' . (has('win32') ? ':' : ''), ''])
     call denite#custom#var('grep', 'command', ['pt'])
     call denite#custom#var('grep', 'default_opts', [])
     call denite#custom#var('grep', 'recursive_opts', [])
@@ -68,7 +69,7 @@ endif " }}}
 if s:plug.is_installed('ctrlp.vim') " {{{
   nnoremap <C-p> :<C-u>CtrlP<CR>
   let s:ctrlpUserCommand    = executable('pt') ?
-        \ 'pt --follow -g:' :
+        \ 'pt --follow -g' :
         \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
   let g:ctrlp_use_caching   = 0  " no cache
   let g:ctrlp_key_loop      = 1  " Support multi-byte character
