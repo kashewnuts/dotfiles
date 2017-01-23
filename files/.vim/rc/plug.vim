@@ -68,13 +68,19 @@ endif " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
   nnoremap <C-p> :<C-u>CtrlP<CR>
-  let s:ctrlpUserCommand    = executable('pt') ?
-        \ 'pt --follow -g' :
-        \ ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let s:ctrlpUserCommand    =
+        \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
+        \   (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
+        \ ]
   let g:ctrlp_use_caching   = 0  " no cache
+  let g:ctrlp_show_hidden   = 1  " Show dotfiles
   let g:ctrlp_key_loop      = 1  " Support multi-byte character
-  let g:ctrlp_match_window  = 'bottom,order:btt,min:1'
-  let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+  let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:100'
+  let g:ctrlp_custom_ignore = {
+      \ 'dir' : '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+      \ }
 endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
