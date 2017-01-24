@@ -16,7 +16,7 @@ Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlP'}
 Plug 'Shougo/neosnippet-snippets',      {'on': []}
 Plug 'Shougo/neosnippet.vim',           {'on': []}
 " FileType
-Plug 'fatih/vim-go',                    {'for': 'go'}
+Plug 'fatih/vim-go',                    {'for': 'go', 'do': ':GoInstallBinaries'}
 Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 " Formater
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
@@ -28,7 +28,6 @@ Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag': 'v2.3.3'}
 " Reference & View
 Plug 'kannokanno/previm',               {'on': 'PrevimOpen'}
   \ | Plug 'tyru/open-browser.vim',     {'on': 'PrevimOpen'}
-
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 Plug 'twitvim/twitvim',                 {'on': [
@@ -46,9 +45,9 @@ endfunction " }}}
 if s:plug.is_installed('ctrlp.vim') " {{{
   nnoremap <C-p> :<C-u>CtrlP<CR>
   let s:ctrlpUserCommand    =
-        \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
-        \   (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
-        \ ]
+      \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
+      \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
+      \ ]
   let g:ctrlp_use_caching   = 0  " no cache
   let g:ctrlp_show_hidden   = 1  " Show dotfiles
   let g:ctrlp_key_loop      = 1  " Support multi-byte character
@@ -116,14 +115,16 @@ if s:plug.is_installed('previm') " {{{
   let g:previm_disable_vimproc = 1
   let g:previm_show_header = 0
   command! PrevimRefresh :call previm#refresh()
-  autocmd MyAutoCmd User previm doautocmd Previm FileType
-  autocmd MyAutoCmd User open-browser.vim doautocmd Previm FileType
+  autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
 endif " }}}
 
 if s:plug.is_installed('twitvim') " {{{
   " Basic
-  let twitvim_browser_cmd =
-    \ 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+  if has('win32')
+    let twitvim_browser_cmd = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+  elseif has('win32unix')
+    let twitvim_browser_cmd = '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+  endif
   let twitvim_force_ssl = 1
   let twitvim_count = 40
   let twitvim_enable_python3 = 1
