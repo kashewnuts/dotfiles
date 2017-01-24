@@ -26,7 +26,9 @@ Plug 'vim-scripts/SQLUtilities',        {'on': 'SQLUFormatter'}
 Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
 Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag': 'v2.3.3'}
 " Reference & View
-Plug 'kannokanno/previm' | Plug 'tyru/open-browser.vim'
+Plug 'kannokanno/previm',               {'on': 'PrevimOpen'}
+  \ | Plug 'tyru/open-browser.vim',     {'on': 'PrevimOpen'}
+
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
 Plug 'twitvim/twitvim',                 {'on': [
@@ -111,11 +113,11 @@ if s:plug.is_installed('vim-easy-align') " {{{
 endif " }}}
 
 if s:plug.is_installed('previm') " {{{
-  " NOTE: In the case of vim-plug, startup will fail, so leave as not lazy-load.
   let g:previm_disable_vimproc = 1
   let g:previm_show_header = 0
-  " let g:previm_custom_css_path = '~/.vim/template/previm/github-markdown.css'
   command! PrevimRefresh :call previm#refresh()
+  autocmd MyAutoCmd User previm doautocmd Previm FileType
+  autocmd MyAutoCmd User open-browser.vim doautocmd Previm FileType
 endif " }}}
 
 if s:plug.is_installed('twitvim') " {{{
