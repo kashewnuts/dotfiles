@@ -109,20 +109,21 @@ set cmdheight=2                 " Command-line height
 set wildmenu wildmode=list:full " Command-line completion
 
 " Statusline
+" %F:                             FileName(Relative Pathname)
+" %m:                             Fix flag([+] or [-])
+" %r:                             Read only flg([RO])
+" %h:                             Help buffer
+" %w:                             Preview window flag
+" %=:                             Separated left & right item
+" [%{&ff}]                        FileFormat
+" [%{&enc}]                       FileEncording
+" [%{strlen(&ft)?&ft:'no\ ft'}]   FileType
+" %{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}
+" %v:                             Virtual column number
+" %P:                             Cursor-Now Column/Total Number
 set laststatus=2                " Always display status bar
-set statusline&                 " Init
-set statusline+=%F              " FileName(Relative Pathname)
-set statusline+=%m              " Fix flag([+] or [-])
-set statusline+=%r              " Read only flg([RO])
-set statusline+=%h              " Help buffer
-set statusline+=%w              " Preview window flag
-set statusline+=%=              " Separated left & right item
-set statusline+=[%{&ff}]                        " View FileFormat
-set statusline+=[%{strlen(&fenc)?&fenc:&enc}]   " FileEncording
-set statusline+=[%{strlen(&ft)?&ft:'no\ ft'}]   " FileType
-set statusline+=%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}
-set statusline+=%4v             " Virtual column number
-set statusline+=%5P             " Cursor-Now Column/Total Number
+let &statusline="%<%F%m%r%h%w%=[%{&ff}][%{&enc}][%{strlen(&ft)?&ft:'no\ ft'}]"
+  \ . "%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}%4v\ %P"
 
 " Terminal
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
@@ -168,7 +169,7 @@ command! Sjis Cp932
 " Remove end of line white space {{{
 command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>, <line2>)
 function! s:FixWhitespace(line1, line2)
-  let l:save_cursor = getpos(".")
+  let l:save_cursor = getpos('.')
   silent! execute ':' . a:line1 . ',' . a:line2 . 's/\\\@<!\s\+$//'
   call setpos('.', l:save_cursor)
 endfunction " }}}
