@@ -4,6 +4,7 @@ let g:markdown_fenced_languages = [
 \  'css',
 \  'conf',
 \  'config',
+\  'help',
 \  'go',
 \  'java',
 \  'javascript',
