@@ -126,19 +126,16 @@ endif " }}}
 
 if s:plug.is_installed('twitvim') " {{{
   " Basic
-  if has('win32')
-    let twitvim_browser_cmd = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-  elseif has('win32unix')
-    let twitvim_browser_cmd = '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
-  endif
+  let twitvim_browser_cmd = (
+  \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
+  \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
+  \ '')
   let twitvim_force_ssl = 1
   let twitvim_count = 40
   let twitvim_enable_python3 = 1
   let twitvim_allow_multiline = 1
   let twitvim_timestamp_format = '%c'
-  " Filter
-  let twitvim_filter_enable = 1
-  let twitvim_filter_regex = '!\v^【(自動|定期).*|(.*https?://ask\.fm.*)|#(countkun|1topi|bookmeter)|(.*(#|#)[^\s]+){5,}|#RTした人全員|.*分以内に.*RTされたら|^!(RT)|^[^RT].*RT|RT\s.*RT\s|^!(BOT)|^[^BOT].*BOT|BOT\s.*BOT\s'
+  let twitvim_show_header = 0
 
   " Mapping
   nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
