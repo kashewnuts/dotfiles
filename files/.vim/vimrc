@@ -7,8 +7,10 @@
 " ==========================================================================
 
 " Basic Settings {{{
+" Init {{{
 if !1 | finish | endif          " Skip if the live Vim is vim-tiny or vim-small
 let s:is_cmd = has('win32') && !has('gui_running')  " For command prompt on Windows
+" }}}
 
 " Encoding {{{
 " Sets the character encoding used inside Vim
@@ -62,8 +64,9 @@ endif " }}}
 set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
 set fillchars=vert:\|,fold:\    " Characters to fill the separators
-set helplang=ja,en              " Comma separated list of languages.
+set formatoptions& formatoptions+=mMj  " Support Japanese to join lines
 set helpheight=999              " Open help to fill the screen
+set helplang=ja,en              " Comma separated list of languages.
 set history=1000                " History
 set list listchars=tab:>-,trail:-  " Visualize character
 set number                      " Show line number (nonumber: Hide)
@@ -78,12 +81,6 @@ set complete& complete+=k       " Specifies how keyword completion
 set completeopt=menuone         " Force the user to select one & No preview
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set tags=./tags;                " Refer to projects root tags file
-
-" Format
-if has('vim_starting') | set runtimepath+=$VIM/plugins/autofmt | endif
-set formatoptions& formatoptions+=mM  " Support Japanese to join lines
-set formatexpr=autofmt#japanese#formatexpr()
-let autofmt_allow_over_tw=1
 
 " Indent
 set autoindent     " Copy indent from current line when starting a new line
@@ -174,8 +171,8 @@ function! s:FixWhitespace(line1, line2)
   call setpos('.', l:save_cursor)
 endfunction " }}}
 
-" Format JSON
-if executable('jq') " {{{
+" Format JSON {{{
+if executable('jq')
   command! -nargs=? Jq call s:Jq(<f-args>)
   function! s:Jq(...)
     execute '%!jq' (a:0 == 0 ? '.' : a:1)

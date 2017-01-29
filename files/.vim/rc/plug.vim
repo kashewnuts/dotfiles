@@ -19,6 +19,7 @@ Plug 'Shougo/neosnippet.vim',           {'on': []}
 Plug 'fatih/vim-go',                    {'for': 'go', 'do': ':GoInstallBinaries'}
 Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
 " Formater
+Plug 'vim-jp/autofmt'
 Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
 Plug 'vim-scripts/SQLUtilities',        {'on': 'SQLUFormatter'}
   \ | Plug 'vim-scripts/Align',         {'on': 'SQLUFormatter'}
@@ -93,6 +94,11 @@ endif " }}}
 if s:plug.is_installed('vim-ft-rst_header') " {{{
   let g:rst_header_chars = '#*=-^~"'
   autocmd MyAutoCmd FileType text setl ft=rst
+endif " }}}
+
+if s:plug.is_installed('autofmt') " {{{
+  set formatexpr=autofmt#japanese#formatexpr()
+  let autofmt_allow_over_tw=1
 endif " }}}
 
 if s:plug.is_installed('Align') " {{{
