@@ -7,8 +7,8 @@
 " ==========================================================================
 
 " Font {{{
-" let &guifont=(has('win32') ? 'MS_Gothic:h10' : 'Ricty_Diminished:h14')
-set guifont=Ricty_Diminished:h11
+let &guifont='Ricty_Diminished' . (has('win32') ? ':h12' : ':h14')
+" set guifont=MS_Gothic:h12
 " }}}
 
 " Colorscheme {{{
