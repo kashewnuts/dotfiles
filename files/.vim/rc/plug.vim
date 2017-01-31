@@ -11,27 +11,33 @@ call plug#begin('~/.cache/plugged')
 
 " Declare the list of plugins.
 " FuzzyFinder
-Plug 'ctrlpvim/ctrlp.vim',              {'on': 'CtrlP'}
+Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
 " Snippets
-Plug 'Shougo/neosnippet-snippets',      {'on': []}
-Plug 'Shougo/neosnippet.vim',           {'on': []}
+Plug 'Shougo/neosnippet-snippets',  {'on': []}
+Plug 'Shougo/neosnippet.vim',       {'on': []}
 " FileType
-Plug 'fatih/vim-go',                    {'for': 'go', 'do': ':GoInstallBinaries'}
-Plug 'thinca/vim-ft-rst_header',        {'for': 'rst'}
+if $GOPATH !=# ''
+  Plug 'fatih/vim-go',              {'for': 'go', 'do': ':GoInstallBinaries'}
+endif
+Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
+if has('python3')
+  Plug 'davidhalter/jedi-vim',      {'for': 'python', 'do': ':pip3 install jedi'}
+  Plug 'tell-k/vim-autopep8',       {'for': 'python', 'do': ':pip3 install autopep8'}
+endif
 " Formater
 Plug 'vim-jp/autofmt'
-Plug 'junegunn/vim-easy-align',         {'on': '<Plug>(EasyAlign)'}
-Plug 'vim-scripts/SQLUtilities',        {'on': 'SQLUFormatter'}
-  \ | Plug 'vim-scripts/Align',         {'on': 'SQLUFormatter'}
+Plug 'junegunn/vim-easy-align',     {'on': '<Plug>(EasyAlign)'}
+Plug 'vim-scripts/SQLUtilities',    {'on': 'SQLUFormatter'}
+  \ | Plug 'vim-scripts/Align',     {'on': 'SQLUFormatter'}
 " Memo
-Plug 'glidenote/memolist.vim',          {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-Plug 'lambdalisue/vim-gista',           {'on': 'Gista', 'tag': 'v2.3.3'}
+Plug 'glidenote/memolist.vim',      {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
+Plug 'lambdalisue/vim-gista',       {'on': 'Gista', 'tag': 'v2.3.3'}
 " Reference & View
-Plug 'kannokanno/previm',               {'on': 'PrevimOpen'}
-  \ | Plug 'tyru/open-browser.vim',     {'on': 'PrevimOpen'}
+Plug 'kannokanno/previm',           {'on': 'PrevimOpen'}
+  \ | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
-Plug 'twitvim/twitvim',                 {'on': [
+Plug 'twitvim/twitvim',             {'on': [
   \ 'SearchTwitter', 'ListTwitter', 'PosttoTwitter', 'CPosttoTwitter']}
 
 " List ends here. Plugins become visible to Vim after this call.
@@ -58,6 +64,19 @@ if s:plug.is_installed('ctrlp.vim') " {{{
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
+endif " }}}
+
+if s:plug.is_installed('jedi-vim') " {{{
+  let g:jedi#auto_initialization = 0
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#popup_on_dot = 0
+  let g:jedi#popup_select_first = 0
+  autocmd MyAutoCmd FileType python setlocal completeopt-=preview
+  autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
+endif " }}}
+
+if s:plug.is_installed('vim-autopep8') " {{{
+  let g:autopep8_max_line_length=120
 endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
