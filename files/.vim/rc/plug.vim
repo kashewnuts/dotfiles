@@ -16,14 +16,9 @@ Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
 Plug 'Shougo/neosnippet-snippets',  {'on': []}
 Plug 'Shougo/neosnippet.vim',       {'on': []}
 " FileType
-if $GOPATH !=# ''
-  Plug 'fatih/vim-go',              {'for': 'go', 'do': ':GoInstallBinaries'}
-endif
+Plug 'fatih/vim-go',                {'for': 'go'}
 Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
-if has('python3')
-  Plug 'davidhalter/jedi-vim',      {'for': 'python', 'do': ':pip3 install jedi'}
-  Plug 'tell-k/vim-autopep8',       {'for': 'python', 'do': ':pip3 install autopep8'}
-endif
+Plug 'tell-k/vim-autopep8',         {'for': 'python'}
 " Formater
 Plug 'vim-jp/autofmt'
 Plug 'junegunn/vim-easy-align',     {'on': '<Plug>(EasyAlign)'}
@@ -64,15 +59,6 @@ if s:plug.is_installed('ctrlp.vim') " {{{
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
-endif " }}}
-
-if s:plug.is_installed('jedi-vim') " {{{
-  let g:jedi#auto_initialization = 0
-  let g:jedi#auto_vim_configuration = 0
-  let g:jedi#popup_on_dot = 0
-  let g:jedi#popup_select_first = 0
-  autocmd MyAutoCmd FileType python setlocal completeopt-=preview
-  autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 endif " }}}
 
 if s:plug.is_installed('vim-autopep8') " {{{
