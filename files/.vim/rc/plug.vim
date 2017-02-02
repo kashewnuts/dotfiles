@@ -18,6 +18,7 @@ Plug 'Shougo/neosnippet.vim',       {'on': []}
 " FileType
 Plug 'fatih/vim-go',                {'for': 'go'}
 Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
+Plug 'davidhalter/jedi-vim',        {'for': 'python'}
 Plug 'tell-k/vim-autopep8',         {'for': 'python'}
 " Formater
 Plug 'vim-jp/autofmt'
@@ -59,6 +60,15 @@ if s:plug.is_installed('ctrlp.vim') " {{{
       \ 'file': '\v\.(exe|so|dll)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
+endif " }}}
+
+if s:plug.is_installed('jedi-vim') " {{{
+  let g:jedi#auto_initialization = 0
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#popup_on_dot = 0
+  let g:jedi#popup_select_first = 0
+  let g:jedi#show_call_signatures = 0
+  autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 endif " }}}
 
 if s:plug.is_installed('vim-autopep8') " {{{
