@@ -63,16 +63,17 @@ if s:plug.is_installed('ctrlp.vim') " {{{
 endif " }}}
 
 if s:plug.is_installed('jedi-vim') " {{{
-  let g:jedi#auto_initialization = 0
-  let g:jedi#auto_vim_configuration = 0
-  let g:jedi#popup_on_dot = 0
-  let g:jedi#popup_select_first = 0
-  let g:jedi#show_call_signatures = 0
+  let g:jedi#auto_initialization    = 0 " Disable the default initialization routine
+  let g:jedi#auto_vim_configuration = 0 " Don't change 'completeopt'
+  let g:jedi#popup_on_dot           = 0 " Manually press the completion key
+  let g:jedi#popup_select_first     = 0 " Don't select first completion entry
+  let g:jedi#show_call_signatures   = 0 " Avoid popups bugs
   autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 endif " }}}
 
 if s:plug.is_installed('vim-autopep8') " {{{
   let g:autopep8_max_line_length=120
+  let g:autopep8_disable_show_diff=1
 endif " }}}
 
 if s:plug.is_installed('memolist.vim') " {{{
