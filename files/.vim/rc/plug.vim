@@ -16,6 +16,7 @@ Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
 Plug 'Shougo/neosnippet-snippets',  {'on': []}
 Plug 'Shougo/neosnippet.vim',       {'on': []}
 " FileType
+Plug 'othree/html5.vim',            {'for': ['html', 'htmldjango', 'htmljinja']}
 Plug 'fatih/vim-go',                {'for': 'go'}
 Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
 Plug 'davidhalter/jedi-vim',        {'for': 'python'}
@@ -23,6 +24,8 @@ Plug 'tell-k/vim-autopep8',         {'for': 'python'}
 " Formater
 Plug 'vim-jp/autofmt'
 Plug 'junegunn/vim-easy-align',     {'on': '<Plug>(EasyAlign)'}
+Plug 'tyru/caw.vim',                {'on':
+  \ ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
 Plug 'vim-scripts/SQLUtilities',    {'on': 'SQLUFormatter'}
   \ | Plug 'vim-scripts/Align',     {'on': 'SQLUFormatter'}
 " Memo
@@ -57,7 +60,7 @@ if s:plug.is_installed('ctrlp.vim') " {{{
   let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:100'
   let g:ctrlp_custom_ignore = {
       \ 'dir' : '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
 endif " }}}
@@ -120,6 +123,23 @@ endif " }}}
 if s:plug.is_installed('Align') " {{{
   let g:Align_xstrlen = 3      " for japanese string
   let g:DrChipTopLvlMenu = ''  " remove 'DrChip' menu
+endif " }}}
+
+if s:plug.is_installed('caw.vim') " {{{
+  function! InitCaw() abort
+    if !&l:modifiable
+      silent! nunmap <buffer> gc
+      silent! xunmap <buffer> gc
+      silent! nunmap <buffer> gcc
+      silent! xunmap <buffer> gcc
+    else
+      nmap <buffer> gc <Plug>(caw:prefix)
+      xmap <buffer> gc <Plug>(caw:prefix)
+      nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+      xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+    endif
+  endfunction
+  autocmd MyAutoCmd FileType * call InitCaw()
 endif " }}}
 
 if s:plug.is_installed('SQLUtilities') " {{{
