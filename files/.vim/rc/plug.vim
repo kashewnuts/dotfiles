@@ -11,7 +11,13 @@ call plug#begin('~/.cache/plugged')
 
 " Declare the list of plugins.
 " FuzzyFinder
-Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
+if (v:version >= 800 || has('nvim')) && has('python3')
+  Plug 'Shougo/denite.nvim' " ,     {'on': 'Denite'}
+  Plug 'Shougo/neomru.vim'  " ,     {'on': 'Denite file_mru'}
+  Plug 'Jagua/vim-denite-ghq',      {'on': 'DeniteGhq'}
+else
+  Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
+endif
 " Snippets
 Plug 'Shougo/neosnippet-snippets',  {'on': []}
 Plug 'Shougo/neosnippet.vim',       {'on': []}
@@ -49,7 +55,7 @@ function! s:plug.is_installed(name)
 endfunction " }}}
 
 if s:plug.is_installed('ctrlp.vim') " {{{
-  nnoremap <C-p> :<C-u>CtrlP<CR>
+  " nnoremap <C-p> :<C-u>CtrlP<CR>
   let s:ctrlpUserCommand    =
       \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
       \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
@@ -63,6 +69,33 @@ if s:plug.is_installed('ctrlp.vim') " {{{
       \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
+endif " }}}
+
+if s:plug.is_installed('denite.nvim') " {{{
+  " NOTE: In the case of vim-plug, calling from another plug-in will be slower,
+  " so denite.nvim will not lazy-load.
+  nnoremap <silent> <Leader>fb :<C-u>Denite buffer<CR>
+  nnoremap <silent> <Leader>fl :<C-u>Denite line<CR>
+  nnoremap <silent> <Leader>fm :<C-u>Denite file_mru<CR>
+  nnoremap <silent> <Leader>fr :<C-u>Denite file_point
+        \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+  nnoremap <silent> <Leader>fg :<C-u>DeniteGhq<CR>
+  " Change mappings.
+  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+
+  " Change file_rec command.
+  if executable('pt')
+    call denite#custom#var('file_rec', 'command',
+        \ ['pt', '--follow', '-g' . (has('win32') ? ':' : ''), ''])
+    call denite#custom#var('grep', 'command', ['pt'])
+    call denite#custom#var('grep', 'default_opts', [])
+    call denite#custom#var('grep', 'recursive_opts', [])
+  endif
+  " Define alias
+  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+  call denite#custom#var('file_rec/git', 'command',
+        \ ['git', 'ls-files', '-co', '--exclude-standard'])
 endif " }}}
 
 if s:plug.is_installed('jedi-vim') " {{{
