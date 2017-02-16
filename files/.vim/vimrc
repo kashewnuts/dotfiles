@@ -67,12 +67,12 @@ set fillchars=vert:\|,fold:\    " Characters to fill the separators
 set formatoptions& formatoptions+=mMj  " Support Japanese to join lines
 set helpheight=999              " Open help to fill the screen
 set helplang=ja,en              " Comma separated list of languages.
-set history=1000                " History
+set history=200                 " History
 set list listchars=tab:>-,trail:-  " Visualize character
-set number                      " Show line number (nonumber: Hide)
-set scrolloff=999               " Keep above and below the cursor
+set scrolloff=5                 " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -82,12 +82,8 @@ set completeopt=menuone         " Force the user to select one & No preview
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set tags=./tags;                " Refer to projects root tags file
 
-" Indent
-set autoindent     " Copy indent from current line when starting a new line
-set smartindent    " Do smart autoindenting when starting a new line
-set copyindent     " Copy the structure of the existing lines indent
-
-" Tab
+" Indent&Tab
+set cindent        " Enables automatic C program indenting.
 set tabstop=8      " Width on the screen of the tab
 set softtabstop=4  " Number of spaces in the file space is the corresponding
 set expandtab      " No expand tabs to spaces (expandtab: expand)
@@ -121,13 +117,6 @@ set wildmenu wildmode=list:full " Command-line completion
 set laststatus=2                " Always display status bar
 let &statusline="%<%F%m%r%h%w%=[%{&ff}][%{&enc}][%{strlen(&ft)?&ft:'no\ ft'}]"
   \ . "%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}%4v\ %P"
-
-" Terminal
-set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
-if !has('gui_running')
-  set lazyredraw                " Only redraw when necessary.
-  set ttyfast                   " Faster redrawing.
-endif
 " }}}
 
 " KeyMaping {{{
