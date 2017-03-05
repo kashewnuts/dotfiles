@@ -1,6 +1,8 @@
 *~
 .DS_Store
 Thumbs.db
-*.pyc
+*.py[c|o]
 *.bak
 *.swp
+node_modules
+tags
