@@ -240,47 +240,51 @@ Plug 'twitvim/twitvim',             {'on': [
 call plug#end() " }}}
 
 " Plugins Config {{{
-" --- ctrlp.vim ---
-" nnoremap <C-p> :<C-u>CtrlP<CR>
-let s:ctrlpUserCommand    =
-    \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
-    \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
-    \ ]
-let g:ctrlp_use_caching   = 0  " no cache
-let g:ctrlp_show_hidden   = 1  " Show dotfiles
-let g:ctrlp_key_loop      = 1  " Support multi-byte character
-let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:100'
-let g:ctrlp_custom_ignore = {
-    \ 'dir' : '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
-    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-    \ }
+if (v:version >= 800 || has('nvim')) && has('python3')
+  " --- denite.nvim ---
+  " NOTE: In the case of vim-plug, calling from another plug-in will be slower,
+  " so denite.nvim will not lazy-load.
+  nnoremap <silent> <Leader>fb :<C-u>Denite buffer<CR>
+  nnoremap <silent> <Leader>fl :<C-u>Denite line<CR>
+  nnoremap <silent> <Leader>fm :<C-u>Denite file_mru<CR>
+  nnoremap <silent> <Leader>fr :<C-u>Denite file_point
+        \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+  nnoremap <silent> <Leader>fg :<C-u>DeniteGhq<CR>
+  nnoremap <silent> <Leader>ml :
+        \ <C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+  " Change mappings.
+  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
-" --- denite.nvim ---
-" NOTE: In the case of vim-plug, calling from another plug-in will be slower,
-" so denite.nvim will not lazy-load.
-nnoremap <silent> <Leader>fb :<C-u>Denite buffer<CR>
-nnoremap <silent> <Leader>fl :<C-u>Denite line<CR>
-nnoremap <silent> <Leader>fm :<C-u>Denite file_mru<CR>
-nnoremap <silent> <Leader>fr :<C-u>Denite file_point
-      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-nnoremap <silent> <Leader>fg :<C-u>DeniteGhq<CR>
-" Change mappings.
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-
-" Change file_rec command.
-if executable('pt')
-  call denite#custom#var('file_rec', 'command',
-      \ ['pt', '--follow', '-g' . (has('win32') ? ':' : ''), ''])
-  call denite#custom#var('grep', 'command', ['pt'])
-  call denite#custom#var('grep', 'default_opts', [])
-  call denite#custom#var('grep', 'recursive_opts', [])
+  " Change file_rec command.
+  if executable('pt')
+    call denite#custom#var('file_rec', 'command',
+        \ ['pt', '--follow', '-g' . (has('win32') ? ':' : ''), ''])
+    call denite#custom#var('grep', 'command', ['pt'])
+    call denite#custom#var('grep', 'default_opts', [])
+    call denite#custom#var('grep', 'recursive_opts', [])
+  endif
+  " Define alias
+  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+  call denite#custom#var('file_rec/git', 'command',
+        \ ['git', 'ls-files', '-co', '--exclude-standard'])
+else
+  " --- ctrlp.vim ---
+  " nnoremap <C-p> :<C-u>CtrlP<CR>
+  let s:ctrlpUserCommand    =
+      \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
+      \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
+      \ ]
+  let g:ctrlp_use_caching   = 0  " no cache
+  let g:ctrlp_show_hidden   = 1  " Show dotfiles
+  let g:ctrlp_key_loop      = 1  " Support multi-byte character
+  let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:100'
+  let g:ctrlp_custom_ignore = {
+      \ 'dir' : '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
+      \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+      \ }
 endif
-" Define alias
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-      \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
 " --- jedi-vim ---
 let g:jedi#auto_initialization    = 0 " Disable the default initialization routine
