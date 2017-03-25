@@ -11,6 +11,7 @@ DOT_FILES=(
     .gitconfig.unix      \
     .ptconfig.toml       \
     .pythonstartup       \
+    .tmux.conf           \
     .vim                 \
 )
 
