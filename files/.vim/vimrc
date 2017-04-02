@@ -304,10 +304,6 @@ autocmd MyAutoCmd FileType htmldjango inoremap {{ {{ }}<left><left><left>
 let g:htmldjangocomplete_html_flavour = 'html5'
 " }}}
 
-" --- tsuquyomi --- {{{
-let g:tsuquyomi_completion_detail = 1
-" }}}
-
 " --- memolist.vim --- {{{
 let g:memolist_path = '~/Dropbox/memo'
 let g:memolist_memo_suffix = 'md'
@@ -337,11 +333,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-" }}}
-
-" --- vim-ft-rst_header --- {{{
-let g:rst_header_chars = '#*=-^~"'
-" autocmd MyAutoCmd FileType text setl ft=rst
 " }}}
 
 " --- autofmt --- {{{
