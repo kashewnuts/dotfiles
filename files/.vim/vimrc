@@ -213,7 +213,6 @@ Plug 'fatih/vim-go',                {'for': 'go', 'do': ':GoInstallBinaries'}
 Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
 Plug 'davidhalter/jedi-vim',        {'for': 'python'}
 Plug 'tell-k/vim-autopep8',         {'for': 'python', 'do': 'pip install autopep8'}
-" Plug 'mjbrownie/vim-htmldjango_omnicomplete',   {'for': ['html', 'htmldjango']}
 if executable('npm')
   Plug 'leafgarland/typescript-vim',  {'for': 'typescript'}
   Plug 'Quramy/tsuquyomi',            {'for': 'typescript'}
@@ -293,15 +292,6 @@ else
       \ }
   " }}}
 endif
-" }}}
-
-" --- vim-htmldjango_omnicomplete --- {{{
-autocmd MyAutoCmd FileType html setf=htmldjango
-" autocmd MyAutoCmd FileType htmldjango set omnifunc=htmldjangocomplete#CompleteDjango
-autocmd MyAutoCmd BufNewFile,BufRead *.html setlocal filetype=htmldjango
-autocmd MyAutoCmd FileType htmldjango inoremap {% {% %}<left><left><left>
-autocmd MyAutoCmd FileType htmldjango inoremap {{ {{ }}<left><left><left>
-let g:htmldjangocomplete_html_flavour = 'html5'
 " }}}
 
 " --- memolist.vim --- {{{
