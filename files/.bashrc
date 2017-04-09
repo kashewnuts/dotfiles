@@ -1,6 +1,9 @@
 export EDITOR=vim
 
-alias ls='ls --show-control-chars'
+if [[ "$OSTYPE" =~ ^linux$ ]]; then
+    export LANGUAGE=ja_JP:ja
+    alias ls='ls --show-control-chars'
+fi
 alias la='ls -al'
 alias ll='ls -l'
 
@@ -16,6 +19,7 @@ if [ "$OSTYPE" != 'msys' ]; then
     # Virtualenvwrapper
     export WORKON_HOME=~/.venvs
     export VIRTUALENV_PYTHON=/usr/bin/python3
+    source `which virtualenvwrapper.sh`
     # export BROWSER=echo heroku open
 
     # crontab
