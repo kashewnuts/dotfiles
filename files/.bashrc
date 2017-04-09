@@ -18,7 +18,7 @@ if [ "$OSTYPE" != 'msys' ]; then
 
     # Virtualenvwrapper
     export WORKON_HOME=~/.venvs
-    export VIRTUALENV_PYTHON=/usr/bin/python3
+    export VIRTUALENV_PYTHON=`which python3`
     source `which virtualenvwrapper.sh`
     # export BROWSER=echo heroku open
 
@@ -45,7 +45,8 @@ darwin*)
     # Editor
     export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
     alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-    alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
+    alias vim=vi
+    alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
 
     # Open
     alias firefox="open -a Firefox"
