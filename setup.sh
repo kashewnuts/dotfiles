@@ -7,8 +7,9 @@ DOT_FILES=(
     .git-completion.bash \
     .git-prompt.sh       \
     .gitconfig           \
-    .gitignore           \
     .gitconfig.unix      \
+    .gitignore           \
+    .hgrc                \
     .ptconfig.toml       \
     .pythonstartup       \
     .tmux.conf           \
