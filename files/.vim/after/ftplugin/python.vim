@@ -3,7 +3,6 @@ setlocal textwidth=99
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
 inoremap # X#
-autocmd FileType python set equalprg=autopep8\ -
 
 " --- jedi-vim --- {{{
 let g:jedi#auto_initialization    = 0 " Disable the default initialization routine
@@ -22,7 +21,6 @@ let g:jedi#usages_command = ''
 command! Jdoc call jedi#show_documentation()
 command! Jgoto call jedi#goto()
 function! JediRename()
-  " execute ':JediClearCache'
   call jedi#clear_cache(0)
   call jedi#rename()
 endfunction
