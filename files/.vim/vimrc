@@ -21,7 +21,7 @@ set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 " }}}
 
 " Disable {{{
-set guioptions=M                      " Disable menu.vim & Use console dialog
+if has('win32') | set guioptions=M | endif " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 
@@ -201,7 +201,7 @@ if (v:version >= 800 || has('nvim')) && has('python3')
   Plug 'Shougo/denite.nvim' " ,     {'on': 'Denite'}
   Plug 'Shougo/neomru.vim'  " ,     {'on': 'Denite file_mru'}
   Plug 'Jagua/vim-denite-ghq',      {'on': 'DeniteGhq'}
-else
+elseif !has('mac')
   Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
 endif
 " Snippets
@@ -235,8 +235,8 @@ Plug 'kannokanno/previm',           {'on': 'PrevimOpen'}
   \ | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
 Plug 'vim-jp/vimdoc-ja'
 " Twitter
-Plug 'twitvim/twitvim',             {'on': [
-  \ 'SearchTwitter', 'ListTwitter', 'PosttoTwitter', 'CPosttoTwitter']}
+Plug 'twitvim/twitvim',             {'on': ['SearchTwitter', 'ListTwitter',
+  \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end() " }}}
@@ -274,7 +274,7 @@ if (v:version >= 800 || has('nvim')) && has('python3')
   call denite#custom#var('file_rec/git', 'command',
         \ ['git', 'ls-files', '-co', '--exclude-standard'])
   " }}}
-else
+elseif !has('mac')
   " --- ctrlp.vim --- {{{
   nnoremap <C-p> :<C-u>CtrlP<CR>
   let s:ctrlpUserCommand    =
@@ -295,11 +295,11 @@ endif
 " }}}
 
 " --- memolist.vim --- {{{
-let g:memolist_path = '~/Dropbox/memo'
+let g:memolist_path = '~/Dropbox (個人)/memo'
 let g:memolist_memo_suffix = 'md'
 let g:memolist_template_dir_path = '~/.vim/template/memolist'
 
-" if s:plug_is_installed('ctrlp.vim') | let g:memolist_ex_cmd = 'CtrlP' | endif
+" let g:memolist_ex_cmd = 'CtrlP'
 " nnoremap <silent> <Leader>ml :MemoList<CR>
 nnoremap <silent> <Leader>mn :MemoNew<CR>
 nnoremap <silent> <Leader>mg :MemoGrep<CR>
@@ -375,6 +375,7 @@ autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
 let twitvim_browser_cmd = (
 \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
 \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
+\ has('mac') ? 'open -a Safari' :
 \ '')
 let twitvim_force_ssl = 1
 let twitvim_count = 40

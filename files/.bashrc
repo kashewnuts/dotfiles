@@ -17,9 +17,11 @@ if [ "$OSTYPE" != 'msys' ]; then
     export PYTHONPATH=~/pycharm-debug.egg:~/pycharm-debug-py3k.egg:$PYTHONPATH
 
     # Virtualenvwrapper
-    export WORKON_HOME=~/.venvs
-    export VIRTUALENV_PYTHON=`which python3`
-    source `which virtualenvwrapper.sh`
+    # export VIRTUALENV_PYTHON=`which python3`
+    if [ -f `which virtualenvwrapper.sh` ]; then
+        export WORKON_HOME=~/.venvs
+        source `which virtualenvwrapper.sh`
+    fi
     # export BROWSER=echo heroku open
 
     # crontab
@@ -43,10 +45,10 @@ case "$OSTYPE" in
 # BSD (contains Mac)
 darwin*)
     # Editor
-    export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
     alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias vim=vi
     alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
+    export EDITOR=vim
 
     # Open
     alias firefox="open -a Firefox"
