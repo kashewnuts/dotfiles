@@ -244,176 +244,179 @@ Plug 'twitvim/twitvim',             {'on': ['SearchTwitter', 'ListTwitter',
 call plug#end() " }}}
 
 " Plugins Config
-" FizzFinder {{{
-if (v:version >= 800 || has('nvim')) && has('python3')
-  " --- denite.nvim --- {{{
-  " NOTE: In the case of vim-plug, calling from another plug-in will be slower,
-  " so denite.nvim will not lazy-load.
-  nnoremap <silent> <Leader>fb :<C-u>Denite buffer<CR>
-  nnoremap <silent> <Leader>fl :<C-u>Denite line<CR>
-  nnoremap <silent> <Leader>fm :<C-u>Denite file_mru<CR>
-  nnoremap <silent> <Leader>fr :<C-u>Denite file_point
-        \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-  nnoremap <C-p> : <C-u>Denite file_point
-        \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-  nnoremap <silent> <Leader>fg :<C-u>DeniteGhq<CR>
-  nnoremap <silent> <Leader>ml :
-        \ <C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
-  " Change mappings.
-  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+if isdirectory(expand('~/.cache/plugged')) " {{{
+  " FizzFinder {{{
+  if (v:version >= 800 || has('nvim')) && has('python3')
+    " --- denite.nvim --- {{{
+    " NOTE: In the case of vim-plug, calling from another plug-in
+    " will be slower, so denite.nvim will not lazy-load.
+    nnoremap <silent> <Leader>fb :<C-u>Denite buffer<CR>
+    nnoremap <silent> <Leader>fl :<C-u>Denite line<CR>
+    nnoremap <silent> <Leader>fm :<C-u>Denite file_mru<CR>
+    nnoremap <silent> <Leader>fr :<C-u>Denite file_point
+          \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+    nnoremap <C-p> : <C-u>Denite file_point
+          \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+    nnoremap <silent> <Leader>fg :<C-u>DeniteGhq<CR>
+    nnoremap <silent> <Leader>ml :
+          \ <C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+    " Change mappings.
+    call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+    call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
-  " Change file_rec command.
-  if executable('pt')
-    call denite#custom#var('file_rec', 'command',
-        \ ['pt', '--follow', '-g' . (has('win32') ? ':' : ''), ''])
-    call denite#custom#var('grep', 'command', ['pt'])
-    call denite#custom#var('grep', 'default_opts', [])
-    call denite#custom#var('grep', 'recursive_opts', [])
+    " Change file_rec command.
+    if executable('pt')
+      call denite#custom#var('file_rec', 'command',
+          \ ['pt', '--follow', '-g' . (has('win32') ? ':' : ''), ''])
+      call denite#custom#var('grep', 'command', ['pt'])
+      call denite#custom#var('grep', 'default_opts', [])
+      call denite#custom#var('grep', 'recursive_opts', [])
+    endif
+    " Define alias
+    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+    call denite#custom#var('file_rec/git', 'command',
+          \ ['git', 'ls-files', '-co', '--exclude-standard'])
+    " }}}
+  elseif !has('mac')
+    " --- ctrlp.vim --- {{{
+    nnoremap <C-p> :<C-u>CtrlP<CR>
+    let s:ctrlpUserCommand    =
+        \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
+        \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
+        \ ]
+    let g:ctrlp_use_caching   = 0  " no cache
+    let g:ctrlp_show_hidden   = 1  " Show dotfiles
+    let g:ctrlp_key_loop      = 1  " Support multi-byte character
+    let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:100'
+    let g:ctrlp_custom_ignore = {
+        \ 'dir' : '\v[\/]\.(git|hg|svn)$',
+        \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
+        \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+        \ }
+    " }}}
   endif
-  " Define alias
-  call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-  call denite#custom#var('file_rec/git', 'command',
-        \ ['git', 'ls-files', '-co', '--exclude-standard'])
   " }}}
-elseif !has('mac')
-  " --- ctrlp.vim --- {{{
-  nnoremap <C-p> :<C-u>CtrlP<CR>
-  let s:ctrlpUserCommand    =
-      \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
-      \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
-      \ ]
-  let g:ctrlp_use_caching   = 0  " no cache
-  let g:ctrlp_show_hidden   = 1  " Show dotfiles
-  let g:ctrlp_key_loop      = 1  " Support multi-byte character
-  let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:100'
-  let g:ctrlp_custom_ignore = {
-      \ 'dir' : '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
-      \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-      \ }
+
+  " --- memolist.vim --- {{{
+  let s:memo_path = ((has('win32') || has('mac')) ? ' (個人)' :'')
+  let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
+  let g:memolist_memo_suffix = 'md'
+  let g:memolist_template_dir_path = '~/.vim/template/memolist'
+
+  " let g:memolist_ex_cmd = 'CtrlP'
+  " nnoremap <silent> <Leader>ml :MemoList<CR>
+  nnoremap <silent> <Leader>mn :MemoNew<CR>
+  nnoremap <silent> <Leader>mg :MemoGrep<CR>
   " }}}
-endif
-" }}}
 
-" --- memolist.vim --- {{{
-let g:memolist_path = '~/Dropbox (個人)/memo'
-let g:memolist_memo_suffix = 'md'
-let g:memolist_template_dir_path = '~/.vim/template/memolist'
+  " --- neosnippet.vim --- {{{
+  " Plugin key-mappings.
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
 
-" let g:memolist_ex_cmd = 'CtrlP'
-" nnoremap <silent> <Leader>ml :MemoList<CR>
-nnoremap <silent> <Leader>mn :MemoNew<CR>
-nnoremap <silent> <Leader>mg :MemoGrep<CR>
-" }}}
+  " SuperTab like snippets behavior.
+  "imap <expr><TAB>
+  " \ pumvisible() ? "\<C-n>" :
+  " \ neosnippet#expandable_or_jumpable() ?
+  " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" --- neosnippet.vim --- {{{
-" Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-" }}}
-
-" --- autofmt --- {{{
-set formatexpr=autofmt#japanese#formatexpr()
-let autofmt_allow_over_tw=1
-" }}}
-
-" --- Align --- {{{
-let g:Align_xstrlen = 3      " for japanese string
-let g:DrChipTopLvlMenu = ''  " remove 'DrChip' menu
-" }}}
-
-" --- caw.vim --- {{{
-function! InitCaw() abort
-  if !&l:modifiable
-    silent! nunmap <buffer> gc
-    silent! xunmap <buffer> gc
-    silent! nunmap <buffer> gcc
-    silent! xunmap <buffer> gcc
-  else
-    nmap <buffer> gc <Plug>(caw:prefix)
-    xmap <buffer> gc <Plug>(caw:prefix)
-    nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
-    xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+  " For conceal markers.
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
   endif
-endfunction
-autocmd MyAutoCmd FileType * call InitCaw()
-" }}}
+  " }}}
 
-" --- SQLUtilities --- {{{
-let g:sqlutil_align_comma = 1
-" }}}
+  " --- autofmt --- {{{
+  set formatexpr=autofmt#japanese#formatexpr()
+  let autofmt_allow_over_tw=1
+  " }}}
 
-" --- vim-easy-align --- {{{
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-" }}}
+  " --- Align --- {{{
+  let g:Align_xstrlen = 3      " for japanese string
+  let g:DrChipTopLvlMenu = ''  " remove 'DrChip' menu
+  " }}}
 
-" --- previm --- {{{
-let g:previm_disable_vimproc = 1
-let g:previm_show_header = 0
-command! PrevimRefresh :call previm#refresh()
-autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
-" }}}
+  " --- caw.vim --- {{{
+  function! InitCaw() abort
+    if !&l:modifiable
+      silent! nunmap <buffer> gc
+      silent! xunmap <buffer> gc
+      silent! nunmap <buffer> gcc
+      silent! xunmap <buffer> gcc
+    else
+      nmap <buffer> gc <Plug>(caw:prefix)
+      xmap <buffer> gc <Plug>(caw:prefix)
+      nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+      xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+    endif
+  endfunction
+  autocmd MyAutoCmd FileType * call InitCaw()
+  " }}}
 
-" --- twitvim --- {{{
-" Basic
-let twitvim_browser_cmd = (
-\ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
-\ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
-\ has('mac') ? 'open -a Safari' :
-\ '')
-let twitvim_force_ssl = 1
-let twitvim_count = 40
-let twitvim_enable_python3 = 1
-let twitvim_allow_multiline = 1
-let twitvim_timestamp_format = '%c'
-let twitvim_show_header = 0
+  " --- SQLUtilities --- {{{
+  let g:sqlutil_align_comma = 1
+  " }}}
 
-" Mapping
-nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
-nnoremap <Leader>tc :<C-u>CPosttoTwitter<CR>
-nnoremap <Leader>tb :<C-u>BPosttoTwitter<CR>
-nnoremap <Leader>tm :<C-u>MentionsTwitter<CR>
-nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
-nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
-nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
-nnoremap <Leader>ff :<C-u>NextTwitter<CR>
+  " --- vim-easy-align --- {{{
+  " Start interactive EasyAlign in visual mode (e.g. vipga)
+  xmap ga <Plug>(EasyAlign)
+  " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+  nmap ga <Plug>(EasyAlign)
+  " }}}
 
-" ListTwitter
-command! LTCliming ListTwitter climbing
-command! LTVim ListTwitter vim
-command! LTPython ListTwitter python-su
-command! LTJava ListTwitter Ewigkeit java-ja
-command! LTPyfes ListTwitter takuan_osho pyfes-2010-10
-command! LTPyhackSummer ListTwitter takanory pyhacksummer2013
-command! LTPyhackSnow ListTwitter inoshiro pyhack-snow201301
-" }}}
+  " --- previm --- {{{
+  let g:previm_disable_vimproc = 1
+  let g:previm_show_header = 0
+  command! PrevimRefresh :call previm#refresh()
+  autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
+  " }}}
 
-augroup load_insert_snippet_plugins " {{{
-  autocmd!
-  autocmd InsertEnter * call plug#load(
-\   'neosnippet.vim',
-\   'neosnippet-snippets',
-\ )
-\ | autocmd! load_insert_snippet_plugins
-augroup END " }}}
+  " --- twitvim --- {{{
+  " Basic
+  let twitvim_browser_cmd = (
+  \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
+  \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
+  \ has('mac') ? 'open -a Safari' :
+  \ '')
+  let twitvim_force_ssl = 1
+  let twitvim_count = 40
+  let twitvim_enable_python3 = 1
+  let twitvim_allow_multiline = 1
+  let twitvim_timestamp_format = '%c'
+  let twitvim_show_header = 0
+
+  " Mapping
+  nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
+  nnoremap <Leader>tc :<C-u>CPosttoTwitter<CR>
+  nnoremap <Leader>tb :<C-u>BPosttoTwitter<CR>
+  nnoremap <Leader>tm :<C-u>MentionsTwitter<CR>
+  nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
+  nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
+  nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
+  nnoremap <Leader>ff :<C-u>NextTwitter<CR>
+
+  " ListTwitter
+  command! LTCliming ListTwitter climbing
+  command! LTVim ListTwitter vim
+  command! LTPython ListTwitter python-su
+  command! LTJava ListTwitter Ewigkeit java-ja
+  command! LTPyfes ListTwitter takuan_osho pyfes-2010-10
+  command! LTPyhackSummer ListTwitter takanory pyhacksummer2013
+  command! LTPyhackSnow ListTwitter inoshiro pyhack-snow201301
+  " }}}
+
+  augroup load_insert_snippet_plugins " {{{
+    autocmd!
+    autocmd InsertEnter * call plug#load(
+  \   'neosnippet.vim',
+  \   'neosnippet-snippets',
+  \ )
+  \ | autocmd! load_insert_snippet_plugins
+  augroup END " }}}
+endif "}}}
 
 " Others {{{
 " Essential
