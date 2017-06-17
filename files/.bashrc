@@ -14,12 +14,10 @@ if [ "$OSTYPE" != 'msys' ]; then
     # Python
     export PYTHONSTARTUP=~/.pythonstartup
     export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
-    export PYTHONPATH=~/pycharm-debug.egg:~/pycharm-debug-py3k.egg:$PYTHONPATH
 
     # Virtualenvwrapper
     # export VIRTUALENV_PYTHON=`which python3`
     if [ -f `which virtualenvwrapper.sh` ]; then
-        export WORKON_HOME=~/.venvs
         source `which virtualenvwrapper.sh`
     fi
     # export BROWSER=echo heroku open
