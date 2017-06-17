@@ -188,9 +188,9 @@ elseif executable('grep')
 endif " }}}
 
 " v:version >= 704 {{{
-if has('&undofile') | set undofile undodir=$HOME/.cache/tmp | endif
-if has('&breakindent') | set breakindent | endif
-if has('&nofixeol') | set nofixeol | endif
+if exists('&undofile') | set undofile undodir=$HOME/.cache/tmp | endif
+if exists('&breakindent') | set breakindent | endif
+if exists('&fixeol') | set nofixeol | endif
 " }}}
 
 " Plugins List {{{
@@ -246,7 +246,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end() " }}}
 
-  " Plugins Config {{{
+  " Plugins Config
   " FizzFinder {{{
   if s:denite_version
     " --- denite.nvim --- {{{
