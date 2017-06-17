@@ -187,66 +187,68 @@ elseif executable('grep')
   set grepprg=grep\ -nH
 endif " }}}
 
-if v:version >= 704 " {{{
-  set undofile undodir=$HOME/.cache/tmp
-  set nofixeol
-  set breakindent
-endif " }}}
+" v:version >= 704 {{{
+if has('&undofile') | set undofile undodir=$HOME/.cache/tmp | endif
+if has('&breakindent') | set breakindent | endif
+if has('&nofixeol') | set nofixeol | endif
+" }}}
 
 " Plugins List {{{
 " Plugins will be downloaded under the specified directory.
-call plug#begin('~/.cache/plugged')
+let s:plug_dir = '~/.cache/plugged'
+if isdirectory(expand(s:plug_dir)) " {{{
+  call plug#begin(s:plug_dir)
 
-" Declare the list of plugins.
-" FuzzyFinder
-if (v:version >= 800 || has('nvim')) && has('python3')
-  Plug 'Shougo/denite.nvim' " ,     {'on': 'Denite'}
-  Plug 'Shougo/neomru.vim'  " ,     {'on': 'Denite file_mru'}
-  Plug 'Jagua/vim-denite-ghq',      {'on': 'DeniteGhq'}
-elseif !has('mac')
-  Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
-endif
-" Snippets
-Plug 'Shougo/neosnippet-snippets',  {'on': []}
-Plug 'Shougo/neosnippet.vim',       {'on': []}
-" FileType
-Plug 'othree/html5.vim',            {'for': ['html', 'htmldjango', 'htmljinja']}
-Plug 'fatih/vim-go',                {'for': 'go', 'do': ':GoInstallBinaries'}
-Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
-Plug 'davidhalter/jedi-vim',        {'for': 'python'}
-Plug 'tell-k/vim-autopep8',         {'for': 'python', 'do': 'pip install autopep8'}
-if executable('npm')
-  Plug 'leafgarland/typescript-vim',  {'for': 'typescript'}
-  Plug 'Quramy/tsuquyomi',            {'for': 'typescript'}
-    \ | Plug 'Shougo/vimproc.vim',    {'do': 'make'}
-  Plug 'ternjs/tern_for_vim',       {'for': 'javascript', 'do': 'npm install'}
-endif
-Plug 'ekalinin/Dockerfile.vim',     {'for': ['dock*', 'Docker*']}
-" Formater
-Plug 'vim-jp/autofmt'
-Plug 'junegunn/vim-easy-align',     {'on': '<Plug>(EasyAlign)'}
-Plug 'tyru/caw.vim',                {'on':
-  \ ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
-Plug 'vim-scripts/SQLUtilities',    {'on': 'SQLUFormatter'}
-  \ | Plug 'vim-scripts/Align',     {'on': 'SQLUFormatter'}
-" Memo
-Plug 'glidenote/memolist.vim',      {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-Plug 'lambdalisue/vim-gista',       {'on': 'Gista', 'tag': 'v2.3.3'}
-" Reference & View
-Plug 'kannokanno/previm',           {'on': 'PrevimOpen'}
-  \ | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
-Plug 'vim-jp/vimdoc-ja'
-" Twitter
-Plug 'twitvim/twitvim',             {'on': ['SearchTwitter', 'ListTwitter',
-  \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
+  " Declare the list of plugins.
+  " FuzzyFinder
+  let s:denite_version = (v:version >= 800 || has('nvim')) && has('python3')
+  if s:denite_version
+    Plug 'Shougo/denite.nvim' " ,     {'on': 'Denite'}
+    Plug 'Shougo/neomru.vim'  " ,     {'on': 'Denite file_mru'}
+    Plug 'Jagua/vim-denite-ghq',      {'on': 'DeniteGhq'}
+  elseif !has('mac')
+    Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
+  endif
+  " Snippets
+  Plug 'Shougo/neosnippet-snippets',  {'on': []}
+  Plug 'Shougo/neosnippet.vim',       {'on': []}
+  " FileType
+  Plug 'othree/html5.vim',            {'for': ['html', 'htmldjango', 'htmljinja']}
+  Plug 'fatih/vim-go',                {'for': 'go', 'do': ':GoInstallBinaries'}
+  Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
+  Plug 'davidhalter/jedi-vim',        {'for': 'python'}
+  Plug 'tell-k/vim-autopep8',         {'for': 'python', 'do': 'pip install autopep8'}
+  if executable('npm')
+    Plug 'leafgarland/typescript-vim',  {'for': 'typescript'}
+    Plug 'Quramy/tsuquyomi',            {'for': 'typescript'}
+      \ | Plug 'Shougo/vimproc.vim',    {'do': 'make'}
+    Plug 'ternjs/tern_for_vim',       {'for': 'javascript', 'do': 'npm install'}
+  endif
+  Plug 'ekalinin/Dockerfile.vim',     {'for': ['dock*', 'Docker*']}
+  " Formater
+  Plug 'vim-jp/autofmt'
+  Plug 'junegunn/vim-easy-align',     {'on': '<Plug>(EasyAlign)'}
+  Plug 'tyru/caw.vim',                {'on':
+    \ ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
+  Plug 'vim-scripts/SQLUtilities',    {'on': 'SQLUFormatter'}
+    \ | Plug 'vim-scripts/Align',     {'on': 'SQLUFormatter'}
+  " Memo
+  Plug 'glidenote/memolist.vim',      {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
+  Plug 'lambdalisue/vim-gista',       {'on': 'Gista', 'tag': 'v2.3.3'}
+  " Reference & View
+  Plug 'kannokanno/previm',           {'on': 'PrevimOpen'}
+    \ | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
+  Plug 'vim-jp/vimdoc-ja'
+  " Twitter
+  Plug 'twitvim/twitvim',             {'on': ['SearchTwitter', 'ListTwitter',
+    \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
 
-" List ends here. Plugins become visible to Vim after this call.
-call plug#end() " }}}
+  " List ends here. Plugins become visible to Vim after this call.
+  call plug#end() " }}}
 
-" Plugins Config
-if isdirectory(expand('~/.cache/plugged')) " {{{
+  " Plugins Config {{{
   " FizzFinder {{{
-  if (v:version >= 800 || has('nvim')) && has('python3')
+  if s:denite_version
     " --- denite.nvim --- {{{
     " NOTE: In the case of vim-plug, calling from another plug-in
     " will be slower, so denite.nvim will not lazy-load.
