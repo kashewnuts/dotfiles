@@ -1,7 +1,7 @@
 " Vim support file to detect file types
 "
 " Maintainer:	Kashun YOSHIDA <bjzli.m08vo9kqs@gmail.com>
-" Last Change:	2016 Mar 22
+" Last Change:	2017 Jun 24
 
 " Listen very carefully, I will say this only once
 if exists("did_load_filetypes")
@@ -48,29 +48,6 @@ func! s:StarSetf(ft)
   endif
 endfunc
 
-" Abaqus or Trasys
-au BufNewFile,BufRead *.inp			call s:Check_inp()
-
-func! s:Check_inp()
-  if getline(1) =~ '^\*'
-    setf abaqus
-  else
-    let n = 1
-    if line("$") > 500
-      let nmax = 500
-    else
-      let nmax = line("$")
-    endif
-    while n <= nmax
-      if getline(n) =~? "^header surface data"
-	setf trasys
-	break
-      endif
-      let n = n + 1
-    endwhile
-  endif
-endfunc
-
 " Apache style config file
 au BufNewFile,BufRead proftpd.conf*		call s:StarSetf('apachestyle')
 
@@ -82,22 +59,6 @@ au BufNewFile,BufRead */boot/grub/menu.lst,*/boot/grub/grub.conf,*/etc/grub.conf
 
 " Automake
 au BufNewFile,BufRead [mM]akefile.am,GNUmakefile.am	setf automake
-
-" BASIC or Visual Basic
-au BufNewFile,BufRead *.bas			call s:FTVB("basic")
-
-" Check if one of the first five lines contains "VB_Name".  In that case it is
-" probably a Visual Basic file.  Otherwise it's assumed to be "alt" filetype.
-func! s:FTVB(alt)
-  if getline(1).getline(2).getline(3).getline(4).getline(5) =~? 'VB_Name\|Begin VB\.\(Form\|MDIForm\|UserControl\)'
-    setf vb
-  else
-    exe "setf " . a:alt
-  endif
-endfunc
-
-" Visual Basic Script (close to Visual Basic) or Visual Basic .NET
-au BufNewFile,BufRead *.vb,*.vbs,*.dsm,*.ctl	setf vb
 
 " Batch file for MSDOS.
 au BufNewFile,BufRead *.bat,*.sys		setf dosbatch
@@ -177,7 +138,7 @@ au BufNewFile,BufRead *.css			setf css
 au BufNewFile,BufRead CMakeLists.txt,*.cmake,*.cmake.in		setf cmake
 
 " Dockerfile
-au BufNewFile,BufRead Dockerfile		setf dockerfile
+au BufNewFile,BufRead Dockerfile,*.Dockerfile	setf dockerfile
 
 " Dict config
 au BufNewFile,BufRead dict.conf,.dictrc		setf dictconf
@@ -275,7 +236,7 @@ au BufNewFile,BufRead *.properties,*.properties_??,*.properties_??_??	setf jprop
 au BufNewFile,BufRead *.properties_??_??_*	call s:StarSetf('jproperties')
 
 " JSON
-au BufNewFile,BufRead *.json,*.jsonp		setf json
+au BufNewFile,BufRead *.json,*.jsonp,*.webmanifest	setf json
 
 " Less
 au BufNewFile,BufRead *.less			setf less
@@ -441,6 +402,17 @@ au BufNewFile,BufRead .viminfo,_viminfo		setf viminfo
 " XHTML
 au BufNewFile,BufRead *.xhtml,*.xht		setf xhtml
 
+" yum conf (close enough to dosini)
+au BufNewFile,BufRead */etc/yum.repos.d/*	call s:StarSetf('dosini')
+
+" Z-Shell script
+au BufNewFile,BufRead zsh*,zlog*		call s:StarSetf('zsh')
+
+
+" Plain text files, needs to be far down to not override others.  This avoids
+" the "conf" type being used if there is a line starting with '#'.
+au BufNewFile,BufRead *.txt,*.text,README	setf text
+
 augroup END
 
 
@@ -483,6 +455,9 @@ au BufNewFile,BufRead [mM]akefile*		call s:StarSetf('make')
 
 " Ruby Makefile
 au BufNewFile,BufRead [rR]akefile*		call s:StarSetf('ruby')
+
+" Yaml
+au BufNewFile,BufRead *.yaml,*.yml		setf yaml
 
 " Vim script
 au BufNewFile,BufRead *vimrc*			call s:StarSetf('vim')
