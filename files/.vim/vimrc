@@ -274,6 +274,9 @@ if isdirectory(expand(s:plug_dir)) " {{{
       call denite#custom#var('grep', 'default_opts', [])
       call denite#custom#var('grep', 'recursive_opts', [])
     endif
+    if executable('files')
+      call denite#custom#var('file_rec', 'command', ['files', '-a'])
+    endif
     " Define alias
     call denite#custom#alias('source', 'file_rec/git', 'file_rec')
     call denite#custom#var('file_rec/git', 'command',
