@@ -9,7 +9,7 @@ alias ll='ls -l'
 
 if [ "$OSTYPE" != 'msys' ]; then
     # alias vi='vim'
-    alias vi='vim -Nu ~/.vim/rc/minimal.vim'
+    alias vi='vim -Nu ~/.vim/minimal.vim'
 
     # Python
     export PYTHONSTARTUP=~/.pythonstartup

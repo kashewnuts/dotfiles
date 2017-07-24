@@ -5,7 +5,7 @@ autocmd!
 " --- Appearance ---
 set ambiwidth=double                " Use twice the width of ASCII characters
 set backspace=indent,eol,start      " Can erase everything in the back space
-set clipboard=unnamed               " Use the OS clipboard
+set clipboard=unnamed,unnamedplus   " Use the OS clipboard
 set fileformats=unix,dos            " This gives the end-of-line formats
 set helpheight=999                  " Open help to fill the screen
 set history=200                     " History
@@ -43,7 +43,7 @@ autocmd QuickFixCmdPost *grep* cwindow  " Auto open quickfix-window
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 " Like CTRL-], but use ":tjump" instead of ":tag".
- nnoremap <C-]> g<C-]>zz
+nnoremap <C-]> g<C-]>zz
 " --- Essential ---
 filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
