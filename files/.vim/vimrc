@@ -401,7 +401,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
   nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
   nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
   nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
-  nnoremap <Leader>ff :<C-u>NextTwitter<CR>
+  nnoremap <Leader>fn :<C-u>NextTwitter<CR>
 
   " ListTwitter
   command! LTCliming ListTwitter climbing
@@ -409,8 +409,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
   command! LTPython ListTwitter python-su
   command! LTJava ListTwitter Ewigkeit java-ja
   command! LTPyfes ListTwitter takuan_osho pyfes-2010-10
-  command! LTPyhackSummer ListTwitter takanory pyhacksummer2013
-  command! LTPyhackSnow ListTwitter inoshiro pyhack-snow201301
+  command! LTBeProud ListTwitter BeProud
   " }}}
 
   augroup load_insert_snippet_plugins " {{{
