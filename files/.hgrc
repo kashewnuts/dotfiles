@@ -1,6 +1,6 @@
 [ui]
 username=kashewnuts <bjzli.m08vo9kqs@gmail.com>
-ignore=~/.hgignore
+ignore=~/.hgignore_global
 editor=vim
 ssh = ssh -C
 
