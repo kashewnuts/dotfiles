@@ -2,6 +2,7 @@
 
 # Const
 DOT_FILES=(
+    .ansible.cfg
     .bash_profile        \
     .bashrc              \
     .git-completion.bash \
