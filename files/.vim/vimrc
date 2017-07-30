@@ -199,6 +199,11 @@ let s:plug_dir = '~/.cache/plugged'
 if isdirectory(expand(s:plug_dir)) " {{{
   call plug#begin(s:plug_dir)
 
+  function! Cond(cond, ...) "{{{
+    let opts = get(a:000, 0, {})
+    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+  endfunction "}}}
+
   " Declare the list of plugins.
   " FuzzyFinder
   let s:denite_version = (v:version >= 800 || has('nvim')) && has('python3')
@@ -206,9 +211,8 @@ if isdirectory(expand(s:plug_dir)) " {{{
     Plug 'Shougo/denite.nvim' " ,     {'on': 'Denite'}
     Plug 'Shougo/neomru.vim'  " ,     {'on': 'Denite file_mru'}
     Plug 'Jagua/vim-denite-ghq',      {'on': 'DeniteGhq'}
-  elseif !has('mac')
-    Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
   endif
+  Plug 'ctrlpvim/ctrlp.vim',          Cond(!has('mac'), {'on': 'CtrlP'})
   " Snippets
   Plug 'Shougo/neosnippet-snippets',  {'on': []}
   Plug 'Shougo/neosnippet.vim',       {'on': []}
@@ -219,9 +223,9 @@ if isdirectory(expand(s:plug_dir)) " {{{
   Plug 'davidhalter/jedi-vim',        {'for': 'python'}
   Plug 'tell-k/vim-autopep8',         {'for': 'python', 'do': 'pip install autopep8'}
   if executable('npm')
-    Plug 'leafgarland/typescript-vim',  {'for': 'typescript'}
-    Plug 'Quramy/tsuquyomi',            {'for': 'typescript'}
-      \ | Plug 'Shougo/vimproc.vim',    {'do': 'make'}
+    Plug 'leafgarland/typescript-vim',{'for': 'typescript'}
+    Plug 'Quramy/tsuquyomi',          {'for': 'typescript'}
+      \ | Plug 'Shougo/vimproc.vim',  Cond(v:version <= 704, {'do': 'make'})
     Plug 'ternjs/tern_for_vim',       {'for': 'javascript', 'do': 'npm install'}
   endif
   Plug 'ekalinin/Dockerfile.vim',     {'for': ['dock*', 'Docker*']}
