@@ -37,6 +37,8 @@ if [ "$OSTYPE" != 'msys' ]; then
 
     # Jupyter Notebook
     alias iPythonNotebook='cd ~/project/ipythondir;jupyter notebook'
+    # disable pyc
+    # export PYTHONDONTWRITEBYTECODE=1
 fi
 
 case "$OSTYPE" in
