@@ -73,6 +73,7 @@ set scrolloff=5                 " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
+set iskeyword& iskeyword+=-     " Include '-' to word
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -177,7 +178,7 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
-autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 " IME off
+autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " }}}
 
 " Grep settings {{{

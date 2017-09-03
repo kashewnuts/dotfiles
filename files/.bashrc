@@ -8,9 +8,6 @@ alias la='ls -al'
 alias ll='ls -l'
 
 if [ "$OSTYPE" != 'msys' ]; then
-    # alias vi='vim'
-    alias vi='vim -Nu ~/.vim/minimal.vim'
-
     # Python
     export PYTHONSTARTUP=~/.pythonstartup
     export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
@@ -48,7 +45,6 @@ darwin*)
     alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
     alias vim=vi
     alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -g "$@"'
-    export EDITOR=vim
 
     # Open
     alias firefox="open -a Firefox"
