@@ -13,7 +13,8 @@ if [ "$OSTYPE" != 'msys' ]; then
     export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
 
     # Virtualenvwrapper
-    # export VIRTUALENV_PYTHON=`which python3`
+    export VIRTUALENV_PYTHON=`which python3`
+    export VIRTUALENVWRAPPER_PYTHON=`which python3`
     if [ -f `which virtualenvwrapper.sh` ]; then
         source `which virtualenvwrapper.sh`
     fi
@@ -35,7 +36,7 @@ if [ "$OSTYPE" != 'msys' ]; then
     # Jupyter Notebook
     alias iPythonNotebook='cd ~/project/ipythondir;jupyter notebook'
     # disable pyc
-    # export PYTHONDONTWRITEBYTECODE=1
+    export PYTHONDONTWRITEBYTECODE=1
 fi
 
 case "$OSTYPE" in
