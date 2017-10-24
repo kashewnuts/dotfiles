@@ -37,6 +37,11 @@ if [ "$OSTYPE" != 'msys' ]; then
     alias iPythonNotebook='cd ~/project/ipythondir;jupyter notebook'
     # disable pyc
     export PYTHONDONTWRITEBYTECODE=1
+
+    # bash
+    export HISTSIZE=1000
+    export HISTCONTROL=ignoreboth   # ignorespace+ignoredups = ignoreboth
+    export HISTIGNORE="ls:fg*:history*"
 fi
 
 case "$OSTYPE" in
