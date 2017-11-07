@@ -39,7 +39,7 @@ if [ "$OSTYPE" != 'msys' ]; then
     export PYTHONDONTWRITEBYTECODE=1
 
     # bash
-    export HISTSIZE=1000
+    export HISTSIZE=10000
     export HISTCONTROL=ignoreboth   # ignorespace+ignoredups = ignoreboth
     export HISTIGNORE="ls:fg*:history*"
 fi
@@ -66,6 +66,62 @@ msys*)
     alias python='winpty python.exe'
     ;;
 esac
+
+# peco
+function peco-repo() {
+  local selected_file=$(ghq list --full-path | peco --query "$LBUFFER")
+  if [ -n "$selected_file" ]; then
+    if [ -t 1 ]; then
+      echo ${selected_file}
+      cd ${selected_file}
+    fi
+  fi
+}
+bind -x '"\C-]": peco-repo'
+
+function peco-cd() {
+  if [[ -z "$1" ]]; then
+    local dir="$( find . -maxdepth 3 -type d | sed -e 's;\./;;' | peco )"
+    if [ ! -z "$dir" ] ; then
+      cd "$dir"
+    fi
+  else
+    cd "$1"
+  fi
+}
+alias pcd="peco-cd"
+
+peco-history() {
+  local NUM=$(history | wc -l)
+  local FIRST=$((-1*(NUM-1)))
+
+  if [ $FIRST -eq 0 ] ; then
+    # Remove the last entry, "peco-history"
+    history -d $((HISTCMD-1))
+    echo "No history" >&2
+    return
+  fi
+
+  local CMD=$(fc -l $FIRST | sort -k 2 -k 1nr | uniq -f 1 | sort -nr | sed -E 's/^[0-9]+[[:blank:]]+//' | peco | head -n 1)
+
+  if [ -n "$CMD" ] ; then
+    # Replace the last entry, "peco-history", with $CMD
+    history -s $CMD
+
+    if type osascript > /dev/null 2>&1 ; then
+      # Send UP keystroke to console
+      (osascript -e 'tell application "System Events" to keystroke (ASCII character 30)' &)
+    fi
+
+    # Uncomment below to execute it here directly
+    # echo $CMD >&2
+    # eval $CMD
+  else
+    # Remove the last entry, "peco-history"
+    history -d $((HISTCMD-1))
+  fi
+}
+bind '"\C-r":"peco-history\n"'
 
 # local setting
 if [ -f ~/.bash_local ]; then
