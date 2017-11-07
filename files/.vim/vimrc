@@ -144,6 +144,10 @@ nnoremap k gk
 nnoremap <Leader>e  :<C-u>/ oldfiles<Home>browse filter /
 " Like CTRL-], but use ":tjump" instead of ":tag".
 nnoremap <C-]> g<C-]>zz
+" For vim-go
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 " }}}
 
 " Commands {{{
@@ -214,10 +218,10 @@ if isdirectory(expand(s:plug_dir)) " {{{
     Plug 'Shougo/neomru.vim'  " ,     {'on': 'Denite file_mru'}
     Plug 'Jagua/vim-denite-ghq',      {'on': 'DeniteGhq'}
   endif
-  Plug 'ctrlpvim/ctrlp.vim',          Cond(!has('mac'), {'on': 'CtrlP'})
+  Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
   " Snippets
-  Plug 'Shougo/neosnippet-snippets',  {'on': []}
-  Plug 'Shougo/neosnippet.vim',       {'on': []}
+  Plug 'SirVer/ultisnips',            {'on': [], 'for': 'go'}
+  Plug 'honza/vim-snippets',          {'on': []}
   " FileType
   Plug 'othree/html5.vim',            {'for': ['html', 'htmldjango', 'htmljinja']}
   Plug 'fatih/vim-go',                {'for': 'go', 'do': ':GoInstallBinaries'}
@@ -240,7 +244,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
     \ | Plug 'vim-scripts/Align',     {'on': 'SQLUFormatter'}
   " Memo
   Plug 'glidenote/memolist.vim',      {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-  Plug 'lambdalisue/vim-gista',       {'on': 'Gista', 'tag': 'v2.3.3'}
+  " Plug 'lambdalisue/vim-gista',       {'on': 'Gista', 'tag': 'v2.3.3'}
   " Reference & View
   Plug 'kannokanno/previm',           {'on': 'PrevimOpen'}
     \ | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
@@ -288,7 +292,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
     " }}}
   elseif !has('mac')
     " --- ctrlp.vim --- {{{
-    nnoremap <C-p> :<C-u>CtrlP<CR>
+    " nnoremap <C-p> :<C-u>CtrlP<CR>
     let s:ctrlpUserCommand    =
       \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
       \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
@@ -316,26 +320,6 @@ if isdirectory(expand(s:plug_dir)) " {{{
   " nnoremap <silent> <Leader>ml :MemoList<CR>
   nnoremap <silent> <Leader>mn :MemoNew<CR>
   nnoremap <silent> <Leader>mg :MemoGrep<CR>
-  " }}}
-
-  " --- neosnippet.vim --- {{{
-  " Plugin key-mappings.
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-
-  " SuperTab like snippets behavior.
-  "imap <expr><TAB>
-  " \ pumvisible() ? "\<C-n>" :
-  " \ neosnippet#expandable_or_jumpable() ?
-  " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-  " For conceal markers.
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
   " }}}
 
   " --- autofmt --- {{{
@@ -419,8 +403,8 @@ if isdirectory(expand(s:plug_dir)) " {{{
   augroup load_insert_snippet_plugins " {{{
     autocmd!
     autocmd InsertEnter * call plug#load(
-  \   'neosnippet.vim',
-  \   'neosnippet-snippets',
+  \ 'ultisnips',
+  \ 'vim-snippets',
   \ )
   \ | autocmd! load_insert_snippet_plugins
   augroup END " }}}
