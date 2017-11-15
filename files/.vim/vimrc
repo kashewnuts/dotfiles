@@ -13,12 +13,10 @@ let s:is_cmd = has('win32') && !has('gui_running')  " For command prompt on Wind
 " }}}
 
 " Encoding {{{
-" Sets the character encoding used inside Vim
-let &termencoding = &encoding
-let &encoding = s:is_cmd ? 'cp932' : 'utf-8'
+let &termencoding = &encoding   " Encoding used for the terminal
+set encoding=utf-8              " Sets the character encoding used inside Vim
 scriptencoding utf-8            " Specify encoding used in the script
 set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
-set fileencodings=ucs-bom,iso-2022-jp,utf-8,euc-jp,cp932
 " }}}
 
 " Disable {{{
