@@ -38,3 +38,5 @@
 	path = .gitconfig.local
 [github]
 	user = kashewnuts
+[ghq]
+	root = ~/projects
