@@ -214,43 +214,44 @@ if isdirectory(expand(s:plug_dir)) " {{{
   " FuzzyFinder
   let s:denite_version = (v:version >= 800 || has('nvim')) && has('python3')
   if s:denite_version
-    Plug 'Shougo/denite.nvim' " ,     {'on': 'Denite'}
-    Plug 'Shougo/neomru.vim'  " ,     {'on': 'Denite file_mru'}
-    Plug 'Jagua/vim-denite-ghq',      {'on': 'DeniteGhq'}
+    Plug 'Shougo/denite.nvim' " ,       {'on': 'Denite'}
+    Plug 'Shougo/neomru.vim'  " ,       {'on': 'Denite file_mru'}
+    Plug 'Jagua/vim-denite-ghq',        {'on': 'DeniteGhq'}
   endif
-  Plug 'ctrlpvim/ctrlp.vim',          {'on': 'CtrlP'}
+  Plug 'ctrlpvim/ctrlp.vim',            {'on': 'CtrlP'}
   " Snippets
-  Plug 'SirVer/ultisnips',            {'on': [], 'for': 'go'}
-  Plug 'honza/vim-snippets',          {'on': []}
+  Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
+  Plug 'honza/vim-snippets',            {'on': []}
   " FileType
-  Plug 'othree/html5.vim',            {'for': ['html', 'htmldjango', 'htmljinja']}
-  Plug 'fatih/vim-go',                {'for': 'go', 'do': ':GoInstallBinaries'}
-  Plug 'thinca/vim-ft-rst_header',    {'for': 'rst'}
-  Plug 'davidhalter/jedi-vim',        {'for': 'python'}
-  Plug 'tell-k/vim-autopep8',         {'for': 'python', 'do': 'pip install autopep8'}
+  Plug 'othree/html5.vim',              {'for': ['html', 'htmldjango', 'htmljinja']}
+  Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
+  Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
+  Plug 'davidhalter/jedi-vim',          {'for': 'python'}
+  Plug 'tell-k/vim-autopep8',           {'for': 'python', 'do': 'pip install autopep8'}
   if executable('npm')
-    Plug 'leafgarland/typescript-vim',{'for': 'typescript'}
-    Plug 'Quramy/tsuquyomi',          {'for': 'typescript'}
+    Plug 'leafgarland/typescript-vim',  {'for': 'typescript'}
+    Plug 'Quramy/tsuquyomi',            {'for': 'typescript'}
       \ | Plug 'Shougo/vimproc.vim',  Cond(v:version <= 704, {'do': 'make'})
-    Plug 'ternjs/tern_for_vim',       {'for': 'javascript', 'do': 'npm install'}
+    Plug 'ternjs/tern_for_vim',         {'for': 'javascript', 'do': 'npm install'}
   endif
-  Plug 'ekalinin/Dockerfile.vim',     {'for': ['dock*', 'Docker*']}
+  Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   " Formater
   Plug 'vim-jp/autofmt'
-  Plug 'junegunn/vim-easy-align',     {'on': '<Plug>(EasyAlign)'}
-  Plug 'tyru/caw.vim',                {'on':
+  Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
+  Plug 'tyru/caw.vim',                  {'on':
     \ ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
-  Plug 'vim-scripts/SQLUtilities',    {'on': 'SQLUFormatter'}
-    \ | Plug 'vim-scripts/Align',     {'on': 'SQLUFormatter'}
+  Plug 'vim-scripts/SQLUtilities',      {'on': 'SQLUFormatter'}
+    \ | Plug 'vim-scripts/Align',       {'on': 'SQLUFormatter'}
+  Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
-  Plug 'glidenote/memolist.vim',      {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
+  Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Plug 'lambdalisue/vim-gista',       {'on': 'Gista', 'tag': 'v2.3.3'}
   " Reference & View
-  Plug 'kannokanno/previm',           {'on': 'PrevimOpen'}
-    \ | Plug 'tyru/open-browser.vim', {'on': 'PrevimOpen'}
+  Plug 'kannokanno/previm',             {'on': 'PrevimOpen'}
+    \ | Plug 'tyru/open-browser.vim',   {'on': 'PrevimOpen'}
   Plug 'vim-jp/vimdoc-ja'
   " Twitter
-  Plug 'twitvim/twitvim',             {'on': ['SearchTwitter', 'ListTwitter',
+  Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
 
   " List ends here. Plugins become visible to Vim after this call.
