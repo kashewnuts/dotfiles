@@ -225,7 +225,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
   Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   Plug 'davidhalter/jedi-vim',          {'for': 'python'}
-  Plug 'tell-k/vim-autopep8',           {'for': 'python', 'do': 'pip install autopep8'}
+  Plug 'tell-k/vim-autopep8',           {'for': 'python', 'do': 'pip3 install autopep8'}
   if executable('npm')
     Plug 'leafgarland/typescript-vim',  {'for': 'typescript'}
     Plug 'Quramy/tsuquyomi',            {'for': 'typescript'}

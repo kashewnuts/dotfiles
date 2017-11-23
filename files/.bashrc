@@ -10,14 +10,26 @@ alias ll='ls -l'
 if [ "$OSTYPE" != 'msys' ]; then
     # Python
     export PYTHONSTARTUP=~/.pythonstartup
-    export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
+    # export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
+    export WORKON_HOME=~/.virtualenvs
+    export PIPENV_VENV_IN_PROJECT=true
 
-    # Virtualenvwrapper
-    export VIRTUALENV_PYTHON=`which python3`
-    export VIRTUALENVWRAPPER_PYTHON=`which python3`
-    if [ -f `which virtualenvwrapper.sh` ]; then
-        source `which virtualenvwrapper.sh`
-    fi
+    # # Virtualenvwrapper
+    # export VIRTUALENV_PYTHON=`which python3`
+    # export VIRTUALENVWRAPPER_PYTHON=`which python3`
+    # if [ -f `which virtualenvwrapper.sh` ]; then
+    #     source `which virtualenvwrapper.sh`
+    # fi
+
+    # pipenv
+    _pipenv_completion() {
+        local IFS=$'\t'
+        COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
+                       COMP_CWORD=$COMP_CWORD \
+                       _PIPENV_COMPLETE=complete-bash $1 ) )
+        return 0
+    }
+    complete -F _pipenv_completion -o default pipenv
     # export BROWSER=echo heroku open
 
     # crontab
@@ -33,8 +45,8 @@ if [ "$OSTYPE" != 'msys' ]; then
     export GOPATH=$HOME/.go
     export PATH=$PATH:$GOPATH/bin
 
-    # Jupyter Notebook
-    alias iPythonNotebook='cd ~/project/ipythondir;jupyter notebook'
+    # # Jupyter Notebook
+    # alias iPythonNotebook='cd ~/project/ipythondir;jupyter notebook'
     # disable pyc
     export PYTHONDONTWRITEBYTECODE=1
 
