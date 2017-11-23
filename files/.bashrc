@@ -39,7 +39,7 @@ if [ "$OSTYPE" != 'msys' ]; then
     source ~/.git-prompt.sh
     source ~/.git-completion.bash
     GIT_PS1_SHOWDIRTYSTATE=true
-    export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
+    export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
 
     # Golang
     export GOPATH=$HOME/.go
@@ -133,7 +133,7 @@ peco-history() {
     history -d $((HISTCMD-1))
   fi
 }
-bind '"\C-r":"peco-history\n"'
+bind -x '"\C-r": peco-history'
 
 # local setting
 if [ -f ~/.bash_local ]; then
