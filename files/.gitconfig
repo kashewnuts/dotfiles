@@ -25,6 +25,7 @@
 	st = status
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
+	# fetch = fetch --prune
 [merge]
 	ff = false
 [pull]

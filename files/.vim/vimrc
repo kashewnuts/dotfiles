@@ -73,6 +73,7 @@ set showmatch matchtime=1       " The highlight matching brackets
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 set iskeyword& iskeyword+=-     " Include '-' to word
+set spelllang=en,cjk
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -197,6 +198,13 @@ if exists('&breakindent') | set breakindent | endif
 if exists('&fixeol') | set nofixeol | endif
 " }}}
 
+function! PecoOpen()
+  for filename in split(system("find . -type f | peco"), "\n")
+    execute "e" filename
+  endfor
+endfunction
+nnoremap <Leader>op :call PecoOpen()<CR>
+
 " Plugins List {{{
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
@@ -208,6 +216,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
     return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
   endfunction "}}}
 
+  " Plug 'Valloric/YouCompleteMe',        {'do': './install.py --all'}
   " Declare the list of plugins.
   " FuzzyFinder
   let s:denite_version = (v:version >= 800 || has('nvim')) && has('python3')

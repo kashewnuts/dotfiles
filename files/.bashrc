@@ -8,6 +8,15 @@ alias la='ls -al'
 alias ll='ls -l'
 
 if [ "$OSTYPE" != 'msys' ]; then
+    # crontab
+    alias crontab='crontab -i'
+
+    # git-comletion.bash
+    source ~/.git-prompt.sh
+    source ~/.git-completion.bash
+    GIT_PS1_SHOWDIRTYSTATE=true
+    export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
+
     # Python
     export PYTHONSTARTUP=~/.pythonstartup
     # export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
@@ -17,11 +26,22 @@ if [ "$OSTYPE" != 'msys' ]; then
     # # Virtualenvwrapper
     # export VIRTUALENV_PYTHON=`which python3`
     # export VIRTUALENVWRAPPER_PYTHON=`which python3`
-    # if [ -f `which virtualenvwrapper.sh` ]; then
+    # if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    # # if [ -f `which virtualenvwrapper.sh` ]; then
     #     source `which virtualenvwrapper.sh`
     # fi
+    # export BROWSER=echo heroku open
 
-    # pipenv
+    # # direnv
+    # eval "$(direnv hook bash)"
+    # show_virtual_env() {
+    #   if [ -n "$VIRTUAL_ENV" ]; then
+    #     echo "($(basename $VIRTUAL_ENV))"
+    #   fi
+    # }
+    # export PS1='$(show_virtual_env)'$PS1
+
+    # Pipenv
     _pipenv_completion() {
         local IFS=$'\t'
         COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
@@ -30,16 +50,6 @@ if [ "$OSTYPE" != 'msys' ]; then
         return 0
     }
     complete -F _pipenv_completion -o default pipenv
-    # export BROWSER=echo heroku open
-
-    # crontab
-    alias crontab='crontab -i'
-
-    # git-comletion.bash
-    source ~/.git-prompt.sh
-    source ~/.git-completion.bash
-    GIT_PS1_SHOWDIRTYSTATE=true
-    export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
 
     # Golang
     export GOPATH=$HOME/.go
