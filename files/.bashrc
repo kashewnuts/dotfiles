@@ -14,51 +14,21 @@ if [ "$OSTYPE" != 'msys' ]; then
     # git-comletion.bash
     source ~/.git-prompt.sh
     source ~/.git-completion.bash
-    GIT_PS1_SHOWDIRTYSTATE=true
-    export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
 
     # Python
+    export PYTHONDONTWRITEBYTECODE=1    # disable pyc
     export PYTHONSTARTUP=~/.pythonstartup
-    # export PIP_DOWNLOAD_CACHE=~/.pip/download_cache
     export WORKON_HOME=~/.virtualenvs
     export PIPENV_VENV_IN_PROJECT=true
 
-    # # Virtualenvwrapper
-    # export VIRTUALENV_PYTHON=`which python3`
-    # export VIRTUALENVWRAPPER_PYTHON=`which python3`
-    # if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    # # if [ -f `which virtualenvwrapper.sh` ]; then
-    #     source `which virtualenvwrapper.sh`
-    # fi
-    # export BROWSER=echo heroku open
-
-    # # direnv
-    # eval "$(direnv hook bash)"
-    # show_virtual_env() {
-    #   if [ -n "$VIRTUAL_ENV" ]; then
-    #     echo "($(basename $VIRTUAL_ENV))"
-    #   fi
-    # }
-    # export PS1='$(show_virtual_env)'$PS1
-
-    # Pipenv
-    _pipenv_completion() {
-        local IFS=$'\t'
-        COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
-                       COMP_CWORD=$COMP_CWORD \
-                       _PIPENV_COMPLETE=complete-bash $1 ) )
-        return 0
-    }
-    complete -F _pipenv_completion -o default pipenv
+    # Jupyter Notebook
+    alias iPythonNotebook='cd ~/project/ipythondir;jupyter notebook'
 
     # Golang
     export GOPATH=$HOME/.go
     export PATH=$PATH:$GOPATH/bin
-
-    # # Jupyter Notebook
-    # alias iPythonNotebook='cd ~/project/ipythondir;jupyter notebook'
-    # disable pyc
-    export PYTHONDONTWRITEBYTECODE=1
 
     # bash
     export HISTSIZE=10000
