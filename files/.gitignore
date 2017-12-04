@@ -11,3 +11,5 @@ tags
 .idea/
 *.env
 *.venv
+Pipfile*
+*.vscode
