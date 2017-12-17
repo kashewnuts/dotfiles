@@ -13,6 +13,7 @@ DOT_FILES=(
     .hgrc                \
     .ptconfig.toml       \
     .pythonstartup       \
+    .tigrc               \
     .tmux.conf           \
     .vim                 \
 )

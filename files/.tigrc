@@ -1,0 +1,15 @@
+set main-view = id date author commit-title:graph=yes,refs=yes
+set split-view-height = 80%
+
+color "---"			blue	default bold
+color "index "			blue	default bold
+color "diff-tree "		blue	default bold
+color "Merge: "			blue	default bold
+color "parent "			blue	default bold
+color "tree "			blue	default bold
+color id			red	default
+color date			blue	default bold
+color grep.file			blue	default bold
+color help-group		blue	default bold
+color diff-stat			blue	default bold
+color graph-commit		blue	default bold
