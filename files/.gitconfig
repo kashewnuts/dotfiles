@@ -16,8 +16,8 @@
 [i18n]
 	logOutputEncoding = utf-8
 [alias]
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lg = log --graph --abbrev-commit --date=relative
+	lga = log --graph --abbrev-commit --date=relative --all
 	br = branch
 	ci = commit
 	co = checkout
@@ -25,9 +25,8 @@
 	st = status
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
-	# fetch = fetch --prune
-[merge]
-	ff = false
+[format]
+	pretty = '%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 [pull]
 	ff = only
 [filter "lfs"]
