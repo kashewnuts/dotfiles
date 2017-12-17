@@ -3,7 +3,7 @@
 	email = bjzli.m08vo9kqs@gmail.com
 [core]
 	editor = vim
-	excludesfile = /Users/kashewnuts/.gitignore
+	excludesfile = ~/.gitignore
 	quotepath = false
 	preloadindex = true
 	fscache = true
@@ -26,7 +26,7 @@
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
 [format]
-	pretty = %C(red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+	# pretty = %C(red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 	pretty = %C(red)%h %C(green)%ci %C(bold blue)%an %C(blue)%m %C(yellow)%d %Creset%s
 [pull]
 	ff = only
@@ -41,11 +41,3 @@
 	user = kashewnuts
 [ghq]
 	root = ~/projects
-[difftool "sourcetree"]
-	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/kdiff3.app/Contents/MacOS/kdiff3 \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
-	trustExitCode = true
-[commit]
-	template = /Users/kashewnuts/.stCommitMsg
