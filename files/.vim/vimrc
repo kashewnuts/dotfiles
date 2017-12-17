@@ -149,7 +149,6 @@ nnoremap <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 " }}}
 
-" Commands {{{
 " ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -166,15 +165,6 @@ function! s:FixWhitespace(line1, line2)
   silent! execute ':' . a:line1 . ',' . a:line2 . 's/\\\@<!\s\+$//'
   call setpos('.', l:save_cursor)
 endfunction " }}}
-
-" Format JSON {{{
-if executable('jq')
-  command! -nargs=? Jq call s:Jq(<f-args>)
-  function! s:Jq(...)
-    execute '%!jq' (a:0 == 0 ? '.' : a:1)
-  endfunction
-endif " }}}
-" }}}
 
 " AutoCommand {{{
 " init augroup (Write the following in order of less than patch 7.4.2103)
@@ -216,14 +206,12 @@ if isdirectory(expand(s:plug_dir)) " {{{
     return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
   endfunction "}}}
 
-  " Plug 'Valloric/YouCompleteMe',        {'do': './install.py --all'}
   " Declare the list of plugins.
   " FuzzyFinder
   let s:denite_version = (v:version >= 800 || has('nvim')) && has('python3')
   if s:denite_version
     Plug 'Shougo/denite.nvim' " ,       {'on': 'Denite'}
     Plug 'Shougo/neomru.vim'  " ,       {'on': 'Denite file_mru'}
-    Plug 'Jagua/vim-denite-ghq',        {'on': 'DeniteGhq'}
   endif
   Plug 'ctrlpvim/ctrlp.vim',            {'on': 'CtrlP'}
   " Snippets
@@ -235,12 +223,6 @@ if isdirectory(expand(s:plug_dir)) " {{{
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   Plug 'davidhalter/jedi-vim',          {'for': 'python'}
   Plug 'tell-k/vim-autopep8',           {'for': 'python', 'do': 'pip3 install autopep8'}
-  if executable('npm')
-    Plug 'leafgarland/typescript-vim',  {'for': 'typescript'}
-    Plug 'Quramy/tsuquyomi',            {'for': 'typescript'}
-      \ | Plug 'Shougo/vimproc.vim',  Cond(v:version <= 704, {'do': 'make'})
-    Plug 'ternjs/tern_for_vim',         {'for': 'javascript', 'do': 'npm install'}
-  endif
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   " Formater
   Plug 'vim-jp/autofmt'
@@ -252,7 +234,6 @@ if isdirectory(expand(s:plug_dir)) " {{{
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
-  " Plug 'lambdalisue/vim-gista',       {'on': 'Gista', 'tag': 'v2.3.3'}
   " Reference & View
   Plug 'kannokanno/previm',             {'on': 'PrevimOpen'}
     \ | Plug 'tyru/open-browser.vim',   {'on': 'PrevimOpen'}
@@ -275,7 +256,6 @@ if isdirectory(expand(s:plug_dir)) " {{{
     nnoremap <silent> <Leader>fm :<C-u>Denite file_mru<CR>
     nnoremap <C-p> : <C-u>Denite file_point
       \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
-    nnoremap <silent> <Leader>fg :<C-u>DeniteGhq<CR>
     nnoremap <silent> <Leader>ml :
       \ <C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
     " Change mappings.
