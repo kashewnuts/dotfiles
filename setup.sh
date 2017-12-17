@@ -39,3 +39,16 @@ do
         put_symbolic_link $file
     fi
 done
+
+CONFIG_FILES=(
+    peco/config.json
+)
+for file in ${CONFIG_FILES[@]}
+do
+    if [ -a $HOME/.config/$file ]; then
+        echo "Already exists file: $file"
+    else
+        ln -s $HOME/dotfiles/.config/$file $HOME/.config/$file
+        echo "Put Symbolic Link: $file"
+    fi
+done
