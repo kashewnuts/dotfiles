@@ -3,6 +3,7 @@ setlocal textwidth=99
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
 inoremap # X#
+if executable('autopep8') | setlocal equalprg=autopep8\ - | endif
 
 autocmd! User jedi-vim call s:jedivim_hook()
 function! s:jedivim_hook()
@@ -31,10 +32,4 @@ function! JediRename()
 endfunction
 command! Jrename call JediRename()
 command! Jusages call jedi#usages()
-" }}}
-
-" --- vim-autopep8 --- {{{
-let g:autopep8_max_line_length=99
-let g:autopep8_disable_show_diff=1
-autocmd MyAutoCmd FileType python map <buffer> <F8> :call Autopep8()<CR>
 " }}}
