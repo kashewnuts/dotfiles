@@ -45,7 +45,7 @@ let g:loaded_logipat           = 1
 
 " Don't read $VIM/(g)vimrc
 if has('kaoriya')
-  function! s:disable_source(vimrc_local, message)
+  function! s:disable_source(vimrc_local, message) abort
     let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
     if !filereadable(l:vimrc_local)
       execute ':redir! >' . l:vimrc_local
@@ -143,10 +143,16 @@ nnoremap k gk
 nnoremap <Leader>e  :<C-u>/ oldfiles<Home>browse filter /
 " Like CTRL-], but use ":tjump" instead of ":tag".
 nnoremap <C-]> g<C-]>zz
-" For vim-go
-nnoremap <C-n> :cnext<CR>
-nnoremap <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
+" " For vim-go
+" nnoremap <C-n> :cnext<CR>
+" nnoremap <C-m> :cprevious<CR>
+" nnoremap <leader>a :cclose<CR>
+function! PecoOpen() abort
+  for filename in split(system("find . -type f | peco"), "\n")
+    execute "e" filename
+  endfor
+endfunction
+nnoremap <Leader>op :call PecoOpen()<CR>
 " }}}
 
 " ReOpen Encoding {{{
@@ -160,7 +166,7 @@ command! Sjis Cp932
 
 " Remove end of line white space {{{
 command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>, <line2>)
-function! s:FixWhitespace(line1, line2)
+function! s:FixWhitespace(line1, line2) abort
   let l:save_cursor = getpos('.')
   silent! execute ':' . a:line1 . ',' . a:line2 . 's/\\\@<!\s\+$//'
   call setpos('.', l:save_cursor)
@@ -188,23 +194,15 @@ if exists('&breakindent') | set breakindent | endif
 if exists('&fixeol') | set nofixeol | endif
 " }}}
 
-function! PecoOpen()
-  for filename in split(system("find . -type f | peco"), "\n")
-    execute "e" filename
-  endfor
-endfunction
-nnoremap <Leader>op :call PecoOpen()<CR>
-
 " Plugins List {{{
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
 if isdirectory(expand(s:plug_dir)) " {{{
   call plug#begin(s:plug_dir)
-
-  function! Cond(cond, ...) "{{{
-    let opts = get(a:000, 0, {})
-    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-  endfunction "}}}
+  " function! Cond(cond, ...) "{{{
+  "   let opts = get(a:000, 0, {})
+  "   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+  " endfunction "}}}
 
   " Declare the list of plugins.
   " FuzzyFinder
@@ -212,8 +210,9 @@ if isdirectory(expand(s:plug_dir)) " {{{
   if s:denite_version
     Plug 'Shougo/denite.nvim' " ,       {'on': 'Denite'}
     Plug 'Shougo/neomru.vim'  " ,       {'on': 'Denite file_mru'}
+  else
+    Plug 'ctrlpvim/ctrlp.vim',            {'on': 'CtrlP'}
   endif
-  Plug 'ctrlpvim/ctrlp.vim',            {'on': 'CtrlP'}
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -222,7 +221,6 @@ if isdirectory(expand(s:plug_dir)) " {{{
   Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   Plug 'davidhalter/jedi-vim',          {'for': 'python'}
-  Plug 'tell-k/vim-autopep8',           {'for': 'python', 'do': 'pip3 install autopep8'}
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   " Formater
   Plug 'vim-jp/autofmt'
@@ -235,8 +233,8 @@ if isdirectory(expand(s:plug_dir)) " {{{
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
-  Plug 'kannokanno/previm',             {'on': 'PrevimOpen'}
-    \ | Plug 'tyru/open-browser.vim',   {'on': 'PrevimOpen'}
+  " Plug 'kannokanno/previm',             {'on': 'PrevimOpen'}
+  "   \ | Plug 'tyru/open-browser.vim',   {'on': 'PrevimOpen'}
   Plug 'vim-jp/vimdoc-ja'
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
@@ -278,9 +276,9 @@ if isdirectory(expand(s:plug_dir)) " {{{
     call denite#custom#var('file_rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
     " }}}
-  elseif !has('mac')
+  else  " if !has('mac')
     " --- ctrlp.vim --- {{{
-    " nnoremap <C-p> :<C-u>CtrlP<CR>
+    nnoremap <C-p> :<C-u>CtrlP<CR>
     let s:ctrlpUserCommand    =
       \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
       \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
@@ -360,7 +358,7 @@ if isdirectory(expand(s:plug_dir)) " {{{
   let twitvim_browser_cmd = (
   \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
   \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
-  \ has('mac') ? 'open -a Safari' :
+  \ has('mac') ? 'open -a Chrome' :
   \ '')
   let twitvim_force_ssl = 1
   let twitvim_count = 40
