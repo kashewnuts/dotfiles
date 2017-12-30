@@ -11,6 +11,7 @@ DOT_FILES=(
   .gitconfig.unix      \
   .gitignore           \
   .hgrc                \
+  .inputrc             \
   .ptconfig.toml       \
   .pythonstartup       \
   .tigrc               \
