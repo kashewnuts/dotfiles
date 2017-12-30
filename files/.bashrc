@@ -60,32 +60,29 @@ case "$OSTYPE" in
 esac
 
 if type "peco" > /dev/null 2>&1; then
+  function _peco-cd() {
+    if [[ -z "$2" ]]; then
+      if [ ! -z "$1" ] ; then
+        cd "$1"
+      fi
+    else
+      cd "$2"
+    fi
+  }
   if type "ghq" > /dev/null 2>&1; then
     function peco-repo() {
-      local selected_file=$(ghq list --full-path | peco --query "$LBUFFER")
-      if [ -n "$selected_file" ]; then
-        if [ -t 1 ]; then
-          echo ${selected_file}
-          cd ${selected_file}
-        fi
-      fi
+      _peco-cd $(ghq list --full-path | peco --query "$LBUFFER")
     }
-    bind -x '"\C-]": peco-repo'
+    # bind -x '"\C-]": peco-repo'
+    alias prepo="peco-repo"
   fi
 
   function peco-cd() {
-    if [[ -z "$1" ]]; then
-      local dir="$( find . -maxdepth 3 -type d | sed -e 's;\./;;' | peco )"
-      if [ ! -z "$dir" ] ; then
-        cd "$dir"
-      fi
-    else
-      cd "$1"
-    fi
+    _peco-cd $(find . -maxdepth 3 -type d | sed -e 's;\./;;' | peco)
   }
   alias pcd="peco-cd"
 
-  peco-history() {
+  function peco-history() {
     local NUM=$(history | wc -l)
     local FIRST=$((-1*(NUM-1)))
 
@@ -115,7 +112,7 @@ if type "peco" > /dev/null 2>&1; then
       history -d $((HISTCMD-1))
     fi
   }
-  bind -x '"\C-r": peco-history'
+  # bind -x '"\C-r": peco-history'
 fi
 
 # local setting
