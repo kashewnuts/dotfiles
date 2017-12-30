@@ -26,11 +26,9 @@
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
 [format]
-	# pretty = %C(red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
 	pretty = %C(red)%h %C(green)%ci %C(bold blue)%an %C(blue)%m %C(yellow)%d %Creset%s
 [fetch]
 	prune = true
-	all = true
 [pull]
 	ff = only
 [filter "lfs"]
