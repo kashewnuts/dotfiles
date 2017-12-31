@@ -41,7 +41,7 @@ for file in ${DOT_FILES[@]}; do
 done
 
 mkdir -p ~/.cache/tmp
-mkdir -p ~/.config
+mkdir -p ~/.config/peco
 CONFIG_FILES=(
   peco/config.json
   pep8
@@ -51,7 +51,7 @@ for file in ${CONFIG_FILES[@]}; do
   if [ -a $HOME/.config/$file ]; then
     echo "Already exists file: $file"
   else
-    ln -fs $HOME/dotfiles/.config/$file $HOME/.config/$file
+    ln -fs $HOME/dotfiles/files/.config/$file $HOME/.config/$file
     echo "Put Symbolic Link: $file"
   fi
 done
