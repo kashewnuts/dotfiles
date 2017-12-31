@@ -144,14 +144,19 @@ nnoremap <Leader>e  :<C-u>/ oldfiles<Home>browse filter /
 " Like CTRL-], but use ":tjump" instead of ":tag".
 nnoremap <C-]> g<C-]>zz
 " FizzyFinder
-function! PecoOpen() abort
+function! PecoOpen() abort  " CLI Only
+  " let s:fizzyfinder = (finddir('.git', ';') == ''
+  "   \ ? 'find . -type f | peco' 
+  "   \ : 'git ls-files -co --exclude-standard | peco')
   let s:fizzyfinder = (finddir('.git', ';') == ''
-    \ ? "find . -type f | peco" : "git ls-files -co --exclude-standard | peco")
-  for filename in split(system(s:fizzyfinder), "\n")
-    execute "e" filename
+    \ ? 'pt --follow -g' . (has('win32') ? ':' : '=') . ' | peco'
+    \ : 'git ls-files -co --exclude-standard | peco')
+  for filename in split(system(s:fizzyfinder), '\n')
+    execute 'e' filename
   endfor
 endfunction
-nnoremap <C-p> : <C-u>call PecoOpen()<CR>
+" nnoremap <C-p> : <C-u>call PecoOpen()<CR>
+nnoremap <Leader>op  :<C-u>call PecoOpen()<CR>
 " }}}
 
 " ReOpen Encoding {{{
@@ -197,8 +202,17 @@ if exists('&fixeol') | set nofixeol | endif
 " Plugins List {{{
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
-if isdirectory(expand(s:plug_dir)) " {{{
-  call plug#begin(s:plug_dir)
+if isdirectory(expand(s:plug_dir))
+  call plug#begin(s:plug_dir) " {{{
+  " Declare the list of plugins.
+  " FuzzyFinder
+  let s:denite_version = (v:version >= 800 || has('nvim')) && has('python3')
+  if s:denite_version
+    Plug 'Shougo/denite.nvim' " ,       {'on': 'Denite'}
+    Plug 'Shougo/neomru.vim'  " ,       {'on': 'Denite file_mru'}
+  else
+    Plug 'ctrlpvim/ctrlp.vim',            {'on': 'CtrlP'}
+  endif
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -230,6 +244,58 @@ if isdirectory(expand(s:plug_dir)) " {{{
   call plug#end() " }}}
 
   " Plugins Config
+  " FizzFinder {{{
+  if s:denite_version
+    " --- denite.nvim --- {{{
+    " NOTE: In the case of vim-plug, calling from another plug-in
+    " will be slower, so denite.nvim will not lazy-load.
+    nnoremap <silent> <Leader>fb :<C-u>Denite buffer<CR>
+    nnoremap <silent> <Leader>fl :<C-u>Denite line<CR>
+    nnoremap <silent> <Leader>fm :<C-u>Denite file_mru<CR>
+    nnoremap <C-p> : <C-u>Denite file_point
+      \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
+    nnoremap <silent> <Leader>ml :
+      \ <C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+    " Change mappings.
+    call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+    call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+
+    " Change file_rec command.
+    if executable('pt')
+      call denite#custom#var('file_rec', 'command',
+        \ ['pt', '--follow', '-g' . (has('win32') ? ':' : ''), ''])
+      call denite#custom#var('grep', 'command', ['pt'])
+      call denite#custom#var('grep', 'default_opts', [])
+      call denite#custom#var('grep', 'recursive_opts', [])
+    endif
+    if executable('files')
+      call denite#custom#var('file_rec', 'command', ['files', '-a'])
+    endif
+    " Define alias
+    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+    call denite#custom#var('file_rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
+    " }}}
+  else  " if !has('mac')
+    " --- ctrlp.vim --- {{{
+    nnoremap <C-p> :<C-u>CtrlP<CR>
+    let s:ctrlpUserCommand    =
+      \ ['.git', 'cd %s && git ls-files . -co --exclude-standard',
+      \  (executable('pt') ? 'pt --follow -g' : 'find %s -type f')
+      \ ]
+    let g:ctrlp_use_caching   = 0  " no cache
+    let g:ctrlp_show_hidden   = 1  " Show dotfiles
+    let g:ctrlp_key_loop      = 1  " Support multi-byte character
+    let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:100'
+    let g:ctrlp_custom_ignore = {
+      \ 'dir' : '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
+      \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+      \ }
+    " }}}
+  endif
+  " }}}
+
   " --- memolist.vim --- {{{
   let s:memo_path = ((has('win32') || has('mac')) ? ' (個人)' :'')
   let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
@@ -280,12 +346,12 @@ if isdirectory(expand(s:plug_dir)) " {{{
   nmap ga <Plug>(EasyAlign)
   " }}}
 
-  " --- previm --- {{{
-  let g:previm_disable_vimproc = 1
-  let g:previm_show_header = 0
-  command! PrevimRefresh :call previm#refresh()
-  autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
-  " }}}
+  " " --- previm --- {{{
+  " let g:previm_disable_vimproc = 1
+  " let g:previm_show_header = 0
+  " command! PrevimRefresh :call previm#refresh()
+  " autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
+  " " }}}
 
   " --- twitvim --- {{{
   " Basic

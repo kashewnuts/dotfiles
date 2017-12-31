@@ -5,9 +5,8 @@ setlocal textwidth=99
 inoremap # X#
 if executable('autopep8') | setlocal equalprg=autopep8\ - | endif
 
-autocmd! User jedi-vim call s:jedivim_hook()
+autocmd! User jedi-vim call s:jedivim_hook() " {{{
 function! s:jedivim_hook()
-  " --- jedi-vim --- {{{
   let g:jedi#auto_initialization    = 0 " Disable the default initialization routine
   let g:jedi#auto_vim_configuration = 0 " Don't change 'completeopt'
   let g:jedi#popup_on_dot           = 0 " Manually press the completion key
