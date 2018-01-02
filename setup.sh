@@ -41,9 +41,9 @@ for file in ${DOT_FILES[@]}; do
 done
 
 mkdir -p ~/.cache/tmp
-mkdir -p ~/.config/peco
+mkdir -p ~/.config
 CONFIG_FILES=(
-  peco/config.json
+  peco
   pep8
   flake8
 )
