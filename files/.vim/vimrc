@@ -189,6 +189,17 @@ autocmd MyAutoCmd VimLeave * :silent !clear
 " Grep settings {{{
 if executable('pt')
   set grepprg=pt    " https://github.com/monochromegane/the_platinum_searcher
+  " http://stackoverflow.com/questions/15393301/automatically-sort-quickfix-entries-by-line-text-in-vim
+  autocmd MyAutoCmd QuickFixCmdPost * call s:SortQuickfix('s:QfStrCmp')
+  function! s:SortQuickfix(fn)
+    call setqflist(sort(getqflist(), a:fn))
+  endfunction
+  function! s:QfStrCmp(e1, e2)
+    let [t1, t2] = [bufname(a:e1.bufnr), bufname(a:e2.bufnr)]
+    return t1 <? t2 ? -1 : t1 ==? t2 ? 0 : 1
+  endfunction
+elseif executable('jvgrep')
+  let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
 elseif executable('grep')
   set grepprg=grep\ -nH
 endif " }}}
@@ -292,6 +303,9 @@ if isdirectory(expand(s:plug_dir))
       \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
+    if executable('files')
+      let g:ctrlp_user_command = 'files -a %s'
+    endif
     " }}}
   endif
   " }}}
