@@ -68,7 +68,6 @@ set helpheight=999              " Open help to fill the screen
 set helplang=ja,en              " Comma separated list of languages.
 set history=200                 " History
 set list listchars=tab:>-,trail:-  " Visualize character
-set modeline
 set scrolloff=5                 " Keep above and below the cursor
 set showmatch matchtime=1       " The highlight matching brackets
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
@@ -268,6 +267,9 @@ if isdirectory(expand(s:plug_dir))
       \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
     nnoremap <silent> <Leader>ml :
       \ <C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+    " Change mappings.
+    call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+    call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
     " Change file_rec command.
     if executable('pt')
