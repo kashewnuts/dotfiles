@@ -184,6 +184,15 @@ augroup END
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 autocmd MyAutoCmd VimLeave * :silent !clear
+" transparency
+augroup TransparentBG
+  autocmd!
+  autocmd Colorscheme * highlight Normal ctermbg=none
+  autocmd Colorscheme * highlight NonText ctermbg=none
+  autocmd Colorscheme * highlight LineNr ctermbg=none
+  autocmd Colorscheme * highlight Folded ctermbg=none
+  autocmd Colorscheme * highlight EndOfBuffer ctermbg=none
+augroup END
 " }}}
 
 " Grep settings {{{
