@@ -35,7 +35,7 @@ def put_symbolic_link(path, parent_dir='', alias=''):
     p = os.path.join(os.path.expanduser('~'), parent_dir, alias if alias else path)
     msg = 'Already exists file'
     if not check_exists_path(p):
-        os.symlink(os.path.join(os.path.expanduser('~'), 'dotfiles', 'files', parent_dir, path), p)
+        os.symlink(os.path.join(os.getcwd(), parent_dir, path), p)
         msg = 'Put Symbolic Link'
     print(msg + ': %s' % (alias if alias else path))
 
@@ -49,7 +49,7 @@ def setup_dotfiles(path):
             put_symbolic_link(path, alias='vimfiles')
         put_symbolic_link(path)
 
-    elif path.startswith('.gitconfig.unix'):
+    elif path == '.gitconfig.unix':
         p = '.gitconfig.win' if sys.platform.startswith('win32') else path
         put_symbolic_link(p, alias='.gitconfig.os')
 
