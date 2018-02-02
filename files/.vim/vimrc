@@ -20,7 +20,7 @@ set fileformats=unix,dos,mac    " This gives the end-of-line (<EOL>) formats
 " }}}
 
 " Disable {{{
-if has('win32') | set guioptions=M | endif " Disable menu.vim & Use console dialog
+if !has('mac') | set guioptions=M | endif " Disable menu.vim & Use console dialog
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 
@@ -37,7 +37,7 @@ let g:loaded_vimballPlugin     = 1
 let g:loaded_getscript         = 1
 let g:loaded_getscriptPlugin   = 1
 let g:loaded_logipat           = 1
-" let g:loaded_matchparen        = 1
+let g:loaded_matchparen        = 1
 " let g:loaded_netrw             = 1
 " let g:loaded_netrwPlugin       = 1
 " let g:loaded_netrwSettings     = 1
@@ -62,14 +62,12 @@ endif " }}}
 " Appearance
 set ambiwidth=double            " Use twice the width of ASCII characters
 set display=lastline            " Enable view long line
-set fillchars=vert:\|,fold:\    " Characters to fill the separators
 set formatoptions& formatoptions+=mMj  " Support Japanese to join lines
 set helpheight=999              " Open help to fill the screen
 set helplang=ja,en              " Comma separated list of languages.
 set history=200                 " History
 set list listchars=tab:>-,trail:-  " Visualize character
 set scrolloff=5                 " Keep above and below the cursor
-set showmatch matchtime=1       " The highlight matching brackets
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 set iskeyword& iskeyword+=-     " Include '-' to word
@@ -296,7 +294,7 @@ if isdirectory(expand(s:plug_dir))
     call denite#custom#var('file_rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
     " }}}
-  else  " if !has('mac')
+  elseif !has('mac') " SEGV vim on macOS, so disable.
     " --- ctrlp.vim --- {{{
     nnoremap <C-p> :<C-u>CtrlP<CR>
     let s:ctrlpUserCommand    =
