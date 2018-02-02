@@ -44,6 +44,9 @@ export HISTSIZE=10000
 export HISTCONTROL=ignoreboth   # ignorespace+ignoredups = ignoreboth
 export HISTIGNORE="ls:fg*:history*"
 
+# Disable Ctrl+S
+stty stop undef
+
 if type "peco" > /dev/null 2>&1; then
   function _peco-cd() {
     ([ -z "$2" ] && [ ! -z "$1" ]) && cd "$1" || cd "$2"
