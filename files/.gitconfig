@@ -22,6 +22,7 @@
 	ci = commit
 	co = checkout
 	df = diff
+	dft = difftool
 	st = status
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
@@ -42,3 +43,11 @@
 	user = kashewnuts
 [ghq]
 	root = ~/projects
+[diff]
+	tool = vimdiff3
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff3
+[mergetool]
+	prompt = false
