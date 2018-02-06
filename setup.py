@@ -5,6 +5,8 @@ import os
 import os.path
 import sys
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DOT_FILES_DIR = os.path.join(BASE, 'files')
 DOT_FILES = [
     '.ansible.cfg',
     '.bash_profile',
@@ -35,7 +37,7 @@ def put_symbolic_link(path, parent_dir='', alias=''):
     p = os.path.join(os.path.expanduser('~'), parent_dir, alias if alias else path)
     msg = 'Already exists file'
     if not check_exists_path(p):
-        os.symlink(os.path.join(os.getcwd(), parent_dir, path), p)
+        os.symlink(os.path.join(DOT_FILES_DIR, parent_dir, path), p)
         msg = 'Put Symbolic Link'
     print(msg + ': %s' % (alias if alias else path))
 
@@ -59,9 +61,9 @@ def setup_dotfiles(path):
 
 def prepare_dir():
     for path in PATH_LIST:
-        path_ = os.path.expanduser(path)
-        if not check_exists_path(path_):
-            os.makedirs(path_)
+        p = os.path.expanduser(path)
+        if not check_exists_path(p):
+            os.makedirs(p)
 
 
 def main():
