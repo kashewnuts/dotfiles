@@ -155,6 +155,36 @@ function! PecoOpen() abort  " CLI Only
 endfunction
 " nnoremap <C-p> : <C-u>call PecoOpen()<CR>
 nnoremap <Leader>op  :<C-u>call PecoOpen()<CR>
+" Enable Bracketed Paste Mode in vim when using tmux
+if has('patch-8.0.0238')
+  if &term =~ "screen"
+    let &t_BE = "\e[?2004h"
+    let &t_BD = "\e[?2004l"
+    exec "set t_PS=\e[200~"
+    exec "set t_PE=\e[201~"
+  endif
+else
+  if has('patch-8.0.0210')
+    set t_BE=
+  endif
+
+  if &term =~ "xterm" || &term =~ "screen"
+    function XTermPasteBegin(ret)
+      set paste
+      set pastetoggle=<Esc>[201~
+      return a:ret
+    endfunction
+
+    let &t_ti .= "\e[?2004h"
+    let &t_te .= "\e[?2004l"
+
+    noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
+    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
+    vnoremap <special> <expr> <Esc>[200~ XTermPasteBegin("c")
+    cnoremap <special> <Esc>[200~ <nop>
+    cnoremap <special> <Esc>[201~ <nop>
+  endif
+endif
 " }}}
 
 " ReOpen Encoding {{{
