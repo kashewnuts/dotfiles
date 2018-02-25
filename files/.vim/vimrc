@@ -167,7 +167,7 @@ else
   endif
 
   if &term =~ "xterm" || &term =~ "screen"
-    function XTermPasteBegin(ret)
+    function! XTermPasteBegin(ret) abort
       set paste
       set pastetoggle=<Esc>[201~
       return a:ret
@@ -251,7 +251,7 @@ let s:plug_dir = '~/.cache/plugged'
 if isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir) " {{{
   " Declare the list of plugins.
-  Plug 'ctrlpvim/ctrlp.vim',            {'on': 'CtrlP'}
+  Plug 'ctrlpvim/ctrlp.vim',            {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFile']}
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -260,6 +260,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   Plug 'davidhalter/jedi-vim',          {'for': 'python'}
+  Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   " Formater
   Plug 'vim-jp/autofmt'
@@ -285,6 +286,8 @@ if isdirectory(expand(s:plug_dir))
   " Plugins Config
   " --- ctrlp.vim --- {{{
   nnoremap <C-p> :<C-u>CtrlP<CR>
+  nnoremap <silent> <Leader>fb :<C-u>CtrlPBuffer<CR>
+  nnoremap <silent> <Leader>fm :<C-u>CtrlPMRUFile<CR>
   let g:ctrlp_use_caching   = 0  " no cache
   let g:ctrlp_show_hidden   = 1  " Show dotfiles
   let g:ctrlp_key_loop      = 1  " Support multi-byte character
