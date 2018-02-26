@@ -251,7 +251,7 @@ let s:plug_dir = '~/.cache/plugged'
 if isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir) " {{{
   " Declare the list of plugins.
-  Plug 'ctrlpvim/ctrlp.vim',            {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFile']}
+  Plug 'ctrlpvim/ctrlp.vim',            {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles']}
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -287,7 +287,7 @@ if isdirectory(expand(s:plug_dir))
   " --- ctrlp.vim --- {{{
   nnoremap <C-p> :<C-u>CtrlP<CR>
   nnoremap <silent> <Leader>fb :<C-u>CtrlPBuffer<CR>
-  nnoremap <silent> <Leader>fm :<C-u>CtrlPMRUFile<CR>
+  nnoremap <silent> <Leader>fm :<C-u>CtrlPMRUFiles<CR>
   let g:ctrlp_use_caching   = 0  " no cache
   let g:ctrlp_show_hidden   = 1  " Show dotfiles
   let g:ctrlp_key_loop      = 1  " Support multi-byte character
