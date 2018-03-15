@@ -1,3 +1,7 @@
+rem ###########################################################################
+rem # This file doesn't maintain. Please use setup.py.
+rem ###########################################################################
+
 @set DOTFILES=%USERPROFILE%\dotfiles
 
 mklink /d %USERPROFILE%\vimfiles %DOTFILES%\files\.vim

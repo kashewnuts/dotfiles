@@ -2,16 +2,16 @@
 
 This is my dotfiles. To setup, run as below.
 
+## Require
+Python2.7+/3.5+
+
 ## Common
-At your home directory, `git clone https://github.com/kashewnuts/dotfiles`
+- At your home directory, `git clone https://github.com/kashewnuts/dotfiles`
+- Run `python dotfiles/setup.py` (Run as an administrator if Windows)
 
-##  For Non-Windows (like Linux, Mac OSX)
-Just `dotfiles/setup.sh`
-
-## For Windows
-1. Run as an administrator. `dotfiles/setup.bat`
-2. (Option) Add Path to environmental variables to register `vim.exe`.
-3. (Option) Run as an administrator. `reg import dotfiles\files\EditByVim.reg`
+## Option for Windows
+1. Add Path to environmental variables to register `gvim.exe`.
+2. Run as an administrator. `reg import dotfiles\files\EditByVim.reg`
 
 ## LICENSE
 MIT
