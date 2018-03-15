@@ -5,7 +5,6 @@ try:
     import rlcompleter
     import atexit
     import os
-    import platform
     # Tab complement
     readline.parse_and_bind('tab: complete')
     # History File
@@ -16,6 +15,6 @@ try:
     except IOError:
         pass
     atexit.register(readline.write_history_file, histfile)
-    del platform, os, histfile, environ_path, readline, rlcompleter, atexit
+    del os, histfile, readline, rlcompleter, atexit
 except:
     pass
