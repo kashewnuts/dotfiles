@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import os
-import os.path
 import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DOT_FILES_DIR = os.path.join(BASE, 'files')
+DOT_FILES_DIR = os.path.join(BASE_DIR, 'files')
 DOT_FILES = [
     '.ansible.cfg',
     '.bash_profile',
