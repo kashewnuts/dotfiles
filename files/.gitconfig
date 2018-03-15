@@ -1,6 +1,6 @@
 [user]
 	name = kashewnuts
-	email = bjzli.m08vo9kqs@gmail.com
+	email = kashun.nuts@gmail.com
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
@@ -26,12 +26,22 @@
 	st = status
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
+	vimdiff = difftool --tool=vimdiff --no-prompt
 [format]
 	pretty = %C(red)%h %C(green)%ci %C(bold blue)%an %C(blue)%m %C(yellow)%d %Creset%s
 [fetch]
 	prune = true
 [pull]
 	ff = only
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
@@ -43,11 +53,3 @@
 	user = kashewnuts
 [ghq]
 	root = ~/projects
-[diff]
-	tool = vimdiff3
-[difftool]
-	prompt = false
-[merge]
-	tool = vimdiff3
-[mergetool]
-	prompt = false
