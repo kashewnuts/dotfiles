@@ -17,6 +17,7 @@ DOT_FILES = [
     '.gitignore',
     '.hgrc',
     '.inputrc',
+    '.ideavimrc',
     '.ptconfig.toml',
     '.pythonstartup',
     '.tigrc',
