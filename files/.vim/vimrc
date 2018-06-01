@@ -273,8 +273,8 @@ if isdirectory(expand(s:plug_dir))
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
-  " Plug 'kannokanno/previm',             {'on': 'PrevimOpen'}
-  "   \ | Plug 'tyru/open-browser.vim',   {'on': 'PrevimOpen'}
+  Plug 'kannokanno/previm',             {'on': 'PrevimOpen'}
+  Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
   Plug 'vim-jp/vimdoc-ja'
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
@@ -365,6 +365,12 @@ if isdirectory(expand(s:plug_dir))
   " autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
   " " }}}
 
+  " --- open-browser --- {{{
+  let g:netrw_nogx = 1 " disable netrw's gx mapping.
+  nmap gx <Plug>(openbrowser-smart-search)
+  vmap gx <Plug>(openbrowser-smart-search)
+  " }}}
+
   " --- twitvim --- {{{
   " Basic
   let twitvim_browser_cmd = (
@@ -378,6 +384,7 @@ if isdirectory(expand(s:plug_dir))
   let twitvim_allow_multiline = 1
   let twitvim_timestamp_format = '%c'
   let twitvim_show_header = 0
+  autocmd MyAutoCmd FileType twitvim setlocal wrap
 
   " Mapping
   nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
