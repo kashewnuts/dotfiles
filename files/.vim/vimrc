@@ -209,7 +209,7 @@ augroup MyAutoCmd
 augroup END
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
-autocmd MyAutoCmd VimLeave * :silent !clear
+
 " transparency
 augroup TransparentBG
   autocmd!
@@ -358,12 +358,12 @@ if isdirectory(expand(s:plug_dir))
   nmap ga <Plug>(EasyAlign)
   " }}}
 
-  " " --- previm --- {{{
-  " let g:previm_disable_vimproc = 1
-  " let g:previm_show_header = 0
-  " command! PrevimRefresh :call previm#refresh()
-  " autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
-  " " }}}
+  " --- previm --- {{{
+  let g:previm_disable_vimproc = 1
+  let g:previm_show_header = 0
+  command! PrevimRefresh :call previm#refresh()
+  autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
+  " }}}
 
   " --- open-browser --- {{{
   let g:netrw_nogx = 1 " disable netrw's gx mapping.

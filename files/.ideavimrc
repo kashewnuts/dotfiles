@@ -1,1 +1,23 @@
-source ~/.vim/vimrc
+" Appearance
+set clipboard=unnamed,unnamedplus   " Use the OS clipboard
+set history=200                     " History
+set iskeyword& iskeyword+=-         " Include '-' to word
+set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set noerrorbells novisualbell t_vb= " Disable annoying bells
+set scrolloff=5                     " Keep above and below the cursor
+set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
+" Search
+set hlsearch                        " Highlight searches
+nohlsearch                          " Prevent the highlights when reload
+set incsearch                       " Do incremental searching
+set ignorecase                      " Ignore case when searching
+set smartcase                       " No ignorecase if Uppercase char present
+" KeyMapping
+nnoremap j gj
+nnoremap k gk
+nnoremap <C-o> :<C-u>action Back<CR>
+nnoremap <C-i> :<C-u>action Forward<CR>
+nnoremap <C-S-o> <C-o>
+nnoremap <C-S-i> <C-i>
+
+" vim: tw=78 et sw=2 foldmethod=marker

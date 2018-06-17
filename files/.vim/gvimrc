@@ -13,8 +13,8 @@ elseif has('mac')
   let &guifont='Ricty_Diminished:h16'
 else
   " let &guifont='Ricty 12'
-  let &guifont='Monospace 14'
-  let &guifontwide='Monospace 14'
+  let &guifont='Monospace 12'
+  let &guifontwide='Monospace 12'
 endif
 " }}}
 
