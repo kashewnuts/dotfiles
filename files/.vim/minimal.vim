@@ -26,7 +26,6 @@ set list listchars=tab:>-,trail:-   " Visualize character
 set matchpairs& matchpairs+=<:>     " To support brackets a pair of '<' & '>'
 set noerrorbells novisualbell t_vb= guioptions=M    " Turn off menu & bell
 set noswapfile nobackup nowritebackup noundofile    " Doesn't make backup file
-set showmatch matchtime=1           " The highlight matching brackets
 set tags=./tags;                    " Refer to projects root tags file
 set ttimeout timeoutlen=300 ttimeoutlen=50  " Speedup for ESC
 set wildmenu wildmode=list:full cmdheight=2 " Command-line
