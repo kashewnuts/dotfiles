@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.ini setf config
+autocmd BufNewFile,BufRead *.ini setf dosini
