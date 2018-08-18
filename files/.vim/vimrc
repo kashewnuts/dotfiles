@@ -141,18 +141,16 @@ nnoremap k gk
 nnoremap <Leader>e  :<C-u>/ oldfiles<Home>browse filter /
 " Like CTRL-], but use ":tjump" instead of ":tag".
 nnoremap <C-]> g<C-]>zz
-" FizzyFinder
-function! PecoOpen() abort  " CLI Only
-  let s:searcher = (executable('pt')
-    \ ? 'pt --follow -g' . (has('win32') ? ':' : '=') : 'find . -type f')
-  let s:fizzyfinder = (finddir('.git', ';') == ''
-    \ ? s:searcher : 'git ls-files -co --exclude-standard') . ' | peco'
-  for filename in split(system(s:fizzyfinder), '\n')
-    execute 'e' filename
-  endfor
-endfunction
-" nnoremap <C-p> : <C-u>call PecoOpen()<CR>
-nnoremap <Leader>op  :<C-u>call PecoOpen()<CR>
+" Like unimpaired.vim for quickfix-window & buffer
+nnoremap <silent> [c :cprevious<CR>
+nnoremap <silent> ]c :cnext<CR>
+nnoremap <silent> [C :cfirst<CR>
+nnoremap <silent> ]C :clast<CR>
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
 " Enable Bracketed Paste Mode in vim when using tmux
 if has('patch-8.0.0238')
   if &term =~ "screen"
