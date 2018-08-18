@@ -234,7 +234,7 @@ if executable('pt')
 elseif executable('jvgrep')
   let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
 elseif executable('grep')
-  set grepprg=grep\ -nH
+  let &grepprg='grep -rnIH --exclude-dir={*git,*hg,*svn,*venv} --exclude={*tags}'
 endif " }}}
 
 " v:version >= 704 {{{
