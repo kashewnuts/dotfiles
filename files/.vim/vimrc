@@ -250,7 +250,7 @@ if isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir) " {{{
   " Declare the list of plugins.
   Plug 'ctrlpvim/ctrlp.vim',            {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles']}
-  Plug 'jsfaint/gen_tags.vim',          {'on': ['GenCtags']}
+  Plug 'jsfaint/gen_tags.vim'
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -307,7 +307,7 @@ if isdirectory(expand(s:plug_dir))
   " endif
   " }}}
 
-  " --- gen_gtags.vim --- {{{
+  " --- gen_tags.vim --- {{{
   let g:loaded_gentags#gtags = 1
   let g:gen_tags#ctags_auto_gen = 1
   let g:gen_tags#ctags_prune = 1
