@@ -9,7 +9,10 @@ node_modules
 tags
 *.gitkeep
 .idea/
-*.env
-*.venv
+*.env*
+*.venv*
+*venv*
 Pipfile*
 *.vscode
+*.sqlite3
+.ctags

@@ -27,6 +27,7 @@
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
 	vimdiff = difftool --tool=vimdiff --no-prompt
+	vimp = !git ls-files | peco | xargs -o vim
 [format]
 	pretty = %C(red)%h %C(green)%ci %C(bold blue)%an %C(blue)%m %C(yellow)%d %Creset%s
 [fetch]
