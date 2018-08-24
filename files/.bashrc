@@ -47,63 +47,27 @@ export HISTIGNORE="ls:fg*:history*"
 # Disable Ctrl+S
 stty stop undef
 
-if type "peco" > /dev/null 2>&1; then
-  function _peco-cd() {
-    ([ -z "$2" ] && [ ! -z "$1" ]) && cd "$1" || cd "$2"
+# fzf setting
+if [ -f ~/.fzf.bash ]; then
+  # https://tottoto.net/fzf-history-on-bash/
+  __fzf_history__() {
+    if type tac > /dev/null 2>&1; then tac="tac"; else tac="tail -r"; fi
+    shopt -u nocaseglob nocasematch
+    echo $(HISTTIMEFORMAT= history | command $tac | sed -e 's/^ *[0-9]\{1,\}\*\{0,1\} *//' -e 's/ *$//' | awk '!a[$0]++' |
+        FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS --sync -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $(__fzfcmd))
   }
-  function peco-cd() {
-    _peco-cd $(find . -maxdepth 3 -type d | sed -e 's;\./;;' | peco)
-  }
-  alias pcd="peco-cd"
+  bind '"\C-r": " \C-e\C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\er\e^"'
+
 
   if type "ghq" > /dev/null 2>&1; then
-    function peco-repo() {
-      _peco-cd $(ghq list --full-path | peco --query "$LBUFFER")
+    function fzf-repo() {
+      cd $(ghq list --full-path | fzf)
     }
-    # bind -x '"\C-]": peco-repo'
-    alias prepo="peco-repo"
+    alias frepo="fzf-repo"
   fi
 
-  case "$OSTYPE" in
-    darwin*) function peco-history() {
-      local NUM=$(history | wc -l)
-      local FIRST=$((-1*(NUM-1)))
-
-      if [ $FIRST -eq 0 ] ; then
-        # Remove the last entry, "peco-history"
-        history -d $((HISTCMD-1))
-        echo "No history" >&2
-        return
-      fi
-
-      local CMD=$(fc -l $FIRST | sort -k 2 -k 1nr | uniq -f 1 | sort -nr | sed -E 's/^[0-9]+[[:blank:]]+//' | peco | head -n 1)
-
-      if [ -n "$CMD" ] ; then
-        # Replace the last entry, "peco-history", with $CMD
-        history -s $CMD
-
-        if type osascript > /dev/null 2>&1 ; then
-          # Send UP keystroke to console
-          (osascript -e 'tell application "System Events" to keystroke (ASCII character 30)' &)
-        fi
-
-        # Uncomment below to execute it here directly
-        # echo $CMD >&2
-        # eval $CMD
-      else
-        # Remove the last entry, "peco-history"
-        history -d $((HISTCMD-1))
-      fi
-    }
-    ;;
-
-    linux*) function peco-history() {
-      local l=$(HISTTIMEFORMAT= history |  sort -k 2 -k 1nr | uniq -f 1 | sort -nr | sed -e 's/^\s*[0-9]*\s*//' | perl -ne 'print unless $seen{$_}++' | peco --query "$READLINE_LINE" | head -n 1)
-      READLINE_LINE="$l"
-      READLINE_POINT=${#l}
-    }
-  esac
-  bind -x '"\C-r": peco-history'
+  export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+  source ~/.fzf.bash
 fi
 
 # local setting
