@@ -58,7 +58,6 @@ if [ -f ~/.fzf.bash ]; then
   }
   bind '"\C-r": " \C-e\C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\er\e^"'
 
-
   if type "ghq" > /dev/null 2>&1; then
     function fzf-repo() {
       cd $(ghq list --full-path | fzf)
