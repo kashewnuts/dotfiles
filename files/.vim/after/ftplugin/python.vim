@@ -25,7 +25,7 @@ function! s:jedivim_hook()
   let g:jedi#show_call_signatures   = 0 " Avoid popups bugs
   autocmd MyAutoCmd FileType python setlocal omnifunc=jedi#completions
 endfunction
-" let g:jedi#goto_command = '<C-]>'
+let g:jedi#goto_command = '<C-]>'
 
 " Since the default mapping doesn't work, it define with a command.
 command! Jdoc call jedi#show_documentation()

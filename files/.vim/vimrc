@@ -309,8 +309,7 @@ if isdirectory(expand(s:plug_dir))
 
   " --- gen_tags.vim --- {{{
   let g:loaded_gentags#gtags = 1
-  let g:gen_tags#ctags_auto_gen = 1
-  let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy*']
+  let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
   " }}}
 
   " --- memolist.vim --- {{{
