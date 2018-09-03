@@ -251,6 +251,10 @@ if isdirectory(expand(s:plug_dir))
   " Declare the list of plugins.
   Plug 'ctrlpvim/ctrlp.vim',            {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles']}
   Plug 'jsfaint/gen_tags.vim'
+  " Git
+  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse']}
+  Plug 'tpope/vim-rhubarb',             {'on': 'Gbrowse'}
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -310,6 +314,10 @@ if isdirectory(expand(s:plug_dir))
   " --- gen_tags.vim --- {{{
   let g:loaded_gentags#gtags = 1
   let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
+  " }}}
+
+  " --- vim-gitgutter --- {{{
+  set signcolumn=yes
   " }}}
 
   " --- memolist.vim --- {{{
