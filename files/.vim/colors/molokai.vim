@@ -227,7 +227,7 @@ if &t_Co > 255
    hi Comment         ctermfg=59
    hi CursorColumn                ctermbg=236
    hi ColorColumn                 ctermbg=236
-   hi LineNr          ctermfg=250 ctermbg=236
+   hi LineNr          ctermfg=239 ctermbg=None
    hi NonText         ctermfg=59
 
    hi SpecialKey      ctermfg=59
@@ -274,3 +274,8 @@ end
 " Must be at the end, because of ctermbg=234 bug.
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
 set background=dark
+
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi Folded ctermbg=none
+hi EndOfBuffer ctermbg=none
