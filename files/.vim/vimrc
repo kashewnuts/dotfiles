@@ -208,17 +208,6 @@ augroup END
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow " Auto open quickfix-window
 autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 
-" transparency
-augroup TransparentBG
-  autocmd!
-  autocmd Colorscheme * highlight Normal ctermbg=none
-  autocmd Colorscheme * highlight NonText ctermbg=none
-  autocmd Colorscheme * highlight LineNr ctermbg=none
-  autocmd Colorscheme * highlight Folded ctermbg=none
-  autocmd Colorscheme * highlight EndOfBuffer ctermbg=none
-augroup END
-" }}}
-
 " Grep settings {{{
 if executable('pt')
   set grepprg=pt    " https://github.com/monochromegane/the_platinum_searcher
@@ -266,6 +255,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   " Formater
+  Plug 'w0rp/ale'
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on':
@@ -313,7 +303,32 @@ if isdirectory(expand(s:plug_dir))
 
   " --- gen_tags.vim --- {{{
   let g:loaded_gentags#gtags = 1
-  let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
+  " let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
+  let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.mypy_cache']
+  " }}}
+  "
+  " --- ale ---{{{
+  let g:ale_set_loclist = 0
+  let g:ale_set_quickfix = 0    " 1
+  let g:ale_open_list = 0
+  let g:ale_keep_list_window_open = 0
+  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_text_changed = 'never'
+  let g:ale_linters = {
+  \   'python': ['flake8'],
+  \}
+  let g:ale_fix_on_save = 1
+  let b:ale_fixers = {
+  \   'python': ['autopep8', 'isort'],
+  \}
+  " let g:ale_python_
+  " let g:ale_python_isort_options = '-m isort'
+  " Disable warnings about trailing whitespace for Python files.
+  let b:ale_warn_about_trailing_whitespace = 0
+  if exists('&signcolumn')  " Vim 7.4.2201
+    set signcolumn=yes
+  endif
+  let g:ale_sign_column_always = 1
   " }}}
 
   " --- vim-gitgutter --- {{{
