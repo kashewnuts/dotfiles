@@ -258,7 +258,6 @@ if isdirectory(expand(s:plug_dir))
   Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   " Formater
-  Plug 'w0rp/ale'
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on':
@@ -266,6 +265,9 @@ if isdirectory(expand(s:plug_dir))
   Plug 'vim-scripts/SQLUtilities',      {'on': 'SQLUFormatter'}
     \ | Plug 'vim-scripts/Align',       {'on': 'SQLUFormatter'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
+  if v:version >= 800 && has('timers') && has('job') && has('channel')
+    Plug 'w0rp/ale'
+  endif
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
