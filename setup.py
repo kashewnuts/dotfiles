@@ -16,8 +16,9 @@ DOT_FILES = [
     '.gitconfig.unix',
     '.gitignore',
     '.hgrc',
-    '.inputrc',
     '.ideavimrc',
+    '.inputrc',
+    '.isort.cfg',
     '.ptconfig.toml',
     '.pythonstartup',
     '.tigrc',
@@ -25,7 +26,7 @@ DOT_FILES = [
     '.vim',
 ]
 PATH_LIST = ['~/.cache/tmp', '~/.config']
-CONFIG_FILES = ['peco', 'pep8', 'flake8']
+CONFIG_FILES = ['pep8', 'flake8']
 
 
 def check_exists_path(path):
