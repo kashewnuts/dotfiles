@@ -56,6 +56,10 @@ if [ -f ~/.fzf.bash ]; then
     alias frepo="fzf-repo"
   fi
 
+  if type "pt" > /dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='pt -g ""'
+  fi
+
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
   export FZF_UNIQUE_HISTORY=1   # https://github.com/junegunn/fzf/pull/1363/files
   source ~/.fzf.bash

@@ -241,7 +241,8 @@ let s:plug_dir = '~/.cache/plugged'
 if isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir) " {{{
   " Declare the list of plugins.
-  Plug 'ctrlpvim/ctrlp.vim',            {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles']}
+  Plug 'junegunn/fzf',                  {'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
   Plug 'jsfaint/gen_tags.vim'
   " Git
   Plug 'airblade/vim-gitgutter'
@@ -282,28 +283,14 @@ if isdirectory(expand(s:plug_dir))
   call plug#end() " }}}
 
   " Plugins Config
-  " --- ctrlp.vim --- {{{
-  nnoremap <C-p> :<C-u>CtrlP<CR>
-  nnoremap <silent> <Leader>fb :<C-u>CtrlPBuffer<CR>
-  nnoremap <silent> <Leader>fm :<C-u>CtrlPMRUFiles<CR>
-  let g:ctrlp_use_caching   = 0  " no cache
-  let g:ctrlp_show_hidden   = 1  " Show dotfiles
-  let g:ctrlp_key_loop      = 1  " Support multi-byte character
-  let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:50'
-  let g:ctrlp_custom_ignore = {
-    \ 'dir' : '\v[\/]\.(git|hg|svn)$',
-    \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
-    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-    \ }
-  " let g:ctrlp_user_command = 'pt --follow -g='
-  let g:ctrlp_user_command = {
-    \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files'],
-    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \ },
-    \ 'fallback': 'pt --follow -g='
-    \ }
-  " endif
+  " --- fzf.vim --- {{{
+  nnoremap <C-p> :<C-u>Files<CR>
+  nnoremap <silent> <Leader>fb :<C-u>Buffers<CR>
+  nnoremap <silent> <Leader>fm :<C-u>History<CR>
+  command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+  command! -bang -nargs=? -complete=dir GFiles
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   " }}}
 
   " --- gen_tags.vim --- {{{
@@ -339,8 +326,7 @@ if isdirectory(expand(s:plug_dir))
   let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
   let g:memolist_memo_suffix = 'md'
   let g:memolist_template_dir_path = '~/.vim/template/memolist'
-
-  let g:memolist_ex_cmd = 'CtrlP'
+  let g:memolist_ex_cmd = 'Files'
   nnoremap <silent> <Leader>ml :MemoList<CR>
   nnoremap <silent> <Leader>mn :MemoNew<CR>
   nnoremap <silent> <Leader>mg :MemoGrep<CR>
