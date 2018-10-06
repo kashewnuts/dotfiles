@@ -185,6 +185,7 @@ else
 endif
 " }}}
 
+" Commands {{{
 " ReOpen Encoding {{{
 command! Cp932 edit ++enc=cp932
 command! Eucjp edit ++enc=euc-jp
@@ -194,9 +195,17 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 " }}}
 
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+    \ | wincmd p | diffthis
+endif
+
+command! -range=% Isort :<line1>,<line2>! isort -
+" }}}
+
 " Remove end of line white space {{{
-command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>, <line2>)
-function! s:FixWhitespace(line1, line2) abort
+command! -range=% WhitespaceTrim call <SID>WhitespaceTrim(<line1>, <line2>)
+function! s:WhitespaceTrim(line1, line2) abort
   let l:save_cursor = getpos('.')
   silent! execute ':' . a:line1 . ',' . a:line2 . 's/\\\@<!\s\+$//'
   call setpos('.', l:save_cursor)
