@@ -264,10 +264,11 @@ if isdirectory(expand(s:plug_dir))
   Plug 'othree/html5.vim',              {'for': ['html', 'htmldjango', 'htmljinja']}
   Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  Plug 'davidhalter/jedi-vim',          {'for': 'python'}
+  " Plug 'davidhalter/jedi-vim',          {'for': 'python'}
   Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   Plug 'mechatroner/rainbow_csv'
+  Plug 'amiorin/vim-textile',           {'for': 'textile'}
   " Formater
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
@@ -276,7 +277,10 @@ if isdirectory(expand(s:plug_dir))
   Plug 'vim-scripts/SQLUtilities',      {'on': 'SQLUFormatter'}
     \ | Plug 'vim-scripts/Align',       {'on': 'SQLUFormatter'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
+  " For vim8.0 after
   if v:version >= 800 && has('timers') && has('job') && has('channel')
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
     Plug 'w0rp/ale'
   endif
   " Memo
@@ -301,14 +305,23 @@ if isdirectory(expand(s:plug_dir))
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   command! -bang -nargs=? -complete=dir GFiles
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+  " https://blog.fakiyer.com/entry/2017/08/06/222936
+  function! s:find_git_root()
+    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+  endfunction
+  command! -bang -nargs=* Grep
+  \ call fzf#vim#grep(
+  \   'pt --column --ignore=.git --global-gitignore '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
+  \   <bang>0)
   " }}}
 
   " --- gen_tags.vim --- {{{
   let g:loaded_gentags#gtags = 1
-  " let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
-  let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.mypy_cache']
+  let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
   " }}}
-  "
+
   " --- ale ---{{{
   let g:ale_set_loclist = 0
   let g:ale_set_quickfix = 0    " 1
@@ -317,9 +330,10 @@ if isdirectory(expand(s:plug_dir))
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_linters = {
-  \   'python': ['flake8'],
+  \   'python': ['flake8', 'mypy'],
   \}
-  let g:ale_fix_on_save = 1
+  let g:ale_fix_on_save = 0
+  let g:ale_fix_on_text_changed = 'never'
   let b:ale_fixers = {
   \   'python': ['autopep8', 'isort'],
   \}
@@ -329,6 +343,58 @@ if isdirectory(expand(s:plug_dir))
     set signcolumn=yes
   endif
   let g:ale_sign_column_always = 1
+  " }}}
+
+  " --- vim-lsp --- {{{
+  " for Debug
+  " let g:lsp_log_verbose = 1
+  " let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')
+  if executable('typescript-language-server')
+    " npm install -g typescript-language-server
+    augroup LspTypeScript
+      autocmd!
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'typescript-language-server',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
+          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+          \ 'whitelist': ['typescript'],
+          \ })
+      autocmd FileType typescript setlocal omnifunc=lsp#complete
+    augroup END
+  endif
+  if executable('pyls')
+    " pip install python-language-server
+    augroup LspPython
+      autocmd!
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'pyls',
+          \ 'cmd': {server_info->['pyls']},
+          \ 'whitelist': ['python'],
+          \ })
+      autocmd FileType python setlocal omnifunc=lsp#complete
+      autocmd FileType python nnoremap <buffer><silent> <C-]> :<C-u>LspDefinition<CR>
+      autocmd FileType python nnoremap <buffer><silent> <Leader>n :<C-u>LspReferences<CR>
+      " autocmd FileType python nnoremap <buffer><silent> gD :<C-u>LspReferences<CR>
+      " autocmd FileType python nnoremap <buffer><silent> gs :<C-u>LspDocumentSymbol<CR>
+      " autocmd FileType python nnoremap <buffer><silent> gS :<C-u>LspWorkspaceSymbol<CR>
+      " autocmd FileType python nnoremap <buffer><silent> gQ :<C-u>LspDocumentFormat<CR>
+      " autocmd FileType python vnoremap <buffer><silent> gQ :LspDocumentRangeFormat<CR>
+      autocmd FileType python nnoremap <buffer><silent> K :<C-u>LspHover<CR>
+      autocmd FileType python nnoremap <buffer><silent> <F1> :<C-u>LspImplementation<CR>
+      autocmd FileType python nnoremap <buffer><silent> <F2> :<C-u>LspRename<CR>
+    augroup END
+  endif
+  if executable('go-langserver')
+    augroup LspGo
+      autocmd!
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'go-lang',
+          \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
+          \ 'whitelist': ['go'],
+          \ })
+      autocmd FileType go setlocal omnifunc=lsp#complete
+    augroup END
+  endif
   " }}}
 
   " --- memolist.vim --- {{{
