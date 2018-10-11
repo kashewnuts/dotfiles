@@ -73,7 +73,7 @@ set number
 set scrolloff=5                 " Keep above and below the cursor
 set spelllang=en,cjk
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
-set updatetime=100
+set updatetime=250
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
@@ -264,7 +264,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'othree/html5.vim',              {'for': ['html', 'htmldjango', 'htmljinja']}
   Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  " Plug 'davidhalter/jedi-vim',          {'for': 'python'}
+  Plug 'davidhalter/jedi-vim',          {'for': 'python'}
   Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   Plug 'mechatroner/rainbow_csv'
@@ -279,9 +279,15 @@ if isdirectory(expand(s:plug_dir))
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " For vim8.0 after
   if v:version >= 800 && has('timers') && has('job') && has('channel')
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/async.vim'
+    " Plug 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/asyncomplete.vim'
+    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
     Plug 'w0rp/ale'
+    " Plug 'autozimu/LanguageClient-neovim', {
+    " \ 'branch': 'next',
+    " \ 'do': 'bash install.sh',
+    " \ }
   endif
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
@@ -345,56 +351,74 @@ if isdirectory(expand(s:plug_dir))
   let g:ale_sign_column_always = 1
   " }}}
 
+  " --- LanguageClient-neovim --- {{{
+  " \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+  " \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+  " \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+  " let g:LanguageClient_serverCommands = {
+  "   \ 'python': ['pyls'],
+  "   \ }
+  " nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+  " nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  " nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  " autocmd MyAutoCmd FileType python setlocal omnifunc=LanguageClient#complete
+  " }}}
+
+  " -- asyncomplete.vim --- {{{
+  imap <c-space> <Plug>(asyncomplete_force_refresh)
+  " imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
+  " }}}
+
   " --- vim-lsp --- {{{
   " for Debug
   " let g:lsp_log_verbose = 1
   " let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')
-  if executable('typescript-language-server')
-    " npm install -g typescript-language-server
-    augroup LspTypeScript
-      autocmd!
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'typescript-language-server',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
-          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \ 'whitelist': ['typescript'],
-          \ })
-      autocmd FileType typescript setlocal omnifunc=lsp#complete
-    augroup END
-  endif
-  if executable('pyls')
-    " pip install python-language-server
-    augroup LspPython
-      autocmd!
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'pyls',
-          \ 'cmd': {server_info->['pyls']},
-          \ 'whitelist': ['python'],
-          \ })
-      autocmd FileType python setlocal omnifunc=lsp#complete
-      autocmd FileType python nnoremap <buffer><silent> <C-]> :<C-u>LspDefinition<CR>
-      autocmd FileType python nnoremap <buffer><silent> <Leader>n :<C-u>LspReferences<CR>
-      " autocmd FileType python nnoremap <buffer><silent> gD :<C-u>LspReferences<CR>
-      " autocmd FileType python nnoremap <buffer><silent> gs :<C-u>LspDocumentSymbol<CR>
-      " autocmd FileType python nnoremap <buffer><silent> gS :<C-u>LspWorkspaceSymbol<CR>
-      " autocmd FileType python nnoremap <buffer><silent> gQ :<C-u>LspDocumentFormat<CR>
-      " autocmd FileType python vnoremap <buffer><silent> gQ :LspDocumentRangeFormat<CR>
-      autocmd FileType python nnoremap <buffer><silent> K :<C-u>LspHover<CR>
-      autocmd FileType python nnoremap <buffer><silent> <F1> :<C-u>LspImplementation<CR>
-      autocmd FileType python nnoremap <buffer><silent> <F2> :<C-u>LspRename<CR>
-    augroup END
-  endif
-  if executable('go-langserver')
-    augroup LspGo
-      autocmd!
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'go-lang',
-          \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
-          \ 'whitelist': ['go'],
-          \ })
-      autocmd FileType go setlocal omnifunc=lsp#complete
-    augroup END
-  endif
+  " if executable('typescript-language-server')
+  "   " npm install -g typescript-language-server
+  "   augroup LspTypeScript
+  "     autocmd!
+  "     autocmd User lsp_setup call lsp#register_server({
+  "         \ 'name': 'typescript-language-server',
+  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
+  "         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+  "         \ 'whitelist': ['typescript'],
+  "         \ })
+  "     autocmd FileType typescript setlocal omnifunc=lsp#complete
+  "   augroup END
+  " endif
+  " if executable('pyls')
+  "   " pip install python-language-server
+  "   augroup LspPython
+  "     autocmd!
+  "     autocmd User lsp_setup call lsp#register_server({
+  "         \ 'name': 'pyls',
+  "         \ 'cmd': {server_info->['pyls']},
+  "         \ 'whitelist': ['python'],
+  "         \ })
+  "     " autocmd FileType python setlocal omnifunc=lsp#complete
+  "     autocmd FileType python nnoremap <buffer><silent> <C-]> :<C-u>LspDefinition<CR>
+  "     autocmd FileType python nnoremap <buffer><silent> <Leader>n :<C-u>LspReferences<CR>
+  "     " autocmd FileType python nnoremap <buffer><silent> gD :<C-u>LspReferences<CR>
+  "     " autocmd FileType python nnoremap <buffer><silent> gs :<C-u>LspDocumentSymbol<CR>
+  "     " autocmd FileType python nnoremap <buffer><silent> gS :<C-u>LspWorkspaceSymbol<CR>
+  "     " autocmd FileType python nnoremap <buffer><silent> gQ :<C-u>LspDocumentFormat<CR>
+  "     " autocmd FileType python vnoremap <buffer><silent> gQ :LspDocumentRangeFormat<CR>
+  "     autocmd FileType python nnoremap <buffer><silent> K :<C-u>LspHover<CR>
+  "     autocmd FileType python nnoremap <buffer><silent> <F1> :<C-u>LspImplementation<CR>
+  "     autocmd FileType python nnoremap <buffer><silent> <F2> :<C-u>LspRename<CR>
+  "   augroup END
+  " endif
+  " if executable('go-langserver')
+  "   augroup LspGo
+  "     autocmd!
+  "     autocmd User lsp_setup call lsp#register_server({
+  "         \ 'name': 'go-lang',
+  "         \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
+  "         \ 'whitelist': ['go'],
+  "         \ })
+  "     autocmd FileType go setlocal omnifunc=lsp#complete
+  "   augroup END
+  " endif
   " }}}
 
   " --- memolist.vim --- {{{
