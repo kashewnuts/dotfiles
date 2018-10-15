@@ -255,8 +255,13 @@ if isdirectory(expand(s:plug_dir))
   Plug 'jsfaint/gen_tags.vim'
   " Git
   Plug 'airblade/vim-gitgutter'
-  Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse']}
-  Plug 'tpope/vim-rhubarb',             {'on': 'Gbrowse'}
+  if v:version >= 800 && has('timers') && has('job') && has('channel')
+    Plug 'lambdalisue/gina.vim',        {'on': 'Gina'}
+    Plug 'w0rp/ale'
+  else
+    Plug 'tpope/vim-fugitive',          {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse', 'Gstatus']}
+    Plug 'tpope/vim-rhubarb',           {'on': 'Gbrowse'}
+  endif
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -277,18 +282,17 @@ if isdirectory(expand(s:plug_dir))
   Plug 'vim-scripts/SQLUtilities',      {'on': 'SQLUFormatter'}
     \ | Plug 'vim-scripts/Align',       {'on': 'SQLUFormatter'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
-  " For vim8.0 after
-  if v:version >= 800 && has('timers') && has('job') && has('channel')
-    " Plug 'prabirshrestha/async.vim'
-    " Plug 'prabirshrestha/vim-lsp'
-    " Plug 'prabirshrestha/asyncomplete.vim'
-    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'w0rp/ale'
-    " Plug 'autozimu/LanguageClient-neovim', {
-    " \ 'branch': 'next',
-    " \ 'do': 'bash install.sh',
-    " \ }
-  endif
+  " LSP
+  " if v:version >= 800 && has('timers') && has('job') && has('channel')
+  "   Plug 'prabirshrestha/async.vim'
+  "   Plug 'prabirshrestha/vim-lsp'
+  "   " Plug 'prabirshrestha/asyncomplete.vim'
+  "   " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  "   " Plug 'autozimu/LanguageClient-neovim', {
+  "   " \ 'branch': 'next',
+  "   " \ 'do': 'bash install.sh',
+  "   " \ }
+  " endif
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
@@ -365,7 +369,7 @@ if isdirectory(expand(s:plug_dir))
   " }}}
 
   " -- asyncomplete.vim --- {{{
-  imap <c-space> <Plug>(asyncomplete_force_refresh)
+  " imap <c-space> <Plug>(asyncomplete_force_refresh)
   " imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
   " }}}
 
@@ -395,7 +399,7 @@ if isdirectory(expand(s:plug_dir))
   "         \ 'cmd': {server_info->['pyls']},
   "         \ 'whitelist': ['python'],
   "         \ })
-  "     " autocmd FileType python setlocal omnifunc=lsp#complete
+  "     autocmd FileType python setlocal omnifunc=lsp#complete
   "     autocmd FileType python nnoremap <buffer><silent> <C-]> :<C-u>LspDefinition<CR>
   "     autocmd FileType python nnoremap <buffer><silent> <Leader>n :<C-u>LspReferences<CR>
   "     " autocmd FileType python nnoremap <buffer><silent> gD :<C-u>LspReferences<CR>
