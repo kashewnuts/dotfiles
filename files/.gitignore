@@ -16,3 +16,4 @@ Pipfile*
 *.vscode
 *.sqlite3
 .ctags
+*.*orig

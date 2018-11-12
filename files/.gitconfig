@@ -39,11 +39,13 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+	trustExitCode = true	# Be able to abort all diffs with `:cq` or `:cquit`
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
+	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
