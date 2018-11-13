@@ -23,6 +23,7 @@ DOT_FILES = [
     '.pythonstartup',
     '.tigrc',
     '.tmux.conf',
+    '.tmux.conf.osx',
     '.vim',
 ]
 PATH_LIST = ['~/.cache/tmp', '~/.config']
@@ -55,6 +56,9 @@ def setup_dotfiles(path):
     elif path == '.gitconfig.unix':
         p = '.gitconfig.win' if sys.platform.startswith('win32') else path
         put_symbolic_link(p, alias='.gitconfig.os')
+
+    elif path == 'tmux.conf.osx' and sys.platform.startswith('darwin'):
+        put_symbolic_link(path)
 
     else:
         put_symbolic_link(path)

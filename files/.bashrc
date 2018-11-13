@@ -41,11 +41,15 @@ export PATH=$PATH:$GOPATH/bin
 
 # history
 export HISTSIZE=10000
-export HISTCONTROL=ignoreboth   # ignorespace+ignoredups = ignoreboth
+export HISTCONTROL=ignoreboth:erasedups # ignorespace+ignoredups = ignoreboth
 export HISTIGNORE="ls:fg*:history*"
 
 # Disable Ctrl+S
 stty stop undef
+
+# Setting timeout for ESC
+stty time 0
+bind 'set keyseq-timeout 1'
 
 # fzf setting
 if [ -f ~/.fzf.bash ]; then
