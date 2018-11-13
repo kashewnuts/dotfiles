@@ -74,6 +74,7 @@ set scrolloff=5                 " Keep above and below the cursor
 set spelllang=en,cjk
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 set updatetime=250
+set virtualedit=block           " expand selection area for visual mode
 
 " Edit
 set backspace=indent,eol,start  " Can erase everything in the back space
