@@ -1,7 +1,8 @@
+#!/bin/bash
 export EDITOR=vim
 case "$OSTYPE" in
   darwin*)  # BSD (contains Mac)
-  alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+  vi() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
   alias vim=vi
   alias gvim='vi -g'
   export GIT_EDITOR='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
@@ -56,7 +57,7 @@ bind 'set keyseq-timeout 1'
 if [ -f ~/.fzf.bash ]; then
   if type "ghq" > /dev/null 2>&1; then
     function fzf-repo() {
-      cd $(ghq list --full-path | fzf)
+      cd "$(ghq list --full-path | fzf)" || exit
     }
     alias frepo="fzf-repo"
   fi
@@ -75,7 +76,7 @@ if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
   export PS1='\[\033[00m\]\$ '
   case "$OSTYPE" in
     darwin*)  # BSD (contains Mac)
-      alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0" -c "set ruler" -c "set nonumber" "$@"'
+      vi() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0 set ruler set nonumber" "$@"; }
       alias vim=vi
       alias gvim='vi -g'
     ;;

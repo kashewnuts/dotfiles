@@ -343,8 +343,10 @@ if isdirectory(expand(s:plug_dir))
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_linters = {
+  \   'bash': ['shellcheck'],
   \   'python': ['flake8', 'mypy'],
   \}
+  let g:ale_sh_shellcheck_exclusions = 'SC1090'
   let g:ale_fix_on_save = 0
   let g:ale_fix_on_text_changed = 'never'
   let b:ale_fixers = {
