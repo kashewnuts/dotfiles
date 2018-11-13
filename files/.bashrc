@@ -4,6 +4,7 @@ case "$OSTYPE" in
   alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
   alias vim=vi
   alias gvim='vi -g'
+  export GIT_EDITOR='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
   ;;
 
   msys*)    # MSYS
@@ -27,7 +28,7 @@ alias crontab='crontab -i'
 source ~/.git-prompt.sh
 source ~/.git-completion.bash
 export GIT_PS1_SHOWDIRTYSTATE=true
-export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
 
 # Python
 export PYTHONDONTWRITEBYTECODE=1    # disable pyc
@@ -67,6 +68,18 @@ if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
   export FZF_UNIQUE_HISTORY=1   # https://github.com/junegunn/fzf/pull/1363/files
   source ~/.fzf.bash
+fi
+
+# For DEMO
+if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
+  export PS1='\[\033[00m\]\$ '
+  case "$OSTYPE" in
+    darwin*)  # BSD (contains Mac)
+      alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0" -c "set ruler" -c "set nonumber" "$@"'
+      alias vim=vi
+      alias gvim='vi -g'
+    ;;
+  esac
 fi
 
 # local setting

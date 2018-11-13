@@ -252,11 +252,13 @@ if isdirectory(expand(s:plug_dir))
   " Declare the list of plugins.
   Plug 'junegunn/fzf', has('win32') ? {} : {'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'jsfaint/gen_tags.vim'
+  if executable('ctags')
+    Plug 'jsfaint/gen_tags.vim'
+  endif
   " Git
   Plug 'airblade/vim-gitgutter'
   if v:version >= 800 && has('timers') && has('job') && has('channel')
-    Plug 'lambdalisue/gina.vim',        {'on': 'Gina'}
+    Plug 'lambdalisue/gina.vim'
     Plug 'w0rp/ale'
   else
     Plug 'tpope/vim-fugitive',          {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse', 'Gstatus']}
@@ -274,6 +276,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
   Plug 'mechatroner/rainbow_csv'
   Plug 'amiorin/vim-textile',           {'for': 'textile'}
+  Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   " Formater
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
@@ -353,6 +356,7 @@ if isdirectory(expand(s:plug_dir))
     set signcolumn=yes
   endif
   let g:ale_sign_column_always = 1
+  command! AFix ALEFix
   " }}}
 
   " --- LanguageClient-neovim --- {{{
@@ -368,7 +372,7 @@ if isdirectory(expand(s:plug_dir))
   " autocmd MyAutoCmd FileType python setlocal omnifunc=LanguageClient#complete
   " }}}
 
-  " -- asyncomplete.vim --- {{{
+  " --- asyncomplete.vim --- {{{
   " imap <c-space> <Plug>(asyncomplete_force_refresh)
   " imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
   " }}}
@@ -492,7 +496,7 @@ if isdirectory(expand(s:plug_dir))
   let twitvim_browser_cmd = (
   \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
   \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
-  \ has('mac') ? 'open -a Chrome' :
+  \ has('mac') ? 'open -a Firefox' :
   \ '')
   let twitvim_force_ssl = 1
   let twitvim_count = 40
