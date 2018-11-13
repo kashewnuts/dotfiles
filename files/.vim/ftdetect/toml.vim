@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.toml set filetype=config
+autocmd BufNewFile,BufRead *.toml,Pipfile* set filetype=config
