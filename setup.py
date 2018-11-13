@@ -57,8 +57,9 @@ def setup_dotfiles(path):
         p = '.gitconfig.win' if sys.platform.startswith('win32') else path
         put_symbolic_link(p, alias='.gitconfig.os')
 
-    elif path == 'tmux.conf.osx' and sys.platform.startswith('darwin'):
-        put_symbolic_link(path)
+    elif path == '.tmux.conf.osx':
+        if sys.platform.startswith('darwin'):
+            put_symbolic_link(path)
 
     else:
         put_symbolic_link(path)
