@@ -73,7 +73,7 @@ set number
 set scrolloff=5                 " Keep above and below the cursor
 set spelllang=en,cjk
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
-set updatetime=250
+set updatetime=100
 set virtualedit=block           " expand selection area for visual mode
 
 " Edit
@@ -156,7 +156,7 @@ nnoremap <silent> ]B :blast<CR>
 
 " Enable Bracketed Paste Mode in vim when using tmux
 if has('patch-8.0.0238')
-  if &term =~ "screen"
+  if &term =~# 'screen'
     let &t_BE = "\e[?2004h"
     let &t_BD = "\e[?2004l"
     exec "set t_PS=\e[200~"
@@ -167,7 +167,7 @@ else
     set t_BE=
   endif
 
-  if &term =~ "xterm" || &term =~ "screen"
+  if &term =~# 'xterm' || &term =~# 'screen'
     function! XTermPasteBegin(ret) abort
       set paste
       set pastetoggle=<Esc>[201~
@@ -196,7 +196,7 @@ command! Jis Iso2022jp
 command! Sjis Cp932
 " }}}
 
-if !exists(":DiffOrig")
+if !exists(':DiffOrig')
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
     \ | wincmd p | diffthis
 endif
@@ -249,22 +249,23 @@ if exists('&fixeol') | set nofixeol | endif
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
 if isdirectory(expand(s:plug_dir))
+  let s:is_async = v:version >= 800 && has('timers') && has('job') && has('channel')
+
+  " Registered but not loaded by default depending on the condition.
+  function! Cond(cond, ...)
+    let opts = get(a:000, 0, {})
+    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+  endfunction
+
   call plug#begin(s:plug_dir) " {{{
   " Declare the list of plugins.
+  Plug 'junegunn/vim-plug'
+  " Fizzy Finder
   Plug 'junegunn/fzf', has('win32') ? {} : {'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  if executable('ctags')
-    Plug 'jsfaint/gen_tags.vim'
-  endif
   " Git
+  Plug 'lambdalisue/gina.vim',          Cond(s:is_async)
   Plug 'airblade/vim-gitgutter'
-  if v:version >= 800 && has('timers') && has('job') && has('channel')
-    Plug 'lambdalisue/gina.vim'
-    Plug 'w0rp/ale'
-  else
-    Plug 'tpope/vim-fugitive',          {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse', 'Gstatus']}
-    Plug 'tpope/vim-rhubarb',           {'on': 'Gbrowse'}
-  endif
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -279,6 +280,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'amiorin/vim-textile',           {'for': 'textile'}
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   " Formater
+  Plug 'w0rp/ale',                      Cond(s:is_async)
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on':
@@ -286,23 +288,13 @@ if isdirectory(expand(s:plug_dir))
   Plug 'vim-scripts/SQLUtilities',      {'on': 'SQLUFormatter'}
     \ | Plug 'vim-scripts/Align',       {'on': 'SQLUFormatter'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
-  " LSP
-  " if v:version >= 800 && has('timers') && has('job') && has('channel')
-  "   Plug 'prabirshrestha/async.vim'
-  "   Plug 'prabirshrestha/vim-lsp'
-  "   " Plug 'prabirshrestha/asyncomplete.vim'
-  "   " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  "   " Plug 'autozimu/LanguageClient-neovim', {
-  "   " \ 'branch': 'next',
-  "   " \ 'do': 'bash install.sh',
-  "   " \ }
-  " endif
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
-  Plug 'kannokanno/previm',             {'on': 'PrevimOpen'}
+  Plug 'previm/previm',                 {'on': 'PrevimOpen'}
   Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
   Plug 'vim-jp/vimdoc-ja'
+  Plug 'jsfaint/gen_tags.vim',          Cond(executable('ctags'))
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
@@ -336,6 +328,10 @@ if isdirectory(expand(s:plug_dir))
   let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
   " }}}
 
+  " --- gina.vim --- {{{
+  command! Gbrowse Gina browse :
+  " }}}
+
   " --- ale ---{{{
   let g:ale_set_loclist = 0
   let g:ale_set_quickfix = 0    " 1
@@ -360,76 +356,6 @@ if isdirectory(expand(s:plug_dir))
   endif
   let g:ale_sign_column_always = 1
   command! AFix ALEFix
-  " }}}
-
-  " --- LanguageClient-neovim --- {{{
-  " \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-  " \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-  " \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-  " let g:LanguageClient_serverCommands = {
-  "   \ 'python': ['pyls'],
-  "   \ }
-  " nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-  " nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-  " nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-  " autocmd MyAutoCmd FileType python setlocal omnifunc=LanguageClient#complete
-  " }}}
-
-  " --- asyncomplete.vim --- {{{
-  " imap <c-space> <Plug>(asyncomplete_force_refresh)
-  " imap <C-x><C-u> <Plug>(asyncomplete_force_refresh)
-  " }}}
-
-  " --- vim-lsp --- {{{
-  " for Debug
-  " let g:lsp_log_verbose = 1
-  " let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')
-  " if executable('typescript-language-server')
-  "   " npm install -g typescript-language-server
-  "   augroup LspTypeScript
-  "     autocmd!
-  "     autocmd User lsp_setup call lsp#register_server({
-  "         \ 'name': 'typescript-language-server',
-  "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
-  "         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-  "         \ 'whitelist': ['typescript'],
-  "         \ })
-  "     autocmd FileType typescript setlocal omnifunc=lsp#complete
-  "   augroup END
-  " endif
-  " if executable('pyls')
-  "   " pip install python-language-server
-  "   augroup LspPython
-  "     autocmd!
-  "     autocmd User lsp_setup call lsp#register_server({
-  "         \ 'name': 'pyls',
-  "         \ 'cmd': {server_info->['pyls']},
-  "         \ 'whitelist': ['python'],
-  "         \ })
-  "     autocmd FileType python setlocal omnifunc=lsp#complete
-  "     autocmd FileType python nnoremap <buffer><silent> <C-]> :<C-u>LspDefinition<CR>
-  "     autocmd FileType python nnoremap <buffer><silent> <Leader>n :<C-u>LspReferences<CR>
-  "     " autocmd FileType python nnoremap <buffer><silent> gD :<C-u>LspReferences<CR>
-  "     " autocmd FileType python nnoremap <buffer><silent> gs :<C-u>LspDocumentSymbol<CR>
-  "     " autocmd FileType python nnoremap <buffer><silent> gS :<C-u>LspWorkspaceSymbol<CR>
-  "     " autocmd FileType python nnoremap <buffer><silent> gQ :<C-u>LspDocumentFormat<CR>
-  "     " autocmd FileType python vnoremap <buffer><silent> gQ :LspDocumentRangeFormat<CR>
-  "     autocmd FileType python nnoremap <buffer><silent> K :<C-u>LspHover<CR>
-  "     autocmd FileType python nnoremap <buffer><silent> <F1> :<C-u>LspImplementation<CR>
-  "     autocmd FileType python nnoremap <buffer><silent> <F2> :<C-u>LspRename<CR>
-  "   augroup END
-  " endif
-  " if executable('go-langserver')
-  "   augroup LspGo
-  "     autocmd!
-  "     autocmd User lsp_setup call lsp#register_server({
-  "         \ 'name': 'go-lang',
-  "         \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
-  "         \ 'whitelist': ['go'],
-  "         \ })
-  "     autocmd FileType go setlocal omnifunc=lsp#complete
-  "   augroup END
-  " endif
   " }}}
 
   " --- memolist.vim --- {{{
