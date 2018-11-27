@@ -341,13 +341,19 @@ if isdirectory(expand(s:plug_dir))
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_linters = {
   \   'bash': ['shellcheck'],
+  \   'json': ['prettier'],
+  \   'markdown': ['prettier'],
   \   'python': ['flake8', 'mypy'],
+  \   'yaml': ['prettier'],
   \}
   let g:ale_sh_shellcheck_exclusions = 'SC1090'
   let g:ale_fix_on_save = 0
   let g:ale_fix_on_text_changed = 'never'
   let b:ale_fixers = {
+  \   'json': ['prettier'],
+  \   'markdown': ['prettier'],
   \   'python': ['autopep8', 'isort'],
+  \   'yaml': ['prettier'],
   \}
   " Disable warnings about trailing whitespace for Python files.
   let b:ale_warn_about_trailing_whitespace = 0
