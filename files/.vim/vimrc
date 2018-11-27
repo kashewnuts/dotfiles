@@ -248,15 +248,8 @@ if exists('&fixeol') | set nofixeol | endif
 " Plugins List {{{
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
+let s:is_async = (v:version >= 800 && has('timers') && has('job') && has('channel'))
 if isdirectory(expand(s:plug_dir))
-  let s:is_async = v:version >= 800 && has('timers') && has('job') && has('channel')
-
-  " Registered but not loaded by default depending on the condition.
-  function! Cond(cond, ...)
-    let opts = get(a:000, 0, {})
-    return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-  endfunction
-
   call plug#begin(s:plug_dir) " {{{
   " Declare the list of plugins.
   Plug 'junegunn/vim-plug'
@@ -264,8 +257,8 @@ if isdirectory(expand(s:plug_dir))
   Plug 'junegunn/fzf', has('win32') ? {} : {'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   " Git
-  Plug 'lambdalisue/gina.vim',          Cond(s:is_async)
   Plug 'airblade/vim-gitgutter'
+  if s:is_async | Plug 'lambdalisue/gina.vim' | endif
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -280,7 +273,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'amiorin/vim-textile',           {'for': 'textile'}
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   " Formater
-  Plug 'w0rp/ale',                      Cond(s:is_async)
+  if s:is_async | Plug 'w0rp/ale' | endif
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on':
@@ -294,7 +287,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'previm/previm',                 {'on': 'PrevimOpen'}
   Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
   Plug 'vim-jp/vimdoc-ja'
-  Plug 'jsfaint/gen_tags.vim',          Cond(executable('ctags'))
+  if executable('ctags') | Plug 'jsfaint/gen_tags.vim' | endif
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
