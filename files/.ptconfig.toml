@@ -3,6 +3,6 @@ nogroup = true
 smart-case = true
 hidden = true
 vcs-ignore = ['.gitignore','.git/info/exclude', '.hgignore_global', '.hgignore']
-ignore = ['.git', '.svn', '.hg', '.exe', '.tags', '.pyc', '.DS_Store', '.venv', 'tags', '.idea']
+ignore = ['.git', '.svn', '.hg', '.exe', '.tags', '.pyc', '.DS_Store', '.venv', 'tags', '.idea', '.tox', '.orig']
 
 # vim: ft=config
