@@ -258,7 +258,8 @@ if isdirectory(expand(s:plug_dir))
   Plug 'junegunn/fzf.vim'
   " Git
   Plug 'airblade/vim-gitgutter'
-  if s:is_async | Plug 'lambdalisue/gina.vim' | endif
+  Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse']}
+  Plug 'tpope/vim-rhubarb',             {'on': 'Gbrowse'}
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
@@ -321,15 +322,7 @@ if isdirectory(expand(s:plug_dir))
   let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
   " }}}
 
-  " --- gina.vim --- {{{
-  command! Gbrowse Gina browse :
-  " }}}
-
   " --- ale ---{{{
-  let g:ale_set_loclist = 0
-  let g:ale_set_quickfix = 0    " 1
-  let g:ale_open_list = 0
-  let g:ale_keep_list_window_open = 0
   let g:ale_lint_on_save = 1
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_linters = {
@@ -350,11 +343,16 @@ if isdirectory(expand(s:plug_dir))
   \}
   " Disable warnings about trailing whitespace for Python files.
   let b:ale_warn_about_trailing_whitespace = 0
-  if exists('&signcolumn')  " Vim 7.4.2201
-    set signcolumn=yes
-  endif
   let g:ale_sign_column_always = 1
   command! AFix ALEFix
+  " }}}
+
+  " --- vim-gitgutter --- {{{
+  if exists('&signcolumn')  " Vim 7.4.2201
+    set signcolumn=yes
+  else
+    let g:gitgutter_sign_column_always = 1
+  endif
   " }}}
 
   " --- memolist.vim --- {{{
