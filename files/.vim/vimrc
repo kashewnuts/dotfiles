@@ -383,11 +383,15 @@ if isdirectory(expand(s:plug_dir))
       silent! xunmap <buffer> gc
       silent! nunmap <buffer> gcc
       silent! xunmap <buffer> gcc
+      silent! nunmap <buffer> <Leader>c
+      silent! xunmap <buffer> <Leader>c
     else
       nmap <buffer> gc <Plug>(caw:prefix)
       xmap <buffer> gc <Plug>(caw:prefix)
       nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
       xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+      nmap <buffer> <Leader>c <Plug>(caw:hatpos:toggle)
+      xmap <buffer> <Leader>c <Plug>(caw:hatpos:toggle)
     endif
   endfunction
   autocmd MyAutoCmd FileType * call InitCaw()
