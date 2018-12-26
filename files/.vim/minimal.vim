@@ -35,8 +35,7 @@ set laststatus=2                    " Always display status bar
 let &statusline="%<%F%m%r%h%w%=[%{&ff}][%{&enc}][%{strlen(&ft)?&ft:'no\ ft'}]"
   \ . "%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}%4v\ %P"
 " --- Grep ---
-" if executable('pt') | let &grepprg='pt --nocolor --nogroup --hidden -S' | endif
-if executable('jvgrep') | let &grepprg='jvgrep -iIR' | endif
+let &grepprg='grep -rnIH --exclude-dir={*git,*hg,*svn,*venv} --exclude={*tags}'
 autocmd QuickFixCmdPost *grep* cwindow  " Auto open quickfix-window
 " --- KeyMapping ---
 " To Enable filtering the command history

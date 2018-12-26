@@ -2,10 +2,17 @@
 export EDITOR=vim
 case "$OSTYPE" in
   darwin*)  # BSD (contains Mac)
-  vi() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
-  alias vim=vi
-  alias gvim='vi -g'
   export GIT_EDITOR='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
+  if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
+    export PS1='\[\033[00m\]\$ '
+    vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0 set ruler set nonumber" "$@"; }
+    alias vi=vim
+    alias gvim='vi -g'
+  else
+    vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
+    alias vi='vim -Nu ~/.vim/minimal.vim'
+    alias gvim='vim -g'
+  fi
   ;;
 
   msys*)    # MSYS
@@ -17,6 +24,7 @@ case "$OSTYPE" in
 
   linux*)   # Linux
   export LANGUAGE=ja_JP:ja
+  alias vi='vim -Nu ~/.vim/minimal.vim'
   alias ls='ls --show-control-chars'
 esac
 alias la='ls -al'
@@ -69,18 +77,6 @@ if [ -f ~/.fzf.bash ]; then
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
   export FZF_UNIQUE_HISTORY=1   # https://github.com/junegunn/fzf/pull/1363/files
   source ~/.fzf.bash
-fi
-
-# For DEMO
-if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
-  export PS1='\[\033[00m\]\$ '
-  case "$OSTYPE" in
-    darwin*)  # BSD (contains Mac)
-      vi() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0 set ruler set nonumber" "$@"; }
-      alias vim=vi
-      alias gvim='vi -g'
-    ;;
-  esac
 fi
 
 # local setting
