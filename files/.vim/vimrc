@@ -292,9 +292,36 @@ if isdirectory(expand(s:plug_dir))
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
+  " LSP
+  " if s:is_async
+  "   Plug 'prabirshrestha/async.vim'
+  "   Plug 'prabirshrestha/vim-lsp'
+  " endif
+  " Plug 'plytophogy/vim-virtualenv',     {'for': 'python'}
 
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end() " }}}
+
+  " if executable('pyls')
+  "   " pip install python-language-server
+  "   autocmd User lsp_setup call lsp#register_server({
+  "       \ 'name': 'pyls',
+  "       \ 'cmd': {server_info->['pyls']},
+  "       \ 'whitelist': ['python'],
+  "       \ })
+  "   augroup PylsCommands
+  "     autocmd!
+  "     autocmd FileType python setlocal omnifunc=lsp#complete
+  "     autocmd FileType python nnoremap <C-]> :<C-u>LspDefinition<CR>
+  "     autocmd FileType python nnoremap K :<C-u>LspHover<CR>
+  "     autocmd FileType python nnoremap <Leader>R :<C-u>LspRename<CR>
+  "     autocmd FileType python nnoremap <Leader>n :<C-u>LspReferences<CR>
+  "   augroup END
+  "   augroup LaunchPyls
+  "     autocmd!
+  "     autocmd BufWinEnter *.py :call lsp#enable()
+  "   augroup END
+  " endif
 
   " Plugins Config
   " --- fzf.vim --- {{{
