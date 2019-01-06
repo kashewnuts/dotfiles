@@ -7,12 +7,11 @@ case "$OSTYPE" in
     export PS1='\[\033[00m\]\$ '
     vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0 set ruler set nonumber" "$@"; }
     alias vi=vim
-    alias gvim='vi -g'
   else
     vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
     alias vi='vim -Nu ~/.vim/minimal.vim'
-    alias gvim='vim -g'
   fi
+  alias gvim='vim -g'
   ;;
 
   msys*)    # MSYS
