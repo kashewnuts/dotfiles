@@ -11,12 +11,15 @@ function! s:build_go_files()
     call go#cmd#Build(0)
   endif
 endfunction
-" autocmd MyAutoCmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd MyAutoCmd FileType go noremap <leader>b :<C-u>call <SID>build_go_files()<CR>
-autocmd MyAutoCmd FileType go noremap <leader>r  <Plug>(go-run)
-autocmd MyAutoCmd FileType go noremap <leader>t  <Plug>(go-test)
-autocmd MyAutoCmd FileType go noremap <Leader>c  <Plug>(go-coverage-toggle)
-autocmd MyAutoCmd FileType go noremap <Leader>i  <Plug>(go-info)
+augroup GolangAutoCmd
+  autocmd!
+  " autocmd FileType go nmap <leader>b  <Plug>(go-build)
+  autocmd FileType go noremap <leader>b :<C-u>call <SID>build_go_files()<CR>
+  autocmd FileType go noremap <leader>r  <Plug>(go-run)
+  autocmd FileType go noremap <leader>t  <Plug>(go-test)
+  autocmd FileType go noremap <Leader>c  <Plug>(go-coverage-toggle)
+  autocmd FileType go noremap <Leader>i  <Plug>(go-info)
+augroup END
 
 let g:go_list_type = 'quickfix'
 let g:go_fmt_command = 'goimports'  " Auto run goimports
