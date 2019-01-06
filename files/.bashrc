@@ -25,6 +25,7 @@ case "$OSTYPE" in
   export LANGUAGE=ja_JP:ja
   alias vi='vim -Nu ~/.vim/minimal.vim'
   alias ls='ls --show-control-chars'
+  alias open='xdg-open &>/dev/null'
 esac
 alias la='ls -al'
 alias ll='ls -l'
@@ -79,6 +80,7 @@ if [ -f ~/.fzf.bash ]; then
 fi
 
 # local setting
+export PATH=$HOME/.local/bin/:$PATH
 if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
