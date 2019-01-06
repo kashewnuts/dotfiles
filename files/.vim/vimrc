@@ -260,6 +260,8 @@ if isdirectory(expand(s:plug_dir))
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse']}
   Plug 'tpope/vim-rhubarb',             {'on': 'Gbrowse'}
+  Plug 'mattn/gist-vim',                {'on': 'Gist'}
+    \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
