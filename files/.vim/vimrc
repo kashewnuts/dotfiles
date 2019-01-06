@@ -309,6 +309,7 @@ if isdirectory(expand(s:plug_dir))
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end() " }}}
 
+  " --- vim-lsp --- {{{
   " if executable('pyls')
   "   " pip install python-language-server
   "   autocmd User lsp_setup call lsp#register_server({
@@ -328,7 +329,7 @@ if isdirectory(expand(s:plug_dir))
   "     autocmd!
   "     autocmd BufWinEnter *.py :call lsp#enable()
   "   augroup END
-  " endif
+  " endif " }}}
 
   " Plugins Config
   " Fizzy Finder {{{
@@ -353,6 +354,7 @@ if isdirectory(expand(s:plug_dir))
       \ },
       \ 'fallback': 'pt --follow -g='
       \ }
+    " }}}
   else
     " --- fzf.vim --- {{{
     nnoremap <C-p> :<C-u>Files<CR>
