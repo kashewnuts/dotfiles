@@ -284,10 +284,8 @@ if isdirectory(expand(s:plug_dir))
   if s:is_async | Plug 'w0rp/ale' | endif
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
-  Plug 'tyru/caw.vim',                  {'on':
-    \ ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
-  Plug 'vim-scripts/SQLUtilities',      {'on': 'SQLUFormatter'}
-    \ | Plug 'vim-scripts/Align',       {'on': 'SQLUFormatter'}
+  Plug 'tyru/caw.vim',                  {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
+  Plug 'mattn/vim-sqlfmt',              {'on': 'SQLFmt', 'do': 'pip install --user -U sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
