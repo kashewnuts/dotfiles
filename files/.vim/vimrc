@@ -68,6 +68,7 @@ set helplang=ja,en              " Comma separated list of languages.
 set history=200                 " History
 set iskeyword& iskeyword+=-     " Include '-' to word
 set list listchars=tab:>-,trail:-  " Visualize character
+set modeline
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set number
 set scrolloff=5                 " Keep above and below the cursor
@@ -254,8 +255,12 @@ if isdirectory(expand(s:plug_dir))
   " Declare the list of plugins.
   Plug 'junegunn/vim-plug'
   " Fizzy Finder
-  Plug 'junegunn/fzf', has('win32') ? {} : {'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
+  if has('win32')
+    Plug 'ctrlpvim/ctrlp.vim',          {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles']}
+  else
+    Plug 'junegunn/fzf',                {'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+  endif
   " Git
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame', 'Gbrowse']}
@@ -326,25 +331,49 @@ if isdirectory(expand(s:plug_dir))
   " endif
 
   " Plugins Config
-  " --- fzf.vim --- {{{
-  nnoremap <C-p> :<C-u>Files<CR>
-  nnoremap <silent> <Leader>fb :<C-u>Buffers<CR>
-  nnoremap <silent> <Leader>fm :<C-u>History<CR>
-  command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-  command! -bang -nargs=? -complete=dir GFiles
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-  " https://blog.fakiyer.com/entry/2017/08/06/222936
-  function! s:find_git_root()
-    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-  endfunction
-  command! -bang -nargs=* Grep
-  \ call fzf#vim#grep(
-  \   'pt --column --ignore=.git --global-gitignore '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
-  \   <bang>0)
-  " }}}
+  " Fizzy Finder {{{
+  if has('win32')
+    " --- ctrlp.vim --- {{{
+    nnoremap <C-p> :<C-u>CtrlP<CR>
+    nnoremap <silent> <Leader>fb :<C-u>CtrlPBuffer<CR>
+    nnoremap <silent> <Leader>fm :<C-u>CtrlPMRUFiles<CR>
+    let g:ctrlp_use_caching   = 0  " no cache
+    let g:ctrlp_show_hidden   = 1  " Show dotfiles
+    let g:ctrlp_key_loop      = 1  " Support multi-byte character
+    let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:50'
+    let g:ctrlp_custom_ignore = {
+      \ 'dir' : '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
+      \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+      \ }
+    let g:ctrlp_user_command = {
+      \ 'types': {
+      \ 1: ['.git', 'cd %s && git ls-files'],
+      \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+      \ },
+      \ 'fallback': 'pt --follow -g='
+      \ }
+  else
+    " --- fzf.vim --- {{{
+    nnoremap <C-p> :<C-u>Files<CR>
+    nnoremap <silent> <Leader>fb :<C-u>Buffers<CR>
+    nnoremap <silent> <Leader>fm :<C-u>History<CR>
+    command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+    command! -bang -nargs=? -complete=dir GFiles
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+    " https://blog.fakiyer.com/entry/2017/08/06/222936
+    function! s:find_git_root()
+      return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+    endfunction
+    command! -bang -nargs=* Grep
+    \ call fzf#vim#grep(
+    \   'pt --column --ignore=.git --global-gitignore '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
+    \   <bang>0)
+    " }}}
+  endif " }}}
 
   " --- gen_tags.vim --- {{{
   let g:loaded_gentags#gtags = 1
@@ -389,7 +418,7 @@ if isdirectory(expand(s:plug_dir))
   let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
   let g:memolist_memo_suffix = 'md'
   let g:memolist_template_dir_path = '~/.vim/template/memolist'
-  let g:memolist_ex_cmd = 'Files'
+  let g:memolist_ex_cmd = (has('win32') ? 'CtrlP': 'Files')
   nnoremap <silent> <Leader>ml :MemoList<CR>
   nnoremap <silent> <Leader>mn :MemoNew<CR>
   nnoremap <silent> <Leader>mg :MemoGrep<CR>
