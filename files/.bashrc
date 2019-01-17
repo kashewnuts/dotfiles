@@ -79,8 +79,17 @@ if [ -f ~/.fzf.bash ]; then
   source ~/.fzf.bash
 fi
 
+_pipenv_completion() {
+    local IFS=$'\t'
+    COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   _PIPENV_COMPLETE=complete-bash $1 ) )
+    return 0
+}
+
+complete -F _pipenv_completion -o default pipenv
+
 # local setting
-export PATH=$HOME/.local/bin/:$PATH
 if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
