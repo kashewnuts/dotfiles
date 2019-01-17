@@ -3,16 +3,15 @@ setlocal textwidth=99
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
 inoremap # X#
-
-augroup python_syntax_extra
-  autocmd!
-  autocmd Syntax python :syn keyword Special self cls
-  autocmd Syntax python :hi link pythonSpecialWord    Special
-  autocmd Syntax python :syn match pythonOperator '\V=\|-\|+\|*\|@\|/\|%\|&\||\|^\|~\|<\|>\|!='
-augroup END
-
 if executable('autopep8') | setlocal equalprg=autopep8\ - | endif
 
+" --- python-syntax --- {{{
+let g:python_highlight_all = 1
+let g:python_highlight_class_vars = 1
+let g:python_highlight_operators = 1
+" }}}
+
+" --- jedi-vim --- {{{
 augroup PythonAutoCmd
   autocmd!
   autocmd User jedi-vim call s:jedivim_hook() " {{{
@@ -25,4 +24,4 @@ augroup PythonAutoCmd
     let g:jedi#show_call_signatures   = 0 " Avoid popups bugs
   endfunction
   let g:jedi#goto_command = '<C-]>'
-augroup END
+augroup END " }}}

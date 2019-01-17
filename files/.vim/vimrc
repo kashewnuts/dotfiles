@@ -271,15 +271,12 @@ if isdirectory(expand(s:plug_dir))
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
   " FileType
-  Plug 'othree/html5.vim',              {'for': ['html', 'htmldjango', 'htmljinja']}
   Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  Plug 'davidhalter/jedi-vim',          {'for': 'python'}
-  Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-  Plug 'ekalinin/Dockerfile.vim',       {'for': ['dock*', 'Docker*']}
+  Plug 'davidhalter/jedi-vim',          {'for': 'python', 'tag': 'c6f05cd'}
   Plug 'mechatroner/rainbow_csv'
-  Plug 'amiorin/vim-textile',           {'for': 'textile'}
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
+  Plug 'sheerun/vim-polyglot'
   " Formater
   if s:is_async | Plug 'w0rp/ale' | endif
   Plug 'vim-jp/autofmt'
@@ -376,6 +373,10 @@ if isdirectory(expand(s:plug_dir))
   let b:ale_warn_about_trailing_whitespace = 0
   let g:ale_sign_column_always = 1
   command! AFix ALEFix
+  " }}}
+
+  " --- vim-python-pep8-indent --- {{{
+  let g:python_pep8_indent_searchpair_timeout = 0
   " }}}
 
   " --- vim-gitgutter --- {{{
