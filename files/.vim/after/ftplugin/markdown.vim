@@ -1,4 +1,5 @@
 let g:markdown_fenced_languages = [
+\  'sh',
 \  'c',
 \  'cpp',
 \  'css',
@@ -11,6 +12,7 @@ let g:markdown_fenced_languages = [
 \  'js=javascript',
 \  'json=javascript',
 \  'python',
+\  'textile',
 \  'xml',
 \  'vim',
 \]

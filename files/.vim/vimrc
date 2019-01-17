@@ -277,6 +277,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
+  let g:polyglot_disabled = ['markdown']
   " Formater
   if s:is_async | Plug 'w0rp/ale' | endif
   Plug 'vim-jp/autofmt'
