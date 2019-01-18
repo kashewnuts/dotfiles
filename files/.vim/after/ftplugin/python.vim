@@ -5,10 +5,15 @@ setlocal textwidth=99
 inoremap # X#
 if executable('autopep8') | setlocal equalprg=autopep8\ - | endif
 
+augroup python_syntax_extra
+  autocmd!
+  autocmd Syntax python :syn keyword Special self cls
+  autocmd Syntax python :hi link pythonSpecialWord    Special
+  autocmd Syntax python :syn match pythonOperator '\V=\|-\|+\|*\|@\|/\|%\|&\||\|^\|~\|<\|>\|!='
+augroup END
+
 " --- python-syntax --- {{{
 let g:python_highlight_all = 1
-let g:python_highlight_class_vars = 1
-let g:python_highlight_operators = 1
 " }}}
 
 " --- jedi-vim --- {{{
