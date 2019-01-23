@@ -12,6 +12,7 @@ case "$OSTYPE" in
     alias vi='vim -Nu ~/.vim/minimal.vim'
   fi
   alias gvim='vim -g'
+  [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
   ;;
 
   msys*)    # MSYS
@@ -44,10 +45,6 @@ export PYTHONDONTWRITEBYTECODE=1    # disable pyc
 export PYTHONSTARTUP=~/.pythonstartup
 export WORKON_HOME=~/.virtualenvs
 export PIPENV_VENV_IN_PROJECT=true
-
-# Golang
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOPATH/bin
 
 # history
 export HISTSIZE=10000
