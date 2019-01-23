@@ -20,8 +20,9 @@ let g:python_highlight_all = 1
 augroup PythonAutoCmd
   autocmd!
   autocmd User jedi-vim call s:jedivim_hook() " {{{
-  autocmd FileType python setlocal omnifunc=jedi#completions
+  " autocmd FileType python setlocal omnifunc=jedi#completions
   function! s:jedivim_hook()
+    let g:jedi#completions_enabled    = 0 " For vim-lsp
     let g:jedi#auto_initialization    = 0 " Disable the default initialization routine
     let g:jedi#auto_vim_configuration = 0 " Don't change 'completeopt'
     let g:jedi#popup_on_dot           = 0 " Manually press the completion key

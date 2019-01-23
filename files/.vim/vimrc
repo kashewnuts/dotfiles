@@ -270,8 +270,14 @@ if isdirectory(expand(s:plug_dir))
   " Snippets
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
+  " LSP
+  if (v:version >= 800 && has('timers') && has('job') && has('channel'))
+    Plug 'w0rp/ale'
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+  endif
   " FileType
-  Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
+  " Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   Plug 'davidhalter/jedi-vim',          {'for': 'python', 'tag': 'c6f05cd'}
   Plug 'mechatroner/rainbow_csv'
@@ -279,7 +285,6 @@ if isdirectory(expand(s:plug_dir))
   Plug 'sheerun/vim-polyglot'
   let g:polyglot_disabled = ['markdown']
   " Formater
-  if s:is_async | Plug 'w0rp/ale' | endif
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
@@ -387,6 +392,60 @@ if isdirectory(expand(s:plug_dir))
   else
     let g:gitgutter_sign_column_always = 1
   endif
+  " }}}
+
+  " --- vim-lsp --- {{{
+  " for Debug
+  let g:lsp_log_verbose = 1
+  let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')
+  let g:lsp_diagnostics_enabled = 0         " Disabled because use ALE
+  augroup my-lsp
+    autocmd! *
+    " pip install python-language-server
+    if executable('pyls')
+       autocmd User lsp_setup call lsp#register_server({
+           \ 'name': 'pyls',
+           \ 'cmd': { si -> ['pyls'] },
+           \ 'whitelist': ['python'],
+           \})
+      autocmd FileType python call s:configure_lsp()
+    endif
+    " npm install -g typescript-language-server
+    if executable('typescript-language-server')
+      autocmd User lsp_setup call lsp#register_server({
+            \ 'name': 'typescript-language-server',
+            \ 'cmd': { si -> [&shell, &shellcmdflag, 'typescript-language-server --stdio'] },
+            \ 'root_uri': { si -> lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')) },
+            \ 'whitelist': ['javascript', 'typescript'],
+            \})
+      autocmd FileType javascript call s:configure_lsp()
+      autocmd FileType typescript call s:configure_lsp()
+    endif
+    " go get -u github.com/sourcegraph/go-langserver
+    if executable('go-langserver')
+      augroup LspGo
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+            \ 'name': 'go-lang',
+            \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
+            \ 'whitelist': ['go'],
+            \ })
+        autocmd FileType go setlocal call s:configure_lsp()
+      augroup END
+    endif
+  augroup END
+  function! s:configure_lsp() abort
+    setlocal omnifunc=lsp#complete
+    nnoremap <buffer> gd :<C-u>LspDefinition<CR>
+    nnoremap <buffer> gD :<C-u>LspReferences<CR>
+    nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
+    nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
+    nnoremap <buffer> gQ :<C-u>LspDocumentFormat<CR>
+    vnoremap <buffer> gQ :LspDocumentRangeFormat<CR>
+    nnoremap <buffer> K :<C-u>LspHover<CR>
+    nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
+    nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+  endfunction
   " }}}
 
   " --- memolist.vim --- {{{
