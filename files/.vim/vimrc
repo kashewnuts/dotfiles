@@ -279,7 +279,7 @@ if isdirectory(expand(s:plug_dir))
   " FileType
   " Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  Plug 'davidhalter/jedi-vim',          {'for': 'python', 'tag': 'c6f05cd'}
+  " Plug 'davidhalter/jedi-vim',          {'for': 'python', 'tag': 'c6f05cd'}
   Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
@@ -291,7 +291,7 @@ if isdirectory(expand(s:plug_dir))
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
   Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
-  Plug 'Raimondi/delimitMate'
+  " Plug 'Raimondi/delimitMate'
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
