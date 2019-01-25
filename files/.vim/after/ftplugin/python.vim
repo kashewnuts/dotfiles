@@ -29,5 +29,5 @@ augroup PythonAutoCmd
     let g:jedi#popup_select_first     = 0 " Don't select first completion entry
     let g:jedi#show_call_signatures   = 0 " Avoid popups bugs
   endfunction
-  let g:jedi#goto_command = '<C-]>'
+  " let g:jedi#goto_command = '<C-]>'
 augroup END " }}}

@@ -306,7 +306,7 @@ if isdirectory(expand(s:plug_dir))
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end() " }}}
 
-  " Plugins Config
+  " Plugins Config {{{
   " Fizzy Finder {{{
   if has('win32')
     " --- ctrlp.vim --- {{{
@@ -399,43 +399,44 @@ if isdirectory(expand(s:plug_dir))
   let g:lsp_log_verbose = 1
   let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')
   let g:lsp_diagnostics_enabled = 0         " Disabled because use ALE
-  augroup my-lsp
+  augroup MyLsp
     autocmd! *
     " pip install python-language-server
     if executable('pyls')
-       autocmd User lsp_setup call lsp#register_server({
-           \ 'name': 'pyls',
-           \ 'cmd': { si -> ['pyls'] },
-           \ 'whitelist': ['python'],
-           \})
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'pyls',
+          \ 'cmd': { server_info -> ['pyls'] },
+          \ 'whitelist': ['python'],
+          \ 'workspace_config': {'pyls': {'plugins': {
+          \   'pycodestyle': {'enabled': v:false},
+          \   'jedi_definition': {'follow_imports': v:true, 'follow_builtin_imports': v:true},}}}
+          \})
       autocmd FileType python call s:configure_lsp()
     endif
     " npm install -g typescript-language-server
     if executable('typescript-language-server')
       autocmd User lsp_setup call lsp#register_server({
-            \ 'name': 'typescript-language-server',
-            \ 'cmd': { si -> [&shell, &shellcmdflag, 'typescript-language-server --stdio'] },
-            \ 'root_uri': { si -> lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')) },
-            \ 'whitelist': ['javascript', 'typescript'],
-            \})
+          \ 'name': 'typescript-language-server',
+          \ 'cmd': { si -> [&shell, &shellcmdflag, 'typescript-language-server --stdio'] },
+          \ 'root_uri': { si -> lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')) },
+          \ 'whitelist': ['javascript', 'typescript'],
+          \})
       autocmd FileType javascript call s:configure_lsp()
       autocmd FileType typescript call s:configure_lsp()
     endif
     " go get -u github.com/sourcegraph/go-langserver
     if executable('go-langserver')
-      augroup LspGo
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-            \ 'name': 'go-lang',
-            \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
-            \ 'whitelist': ['go'],
-            \ })
-        autocmd FileType go setlocal call s:configure_lsp()
-      augroup END
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'go-lang',
+          \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
+          \ 'whitelist': ['go'],
+          \ })
+      autocmd FileType go call s:configure_lsp()
     endif
   augroup END
   function! s:configure_lsp() abort
     setlocal omnifunc=lsp#complete
+    nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
     nnoremap <buffer> gd :<C-u>LspDefinition<CR>
     nnoremap <buffer> gD :<C-u>LspReferences<CR>
     nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
