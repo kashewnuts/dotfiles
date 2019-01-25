@@ -50,12 +50,13 @@ export PIPENV_VENV_IN_PROJECT=true
 export HISTSIZE=10000
 export HISTCONTROL=ignoreboth:erasedups # ignorespace+ignoredups = ignoreboth
 export HISTIGNORE="ls:fg*:history*"
+export HISTTIMEFORMAT=history | sort -nr | sort -uk2 | sort -n |
 
 # Disable Ctrl+S
-stty stop undef
+[ -t 0 ] && stty stop undef  # Check STDIN standard input
 
 # Setting timeout for ESC
-stty time 0
+[ -t 0 ] && stty time 0  # Check STDIN standard input
 bind 'set keyseq-timeout 1'
 
 # fzf setting
@@ -72,8 +73,7 @@ if [ -f ~/.fzf.bash ]; then
   fi
 
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-  export FZF_UNIQUE_HISTORY=1   # https://github.com/junegunn/fzf/pull/1363/files
-  source ~/.fzf.bash
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 fi
 
 _pipenv_completion() {
