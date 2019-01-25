@@ -28,7 +28,7 @@ DOT_FILES = [
     '.vim',
 ]
 CONFIG_DIRS = ['.cache/tmp', '.config']
-CONFIG_FILES = ['pep8', 'flake8']
+CONFIG_FILES = ['pep8', 'flake8', 'pycodestyle']
 
 
 def check_exists_path(fname):
