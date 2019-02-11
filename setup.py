@@ -11,6 +11,7 @@ DOT_FILES = [
     '.ansible.cfg',
     '.bash_profile',
     '.bashrc',
+    '.hub.bash_completion.sh',
     '.git-completion.bash',
     '.git-prompt.sh',
     '.gitconfig',
