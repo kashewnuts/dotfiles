@@ -24,7 +24,7 @@ if !has('mac') | set guioptions=M | endif " Disable menu.vim & Use console dialo
 set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 
-" Disable defalut plugins
+" Disable default plugins
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
@@ -277,9 +277,7 @@ if isdirectory(expand(s:plug_dir))
     Plug 'prabirshrestha/vim-lsp'
   endif
   " FileType
-  " Plug 'fatih/vim-go',                  {'for': 'go', 'do': ':GoInstallBinaries'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  " Plug 'davidhalter/jedi-vim',          {'for': 'python', 'tag': 'c6f05cd'}
   Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
@@ -291,7 +289,6 @@ if isdirectory(expand(s:plug_dir))
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
   Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
-  " Plug 'Raimondi/delimitMate'
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
@@ -400,7 +397,7 @@ if isdirectory(expand(s:plug_dir))
   let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')
   let g:lsp_diagnostics_enabled = 0         " Disabled because use ALE
   augroup MyLsp
-    autocmd! *
+    autocmd!
     " pip install python-language-server
     if executable('pyls')
       autocmd User lsp_setup call lsp#register_server({
