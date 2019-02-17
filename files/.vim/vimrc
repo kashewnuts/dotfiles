@@ -72,7 +72,7 @@ set modeline
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set number
 set scrolloff=5                 " Keep above and below the cursor
-set spelllang=en,cjk
+set spell spelllang=en_us,cjk
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 set updatetime=100
 set virtualedit=block           " expand selection area for visual mode
