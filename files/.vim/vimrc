@@ -124,6 +124,13 @@ let &statusline="%<%F%m%r%h%w%=[%{&ff}][%{&enc}][%{strlen(&ft)?&ft:'no\ ft'}]"
   \ . "%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}%4v\ %P"
 " }}}
 
+" netrw {{{
+let g:netrw_altv = 1  " Open 'Horizontal split' to the right
+let g:netrw_banner = 0  " Hide information displayed at the top
+let g:netrw_liststyle = 3   " Change display format to TreeView
+let g:netrw_winsize = 15  " Open at 15% size when opened by split
+" }}}
+
 " KeyMaping {{{
 let g:mapleader = "\<Space>"
 " nnoremap <silent> <ESC> <ESC>:nohlsearch<CR>
