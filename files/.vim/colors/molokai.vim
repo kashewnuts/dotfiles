@@ -1,6 +1,7 @@
 " Vim color file
 "
 " Author: Tomas Restrepo <tomas@winterdom.com>
+" Maintainer: kashewnuts <kashun.nuts@gmail.com>
 " https://github.com/tomasr/molokai
 "
 " Note: Based on the Monokai theme for TextMate
@@ -19,13 +20,6 @@ if version > 580
     endif
 endif
 let g:colors_name="molokai"
-
-if exists("g:molokai_original")
-    let s:molokai_original = g:molokai_original
-else
-    let s:molokai_original = 0
-endif
-
 
 hi Boolean         guifg=#AE81FF
 hi Character       guifg=#E6DB74
@@ -102,48 +96,30 @@ hi Underlined      guifg=#808080               gui=underline
 
 hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
 hi VisualNOS                     guibg=#403D3D
-hi Visual                        guibg=#403D3D
+hi Visual                        guibg=Grey
 hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
 hi WildMenu        guifg=#66D9EF guibg=#000000
 
 hi TabLineFill     guifg=#1B1D1E guibg=#1B1D1E
 hi TabLine         guibg=#1B1D1E guifg=#808080 gui=none
-
-if s:molokai_original == 1
-   hi Normal          guifg=#F8F8F2 guibg=#272822
-   hi Comment         guifg=#75715E
-   hi CursorLine                    guibg=#3E3D32
-   hi CursorLineNr    guifg=#FD971F               gui=none
-   hi CursorColumn                  guibg=#3E3D32
-   hi ColorColumn                   guibg=#3B3A32
-   hi LineNr          guifg=#BCBCBC guibg=#3B3A32
-   hi NonText         guifg=#75715E
-   hi SpecialKey      guifg=#75715E
-else
-   hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
-   hi Comment         guifg=#7E8E91
-   hi CursorLine                    guibg=#293739
-   hi CursorLineNr    guifg=#FD971F               gui=none
-   hi CursorColumn                  guibg=#293739
-   hi ColorColumn                   guibg=#232526
-   hi LineNr          guifg=#465457 guibg=#232526
-   hi NonText         guifg=#465457
-   hi SpecialKey      guifg=#465457
-end
+hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
+hi Comment         guifg=#7E8E91
+hi CursorLine                    guibg=#293739
+hi CursorLineNr    guifg=#FD971F               gui=none
+hi CursorColumn                  guibg=#293739
+hi ColorColumn                   guibg=#232526
+hi LineNr          guifg=#465457 guibg=#232526
+hi NonText         guifg=#465457
+hi SpecialKey      guifg=#465457
+hi EndOfBuffer                 ctermbg=none
 
 "
 " Support for 256-color terminal
 "
 if &t_Co > 255
-   if s:molokai_original == 1
-      hi Normal                   ctermbg=234
-      hi CursorLine               ctermbg=235   cterm=none
-      hi CursorLineNr ctermfg=208               cterm=none
-   else
-      hi Normal       ctermfg=252 ctermbg=233
-      hi CursorLine               ctermbg=234   cterm=none
-      hi CursorLineNr ctermfg=208               cterm=none
-   endif
+   hi Normal          ctermfg=252 ctermbg=none
+   hi CursorLine                  ctermbg=234   cterm=none
+   hi CursorLineNr    ctermfg=208               cterm=none
    hi Boolean         ctermfg=135
    hi Character       ctermfg=144
    hi Number          ctermfg=135
@@ -155,10 +131,10 @@ if &t_Co > 255
    hi Define          ctermfg=81
    hi Delimiter       ctermfg=241
 
-   hi DiffAdd                     ctermbg=24
-   hi DiffChange      ctermfg=181 ctermbg=239
-   hi DiffDelete      ctermfg=162 ctermbg=53
-   hi DiffText                    ctermbg=102 cterm=bold
+   hi DiffAdd         ctermfg=0   ctermbg=2
+   hi DiffChange      ctermfg=0   ctermbg=3
+   hi DiffDelete      ctermfg=0   ctermbg=6
+   hi DiffText        ctermfg=0   ctermbg=7   cterm=bold
 
    hi Directory       ctermfg=118               cterm=bold
    hi Error           ctermfg=219 ctermbg=89
@@ -166,7 +142,7 @@ if &t_Co > 255
    hi Exception       ctermfg=118               cterm=bold
    hi Float           ctermfg=135
    hi FoldColumn      ctermfg=67  ctermbg=16
-   hi Folded          ctermfg=67  ctermbg=16
+   hi Folded          ctermfg=67  ctermbg=16    cterm=none
    hi Function        ctermfg=118
    hi Identifier      ctermfg=208               cterm=none
    hi Ignore          ctermfg=244 ctermbg=232
@@ -220,67 +196,20 @@ if &t_Co > 255
 
    hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
    hi VisualNOS                   ctermbg=238
-   hi Visual                      ctermbg=235
+   hi Visual          ctermfg=0   ctermbg=7
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
-   hi Comment         ctermfg=59
+   hi Comment         ctermfg=102
    hi CursorColumn                ctermbg=236
    hi ColorColumn                 ctermbg=236
    hi LineNr          ctermfg=239 ctermbg=None
-   hi NonText         ctermfg=59
+   hi NonText         ctermfg=59  ctermbg=none
 
    hi SpecialKey      ctermfg=59
-
-   if exists("g:rehash256") && g:rehash256 == 1
-       hi Normal       ctermfg=252 ctermbg=234
-       hi CursorLine               ctermbg=236   cterm=none
-       hi CursorLineNr ctermfg=208               cterm=none
-
-       hi Boolean         ctermfg=141
-       hi Character       ctermfg=222
-       hi Number          ctermfg=141
-       hi String          ctermfg=222
-       hi Conditional     ctermfg=197               cterm=bold
-       hi Constant        ctermfg=141               cterm=bold
-
-       hi DiffDelete      ctermfg=125 ctermbg=233
-
-       hi Directory       ctermfg=154               cterm=bold
-       hi Error           ctermfg=222 ctermbg=233
-       hi Exception       ctermfg=154               cterm=bold
-       hi Float           ctermfg=141
-       hi Function        ctermfg=154
-       hi Identifier      ctermfg=208
-
-       hi Keyword         ctermfg=197               cterm=bold
-       hi Operator        ctermfg=197
-       hi PreCondit       ctermfg=154               cterm=bold
-       hi PreProc         ctermfg=154
-       hi Repeat          ctermfg=197               cterm=bold
-
-       hi Statement       ctermfg=197               cterm=bold
-       hi Tag             ctermfg=197
-       hi Title           ctermfg=203
-       hi Visual                      ctermbg=238
-
-       hi Comment         ctermfg=244
-       hi LineNr          ctermfg=239 ctermbg=235
-       hi NonText         ctermfg=239
-       hi SpecialKey      ctermfg=239
-   endif
+   hi EndOfBuffer                 ctermbg=none
 end
 
 " Must be at the end, because of ctermbg=234 bug.
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
 set background=dark
-
-hi Normal ctermbg=none
-hi NonText ctermbg=none
-hi Folded ctermbg=none
-hi EndOfBuffer ctermbg=none
-
-hi DiffAdd    ctermfg=black ctermbg=2
-hi DiffChange ctermfg=black ctermbg=3
-hi DiffDelete ctermfg=black ctermbg=6
-hi DiffText   ctermfg=black ctermbg=7
