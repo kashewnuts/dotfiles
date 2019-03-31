@@ -47,6 +47,8 @@
 	prompt = false
 	trustExitCode = true
 	keepBackup = false
+[rerere]
+	enabled = true
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
