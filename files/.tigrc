@@ -13,3 +13,8 @@ color grep.file			blue	default bold
 color help-group		blue	default bold
 color diff-stat			blue	default bold
 color graph-commit		blue	default bold
+
+bind main G !@hub browse -- commit/%(commit)
+bind diff G !@hub browse -- commit/%(commit)
+bind tree G !@hub browse -- tree/%(commit)/%(directory)
+bind blob G !@hub browse -- tree/%(commit)/%(file)

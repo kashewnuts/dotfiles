@@ -13,5 +13,7 @@ augroup python_syntax_extra
 augroup END
 
 " --- python-syntax --- {{{
-let g:python_highlight_all = 1
+" let g:python_highlight_all = 0
+" let g:python_highlight_builtin_funcs_kwarg = 0
+" let g:python_highlight_string_formatting = 1
 " }}}

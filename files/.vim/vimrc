@@ -70,7 +70,6 @@ set iskeyword& iskeyword+=-     " Include '-' to word
 set list listchars=tab:>-,trail:-  " Visualize character
 set modeline
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
-set number
 set scrolloff=5                 " Keep above and below the cursor
 set spell spelllang=en_us,cjk
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
@@ -281,9 +280,10 @@ if isdirectory(expand(s:plug_dir))
   Plug 'honza/vim-snippets',            {'on': []}
   " LSP
   if (v:version >= 800 && has('timers') && has('job') && has('channel'))
+    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     Plug 'w0rp/ale'
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/async.vim'
+    " Plug 'prabirshrestha/vim-lsp'
   endif
   " FileType
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
@@ -375,18 +375,6 @@ if isdirectory(expand(s:plug_dir))
   \   'yaml': ['prettier'],
   \}
   let g:ale_sh_shellcheck_exclusions = 'SC1090'
-  let g:ale_fix_on_save = 0
-  let g:ale_fix_on_text_changed = 'never'
-  let b:ale_fixers = {
-  \   'json': ['prettier'],
-  \   'markdown': ['prettier'],
-  \   'python': ['autopep8', 'isort'],
-  \   'yaml': ['prettier'],
-  \}
-  " Disable warnings about trailing whitespace for Python files.
-  let b:ale_warn_about_trailing_whitespace = 0
-  let g:ale_sign_column_always = 1
-  command! AFix ALEFix
   " }}}
 
   " --- vim-python-pep8-indent --- {{{
@@ -406,58 +394,40 @@ if isdirectory(expand(s:plug_dir))
 
   " }}}
 
-  " --- vim-lsp --- {{{
-  " for Debug
-  let g:lsp_log_verbose = 1
-  let g:lsp_log_file = expand('~/.cache/tmp/vim-lsp.log')
-  let g:lsp_diagnostics_enabled = 0         " Disabled because use ALE
-  augroup MyLsp
-    autocmd!
-    " pip install python-language-server
-    if executable('pyls')
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'pyls',
-          \ 'cmd': { server_info -> ['pyls'] },
-          \ 'whitelist': ['python'],
-          \ 'workspace_config': {'pyls': {'plugins': {
-          \   'pycodestyle': {'enabled': v:false},
-          \ }}}
-          \})
-      autocmd FileType python call s:configure_lsp()
-    endif
-    " npm install -g typescript-language-server
-    if executable('typescript-language-server')
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'typescript-language-server',
-          \ 'cmd': { si -> [&shell, &shellcmdflag, 'typescript-language-server --stdio'] },
-          \ 'root_uri': { si -> lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json')) },
-          \ 'whitelist': ['javascript', 'typescript'],
-          \})
-      autocmd FileType javascript call s:configure_lsp()
-      autocmd FileType typescript call s:configure_lsp()
-    endif
-    " go get -u github.com/sourcegraph/go-langserver
-    if executable('go-langserver')
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'go-lang',
-          \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
-          \ 'whitelist': ['go'],
-          \ })
-      autocmd FileType go call s:configure_lsp()
-    endif
-  augroup END
+  " function! s:configure_lsp() abort
+  "   setlocal omnifunc=lsp#complete
+  "   nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
+  "   nnoremap <buffer> gd :<C-u>LspDefinition<CR>
+  "   nnoremap <buffer> gD :<C-u>LspReferences<CR>
+  "   nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
+  "   nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
+  "   nnoremap <buffer> gQ :<C-u>LspDocumentFormat<CR>
+  "   vnoremap <buffer> gQ :LspDocumentRangeFormat<CR>
+  "   nnoremap <buffer> K :<C-u>LspHover<CR>
+  "   nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
+  "   nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+  " endfunction
+  " " }}}
+
+  " --- coc.nvim --- {{{
+  autocmd MyAutoCmd FileType python call s:configure_lsp()
   function! s:configure_lsp() abort
-    setlocal omnifunc=lsp#complete
-    nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
-    nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-    nnoremap <buffer> gD :<C-u>LspReferences<CR>
-    nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-    nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
-    nnoremap <buffer> gQ :<C-u>LspDocumentFormat<CR>
-    vnoremap <buffer> gQ :LspDocumentRangeFormat<CR>
-    nnoremap <buffer> K :<C-u>LspHover<CR>
-    nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
-    nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+    " Remap keys
+    nmap <C-]> <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    nmap <leader>R   <Plug>(coc-rename)
+    " Remap for format selected region
+    vmap <leader>f   <Plug>(coc-format-selected)
+    nmap <leader>f   <Plug>(coc-format-selected)
+    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+    vmap <leader>a   <Plug>(coc-codeaction-selected)
+    nmap <leader>a   <Plug>(coc-codeaction-selected)
+    " Remap for do codeAction of current line
+    nmap <leader>ac  <Plug>(coc-codeaction)
+    " Fix autofix problem of current line
+    nmap <leader>qf  <Plug>(coc-fix-current)
   endfunction
   " }}}
 

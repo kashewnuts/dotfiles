@@ -2,6 +2,7 @@
 export EDITOR=vim
 case "$OSTYPE" in
   darwin*)  # BSD (contains Mac)
+  export LANG=ja_JP.UTF-8
   export GIT_EDITOR='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
   if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
     export PS1='\[\033[00m\]\$ '
@@ -12,7 +13,6 @@ case "$OSTYPE" in
     alias vi='vim -Nu ~/.vim/minimal.vim'
   fi
   alias gvim='vim -g'
-  [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
   ;;
 
   msys*)    # MSYS
@@ -34,16 +34,14 @@ alias ll='ls -l'
 # crontab
 alias crontab='crontab -i'
 
-# git-comletion.bash
+# git-completion.bash
 source ~/.git-prompt.sh
 source ~/.git-completion.bash
 export GIT_PS1_SHOWDIRTYSTATE=true
 export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
 # hub
-# source ~/.hub.bash_completion.sh
 if [ -f ~/.hub.bash_completion.sh ]; then
   source ~/.hub.bash_completion.sh
-  alias git="hub"
 fi
 
 # Python
