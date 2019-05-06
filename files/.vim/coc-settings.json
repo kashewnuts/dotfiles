@@ -1,36 +1,23 @@
 {
-    "suggest.timeout": 5000,
-    "diagnostic.checkCurrentLine": true,
-    "diagnostic.signOffset": 100,
-    "diagnostic.warningSign": "--",
-    "languageserver": {
-        "bash": {
-            "command": "bash-language-server",
-            "args": [
-                "start"
-            ],
-            "filetypes": [
-                "sh"
-            ],
-            "ignoredRootPaths": [
-                "~"
-            ]
-        },
-        "dockerfile": {
-            "command": "docker-langserver",
-            "filetypes": [
-                "Dockerfile",
-                "dockerfile"
-            ],
-            "args": [
-                "--stdio"
-            ]
-        },
-        "python": {
-            "command": "pyls",
-            "filetypes": [
-                "python"
-            ]
-        }
+  "suggest.timeout": 5000,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.signOffset": 100,
+  "diagnostic.warningSign": "--",
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["Dockerfile", "dockerfile"],
+      "args": ["--stdio"]
+    },
+    "python": {
+      "command": "pyls",
+      "filetypes": ["python"]
     }
+  }
 }
