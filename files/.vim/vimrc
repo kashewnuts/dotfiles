@@ -280,10 +280,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'honza/vim-snippets',            {'on': []}
   " LSP
   if (v:version >= 800 && has('timers') && has('job') && has('channel'))
-    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-    Plug 'w0rp/ale'
-    " Plug 'prabirshrestha/async.vim'
-    " Plug 'prabirshrestha/vim-lsp'
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}  " nightly'}
   endif
   " FileType
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
@@ -364,19 +361,6 @@ if isdirectory(expand(s:plug_dir))
   let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
   " }}}
 
-  " --- ale ---{{{
-  let g:ale_lint_on_save = 1
-  let g:ale_lint_on_text_changed = 'never'
-  let g:ale_linters = {
-  \   'bash': ['shellcheck'],
-  \   'json': ['prettier'],
-  \   'markdown': ['prettier'],
-  \   'python': ['flake8', 'mypy'],
-  \   'yaml': ['prettier'],
-  \}
-  let g:ale_sh_shellcheck_exclusions = 'SC1090'
-  " }}}
-
   " --- vim-python-pep8-indent --- {{{
   let g:python_pep8_indent_searchpair_timeout = 0
   " }}}
@@ -391,26 +375,11 @@ if isdirectory(expand(s:plug_dir))
   highlight default link GitGutterChange        NONE
   highlight default link GitGutterDelete        NONE
   highlight default link GitGutterChangeDelete  NONE
-
   " }}}
-
-  " function! s:configure_lsp() abort
-  "   setlocal omnifunc=lsp#complete
-  "   nnoremap <buffer> <C-]> :<C-u>LspDefinition<CR>
-  "   nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-  "   nnoremap <buffer> gD :<C-u>LspReferences<CR>
-  "   nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-  "   nnoremap <buffer> gS :<C-u>LspWorkspaceSymbol<CR>
-  "   nnoremap <buffer> gQ :<C-u>LspDocumentFormat<CR>
-  "   vnoremap <buffer> gQ :LspDocumentRangeFormat<CR>
-  "   nnoremap <buffer> K :<C-u>LspHover<CR>
-  "   nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
-  "   nnoremap <buffer> <F2> :<C-u>LspRename<CR>
-  " endfunction
-  " " }}}
 
   " --- coc.nvim --- {{{
   autocmd MyAutoCmd FileType python call s:configure_lsp()
+  autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
   function! s:configure_lsp() abort
     " Remap keys
     nmap <C-]> <Plug>(coc-definition)
@@ -429,6 +398,7 @@ if isdirectory(expand(s:plug_dir))
     " Fix autofix problem of current line
     nmap <leader>qf  <Plug>(coc-fix-current)
   endfunction
+  command! -nargs=0 Prettier :CocCommand prettier.formatFile
   " }}}
 
   " --- memolist.vim --- {{{
