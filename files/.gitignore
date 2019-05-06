@@ -16,3 +16,4 @@ Pipfile*
 *.vscode
 *.sqlite3
 *.*orig
+*.mypy_cache/
