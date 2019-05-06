@@ -17,10 +17,7 @@ case "$OSTYPE" in
   ;;
 
   linux*)   # Linux
-  export PATH=$HOME/.local/bin/:$PATH
-  if [ -f ~/.Xmodmap ];then
-    xmodmap ~/.Xmodmap
-  fi
+  export PATH=$HOME/.local/bin:$PATH
 esac
 
 # Golang

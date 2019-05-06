@@ -27,6 +27,9 @@ case "$OSTYPE" in
   alias vi='vim -Nu ~/.vim/minimal.vim'
   alias ls='ls --show-control-chars'
   alias open='xdg-open &>/dev/null'
+  if [ -f ~/.Xmodmap ];then
+    xmodmap ~/.Xmodmap
+  fi
 esac
 alias la='ls -al'
 alias ll='ls -l'
@@ -65,6 +68,10 @@ bind 'set keyseq-timeout 1'
 
 # fzf setting
 if [ -f ~/.fzf.bash ]; then
+  if [ "$(uname)" == 'Darwin' ]; then
+    source ~/.fzf.bash
+  fi
+
   if type "ghq" > /dev/null 2>&1; then
     function fzf-repo() {
       cd "$(ghq list --full-path | fzf)" || exit
@@ -77,7 +84,6 @@ if [ -f ~/.fzf.bash ]; then
   fi
 
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 fi
 
 _pipenv_completion() {
