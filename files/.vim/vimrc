@@ -380,6 +380,8 @@ if isdirectory(expand(s:plug_dir))
   " --- coc.nvim --- {{{
   autocmd MyAutoCmd FileType python call s:configure_lsp()
   autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
+  autocmd MyAutoCmd FileType bash call s:configure_lsp()
+  autocmd MyAutoCmd FileType Dockerfile, call s:configure_lsp()
   function! s:configure_lsp() abort
     " Remap keys
     nmap <C-]> <Plug>(coc-definition)
