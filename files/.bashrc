@@ -13,6 +13,7 @@ case "$OSTYPE" in
     alias vi='vim -Nu ~/.vim/minimal.vim'
   fi
   alias gvim='vim -g'
+  export PYTHONUSERBASE=~/.local
   ;;
 
   msys*)    # MSYS
