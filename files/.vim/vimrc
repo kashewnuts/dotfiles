@@ -259,7 +259,7 @@ if exists('&fixeol') | set nofixeol | endif
 let s:plug_dir = '~/.cache/plugged'
 let s:is_async = (v:version >= 800 && has('timers') && has('job') && has('channel'))
 if isdirectory(expand(s:plug_dir))
-  call plug#begin(s:plug_dir) " {{{
+  call plug#begin(s:plug_dir)
   " Declare the list of plugins.
   Plug 'junegunn/vim-plug'
   " Fizzy Finder
