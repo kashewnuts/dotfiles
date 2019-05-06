@@ -384,21 +384,25 @@ if isdirectory(expand(s:plug_dir))
   autocmd MyAutoCmd FileType Dockerfile, call s:configure_lsp()
   function! s:configure_lsp() abort
     " Remap keys
-    nmap <C-]> <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-    nmap <leader>R   <Plug>(coc-rename)
+    nmap <buffer><C-]> <Plug>(coc-definition)
+    nmap <buffer><silent> gy <Plug>(coc-type-definition)
+    nmap <buffer><silent> gi <Plug>(coc-implementation)
+    nmap <buffer><silent> gr <Plug>(coc-references)
+    nmap <buffer><leader>R   <Plug>(coc-rename)
     " Remap for format selected region
-    vmap <leader>f   <Plug>(coc-format-selected)
-    nmap <leader>f   <Plug>(coc-format-selected)
+    vmap <buffer><leader>f   <Plug>(coc-format-selected)
+    nmap <buffer><leader>f   <Plug>(coc-format-selected)
     " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    vmap <leader>a   <Plug>(coc-codeaction-selected)
-    nmap <leader>a   <Plug>(coc-codeaction-selected)
+    vmap <buffer><leader>a   <Plug>(coc-codeaction-selected)
+    nmap <buffer><leader>a   <Plug>(coc-codeaction-selected)
     " Remap for do codeAction of current line
-    nmap <leader>ac  <Plug>(coc-codeaction)
+    nmap <buffer><leader>ac  <Plug>(coc-codeaction)
     " Fix autofix problem of current line
-    nmap <leader>qf  <Plug>(coc-fix-current)
+    nmap <buffer><leader>qf  <Plug>(coc-fix-current)
+    " Diagnostic
+    nmap <buffer><silent> gd <Plug>(coc-diagnostic-info)
+    nmap <buffer><silent> gn <Plug>(coc-diagnostic-next)
+    nmap <buffer><silent> gp <Plug>(coc-diagnostic-prev)
   endfunction
   command! -nargs=0 Prettier :CocCommand prettier.formatFile
   " }}}
