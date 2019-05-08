@@ -12,6 +12,7 @@ case "$OSTYPE" in
   LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${LOCAL_PATH}"
   LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
   LOCAL_PATH="/usr/local/opt/imagemagick@6/bin:${LOCAL_PATH}"
+  LOCAL_PATH="/usr/local/opt/node@10/bin:${LOCAL_PATH}"
   export PATH="${LOCAL_PATH}"
   export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/imagemagick@6/lib/
   ;;
@@ -43,4 +44,3 @@ PATH=$_path
 
 unset _p
 unset _path
-
