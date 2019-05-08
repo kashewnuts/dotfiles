@@ -280,7 +280,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'honza/vim-snippets',            {'on': []}
   " LSP
   if (v:version >= 800 && has('timers') && has('job') && has('channel'))
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}  " nightly'}
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh nightly'}
   endif
   " FileType
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
