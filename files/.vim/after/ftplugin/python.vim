@@ -3,7 +3,6 @@ setlocal textwidth=99
 " When the '#' character in the first line of the newly created,
 " it isn't unindent
 inoremap # X#
-if executable('autopep8') | setlocal equalprg=autopep8\ - | endif
 
 augroup python_syntax_extra
   autocmd!

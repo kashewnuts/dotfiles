@@ -72,6 +72,7 @@ set modeline
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set scrolloff=5                 " Keep above and below the cursor
 set spell spelllang=en_us,cjk
+set synmaxcol=200               " Only highlight the first 200 columns
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 set updatetime=100
 set virtualedit=block           " expand selection area for visual mode
@@ -378,10 +379,17 @@ if isdirectory(expand(s:plug_dir))
   " }}}
 
   " --- coc.nvim --- {{{
+  let g:coc_global_extensions = [
+    \ 'coc-prettier',
+    \ 'coc-snippets',
+    \ 'coc-json',
+    \ 'coc-tsserver',
+    \ ]
   autocmd MyAutoCmd FileType python call s:configure_lsp()
   autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
   autocmd MyAutoCmd FileType bash call s:configure_lsp()
   autocmd MyAutoCmd FileType Dockerfile, call s:configure_lsp()
+  autocmd MyAutoCmd FileType javascript,typescript call s:configure_lsp()
   function! s:configure_lsp() abort
     " Remap keys
     nmap <buffer><C-]> <Plug>(coc-definition)
@@ -403,6 +411,26 @@ if isdirectory(expand(s:plug_dir))
     nmap <buffer><silent> gd <Plug>(coc-diagnostic-info)
     nmap <buffer><silent> gn <Plug>(coc-diagnostic-next)
     nmap <buffer><silent> gp <Plug>(coc-diagnostic-prev)
+    " Setup format selected region
+    setlocal formatexpr=CocAction('formatSelected')
+
+    " Use K to show documentation in preview window
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
+    augroup CocNvimGroup
+      autocmd!
+      " Highlight symbol under cursor on CursorHold
+      autocmd CursorHold * silent call CocActionAsync('highlight')
+      " Update signature help on jump placeholder
+      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
   endfunction
   command! -nargs=0 Prettier :CocCommand prettier.formatFile
   " }}}
