@@ -280,16 +280,20 @@ if isdirectory(expand(s:plug_dir))
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
   " LSP
-  if (v:version >= 800 && has('timers') && has('job') && has('channel'))
+  if (v:version >= 801 && has('timers') && has('job') && has('channel'))
     Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}  " nightly'}
+  else
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
   endif
   " FileType
+  Plug 'neoclide/jsonc.vim',            {'for': 'json'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
   Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-  let g:polyglot_disabled = ['markdown', 'python']
+  let g:polyglot_disabled = ['markdown', 'python', 'json']
   " Formater
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
@@ -358,6 +362,7 @@ if isdirectory(expand(s:plug_dir))
   endif " }}}
 
   " --- gen_tags.vim --- {{{
+  let g:gen_tags#ctags_auto_gen = 1
   let g:loaded_gentags#gtags = 1
   let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
   " }}}
@@ -435,6 +440,25 @@ if isdirectory(expand(s:plug_dir))
   command! -nargs=0 Prettier :CocCommand prettier.formatFile
   " }}}
 
+  " --- vim-lsp --- {{{
+  " if executable('pyls')
+  "   " pip install python-language-server
+  "   autocmd User lsp_setup call lsp#register_server({
+  "       \ 'name': 'pyls',
+  "       \ 'cmd': {server_info->['pyls']},
+  "       \ 'whitelist': ['python'],
+  "       \ })
+  "   augroup PylsCommands
+  "     autocmd!
+  "     autocmd FileType python setlocal omnifunc=lsp#complete
+  "     autocmd FileType python nnoremap <C-]> :<C-u>LspDefinition<CR>
+  "     autocmd FileType python nnoremap K :<C-u>LspHover<CR>
+  "     autocmd FileType python nnoremap <Leader>R :<C-u>LspRename<CR>
+  "     autocmd FileType python nnoremap <Leader>n :<C-u>LspReferences<CR>
+  "   augroup END
+  " endif
+  " }}}
+
   " --- memolist.vim --- {{{
   let s:memo_path = ((has('win32') || has('mac')) ? ' (個人)' :'')
   let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
@@ -501,7 +525,6 @@ if isdirectory(expand(s:plug_dir))
   \ '')
   let twitvim_force_ssl = 1
   let twitvim_count = 40
-  let twitvim_enable_python3 = 1
   let twitvim_allow_multiline = 1
   let twitvim_timestamp_format = '%c'
   let twitvim_show_header = 0

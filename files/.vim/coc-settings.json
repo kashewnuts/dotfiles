@@ -15,9 +15,30 @@
       "filetypes": ["Dockerfile", "dockerfile"],
       "args": ["--stdio"]
     },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    },
     "python": {
       "command": "pyls",
-      "filetypes": ["python"]
+      "filetypes": ["python"],
+      // "trace.server": "verbose",
+      // "args": [
+      //   "-vv",
+      //   "--log-file",
+      //   "/Users/kashewnuts/.cache/tmp/coc-nvim.log"
+      // ],
+      "settings": {
+        "pyls": {
+          "trace": {"server": "verbose"},
+          "plugins": {
+            "pydocstyle": {"enabled": false},
+            "yapf": {"enabled": false},
+            "pylint": {"enabled": false}
+          }
+        }
+      }
     }
   }
 }
