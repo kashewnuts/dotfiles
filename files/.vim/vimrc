@@ -68,7 +68,7 @@ set helplang=ja,en              " Comma separated list of languages.
 set history=200                 " History
 set iskeyword& iskeyword+=-     " Include '-' to word
 set list listchars=tab:>-,trail:-  " Visualize character
-set modeline
+set nomodeline
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set scrolloff=5                 " Keep above and below the cursor
 set spell spelllang=en_us,cjk
