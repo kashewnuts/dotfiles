@@ -18,7 +18,8 @@ case "$OSTYPE" in
   ;;
 
   linux*)   # Linux
-  export PATH=$HOME/.local/bin:$PATH
+  LOCAL_PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+  export PATH=$HOME/.local/bin:${LOCAL_PATH}
 esac
 
 # Golang

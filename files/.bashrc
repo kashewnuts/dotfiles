@@ -65,13 +65,13 @@ export HISTTIMEFORMAT=history | sort -nr | sort -uk2 | sort -n |
 
 # Setting timeout for ESC
 [ -t 0 ] && stty time 0  # Check STDIN standard input
-bind 'set keyseq-timeout 1'
+if [[ $- == *i* ]]; then # in interactive session
+  bind 'set keyseq-timeout 1'
+fi
 
 # fzf setting
 if [ -f ~/.fzf.bash ]; then
-  if [ "$(uname)" == 'Darwin' ]; then
-    source ~/.fzf.bash
-  fi
+  source ~/.fzf.bash
 
   if type "ghq" > /dev/null 2>&1; then
     function fzf-repo() {
@@ -93,7 +93,10 @@ if [ -f ~/.fzf.bash ]; then
     echo $(HISTTIMEFORMAT= history | command $tac | sed -e 's/^ *[0-9]\{1,\}\*\{0,1\} *//' -e 's/ *$//' | awk '!a[$0]++' |
         FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS --sync -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $(__fzfcmd))
   }
-  bind '"\C-r": " \C-e\C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\er\e^"'
+
+  if [[ $- == *i* ]]; then # in interactive session
+    bind '"\C-r": " \C-e\C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\er\e^"'
+  fi
 fi
 
 _pipenv_completion() {
