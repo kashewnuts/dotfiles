@@ -280,11 +280,11 @@ if isdirectory(expand(s:plug_dir))
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
   " LSP
-  if (v:version >= 801 && has('timers') && has('job') && has('channel'))
+  if (v:version >= 800 && has('timers') && has('job') && has('channel'))
     Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}  " nightly'}
-  else
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
+  " else
+  "   Plug 'prabirshrestha/async.vim'
+  "   Plug 'prabirshrestha/vim-lsp'
   endif
   " FileType
   Plug 'neoclide/jsonc.vim',            {'for': 'json'}
@@ -305,7 +305,9 @@ if isdirectory(expand(s:plug_dir))
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
   Plug 'previm/previm',                 {'on': 'PrevimOpen'}
-  Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
+  Plug 'tyru/open-browser.vim' " ,         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
+  " \ 'OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
+  Plug 'tyru/open-browser-github.vim',  {'on': ['OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'vim-jp/vimdoc-ja',              {'on': ['h', 'help']}
   if executable('ctags') | Plug 'jsfaint/gen_tags.vim' | endif
   " Twitter
@@ -507,7 +509,7 @@ if isdirectory(expand(s:plug_dir))
   let g:previm_disable_vimproc = 1
   let g:previm_show_header = 0
   command! PrevimRefresh :call previm#refresh()
-  autocmd MyAutoCmd User previm,open-browser.vim doautocmd Previm FileType
+  autocmd MyAutoCmd User previm doautocmd Previm FileType
   " }}}
 
   " --- open-browser --- {{{
