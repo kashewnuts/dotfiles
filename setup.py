@@ -1,12 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-import os
 import sys
+from pathlib import Path
 
-HOME_DIR = os.path.expanduser('~')
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DOT_FILES_DIR = os.path.join(BASE_DIR, 'files')
+
+HOME_DIR = Path.home()
+BASE_DIR = Path(__file__).resolve().parent
+DOT_FILES_DIR = BASE_DIR / 'files'
 DOT_FILES = [
     '.ansible.cfg',
     '.bash_profile',
@@ -29,20 +27,18 @@ DOT_FILES = [
     '.vim',
 ]
 CONFIG_DIRS = ['.cache/tmp', '.config']
-CONFIG_FILES = ['pep8', 'flake8', 'pycodestyle', 'alacritty']
+CONFIG_FILES = ['pep8', 'flake8', 'pycodestyle']
 
 
 def check_exists_path(fname):
-    fpath = os.path.join(HOME_DIR, fname)
-    return os.path.exists(fpath)
+    return (HOME_DIR / fname).exists()
 
 
 def put_symbolic_link(fname, parent_dir='', alias=''):
-    dst = os.path.join(parent_dir, alias if alias else fname)
     msg = 'Already exists file'
+    dst = Path(parent_dir, alias if alias else fname)
     if not check_exists_path(dst):
-        os.symlink(os.path.join(DOT_FILES_DIR, parent_dir, fname),
-                   os.path.join(HOME_DIR, dst))
+        (HOME_DIR / dst).symlink_to(DOT_FILES_DIR / parent_dir / fname)
         msg = 'Put Symbolic Link'
     print(msg + ': %s' % (alias if alias else fname))
 
@@ -71,7 +67,7 @@ def setup_dotfile(fname):
 def prepare_dir(fpath):
     msg = 'Already exists directory: %s' % fpath
     if not check_exists_path(fpath):
-        os.makedirs(os.path.join(HOME_DIR, fpath))
+        (HOME_DIR / fpath).mkdir(parents=True, exist_ok=True)
         msg = 'Put directory: %s' % fpath
     print(msg)
 

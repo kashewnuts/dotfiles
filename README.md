@@ -3,7 +3,7 @@
 This is my dotfiles. To setup, run as below.
 
 ## Require
-Python2.7+/3.5+
+Python3.6+
 
 ## Common
 - At your home directory, `git clone https://github.com/kashewnuts/dotfiles`
