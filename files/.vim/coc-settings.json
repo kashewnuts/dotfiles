@@ -3,6 +3,7 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.signOffset": 100,
   "diagnostic.warningSign": "--",
+  "suggest.enablePreview": true,
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
