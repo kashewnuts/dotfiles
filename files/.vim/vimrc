@@ -83,7 +83,7 @@ if has('clipboard')
   set clipboard=unnamed,unnamedplus " Use the OS clipboard
 endif
 set complete& complete+=k       " Specifies how keyword completion
-set completeopt=menuone         " Force the user to select one & No preview
+set completeopt=menuone         " Force the user to select one
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set tags=./tags;                " Refer to projects root tags file
 
@@ -259,6 +259,7 @@ if exists('&fixeol') | set nofixeol | endif
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
 let s:is_async = (v:version >= 800 && has('timers') && has('job') && has('channel'))
+let s:executable_nodejs = (executable('node') || executable('nodejs')) && executable('npm')
 if isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir)
   " Declare the list of plugins.
@@ -280,8 +281,8 @@ if isdirectory(expand(s:plug_dir))
   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
   Plug 'honza/vim-snippets',            {'on': []}
   " LSP
-  if (v:version >= 800 && has('timers') && has('job') && has('channel'))
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}  " nightly'}
+  if s:is_async && s:executable_nodejs
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " else
   "   Plug 'prabirshrestha/async.vim'
   "   Plug 'prabirshrestha/vim-lsp'
@@ -309,7 +310,9 @@ if isdirectory(expand(s:plug_dir))
   " \ 'OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'tyru/open-browser-github.vim',  {'on': ['OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'vim-jp/vimdoc-ja',              {'on': ['h', 'help']}
-  if executable('ctags') | Plug 'jsfaint/gen_tags.vim' | endif
+  if executable('ctags')
+    Plug 'jsfaint/gen_tags.vim'
+  endif
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
@@ -386,60 +389,68 @@ if isdirectory(expand(s:plug_dir))
   " }}}
 
   " --- coc.nvim --- {{{
-  let g:coc_global_extensions = [
-    \ 'coc-prettier',
-    \ 'coc-snippets',
-    \ 'coc-json',
-    \ 'coc-tsserver',
-    \ ]
-  autocmd MyAutoCmd FileType python call s:configure_lsp()
-  autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
-  autocmd MyAutoCmd FileType bash call s:configure_lsp()
-  autocmd MyAutoCmd FileType Dockerfile, call s:configure_lsp()
-  autocmd MyAutoCmd FileType javascript,typescript call s:configure_lsp()
-  function! s:configure_lsp() abort
-    " Remap keys
-    nmap <buffer><C-]> <Plug>(coc-definition)
-    nmap <buffer><silent> gy <Plug>(coc-type-definition)
-    nmap <buffer><silent> gi <Plug>(coc-implementation)
-    nmap <buffer><silent> gr <Plug>(coc-references)
-    nmap <buffer><leader>R   <Plug>(coc-rename)
-    " Remap for format selected region
-    vmap <buffer><leader>f   <Plug>(coc-format-selected)
-    nmap <buffer><leader>f   <Plug>(coc-format-selected)
-    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    vmap <buffer><leader>a   <Plug>(coc-codeaction-selected)
-    nmap <buffer><leader>a   <Plug>(coc-codeaction-selected)
-    " Remap for do codeAction of current line
-    nmap <buffer><leader>ac  <Plug>(coc-codeaction)
-    " Fix autofix problem of current line
-    nmap <buffer><leader>qf  <Plug>(coc-fix-current)
-    " Diagnostic
-    nmap <buffer><silent> gd <Plug>(coc-diagnostic-info)
-    nmap <buffer><silent> gn <Plug>(coc-diagnostic-next)
-    nmap <buffer><silent> gp <Plug>(coc-diagnostic-prev)
-    " Setup format selected region
-    setlocal formatexpr=CocAction('formatSelected')
+  if s:is_async && s:executable_nodejs
+    let g:coc_global_extensions = [
+      \ 'coc-prettier',
+      \ 'coc-snippets',
+      \ 'coc-json',
+      \ 'coc-tsserver',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-vetur',
+      \ 'coc-yaml',
+      \ ]
+    autocmd MyAutoCmd FileType python call s:configure_lsp()
+    autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
+    autocmd MyAutoCmd FileType bash call s:configure_lsp()
+    autocmd MyAutoCmd FileType Dockerfile, call s:configure_lsp()
+    autocmd MyAutoCmd FileType javascript,typescript call s:configure_lsp()
+    function! s:configure_lsp() abort
+      " Remap keys
+      nmap <buffer><C-]> <Plug>(coc-definition)
+      nmap <buffer><silent> gy <Plug>(coc-type-definition)
+      nmap <buffer><silent> gi <Plug>(coc-implementation)
+      nmap <buffer><silent> gr <Plug>(coc-references)
+      nmap <buffer><leader>R   <Plug>(coc-rename)
+      " Remap for format selected region
+      vmap <buffer><leader>f   <Plug>(coc-format-selected)
+      nmap <buffer><leader>f   <Plug>(coc-format-selected)
+      " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+      vmap <buffer><leader>a   <Plug>(coc-codeaction-selected)
+      nmap <buffer><leader>a   <Plug>(coc-codeaction-selected)
+      " Remap for do codeAction of current line
+      nmap <buffer><leader>ac  <Plug>(coc-codeaction)
+      " Fix autofix problem of current line
+      nmap <buffer><leader>qf  <Plug>(coc-fix-current)
+      " Diagnostic
+      nmap <buffer><silent> gd <Plug>(coc-diagnostic-info)
+      nmap <buffer><silent> gn <Plug>(coc-diagnostic-next)
+      nmap <buffer><silent> gp <Plug>(coc-diagnostic-prev)
+      " Setup format selected region
+      setlocal formatexpr=CocAction('formatSelected')
+      " Explorer
+      nmap ge :CocCommand explorer<CR>
 
-    " Use K to show documentation in preview window
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-      if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-      else
-        call CocAction('doHover')
-      endif
+      " Use K to show documentation in preview window
+      nnoremap <silent> K :call <SID>show_documentation()<CR>
+      function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+          execute 'h '.expand('<cword>')
+        else
+          call CocAction('doHover')
+        endif
+      endfunction
+
+      augroup CocNvimGroup
+        autocmd!
+        " Highlight symbol under cursor on CursorHold
+        autocmd CursorHold * silent call CocActionAsync('highlight')
+        " Update signature help on jump placeholder
+        autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+      augroup end
     endfunction
-
-    augroup CocNvimGroup
-      autocmd!
-      " Highlight symbol under cursor on CursorHold
-      autocmd CursorHold * silent call CocActionAsync('highlight')
-      " Update signature help on jump placeholder
-      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
-  endfunction
-  command! -nargs=0 Prettier :CocCommand prettier.formatFile
+    command! -nargs=0 Prettier :CocCommand prettier.formatFile
+  endif
   " }}}
 
   " --- vim-lsp --- {{{
