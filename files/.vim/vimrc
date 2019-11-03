@@ -399,6 +399,7 @@ if isdirectory(expand(s:plug_dir))
       \ 'coc-css',
       \ 'coc-vetur',
       \ 'coc-yaml',
+      \ 'coc-explorer',
       \ ]
     autocmd MyAutoCmd FileType python call s:configure_lsp()
     autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
@@ -428,8 +429,6 @@ if isdirectory(expand(s:plug_dir))
       nmap <buffer><silent> gp <Plug>(coc-diagnostic-prev)
       " Setup format selected region
       setlocal formatexpr=CocAction('formatSelected')
-      " Explorer
-      nmap ge :CocCommand explorer<CR>
 
       " Use K to show documentation in preview window
       nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -450,6 +449,8 @@ if isdirectory(expand(s:plug_dir))
       augroup end
     endfunction
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
+    " Explorer
+    nnoremap <silent> ge :CocCommand explorer<CR>
   endif
   " }}}
 
