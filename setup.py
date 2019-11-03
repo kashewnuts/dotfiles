@@ -13,7 +13,6 @@ DOT_FILES = [
     ".git-completion.bash",
     ".git-prompt.sh",
     ".gitconfig",
-    ".gitconfig.unix",
     ".gitignore",
     ".hgrc",
     ".ideavimrc",
@@ -23,7 +22,6 @@ DOT_FILES = [
     ".pythonstartup",
     ".tigrc",
     ".tmux.conf",
-    ".tmux.conf.osx",
     ".vim",
 ]
 CONFIG_DIRS = [".cache/tmp", ".config"]
@@ -52,13 +50,19 @@ def setup_dotfile(fname):
             put_symbolic_link(fname, alias="vimfiles")
         put_symbolic_link(fname)
 
-    elif fname == ".gitconfig.unix":
-        src = ".gitconfig.win" if sys.platform.startswith("win32") else fname
-        put_symbolic_link(src, alias=".gitconfig.os")
+    elif fname == ".gitconfig":
+        put_symbolic_link(fname)
+        if sys.platform.startswith("win32"):
+            put_symbolic_link(".gitconfig.win", alias=".gitconfig.os")
+        else:
+            put_symbolic_link(".gitconfig.unix", alias=".gitconfig.os")
 
-    elif fname == ".tmux.conf.osx":
+    elif fname == ".tmux.conf":
+        put_symbolic_link(fname)
         if sys.platform.startswith("darwin"):
-            put_symbolic_link(fname)
+            put_symbolic_link(".tmux.conf.osx")
+        elif sys.platform.startswith("linux"):
+            put_symbolic_link(".tmux.conf.linux")
 
     else:
         put_symbolic_link(fname)
