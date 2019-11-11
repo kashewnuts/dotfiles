@@ -62,6 +62,7 @@
 	user = kashewnuts
 [ghq]
 	root = ~/projects
+	root = ~/.cache/plugged
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
