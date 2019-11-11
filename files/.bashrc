@@ -34,6 +34,10 @@ case "$OSTYPE" in
 esac
 alias la='ls -al'
 alias ll='ls -l'
+alias d='docker'
+alias dcp='docker-compose'
+alias g='git'
+alias v='vim'
 
 # crontab
 alias crontab='crontab -i'
