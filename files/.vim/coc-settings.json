@@ -1,27 +1,32 @@
 {
   "suggest.timeout": 5000,
+  "diagnostic.displayByAle": true,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.signOffset": 100,
   "diagnostic.warningSign": "--",
   "suggest.enablePreview": true,
   "languageserver": {
     "bash": {
+      // npm install -g bash-language-server
       "command": "bash-language-server",
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": ["~"]
     },
     "dockerfile": {
+      // npm install -g dockerfile-language-server-nodejs
       "command": "docker-langserver",
       "filetypes": ["Dockerfile", "dockerfile"],
       "args": ["--stdio"]
     },
     "golang": {
+      // go get golang.org/x/tools/gopls@latest
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
     },
     "python": {
+      // pip install python-language-server
       "command": "pyls",
       "filetypes": ["python"],
       // "trace.server": "verbose",
@@ -32,7 +37,7 @@
       // ],
       "settings": {
         "pyls": {
-          "trace": {"server": "verbose"},
+          // "trace": {"server": "verbose"},
           "plugins": {
             "pydocstyle": {"enabled": false},
             "yapf": {"enabled": false},

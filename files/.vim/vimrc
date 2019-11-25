@@ -395,10 +395,11 @@ if isdirectory(expand(s:plug_dir))
       \ 'coc-snippets',
       \ 'coc-json',
       \ 'coc-tsserver',
+      \ 'coc-tslint-plugin',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-vetur',
-      \ 'coc-yaml',
+      \ 'coc-jest',
       \ 'coc-explorer',
       \ ]
     autocmd MyAutoCmd FileType python call s:configure_lsp()

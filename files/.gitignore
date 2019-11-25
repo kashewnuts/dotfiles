@@ -17,3 +17,4 @@ Pipfile*
 *.sqlite3
 *.*orig
 *.mypy_cache/
+.vim
