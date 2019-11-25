@@ -232,22 +232,23 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " }}}
 
 " Grep settings {{{
-if executable('pt')
-  set grepprg=pt    " https://github.com/monochromegane/the_platinum_searcher
-  " http://stackoverflow.com/questions/15393301/automatically-sort-quickfix-entries-by-line-text-in-vim
-  autocmd MyAutoCmd QuickFixCmdPost * call s:SortQuickfix('s:QfStrCmp')
-  function! s:SortQuickfix(fn)
-    call setqflist(sort(getqflist(), a:fn))
-  endfunction
-  function! s:QfStrCmp(e1, e2)
-    let [t1, t2] = [bufname(a:e1.bufnr), bufname(a:e2.bufnr)]
-    return t1 <? t2 ? -1 : t1 ==? t2 ? 0 : 1
-  endfunction
-elseif executable('jvgrep')
-  let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
-elseif executable('grep')
-  let &grepprg='grep -rnIH --exclude-dir={*git,*hg,*svn,*venv} --exclude={*tags}'
-endif " }}}
+let s:excludedir='*git,*venv,*mypy_cache,node_modules,*.serverless,test-results'
+let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '} --exclude={*tags}'
+" if executable('pt')
+"   set grepprg=pt    " https://github.com/monochromegane/the_platinum_searcher
+"   " http://stackoverflow.com/questions/15393301/automatically-sort-quickfix-entries-by-line-text-in-vim
+"   autocmd MyAutoCmd QuickFixCmdPost * call s:SortQuickfix('s:QfStrCmp')
+"   function! s:SortQuickfix(fn)
+"     call setqflist(sort(getqflist(), a:fn))
+"   endfunction
+"   function! s:QfStrCmp(e1, e2)
+"     let [t1, t2] = [bufname(a:e1.bufnr), bufname(a:e2.bufnr)]
+"     return t1 <? t2 ? -1 : t1 ==? t2 ? 0 : 1
+"   endfunction
+" elseif executable('jvgrep')
+"   let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
+" elseif executable('grep')
+" endif " }}}
 
 " v:version >= 704 {{{
 if exists('&undofile') | set undofile undodir=$HOME/.cache/tmp | endif
