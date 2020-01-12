@@ -232,8 +232,6 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " }}}
 
 " Grep settings {{{
-let s:excludedir='*git,*venv,*mypy_cache,node_modules,*.serverless,test-results'
-let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '} --exclude={*tags}'
 " if executable('pt')
 "   set grepprg=pt    " https://github.com/monochromegane/the_platinum_searcher
 "   " http://stackoverflow.com/questions/15393301/automatically-sort-quickfix-entries-by-line-text-in-vim
@@ -248,7 +246,11 @@ let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '} --exclude={*tags}'
 " elseif executable('jvgrep')
 "   let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
 " elseif executable('grep')
-" endif " }}}
+set wildignore+=*tags,*svg
+if executable('grep')
+  let s:excludedir='*git,*venv,*mypy_cache,*tox,node_modules,*.serverless,test-results,migrations'
+  let &grepprg='grep -irnIH --exclude-dir={' . s:excludedir . '}'
+endif " }}}
 
 " v:version >= 704 {{{
 if exists('&undofile') | set undofile undodir=$HOME/.cache/tmp | endif

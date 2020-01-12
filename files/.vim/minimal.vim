@@ -35,7 +35,9 @@ set laststatus=2                    " Always display status bar
 let &statusline="%<%F%m%r%h%w%=[%{&ff}][%{&enc}][%{strlen(&ft)?&ft:'no\ ft'}]"
   \ . "%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}%4v\ %P"
 " --- Grep ---
-let &grepprg='grep -rnIH --exclude-dir={*git,*venv,*mypy_cache,*node_modules} --exclude={*tags}'
+set wildignore+=*tags,*svg
+let s:excludedir='*git,*venv*,.mypy_cache,.tox*,node_modules,.serverless,test-results'
+let &grepprg='grep -irnIH --exclude-dir={' . s:excludedir . '}'
 autocmd QuickFixCmdPost *grep* cwindow  " Auto open quickfix-window
 " --- KeyMapping ---
 " To Enable filtering the command history
