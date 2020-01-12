@@ -254,6 +254,7 @@ let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '} --exclude={*tags}'
 if exists('&undofile') | set undofile undodir=$HOME/.cache/tmp | endif
 if exists('&breakindent') | set breakindent | endif
 if exists('&fixeol') | set nofixeol | endif
+if exists('&signcolumn') | set signcolumn=yes | endif
 " }}}
 
 " Plugins List {{{
@@ -273,9 +274,7 @@ if isdirectory(expand(s:plug_dir))
     Plug 'junegunn/fzf.vim'
   endif
   " Git
-  Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame']}
-  " Plug 'tpope/vim-rhubarb',             {'on': 'Gbrowse'}
   Plug 'mattn/gist-vim',                {'on': 'Gist'}
     \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
   " Snippets
@@ -311,9 +310,9 @@ if isdirectory(expand(s:plug_dir))
   " \ 'OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'tyru/open-browser-github.vim',  {'on': ['OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'vim-jp/vimdoc-ja',              {'on': ['h', 'help']}
-  if executable('ctags')
-    Plug 'jsfaint/gen_tags.vim'
-  endif
+  " if executable('ctags')
+  "   Plug 'jsfaint/gen_tags.vim'
+  " endif
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
