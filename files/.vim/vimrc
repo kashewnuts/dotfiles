@@ -323,7 +323,7 @@ if isdirectory(expand(s:plug_dir))
 
   " Plugins Config {{{
   " Fizzy Finder {{{
-  if has('win32')
+  if has('win32') && empty(globpath(&rtp, 'ctrlp.vim'))
     " --- ctrlp.vim --- {{{
     nnoremap <C-p> :<C-u>CtrlP<CR>
     nnoremap <silent> <Leader>fb :<C-u>CtrlPBuffer<CR>
@@ -345,7 +345,8 @@ if isdirectory(expand(s:plug_dir))
       \ 'fallback': 'pt --follow -g='
       \ }
     " }}}
-  else
+  endif " }}}
+  if !has('win32') && empty(globpath(&rtp, 'fzf.vim'))
     " --- fzf.vim --- {{{
     nnoremap <C-p> :<C-u>Files<CR>
     nnoremap <silent> <Leader>fb :<C-u>Buffers<CR>
@@ -368,29 +369,20 @@ if isdirectory(expand(s:plug_dir))
   endif " }}}
 
   " --- gen_tags.vim --- {{{
-  let g:gen_tags#ctags_auto_gen = 1
-  let g:loaded_gentags#gtags = 1
-  let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
-  " }}}
+  if empty(globpath(&rtp, 'gen_tags.vim'))
+    let g:gen_tags#ctags_auto_gen = 1
+    let g:loaded_gentags#gtags = 1
+    let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
+  endif " }}}
 
   " --- vim-python-pep8-indent --- {{{
-  let g:python_pep8_indent_searchpair_timeout = 0
-  " }}}
-
-  " --- vim-gitgutter --- {{{
-  if exists('&signcolumn')  " Vim 7.4.2201
-    set signcolumn=yes
-  else
-    let g:gitgutter_sign_column_always = 1
+  if empty(globpath(&rtp, 'vim-python-pep8-indent'))
+    let g:python_pep8_indent_searchpair_timeout = 0
   endif
-  highlight default link GitGutterAdd           NONE
-  highlight default link GitGutterChange        NONE
-  highlight default link GitGutterDelete        NONE
-  highlight default link GitGutterChangeDelete  NONE
   " }}}
 
   " --- coc.nvim --- {{{
-  if s:is_async && s:executable_nodejs
+  if s:is_async && s:executable_nodejs && empty(globpath(&rtp, 'coc.nvim'))
     let g:coc_global_extensions = [
       \ 'coc-prettier',
       \ 'coc-snippets',
@@ -457,6 +449,7 @@ if isdirectory(expand(s:plug_dir))
   " }}}
 
   " --- vim-lsp --- {{{
+  " if empty(globpath(&rtp, 'vim-lsp'))
   " if executable('pyls')
   "   " pip install python-language-server
   "   autocmd User lsp_setup call lsp#register_server({
@@ -473,97 +466,104 @@ if isdirectory(expand(s:plug_dir))
   "     autocmd FileType python nnoremap <Leader>n :<C-u>LspReferences<CR>
   "   augroup END
   " endif
-  " }}}
+  " endif }}}
 
   " --- memolist.vim --- {{{
-  let s:memo_path = ((has('win32') || has('mac')) ? ' (個人)' :'')
-  let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
-  let g:memolist_memo_suffix = 'md'
-  let g:memolist_template_dir_path = '~/.vim/template/memolist'
-  let g:memolist_ex_cmd = (has('win32') ? 'CtrlP': 'Files')
-  nnoremap <silent> <Leader>ml :MemoList<CR>
-  nnoremap <silent> <Leader>mn :MemoNew<CR>
-  nnoremap <silent> <Leader>mg :MemoGrep<CR>
-  " }}}
+  if empty(globpath(&rtp, 'memolist.vim'))
+    let s:memo_path = ((has('win32') || has('mac')) ? ' (個人)' :'')
+    let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
+    let g:memolist_memo_suffix = 'md'
+    let g:memolist_template_dir_path = '~/.vim/template/memolist'
+    let g:memolist_ex_cmd = (has('win32') ? 'CtrlP': 'Files')
+    nnoremap <silent> <Leader>ml :MemoList<CR>
+    nnoremap <silent> <Leader>mn :MemoNew<CR>
+    nnoremap <silent> <Leader>mg :MemoGrep<CR>
+  endif " }}}
 
   " --- autofmt --- {{{
-  set formatexpr=autofmt#japanese#formatexpr()
-  let autofmt_allow_over_tw=1
-  " }}}
+  if empty(globpath(&rtp, 'autofmt'))
+    set formatexpr=autofmt#japanese#formatexpr()
+    let autofmt_allow_over_tw=1
+  endif " }}}
 
   " --- caw.vim --- {{{
-  function! InitCaw() abort
-    if !&l:modifiable
-      silent! nunmap <buffer> gc
-      silent! xunmap <buffer> gc
-      silent! nunmap <buffer> gcc
-      silent! xunmap <buffer> gcc
-      silent! nunmap <buffer> <Leader>c
-      silent! xunmap <buffer> <Leader>c
-    else
-      nmap <buffer> gc <Plug>(caw:prefix)
-      xmap <buffer> gc <Plug>(caw:prefix)
-      nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
-      xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
-      nmap <buffer> <Leader>c <Plug>(caw:hatpos:toggle)
-      xmap <buffer> <Leader>c <Plug>(caw:hatpos:toggle)
-    endif
-  endfunction
-  autocmd MyAutoCmd FileType * call InitCaw()
-  " }}}
+  if empty(globpath(&rtp, 'caw.vim'))
+    function! InitCaw() abort
+      if !&l:modifiable
+        silent! nunmap <buffer> gc
+        silent! xunmap <buffer> gc
+        silent! nunmap <buffer> gcc
+        silent! xunmap <buffer> gcc
+        silent! nunmap <buffer> <Leader>c
+        silent! xunmap <buffer> <Leader>c
+      else
+        nmap <buffer> gc <Plug>(caw:prefix)
+        xmap <buffer> gc <Plug>(caw:prefix)
+        nmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+        xmap <buffer> gcc <Plug>(caw:hatpos:toggle)
+        nmap <buffer> <Leader>c <Plug>(caw:hatpos:toggle)
+        xmap <buffer> <Leader>c <Plug>(caw:hatpos:toggle)
+      endif
+    endfunction
+    autocmd MyAutoCmd FileType * call InitCaw()
+  endif " }}}
 
   " --- vim-easy-align --- {{{
-  " Start interactive EasyAlign in visual mode (e.g. vipga)
-  xmap ga <Plug>(EasyAlign)
-  " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-  nmap ga <Plug>(EasyAlign)
-  " }}}
+  if empty(globpath(&rtp, 'vim-easy-align'))
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
+  endif " }}}
 
   " --- previm --- {{{
-  let g:previm_disable_vimproc = 1
-  let g:previm_show_header = 0
-  command! PrevimRefresh :call previm#refresh()
-  autocmd MyAutoCmd User previm doautocmd Previm FileType
-  " }}}
+  if empty(globpath(&rtp, 'previm'))
+    let g:previm_disable_vimproc = 1
+    let g:previm_show_header = 0
+    command! PrevimRefresh :call previm#refresh()
+    autocmd MyAutoCmd User previm doautocmd Previm FileType
+  endif " }}}
 
   " --- open-browser --- {{{
-  let g:netrw_nogx = 1 " disable netrw's gx mapping.
-  nmap gx <Plug>(openbrowser-smart-search)
-  vmap gx <Plug>(openbrowser-smart-search)
-  " }}}
+  if empty(globpath(&rtp, 'open-browser.vim'))
+    let g:netrw_nogx = 1 " disable netrw's gx mapping.
+    nmap gx <Plug>(openbrowser-smart-search)
+    vmap gx <Plug>(openbrowser-smart-search)
+  endif " }}}
 
   " --- twitvim --- {{{
-  " Basic
-  let twitvim_browser_cmd = (
-  \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
-  \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
-  \ has('mac') ? 'open -a Firefox' :
-  \ '')
-  let twitvim_force_ssl = 1
-  let twitvim_count = 40
-  let twitvim_allow_multiline = 1
-  let twitvim_timestamp_format = '%c'
-  let twitvim_show_header = 0
-  autocmd MyAutoCmd FileType twitvim setlocal wrap
+  if empty(globpath(&rtp, 'twitvim'))
+    " Basic
+    let twitvim_browser_cmd = (
+    \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
+    \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
+    \ has('mac') ? 'open -a Firefox' :
+    \ '')
+    let twitvim_force_ssl = 1
+    let twitvim_count = 40
+    let twitvim_allow_multiline = 1
+    let twitvim_timestamp_format = '%c'
+    let twitvim_show_header = 0
+    autocmd MyAutoCmd FileType twitvim setlocal wrap
 
-  " Mapping
-  nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
-  nnoremap <Leader>tc :<C-u>CPosttoTwitter<CR>
-  nnoremap <Leader>tb :<C-u>BPosttoTwitter<CR>
-  nnoremap <Leader>tm :<C-u>MentionsTwitter<CR>
-  nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
-  nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
-  nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
-  nnoremap <Leader>fn :<C-u>NextTwitter<CR>
+    " Mapping
+    nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
+    nnoremap <Leader>tc :<C-u>CPosttoTwitter<CR>
+    nnoremap <Leader>tb :<C-u>BPosttoTwitter<CR>
+    nnoremap <Leader>tm :<C-u>MentionsTwitter<CR>
+    nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
+    nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
+    nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
+    nnoremap <Leader>fn :<C-u>NextTwitter<CR>
 
-  " ListTwitter
-  command! LTCliming ListTwitter climbing
-  command! LTVim ListTwitter vim
-  command! LTPython ListTwitter python-su
-  command! LTJava ListTwitter Ewigkeit java-ja
-  command! LTPyfes ListTwitter takuan_osho pyfes-2010-10
-  command! LTBeProud ListTwitter BeProud
-  " }}}
+    " ListTwitter
+    command! LTCliming ListTwitter climbing
+    command! LTVim ListTwitter vim
+    command! LTPython ListTwitter python-su
+    command! LTJava ListTwitter Ewigkeit java-ja
+    command! LTPyfes ListTwitter takuan_osho pyfes-2010-10
+    command! LTBeProud ListTwitter BeProud
+  endif " }}}
 
   augroup load_insert_snippet_plugins " {{{
     autocmd!
