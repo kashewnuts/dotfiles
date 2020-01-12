@@ -393,12 +393,13 @@ if isdirectory(expand(s:plug_dir))
       \ 'coc-vetur',
       \ 'coc-jest',
       \ 'coc-explorer',
+      \ 'coc-git',
       \ ]
     autocmd MyAutoCmd FileType python call s:configure_lsp()
     autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
     autocmd MyAutoCmd FileType bash call s:configure_lsp()
     autocmd MyAutoCmd FileType Dockerfile, call s:configure_lsp()
-    autocmd MyAutoCmd FileType javascript,typescript call s:configure_lsp()
+    autocmd MyAutoCmd FileType javascript,typescript,vue call s:configure_lsp()
     function! s:configure_lsp() abort
       " Remap keys
       nmap <buffer><C-]> <Plug>(coc-definition)
@@ -422,7 +423,11 @@ if isdirectory(expand(s:plug_dir))
       nmap <buffer><silent> gp <Plug>(coc-diagnostic-prev)
       " Setup format selected region
       setlocal formatexpr=CocAction('formatSelected')
-
+      " coc-git
+      highlight default link GitGutterAdd           NONE
+      highlight default link GitGutterChange        NONE
+      highlight default link GitGutterDelete        NONE
+      highlight default link GitGutterChangeDelete  NONE
       " Use K to show documentation in preview window
       nnoremap <silent> K :call <SID>show_documentation()<CR>
       function! s:show_documentation()
@@ -440,10 +445,11 @@ if isdirectory(expand(s:plug_dir))
         " Update signature help on jump placeholder
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
       augroup end
+
+      command! -nargs=0 Prettier :CocCommand prettier.formatFile
+      " Explorer
+      nnoremap <silent> ge :CocCommand explorer<CR>
     endfunction
-    command! -nargs=0 Prettier :CocCommand prettier.formatFile
-    " Explorer
-    nnoremap <silent> ge :CocCommand explorer<CR>
   endif
   " }}}
 

@@ -1,10 +1,14 @@
 {
+  "suggest.enablePreview": true,
   "suggest.timeout": 5000,
-  "diagnostic.displayByAle": true,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.signOffset": 100,
   "diagnostic.warningSign": "--",
-  "suggest.enablePreview": true,
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "languageserver": {
     "bash": {
       // npm install -g bash-language-server
@@ -39,12 +43,18 @@
         "pyls": {
           // "trace": {"server": "verbose"},
           "plugins": {
+            "autopep8": {"enabled": false},
             "pydocstyle": {"enabled": false},
             "yapf": {"enabled": false},
-            "pylint": {"enabled": false}
+            "pylint": {"enabled": false},
+            // "pyls_mypy": {
+            //     "enable": true,
+            //     "live_mode": false
+            // }
           }
         }
       }
     }
   }
 }
+
