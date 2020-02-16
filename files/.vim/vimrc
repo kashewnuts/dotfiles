@@ -399,12 +399,25 @@ if isdirectory(expand(s:plug_dir))
       \ 'coc-explorer',
       \ 'coc-git',
       \ ]
-    autocmd MyAutoCmd FileType python call s:configure_lsp()
-    autocmd MyAutoCmd FileType markdown,json,yaml call s:configure_lsp()
-    autocmd MyAutoCmd FileType bash call s:configure_lsp()
-    autocmd MyAutoCmd FileType Dockerfile, call s:configure_lsp()
-    autocmd MyAutoCmd FileType javascript,typescript,vue call s:configure_lsp()
+    autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
+      let l:coc_filetyps = [
+        \ 'Dockerfile',
+        \ 'bash',
+        \ 'css',
+        \ 'html',
+        \ 'javascript',
+        \ 'json',
+        \ 'markdown',
+        \ 'python',
+        \ 'typescript',
+        \ 'vue',
+        \ 'yaml',
+        \ ]
+      if match(l:coc_filetyps, &filetype) == -1
+        return
+      endif
+
       " Remap keys
       nmap <buffer><C-]> <Plug>(coc-definition)
       nmap <buffer><silent> gy <Plug>(coc-type-definition)
@@ -451,9 +464,9 @@ if isdirectory(expand(s:plug_dir))
       augroup end
 
       command! -nargs=0 Prettier :CocCommand prettier.formatFile
-      " Explorer
-      nnoremap <silent> ge :CocCommand explorer<CR>
     endfunction
+    " Explorer
+    nnoremap <silent> ge :CocCommand explorer<CR>
   endif
   " }}}
 
