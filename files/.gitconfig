@@ -2,7 +2,7 @@
 	name = kashewnuts
 	email = kashun.nuts@gmail.com
 [core]
-	editor = vim
+	editor = vim -Nu ~/.vim/minimal.vim
 	excludesfile = ~/.gitignore
 	quotepath = false
 	preloadindex = true
@@ -21,6 +21,7 @@
 	br = branch
 	ci = commit
 	co = checkout
+	cof = !git branch -a | fzf | xargs git checkout
 	df = diff
 	dft = difftool
 	st = status
@@ -63,8 +64,3 @@
 [ghq]
 	root = ~/projects
 	root = ~/.cache/plugged
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process

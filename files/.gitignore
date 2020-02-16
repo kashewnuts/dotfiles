@@ -18,3 +18,5 @@ Pipfile*
 *.*orig
 *.mypy_cache/
 .vim
+docker-compose.override.yml
+settings_override.py

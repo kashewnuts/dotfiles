@@ -9,6 +9,7 @@
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "diagnostic.refreshOnInsertMode": true,
   "languageserver": {
     "bash": {
       // npm install -g bash-language-server
@@ -57,4 +58,3 @@
     }
   }
 }
-

@@ -25,11 +25,11 @@ set noerrorbells novisualbell t_vb=   " Disable annoying bells
 set noswapfile nobackup nowritebackup " Doesn't generate backup files
 
 " Disable default plugins
-let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
-let g:loaded_zip               = 1
-let g:loaded_zipPlugin         = 1
+" let g:loaded_gzip              = 1
+" let g:loaded_zip               = 1
+" let g:loaded_zipPlugin         = 1
 let g:loaded_rrhelper          = 1
 " let g:loaded_2html_plugin      = 1
 let g:loaded_vimball           = 1
@@ -72,7 +72,7 @@ set nomodeline
 set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
 set scrolloff=5                 " Keep above and below the cursor
 set spell spelllang=en_us,cjk
-set synmaxcol=200               " Only highlight the first 200 columns
+" set synmaxcol=200               " Only highlight the first 200 columns
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 set updatetime=100
 set virtualedit=block           " expand selection area for visual mode
@@ -119,6 +119,7 @@ set wildmenu wildmode=list:full " Command-line completion
 " %{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}
 " %v:                             Virtual column number
 " %P:                             Cursor-Now Column/Total Number
+" set ruler
 set laststatus=2                " Always display status bar
 let &statusline="%<%F%m%r%h%w%=[%{&ff}][%{&enc}][%{strlen(&ft)?&ft:'no\ ft'}]"
   \ . "%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}%4v\ %P"
@@ -248,7 +249,7 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " elseif executable('grep')
 set wildignore+=*tags,*svg
 if executable('grep')
-  let s:excludedir='*git,*venv,*mypy_cache,*tox,node_modules,*.serverless,test-results,migrations'
+  let s:excludedir='*git,*venv*,*mypy_cache,*tox*,node_modules,*.serverless,test-results,migrations'
   let &grepprg='grep -irnIH --exclude-dir={' . s:excludedir . '}'
 endif " }}}
 
@@ -264,7 +265,7 @@ if exists('&signcolumn') | set signcolumn=yes | endif
 let s:plug_dir = '~/.cache/plugged'
 let s:is_async = (v:version >= 800 && has('timers') && has('job') && has('channel'))
 let s:executable_nodejs = (executable('node') || executable('nodejs')) && executable('npm')
-if isdirectory(expand(s:plug_dir))
+if !&diff && isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir)
   " Declare the list of plugins.
   Plug 'junegunn/vim-plug'
@@ -295,7 +296,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
-  Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+  " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   let g:polyglot_disabled = ['markdown', 'python', 'json']
   " Formater
   Plug 'vim-jp/autofmt'

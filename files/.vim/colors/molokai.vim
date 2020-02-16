@@ -32,10 +32,10 @@ hi iCursor         guifg=#000000 guibg=#F8F8F0
 hi Debug           guifg=#BCA3A3               gui=bold
 hi Define          guifg=#66D9EF
 hi Delimiter       guifg=#8F8F8F
-hi DiffAdd                       guibg=#13354A
-hi DiffChange      guifg=#89807D guibg=#4C4745
-hi DiffDelete      guifg=#960050 guibg=#1E0010
-hi DiffText                      guibg=#4C4745 gui=bold
+" hi DiffAdd                       guibg=#13354A
+" hi DiffChange      guifg=#89807D guibg=#4C4745
+" hi DiffDelete      guifg=#960050 guibg=#1E0010
+" hi DiffText                      guibg=#4C4745 gui=bold
 
 hi Directory       guifg=#A6E22E               gui=bold
 hi Error           guifg=#E6DB74 guibg=#1E0010
@@ -104,10 +104,10 @@ hi TabLineFill     guifg=#1B1D1E guibg=#1B1D1E
 hi TabLine         guibg=#1B1D1E guifg=#808080 gui=none
 hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
 hi Comment         guifg=#7E8E91
-hi CursorLine                    guibg=#293739
-hi CursorLineNr    guifg=#FD971F               gui=none
-hi CursorColumn                  guibg=#293739
-hi ColorColumn                   guibg=#232526
+" hi CursorLine                    guibg=#293739
+" hi CursorLineNr    guifg=#FD971F               gui=none
+" hi CursorColumn                  guibg=#293739
+" hi ColorColumn                   guibg=#232526
 hi LineNr          guifg=#465457 guibg=#232526
 hi NonText         guifg=#465457
 hi SpecialKey      guifg=#465457
@@ -118,8 +118,8 @@ hi EndOfBuffer                 ctermbg=none
 "
 if &t_Co > 255
    hi Normal          ctermfg=252 ctermbg=none
-   hi CursorLine                  ctermbg=234   cterm=none
-   hi CursorLineNr    ctermfg=208               cterm=none
+   " hi CursorLine                  ctermbg=234   cterm=none
+   " hi CursorLineNr    ctermfg=208               cterm=none
    hi Boolean         ctermfg=135
    hi Character       ctermfg=144
    hi Number          ctermfg=135
@@ -213,3 +213,14 @@ end
 " Must be at the end, because of ctermbg=234 bug.
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
 set background=dark
+
+" hi DiffAdd                       guibg=#13354A
+" hi DiffChange      guifg=#89807D guibg=#4C4745
+" hi DiffDelete      guifg=#960050 guibg=#1E0010
+" hi DiffText                      guibg=#4C4745 gui=italic,bold
+"
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+

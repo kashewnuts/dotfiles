@@ -3,15 +3,17 @@ export EDITOR=vim
 case "$OSTYPE" in
   darwin*)  # BSD (contains Mac)
   export LANG=ja_JP.UTF-8
-  export GIT_EDITOR='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
-  if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
-    export PS1='\[\033[00m\]\$ '
-    vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0 set ruler set nonumber" "$@"; }
-    alias vi=vim
-  else
-    vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
-    alias vi='vim -Nu ~/.vim/minimal.vim'
-  fi
+  export GIT_EDITOR='/usr/local/bin/vim'
+  # if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
+  #   export PS1='\[\033[00m\]\$ '
+  #   vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0 set ruler set nonumber" "$@"; }
+  #   alias vi=vim
+  # else
+  #   vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
+  #   alias vi='vim -Nu ~/.vim/minimal.vim'
+  # fi
+  alias vim='/usr/local/bin/vim'
+  alias vi='/usr/local/bin/vim -Nu ~/.vim/minimal.vim -c "set laststatus=0" -c "set ruler" -c "set nonumber"'
   alias gvim='vim -g'
   export PYTHONUSERBASE=~/.local
   ;;
@@ -46,6 +48,7 @@ alias crontab='crontab -i'
 source ~/.git-prompt.sh
 source ~/.git-completion.bash
 export GIT_PS1_SHOWDIRTYSTATE=true
+# export PS1='$ '
 export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
 # hub
 if [ -f ~/.hub.bash_completion.sh ]; then
@@ -103,17 +106,27 @@ if [ -f ~/.fzf.bash ]; then
   fi
 fi
 
-_pipenv_completion() {
-    local IFS=$'\t'
-    COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
-                   COMP_CWORD=$COMP_CWORD \
-                   _PIPENV_COMPLETE=complete-bash $1 ) )
-    return 0
-}
-
-complete -F _pipenv_completion -o default pipenv
+# _pipenv_completion() {
+#     local IFS=$'\t'
+#     COMPREPLY=( $( env COMP_WORDS="${COMP_WORDS[*]}" \
+#                    COMP_CWORD=$COMP_CWORD \
+#                    _PIPENV_COMPLETE=complete-bash $1 ) )
+#     return 0
+# }
+#
+# complete -F _pipenv_completion -o default pipenv
 
 # local setting
 if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
+
+# # tabtab source for serverless package
+# # uninstall by removing these lines or running `tabtab uninstall serverless`
+# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# # tabtab source for sls package
+# # uninstall by removing these lines or running `tabtab uninstall sls`
+# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+# # tabtab source for slss package
+# # uninstall by removing these lines or running `tabtab uninstall slss`
+# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
