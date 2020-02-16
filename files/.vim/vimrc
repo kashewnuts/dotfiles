@@ -313,7 +313,7 @@ if isdirectory(expand(s:plug_dir))
   Plug 'tyru/open-browser.vim' " ,         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
   " \ 'OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'tyru/open-browser-github.vim',  {'on': ['OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
-  Plug 'vim-jp/vimdoc-ja',              {'on': ['h', 'help']}
+  Plug 'vim-jp/vimdoc-ja'  " ,              {'on': ['h', 'help']}
   Plug 'mbbill/undotree'
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
