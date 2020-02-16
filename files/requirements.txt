@@ -1,7 +1,6 @@
 flake8>=3.7.7,<3.8
 flake8-blind-except
 flake8-breakpoint
-flake8-builtins
 flake8-logging-format
 pep8-naming
 black
@@ -9,4 +8,5 @@ isort
 docutils
 ipython
 pipenv
-python-language-server
+python-language-server[rope]
+pyls-mypy
