@@ -314,6 +314,7 @@ if isdirectory(expand(s:plug_dir))
   " \ 'OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'tyru/open-browser-github.vim',  {'on': ['OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'vim-jp/vimdoc-ja',              {'on': ['h', 'help']}
+  Plug 'mbbill/undotree'
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
   " endif
@@ -551,6 +552,11 @@ if isdirectory(expand(s:plug_dir))
     let g:netrw_nogx = 1 " disable netrw's gx mapping.
     nmap gx <Plug>(openbrowser-smart-search)
     vmap gx <Plug>(openbrowser-smart-search)
+  endif " }}}
+
+  " --- undotree --- {{{
+  if empty(globpath(&rtp, 'undotree'))
+    nnoremap <F5> :UndotreeToggle<CR>
   endif " }}}
 
   " --- twitvim --- {{{
