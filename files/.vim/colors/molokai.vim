@@ -219,8 +219,13 @@ set background=dark
 " hi DiffDelete      guifg=#960050 guibg=#1E0010
 " hi DiffText                      guibg=#4C4745 gui=italic,bold
 "
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
+hi DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+hi DiffDelete cterm=bold ctermfg=10 ctermbg=52
+hi DiffChange cterm=bold ctermfg=10 ctermbg=17
+hi DiffText   cterm=bold ctermfg=10 ctermbg=21
 
+" for popup-window inspired badwolf
+hi Pmenu guifg=#f8f6f2 ctermfg=15 guibg=#35322d ctermbg=236
+hi PmenuSel guifg=#000000 ctermfg=16 gui=bold cterm=bold
+hi PmenuSbar guibg=#35322d ctermbg=236
+hi PmenuThumb guifg=#d9cec3 ctermfg=252
