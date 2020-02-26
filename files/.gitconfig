@@ -23,7 +23,9 @@
 	co = checkout
 	cof = !git branch -a | fzf | xargs git checkout
 	df = diff
+	dfc = diff --cached
 	dft = difftool
+	dftc = difftool --cached
 	st = status
 	unstage = reset -q HEAD --
 	uncommit = reset --mixed HEAD~
