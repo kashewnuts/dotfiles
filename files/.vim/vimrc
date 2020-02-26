@@ -286,9 +286,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " LSP
   if s:is_async && s:executable_nodejs
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " else
-  "   Plug 'prabirshrestha/async.vim'
-  "   Plug 'prabirshrestha/vim-lsp'
   endif
   " FileType
   Plug 'neoclide/jsonc.vim',            {'for': 'json'}
@@ -311,8 +308,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
   Plug 'previm/previm',                 {'on': 'PrevimOpen'}
-  Plug 'tyru/open-browser.vim' " ,         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
-  " \ 'OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
+  Plug 'tyru/open-browser.vim' "
   Plug 'tyru/open-browser-github.vim',  {'on': ['OpenGithubFile', 'OpenGithubIssue', 'OpenGithubPullReq']}
   Plug 'vim-jp/vimdoc-ja'  " ,              {'on': ['h', 'help']}
   Plug 'mbbill/undotree'
@@ -327,9 +323,11 @@ if !&diff && isdirectory(expand(s:plug_dir))
   call plug#end() " }}}
 
   " Plugins Config {{{
+  function! s:installed_plugin(plug_name) abort
+    return empty(globpath(&rtp, a:plug_name))
+  endfunction
   " Fizzy Finder {{{
-  if has('win32') && empty(globpath(&rtp, 'ctrlp.vim'))
-    " --- ctrlp.vim --- {{{
+  if s:installed_plugin('ctrlp.vim') && has('win32') " {{{
     nnoremap <C-p> :<C-u>CtrlP<CR>
     nnoremap <silent> <Leader>fb :<C-u>CtrlPBuffer<CR>
     nnoremap <silent> <Leader>fm :<C-u>CtrlPMRUFiles<CR>
@@ -350,9 +348,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'fallback': 'pt --follow -g='
       \ }
     " }}}
-  endif " }}}
-  if !has('win32') && empty(globpath(&rtp, 'fzf.vim'))
-    " --- fzf.vim --- {{{
+  endif
+  if s:installed_plugin('fzf.vim') && !has('win32') " {{{
     nnoremap <C-p> :<C-u>Files<CR>
     nnoremap <silent> <Leader>fb :<C-u>Buffers<CR>
     nnoremap <silent> <Leader>fm :<C-u>History<CR>
@@ -370,30 +367,27 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \   <bang>0 ? fzf#vim#with_preview('up:60%')
     \           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
     \   <bang>0)
-    " }}}
   endif " }}}
+  " }}}
 
-  " --- gen_tags.vim --- {{{
-  if empty(globpath(&rtp, 'gen_tags.vim'))
+  if s:installed_plugin('gen_tags.vim') " {{{
     let g:gen_tags#ctags_auto_gen = 1
     let g:loaded_gentags#gtags = 1
     let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
   endif " }}}
 
-  " --- vim-python-pep8-indent --- {{{
-  if empty(globpath(&rtp, 'vim-python-pep8-indent'))
+  if s:installed_plugin('vim-python-pep8-indent') " {{{
     let g:python_pep8_indent_searchpair_timeout = 0
-  endif
-  " }}}
+  endif " }}}
 
-  " --- coc.nvim --- {{{
-  if s:is_async && s:executable_nodejs && empty(globpath(&rtp, 'coc.nvim'))
+  if s:installed_plugin('coc.nvim') && s:is_async && s:executable_nodejs " {{{
     let g:coc_global_extensions = [
       \ 'coc-prettier',
       \ 'coc-snippets',
       \ 'coc-json',
       \ 'coc-tsserver',
       \ 'coc-tslint-plugin',
+      \ 'coc-eslint',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-vetur',
@@ -407,6 +401,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
         \ 'Dockerfile',
         \ 'bash',
         \ 'css',
+        \ 'scss',
         \ 'html',
         \ 'javascript',
         \ 'json',
@@ -469,31 +464,9 @@ if !&diff && isdirectory(expand(s:plug_dir))
     endfunction
     " Explorer
     nnoremap <silent> ge :CocCommand explorer<CR>
-  endif
-  " }}}
+  endif " }}}
 
-  " --- vim-lsp --- {{{
-  " if empty(globpath(&rtp, 'vim-lsp'))
-  " if executable('pyls')
-  "   " pip install python-language-server
-  "   autocmd User lsp_setup call lsp#register_server({
-  "       \ 'name': 'pyls',
-  "       \ 'cmd': {server_info->['pyls']},
-  "       \ 'whitelist': ['python'],
-  "       \ })
-  "   augroup PylsCommands
-  "     autocmd!
-  "     autocmd FileType python setlocal omnifunc=lsp#complete
-  "     autocmd FileType python nnoremap <C-]> :<C-u>LspDefinition<CR>
-  "     autocmd FileType python nnoremap K :<C-u>LspHover<CR>
-  "     autocmd FileType python nnoremap <Leader>R :<C-u>LspRename<CR>
-  "     autocmd FileType python nnoremap <Leader>n :<C-u>LspReferences<CR>
-  "   augroup END
-  " endif
-  " endif }}}
-
-  " --- memolist.vim --- {{{
-  if empty(globpath(&rtp, 'memolist.vim'))
+  if s:installed_plugin('memolist.vim') " {{{
     let s:memo_path = ((has('win32') || has('mac')) ? ' (個人)' :'')
     let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
     let g:memolist_memo_suffix = 'md'
@@ -504,14 +477,12 @@ if !&diff && isdirectory(expand(s:plug_dir))
     nnoremap <silent> <Leader>mg :MemoGrep<CR>
   endif " }}}
 
-  " --- autofmt --- {{{
-  if empty(globpath(&rtp, 'autofmt'))
+  if s:installed_plugin('autofmt') " {{{
     set formatexpr=autofmt#japanese#formatexpr()
     let autofmt_allow_over_tw=1
   endif " }}}
 
-  " --- caw.vim --- {{{
-  if empty(globpath(&rtp, 'caw.vim'))
+  if s:installed_plugin('caw.vim') " {{{
     function! InitCaw() abort
       if !&l:modifiable
         silent! nunmap <buffer> gc
@@ -532,36 +503,35 @@ if !&diff && isdirectory(expand(s:plug_dir))
     autocmd MyAutoCmd FileType * call InitCaw()
   endif " }}}
 
-  " --- vim-easy-align --- {{{
-  if empty(globpath(&rtp, 'vim-easy-align'))
+  if s:installed_plugin('vim-easy-align') " {{{
     " Start interactive EasyAlign in visual mode (e.g. vipga)
     xmap ga <Plug>(EasyAlign)
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
     nmap ga <Plug>(EasyAlign)
   endif " }}}
 
-  " --- previm --- {{{
-  if empty(globpath(&rtp, 'previm'))
+  if s:installed_plugin('previm') " {{{
     let g:previm_disable_vimproc = 1
     let g:previm_show_header = 0
     command! PrevimRefresh :call previm#refresh()
     autocmd MyAutoCmd User previm doautocmd Previm FileType
   endif " }}}
 
-  " --- open-browser --- {{{
-  if empty(globpath(&rtp, 'open-browser.vim'))
+  if s:installed_plugin('open-browser.vim') " {{{
     let g:netrw_nogx = 1 " disable netrw's gx mapping.
     nmap gx <Plug>(openbrowser-smart-search)
     vmap gx <Plug>(openbrowser-smart-search)
   endif " }}}
 
-  " --- undotree --- {{{
-  if empty(globpath(&rtp, 'undotree'))
+  if s:installed_plugin('undotree') " {{{
     nnoremap <F5> :UndotreeToggle<CR>
   endif " }}}
 
-  " --- twitvim --- {{{
-  if empty(globpath(&rtp, 'twitvim'))
+  if s:installed_plugin('vim-pydocstring') " {{{
+    nmap <silent> <C-_> <Plug>(pydocstring)
+  endif " }}}
+
+  if s:installed_plugin('twitvim') " {{{
     " Basic
     let twitvim_browser_cmd = (
     \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
