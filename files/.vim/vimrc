@@ -69,7 +69,7 @@ set history=200                 " History
 set iskeyword& iskeyword+=-     " Include '-' to word
 set list listchars=tab:>-,trail:-  " Visualize character
 set nomodeline
-set matchpairs& matchpairs+=<:> " To support brackets add a pair of '<' and '>'
+set matchpairs& matchpairs+=<:>,「:」,【:】,『:』,《:》,〈:〉,（:） " Add support brackets
 set scrolloff=5                 " Keep above and below the cursor
 set spell spelllang=en_us,cjk
 " set synmaxcol=200               " Only highlight the first 200 columns
