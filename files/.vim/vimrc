@@ -397,7 +397,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
-      let l:coc_filetyps = [
+      let l:coc_filetypes = [
         \ 'Dockerfile',
         \ 'bash',
         \ 'css',
@@ -411,7 +411,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
         \ 'vue',
         \ 'yaml',
         \ ]
-      if match(l:coc_filetyps, &filetype) == -1
+      if match(l:coc_filetypes, &filetype) == -1
         return
       endif
 
