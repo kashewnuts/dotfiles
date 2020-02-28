@@ -302,7 +302,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
   Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
-  Plug 'psf/black',                     {'for': 'python'}
+  Plug 'psf/black',                     {'on': 'Black'}
   let g:black_linelength = 99
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
