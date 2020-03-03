@@ -264,7 +264,7 @@ if exists('&signcolumn') | set signcolumn=yes | endif
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
 let s:is_async = (v:version >= 800 && has('timers') && has('job') && has('channel'))
-let s:executable_nodejs = (executable('node') || executable('nodejs')) && executable('npm')
+let s:executable_nodejs = (executable('node') || executable('nodejs')) && executable('npm') && executable('yarn')
 if !&diff && isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir)
   " Declare the list of plugins.
@@ -286,6 +286,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " LSP
   if s:is_async && s:executable_nodejs
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'kashewnuts/coc-git', {'do': 'yarn install --frozen-lockfile'}
   endif
   " FileType
   Plug 'neoclide/jsonc.vim',            {'for': 'json'}
@@ -394,8 +395,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-vetur',
       \ 'coc-jest',
       \ 'coc-explorer',
-      \ 'coc-git',
       \ ]
+      " \ 'coc-git',
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
       let l:coc_filetypes = [
@@ -465,6 +466,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
     endfunction
     " Explorer
     nnoremap <silent> ge :CocCommand explorer<CR>
+    command! GBrowserOpen :CocCommand git.browserOpen
+    command! GCopyUrl :CocCommand git.copyUrl
   endif " }}}
 
   if s:installed_plugin('memolist.vim') " {{{
