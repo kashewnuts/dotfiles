@@ -277,7 +277,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
     Plug 'junegunn/fzf.vim'
   endif
   " Git
-  Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame']}
+  " Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame']}
+  Plug 'lambdalisue/gina.vim',          {'on': 'Gina'}
   Plug 'mattn/gist-vim',                {'on': 'Gist'}
     \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
   " Snippets
@@ -286,7 +287,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " LSP
   if s:is_async && s:executable_nodejs
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'kashewnuts/coc-git', {'do': 'yarn install --frozen-lockfile'}
+    " Plug 'kashewnuts/coc-git', {'do': 'yarn install --frozen-lockfile'}
   endif
   " FileType
   Plug 'neoclide/jsonc.vim',            {'for': 'json'}
@@ -296,7 +297,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'sheerun/vim-polyglot'
   " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   let g:polyglot_disabled = ['markdown', 'python', 'json']
-  Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make install'}
+  Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
   " Formater
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
@@ -304,8 +305,10 @@ if !&diff && isdirectory(expand(s:plug_dir))
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
   Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
-  Plug 'psf/black',                     {'on': 'Black'}
+  " Plug 'psf/black',                     {'on': 'Black', 'commit': 'ce14fa8'}
+  Plug 'psf/black',                     {'on': 'Black', 'tag': '19.10b0' }
   let g:black_linelength = 99
+  let g:black_skip_string_normalization = 1
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
@@ -394,8 +397,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-vetur',
       \ 'coc-jest',
       \ 'coc-explorer',
+      \ 'coc-git',
       \ ]
-      " \ 'coc-git',
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
       let l:coc_filetypes = [
