@@ -1,16 +1,16 @@
 [core]
-	autocrlf = true
-[diff]
-	tool = WinMerge
-	guitool = WinMerge
-[difftool "WinMerge"]
-	path = C:/Program Files/WinMerge/WinMergeU.exe
-	cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" -e -ub -dl \"Theirs Files\" -dr \"Mine  Files\" \"$REMOTE\" \"$LOCAL\"
-[merge]
-	tool = WinMerge
-[mergetool "WinMerge"]
-	path = C:/Program Files/WinMerge/WinMergeU.exe
-	cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" \"$MERGED\"
+	autocrlf = input
+# [diff]
+# 	tool = WinMerge
+# 	guitool = WinMerge
+# [difftool "WinMerge"]
+# 	path = C:/Program Files/WinMerge/WinMergeU.exe
+# 	cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" -e -ub -dl \"Theirs Files\" -dr \"Mine  Files\" \"$REMOTE\" \"$LOCAL\"
+# [merge]
+# 	tool = WinMerge
+# [mergetool "WinMerge"]
+# 	path = C:/Program Files/WinMerge/WinMergeU.exe
+# 	cmd = \"C:/Program Files/WinMerge/WinMergeU.exe\" \"$MERGED\"
 [alias]
 	windiff = difftool -y -d -t WinMerge
 	winmerge = mergetool -y -t WinMerge

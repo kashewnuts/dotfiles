@@ -8,7 +8,7 @@
 
 " Font {{{
 if has('win32')
-  let &guifont='Ricty_Diminished:h12'
+  let &guifont='Ricty_Diminished:h14'
 elseif has('mac')
   let &guifont='Ricty_Diminished:h16'
 else

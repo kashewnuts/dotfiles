@@ -344,13 +344,13 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
-    let g:ctrlp_user_command = {
-      \ 'types': {
-      \ 1: ['.git', 'cd %s && git ls-files'],
-      \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-      \ },
-      \ 'fallback': 'pt --follow -g='
-      \ }
+    " let g:ctrlp_user_command = {
+    " \ 'types': {
+    " \ 1: ['.git', 'cd %s && git ls-files'],
+    " \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    " \ },
+    " \ 'fallback': 'pt --follow -g='
+    " \ }
     " }}}
   endif
   if s:installed_plugin('fzf.vim') && !has('win32') " {{{
@@ -473,7 +473,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   endif " }}}
 
   if s:installed_plugin('memolist.vim') " {{{
-    let s:memo_path = ((has('win32') || has('mac')) ? ' (個人)' :'')
+    let s:memo_path = ((has('win32') || has('mac')) ? ' (個人用)' :'')
     let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
     let g:memolist_memo_suffix = 'md'
     let g:memolist_template_dir_path = '~/.vim/template/memolist'
@@ -540,7 +540,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   if s:installed_plugin('twitvim') " {{{
     " Basic
     let twitvim_browser_cmd = (
-    \ has('win32') ? 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe' :
+    \ has('win32') ? 'C:/Program Files\Mozilla Firefox\firefox.exe' :
     \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
     \ has('mac') ? 'open -a Firefox' :
     \ '')
