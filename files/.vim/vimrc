@@ -82,7 +82,7 @@ set backspace=indent,eol,start  " Can erase everything in the back space
 if has('clipboard')
   set clipboard=unnamed,unnamedplus " Use the OS clipboard
 endif
-set complete& complete+=k       " Specifies how keyword completion
+set complete& complete+=k complete-=i  " Specifies how keyword completion
 set completeopt=menuone         " Force the user to select one
 set iminsert=0 imsearch=-1      " Insert, Search mode: ime setting
 set tags=./tags;                " Refer to projects root tags file
@@ -247,10 +247,11 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " elseif executable('jvgrep')
 "   let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
 " elseif executable('grep')
-set wildignore+=*tags,*svg
+set wildignore+=*tags,*svg,*bundle*.js,*png,*jpeg,*jpg
 if executable('grep')
-  let s:excludedir='*git,*venv*,*mypy_cache,*tox*,node_modules,*.serverless,test-results,migrations'
-  let &grepprg='grep -irnIH --exclude-dir={' . s:excludedir . '}'
+  let s:excludedir='*git,*venv*,node_modules,migrations,static*,static_files,tmp,dist*'
+    \ . ',*mypy_cache,*tox*,*.serverless,test-results,screenshots,locale'
+  let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '}'
 endif " }}}
 
 " v:version >= 704 {{{
@@ -277,13 +278,14 @@ if !&diff && isdirectory(expand(s:plug_dir))
     Plug 'junegunn/fzf.vim'
   endif
   " Git
-  " Plug 'tpope/vim-fugitive',            {'on': ['Glog', 'Gdiff', 'Gblame']}
   Plug 'lambdalisue/gina.vim',          {'on': 'Gina'}
   Plug 'mattn/gist-vim',                {'on': 'Gist'}
     \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
   " Snippets
-  Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
-  Plug 'honza/vim-snippets',            {'on': []}
+  " if has('python3')
+  "   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
+  "   Plug 'honza/vim-snippets',            {'on': []}
+  " endif
   " LSP
   if s:is_async && s:executable_nodejs
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -297,6 +299,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'sheerun/vim-polyglot'
   " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   let g:polyglot_disabled = ['markdown', 'python', 'json']
+  Plug 'Shougo/context_filetype.vim'    " For vue
   Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
   " Formater
   Plug 'vim-jp/autofmt'
@@ -315,6 +318,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
   " endif
+  Plug 'thinca/vim-localrc'
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
@@ -340,15 +344,13 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
-    " let g:ctrlp_user_command = {
-    " \ 'types': {
-    " \ 1: ['.git', 'cd %s && git ls-files'],
-    " \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    " \ },
-    " \ 'fallback': 'pt --follow -g='
-    " \ }
-    " }}}
-  endif
+    let g:ctrlp_user_command = {
+    \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+    \ }
+  endif " }}}
   if s:installed_plugin('fzf.vim') && !has('win32') " {{{
     nnoremap <C-p> :<C-u>Files<CR>
     nnoremap <silent> <Leader>fb :<C-u>Buffers<CR>
@@ -582,14 +584,16 @@ if !&diff && isdirectory(expand(s:plug_dir))
     command! LTBeProud ListTwitter BeProud
   endif " }}}
 
-  augroup load_insert_snippet_plugins " {{{
-    autocmd!
-    autocmd InsertEnter * call plug#load(
-  \ 'ultisnips',
-  \ 'vim-snippets',
-  \ )
-  \ | autocmd! load_insert_snippet_plugins
-  augroup END " }}}
+  " if has('python3')
+  "   augroup load_insert_snippet_plugins " {{{
+  "     autocmd!
+  "     autocmd InsertEnter * call plug#load(
+  "   \ 'ultisnips',
+  "   \ 'vim-snippets',
+  "   \ )
+  "   \ | autocmd! load_insert_snippet_plugins
+  "   augroup END " }}}
+  " endif
 endif "}}}
 
 " Others {{{
