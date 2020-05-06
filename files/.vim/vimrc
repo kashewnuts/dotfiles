@@ -398,6 +398,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-jest',
       \ 'coc-explorer',
       \ 'coc-git',
+      \ 'coc-jedi',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
