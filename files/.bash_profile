@@ -18,6 +18,9 @@ case "$OSTYPE" in
   export PATH="${LOCAL_PATH}:${PATH}"
   export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/imagemagick@6/lib/
   export BASH_SILENCE_DEPRECATION_WARNING=1
+
+  export PATH="$HOME/.nodenv/bin:$PATH"
+  eval "$(nodenv init -)"
   ;;
 
   linux*)   # Linux
