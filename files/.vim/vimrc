@@ -287,8 +287,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " LSP
   if s:is_async && s:executable_nodejs
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Plug 'kashewnuts/coc-git', {'do': 'yarn install --frozen-lockfile'}
   endif
+  Plug 'dense-analysis/ale'
   " FileType
   Plug 'neoclide/jsonc.vim',            {'for': 'json'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
@@ -305,10 +305,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
   Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
-  " Plug 'psf/black',                     {'on': 'Black', 'commit': 'ce14fa8'}
-  Plug 'psf/black',                     {'on': 'Black', 'tag': '19.10b0' }
-  let g:black_linelength = 99
-  let g:black_skip_string_normalization = 1
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
@@ -471,6 +467,21 @@ if !&diff && isdirectory(expand(s:plug_dir))
     nnoremap <silent> ge :CocCommand explorer<CR>
     command! GBrowserOpen :CocCommand git.browserOpen
     command! GCopyUrl :CocCommand git.copyUrl
+  endif " }}}
+
+  if s:installed_plugin('ale') " {{{
+    let g:ale_completion_enabled = 0
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_linters = {
+    \ 'bash': ['shellcheck'],
+    \ 'python': ['flake8', 'mypy'],
+    \}
+    let g:ale_fixers = {
+    \ 'python': ['black'],
+    \ }
+    let g:ale_sh_shellcheck_exclusions = 'SC1090'
+    nmap <silent> <Leader>x <Plug>(ale_fix)
   endif " }}}
 
   if s:installed_plugin('memolist.vim') " {{{
