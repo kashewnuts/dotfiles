@@ -278,7 +278,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
     Plug 'junegunn/fzf.vim'
   endif
   " Git
-  Plug 'lambdalisue/gina.vim',          {'on': 'Gina'}
+  Plug 'lambdalisue/gina.vim'
   Plug 'mattn/gist-vim',                {'on': 'Gist'}
     \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
   " Snippets
