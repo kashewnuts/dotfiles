@@ -59,10 +59,9 @@ def setup_dotfile(fname):
 
     elif fname == ".tmux.conf":
         put_symbolic_link(fname)
-        if sys.platform.startswith("darwin"):
-            put_symbolic_link(".tmux.conf.osx")
-        elif sys.platform.startswith("linux"):
-            put_symbolic_link(".tmux.conf.linux")
+        put_symbolic_link(".tmux.conf.osx")
+        put_symbolic_link(".tmux.conf.linux")
+        put_symbolic_link(".tmux.conf.wsl")
 
     else:
         put_symbolic_link(fname)

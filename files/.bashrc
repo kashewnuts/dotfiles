@@ -45,11 +45,12 @@ alias v='vim'
 alias crontab='crontab -i'
 
 # git-completion.bash
-source ~/.git-prompt.sh
+# source ~/.git-prompt.sh
 source ~/.git-completion.bash
-export GIT_PS1_SHOWDIRTYSTATE=true
+# export GIT_PS1_SHOWDIRTYSTATE=true
 # export PS1='$ '
-export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
+# export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
+export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[00m\]\$\n'
 # hub
 if [ -f ~/.hub.bash_completion.sh ]; then
   source ~/.hub.bash_completion.sh

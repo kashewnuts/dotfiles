@@ -195,6 +195,13 @@ else
     cnoremap <special> <Esc>[201~ <nop>
   endif
 endif
+" Windows Subsystem for Linux で、ヤンクでクリップボードにコピー
+if system('uname -a | grep microsoft') != ''
+  augroup myYank
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe', @")
+  augroup END
+endif
 " }}}
 
 " Commands {{{
@@ -265,7 +272,7 @@ if exists('&signcolumn') | set signcolumn=yes | endif
 " Plugins will be downloaded under the specified directory.
 let s:plug_dir = '~/.cache/plugged'
 let s:is_async = (v:version >= 800 && has('timers') && has('job') && has('channel'))
-let s:executable_nodejs = (executable('node') || executable('nodejs')) && executable('npm') && executable('yarn')
+let s:executable_nodejs = (executable('node') || executable('nodejs')) && executable('npm')
 if !&diff && isdirectory(expand(s:plug_dir))
   call plug#begin(s:plug_dir)
   " Declare the list of plugins.
@@ -467,8 +474,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
     endfunction
     " Explorer
     nnoremap <silent> ge :CocCommand explorer<CR>
-    command! GBrowserOpen :CocCommand git.browserOpen
-    command! GCopyUrl :CocCommand git.copyUrl
   endif " }}}
 
   if s:installed_plugin('ale') " {{{
