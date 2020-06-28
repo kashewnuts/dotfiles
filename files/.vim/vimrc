@@ -289,10 +289,10 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'mattn/gist-vim',                {'on': 'Gist'}
     \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
   " Snippets
-  " if has('python3')
-  "   Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
-  "   Plug 'honza/vim-snippets',            {'on': []}
-  " endif
+  if has('python3')
+    Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
+    Plug 'honza/vim-snippets',            {'on': []}
+  endif
   " LSP
   if s:is_async && s:executable_nodejs
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -308,6 +308,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
   let g:polyglot_disabled = ['markdown', 'python', 'json']
   Plug 'Shougo/context_filetype.vim'    " For vue
   Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
+  Plug 'editorconfig/editorconfig-vim'
+  let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
   " Formater
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
@@ -483,11 +485,14 @@ if !&diff && isdirectory(expand(s:plug_dir))
     let g:ale_linters = {
     \ 'bash': ['shellcheck'],
     \ 'python': ['flake8', 'mypy'],
+    \ 'terraform': ['tflint'],
     \}
     let g:ale_fixers = {
     \ 'python': ['black'],
+    \ 'terraform': ['terraform'],
     \ }
     let g:ale_sh_shellcheck_exclusions = 'SC1090'
+    let g:ale_terraform_tflint_options = '-f default'
     nmap <silent> <Leader>x <Plug>(ale_fix)
   endif " }}}
 
@@ -589,16 +594,16 @@ if !&diff && isdirectory(expand(s:plug_dir))
     command! LTBeProud ListTwitter BeProud
   endif " }}}
 
-  " if has('python3')
-  "   augroup load_insert_snippet_plugins " {{{
-  "     autocmd!
-  "     autocmd InsertEnter * call plug#load(
-  "   \ 'ultisnips',
-  "   \ 'vim-snippets',
-  "   \ )
-  "   \ | autocmd! load_insert_snippet_plugins
-  "   augroup END " }}}
-  " endif
+  if has('python3')
+    augroup load_insert_snippet_plugins " {{{
+      autocmd!
+      autocmd InsertEnter * call plug#load(
+    \ 'ultisnips',
+    \ 'vim-snippets',
+    \ )
+    \ | autocmd! load_insert_snippet_plugins
+    augroup END " }}}
+  endif
 endif "}}}
 
 " Others {{{

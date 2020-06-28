@@ -29,8 +29,12 @@
       // go get golang.org/x/tools/gopls@latest
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
-    },
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true,
+        "completeUnimported": true
+      }
+    }
     // "python": {
     //   // pip install python-language-server
     //   "command": "pyls",
