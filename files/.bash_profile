@@ -4,15 +4,8 @@ fi
 
 case "$OSTYPE" in
   darwin*)  # BSD (contains Mac)
-  # Setting PATH for Python 3.4〜3.7
-  # The original version is saved in .bash_profile.pysave
-  # PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
-  # PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
   LOCAL_PATH="/usr/local/opt/imagemagick@6/bin:${LOCAL_PATH}"
   LOCAL_PATH="/usr/local/opt/node@10/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${LOCAL_PATH}"
   LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
   LOCAL_PATH="/usr/local/sbin:${LOCAL_PATH}"
   export PATH="${LOCAL_PATH}:${PATH}"

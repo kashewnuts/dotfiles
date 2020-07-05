@@ -97,8 +97,9 @@ if [ -f ~/.fzf.bash ]; then
   # Avoid duplicate command
   __fzf_history__() {
     if type tac > /dev/null 2>&1; then tac="tac"; else tac="tail -r"; fi
+    if type gsed > /dev/null 2>&1; then sed="gsed"; else sed="sed"; fi
     shopt -u nocaseglob nocasematch
-    echo $(HISTTIMEFORMAT= history | command $tac | sed -e 's/^ *[0-9]\{1,\}\*\{0,1\} *//' -e 's/ *$//' | awk '!a[$0]++' |
+    echo $(HISTTIMEFORMAT= history | command $tac | $sed -e 's/^ *[0-9]\{1,\}\*\{0,1\} *//' -e 's/ *$//' | awk '!a[$0]++' |
         FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS --sync -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $(__fzfcmd))
   }
 
