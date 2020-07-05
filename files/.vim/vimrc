@@ -256,8 +256,8 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " elseif executable('grep')
 set wildignore+=*tags,*svg,*bundle*.js,*png,*jpeg,*jpg
 if executable('grep')
-  let s:excludedir='*git,*venv*,node_modules,migrations,static*,static_files,tmp,dist*'
-    \ . ',*mypy_cache,*tox*,*.serverless,test-results,screenshots,locale'
+  let s:excludedir='*git,*venv*,node_modules,static_files,tmp,dist*'
+   \ . ',*mypy_cache,*tox*,*.serverless,test-results,screenshots,locale'
   let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '}'
 endif " }}}
 
@@ -327,7 +327,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
   " endif
-  Plug 'thinca/vim-localrc'
+  " Plug 'thinca/vim-localrc'
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
