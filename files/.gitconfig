@@ -64,5 +64,5 @@
 [github]
 	user = kashewnuts
 [ghq]
-	root = ~/projects
 	root = ~/.cache/plugged
+	root = ~/projects  # One written later has primary
