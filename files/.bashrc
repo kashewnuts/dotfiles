@@ -148,3 +148,7 @@ fi
 # # tabtab source for slss package
 # # uninstall by removing these lines or running `tabtab uninstall slss`
 # [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
+
+if [ -f /usr/local/bin/terraform ]; then
+  complete -C /usr/local/bin/terraform terraform
+fi
