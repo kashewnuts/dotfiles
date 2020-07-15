@@ -46,7 +46,10 @@ alias crontab='crontab -i'
 
 # git-completion.bash
 # source ~/.git-prompt.sh
-source ~/.git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+  __git_complete g __git_main  # Completion for aliases
+fi
 # export GIT_PS1_SHOWDIRTYSTATE=true
 # export PS1='$ '
 # export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
