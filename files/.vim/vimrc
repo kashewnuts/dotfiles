@@ -254,7 +254,7 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " elseif executable('jvgrep')
 "   let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
 " elseif executable('grep')
-set wildignore+=*tags,*svg,*bundle*.js,*png,*jpeg,*jpg
+set wildignore& wildignore+=*tags,*svg,*bundle*.js,*png,*jpeg,*jpg
 if executable('grep')
   let s:excludedir='*git,*venv*,node_modules,static_files,tmp,dist*'
    \ . ',*mypy_cache,*tox*,*.serverless,test-results,screenshots,locale'
@@ -280,6 +280,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " Fizzy Finder
   if has('win32')
     Plug 'ctrlpvim/ctrlp.vim',          {'on': ['CtrlP', 'CtrlPBuffer', 'CtrlPMRUFiles']}
+    Plug 'rhysd/vim-color-spring-night'
   else
     Plug 'junegunn/fzf',                {'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
@@ -289,7 +290,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'mattn/gist-vim',                {'on': 'Gist'}
     \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
   " Snippets
-  if has('python3')
+  if has('python3') && !has('win32')
     Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
     Plug 'honza/vim-snippets',            {'on': []}
   endif
@@ -327,7 +328,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
   " endif
-  " Plug 'thinca/vim-localrc'
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
@@ -349,7 +349,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
     let g:ctrlp_key_loop      = 1  " Support multi-byte character
     let g:ctrlp_match_window  = 'bottom,order:btt,min:1,max:10000,results:50'
     let g:ctrlp_custom_ignore = {
-      \ 'dir' : '\v[\/]\.(git|hg|svn)$',
+      \ 'dir' : '\v[\/]\.(git|hg|svn|venv|mypy_cache)$',
       \ 'file': '\v\.(exe|so|dll|swp|zip|gz|jpg|png|gif|pyc)$',
       \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
       \ }
@@ -359,7 +359,9 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
     \ },
     \ }
-  endif " }}}
+    " }}}
+    " \ 'fallback': 'pt --follow -g='
+  endif
   if s:installed_plugin('fzf.vim') && !has('win32') " {{{
     nnoremap <C-p> :<C-u>Files<CR>
     nnoremap <silent> <Leader>fb :<C-u>Buffers<CR>
@@ -598,7 +600,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
     command! LTBeProud ListTwitter BeProud
   endif " }}}
 
-  if has('python3')
+  if has('python3') && !has('win32')
     augroup load_insert_snippet_plugins " {{{
       autocmd!
       autocmd InsertEnter * call plug#load(
@@ -616,9 +618,13 @@ filetype plugin indent on       " Load plugins according to detected filetype.
 syntax on                       " Enable syntax highlight
 if !has('gui_running')
   try
-    execute 'colorscheme ' . (s:is_cmd ? 'industry' : 'molokai')
+    if s:is_cmd
+      source ~/.vim/rc/springnight.vim
+    else
+      colorscheme molokai
+    endif
   catch
-    try | colorscheme desert | catch | endtry
+    try | colorscheme molokai | catch | colorscheme desert | endtry
   endtry
 endif
 
