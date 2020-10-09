@@ -10,56 +10,5 @@
   "git.changedSign.hlGroup": "GitGutterChange",
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-  "languageserver": {
-    "bash": {
-      // npm install -g bash-language-server
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
-    "dockerfile": {
-      // npm install -g dockerfile-language-server-nodejs
-      "command": "docker-langserver",
-      "filetypes": ["Dockerfile", "dockerfile"],
-      "args": ["--stdio"]
-    },
-    "golang": {
-      // go get golang.org/x/tools/gopls@latest
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true,
-        "completeUnimported": true
-      }
-    }
-    // "python": {
-    //   // pip install python-language-server
-    //   "command": "pyls",
-    //   "filetypes": ["python"],
-    //   // "trace.server": "verbose",
-    //   // "args": [
-    //   //   "-vv",
-    //   //   "--log-file",
-    //   //   "/Users/kashewnuts/.cache/tmp/coc-nvim.log"
-    //   // ],
-    //   "settings": {
-    //     "pyls": {
-    //       // "trace": {"server": "verbose"},
-    //       "plugins": {
-    //         "autopep8": {"enabled": false},
-    //         "pydocstyle": {"enabled": false},
-    //         "yapf": {"enabled": false},
-    //         "pylint": {"enabled": false},
-    //         // "pyls_mypy": {
-    //         //     "enable": true,
-    //         //     "live_mode": false
-    //         // }
-    //       }
-    //     }
-    //   }
-    // }
-  }
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete"
 }

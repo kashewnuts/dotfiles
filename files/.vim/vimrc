@@ -406,6 +406,9 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-explorer',
       \ 'coc-git',
       \ 'coc-jedi',
+      \ 'coc-sh',
+      \ 'coc-go',
+      \ 'coc-docker',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
@@ -413,12 +416,13 @@ if !&diff && isdirectory(expand(s:plug_dir))
         \ 'Dockerfile',
         \ 'bash',
         \ 'css',
-        \ 'scss',
+        \ 'go',
         \ 'html',
         \ 'javascript',
         \ 'json',
         \ 'markdown',
         \ 'python',
+        \ 'scss',
         \ 'typescript',
         \ 'vue',
         \ 'yaml',
