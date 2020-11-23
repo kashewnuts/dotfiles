@@ -102,12 +102,6 @@ if [ -f ~/.fzf.bash ]; then
   if type "pt" > /dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND='pt -g ""'
   fi
-  if type "rg" > /dev/null 2>&1; then
-    # export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
-    export FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  fi
-
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
   # Avoid duplicate command
