@@ -411,6 +411,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-sh',
       \ 'coc-go',
       \ 'coc-docker',
+      \ 'coc-sql',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
@@ -428,6 +429,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
         \ 'typescript',
         \ 'vue',
         \ 'yaml',
+        \ 'sql',
         \ ]
       if match(l:coc_filetypes, &filetype) == -1
         return
@@ -440,6 +442,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       nmap <buffer><silent> gr <Plug>(coc-references)
       nmap <buffer><leader>R   <Plug>(coc-rename)
       " Remap for format selected region
+      xmap <buffer><leader>f   <Plug>(coc-format-selected)
       vmap <buffer><leader>f   <Plug>(coc-format-selected)
       nmap <buffer><leader>f   <Plug>(coc-format-selected)
       " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
