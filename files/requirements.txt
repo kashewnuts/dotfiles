@@ -9,3 +9,4 @@ isort
 mypy
 pep8-naming
 pipenv
+poetry

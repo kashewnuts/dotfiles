@@ -257,7 +257,7 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 set wildignore& wildignore+=*tags,*svg,*bundle*.js,*png,*jpeg,*jpg
 if executable('grep')
   let s:excludedir='*git,*venv*,node_modules,static_files,tmp,dist*'
-   \ . ',*mypy_cache,*tox*,*.serverless,test-results,screenshots,locale'
+   \ . ',*mypy_cache,*tox*,*.serverless,test-results,screenshots,locale,data'
   let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '}'
 endif " }}}
 
@@ -412,6 +412,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-go',
       \ 'coc-docker',
       \ 'coc-sql',
+      \ 'coc-diagnostic',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
