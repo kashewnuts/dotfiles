@@ -321,8 +321,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
-  Plug 'previm/previm',                 {'on': 'PrevimOpen'}
-  Plug 'tyru/open-browser.vim' ,        {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)']}
+  Plug 'previm/previm',                 {'on': 'PrevimOpen', 'for': ['rst', 'markdown']}
+  Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)'], 'for': ['rst', 'markdown']}
   Plug 'vim-jp/vimdoc-ja'
   Plug 'mbbill/undotree',               {'on': 'UndotreeToggle'}
   " if executable('ctags')
@@ -553,7 +553,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   if s:installed_plugin('previm') " {{{
     let g:previm_disable_vimproc = 1
     let g:previm_show_header = 0
-    command! PrevimRefresh :call previm#refresh()
     autocmd MyAutoCmd User previm doautocmd Previm FileType
   endif " }}}
 
