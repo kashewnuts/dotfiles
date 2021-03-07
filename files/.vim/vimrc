@@ -328,6 +328,9 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
   " endif
+  Plug 'kana/vim-operator-user'
+  Plug 'tyru/operator-camelize.vim'
+  map ,c <plug>(operator-camelize-toggle)
   " Twitter
   Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
     \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
