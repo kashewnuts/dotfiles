@@ -35,10 +35,11 @@ set ignorecase     " Ignore case when searching
 set smartcase      " No ignorecase if Uppercase char present
 set path=**
 set tags=./tags;   " Refer to projects root tags file
-set wildignore& wildignore+=*tags,*svg,*bundle*.js,*png,*jpeg,*jpg
-let s:excludedir='*git,*venv*,node_modules,static_files,tmp,dist*'
-\ . ',*mypy_cache,*tox*,*.serverless,test-results,screenshots,locale'
-let &grepprg='grep -rnIH --exclude-dir={' . s:excludedir . '}'
+let s:excludefiles='*tags,*svg,*bundle*js,*png,*jpeg,*jpg,swagger-ui.js,*lock*'
+let s:excludedirs='*git,*venv*,node_modules,static_files,tmp,dist*,data'
+\ . ',*mypy_cache,*tox*,*.pytest_cache,*.serverless,test-results,screenshots,locale'
+let &grepprg='grep -rnIH --exclude-dir={' . s:excludedirs . '} --exclude={' . s:excludefiles .'}'
+set wildignore& wildignore+=s:excludefiles
 autocmd QuickFixCmdPost *grep* cwindow  " Auto open quickfix-window
 " --- KeyMapping ---
 nnoremap <C-p> :find<SPACE>
