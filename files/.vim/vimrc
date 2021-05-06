@@ -303,21 +303,24 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " FileType
   Plug 'neoclide/jsonc.vim',            {'for': 'json'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  Plug 'mechatroner/rainbow_csv'
+  " Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
+  let b:csv_arrange_align = 'l*'
+  let b:csv_arrange_use_all_rows = 1
   " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   let g:polyglot_disabled = ['markdown', 'python', 'json']
   Plug 'Shougo/context_filetype.vim'    " For vue
-  Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
+  Plug 'heavenshell/vim-pydocstring',   {
+  \  'on': ['<Plug>(pydocstring)', 'Pydocstring'], 'do': 'make clean; make install'}
   Plug 'editorconfig/editorconfig-vim'
   let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
   " Formater
   Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
-  let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
-  Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
+  " let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
+  " Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
@@ -428,10 +431,12 @@ if !&diff && isdirectory(expand(s:plug_dir))
         \ 'html',
         \ 'javascript',
         \ 'json',
+        \ 'jsx',
         \ 'markdown',
         \ 'python',
         \ 'scss',
         \ 'typescript',
+        \ 'tsx',
         \ 'vue',
         \ 'yaml',
         \ 'sql',
@@ -560,18 +565,21 @@ if !&diff && isdirectory(expand(s:plug_dir))
     autocmd MyAutoCmd User previm doautocmd Previm FileType
   endif " }}}
 
-  if s:installed_plugin('open-browser.vim') " {{{
-    let g:netrw_nogx = 1 " disable netrw's gx mapping.
-    nmap gx <Plug>(openbrowser-smart-search)
-    vmap gx <Plug>(openbrowser-smart-search)
-  endif " }}}
+  " if s:installed_plugin('open-browser.vim') " {{{
+  "   let g:netrw_nogx = 1 " disable netrw's gx mapping.
+  "   nmap gx <Plug>(openbrowser-smart-search)
+  "   vmap gx <Plug>(openbrowser-smart-search)
+  " endif " }}}
 
   if s:installed_plugin('undotree') " {{{
     nnoremap <F5> :UndotreeToggle<CR>
   endif " }}}
 
   if s:installed_plugin('vim-pydocstring') " {{{
-    nmap <silent> <C-_> <Plug>(pydocstring)
+    " nmap <silent> <C-_> <Plug>(pydocstring)
+    " imap <silent> <C-_> <Plug>(pydocstring)
+    " nmap <buffer><silent> gp <Plug>(coc-diagnostic-prev)
+    nmap <silent> <Leader>pd <Plug>(pydocstring)
   endif " }}}
 
   if s:installed_plugin('twitvim') " {{{
@@ -628,12 +636,12 @@ if !has('gui_running')
     if s:is_cmd
       source ~/.vim/rc/springnight.vim
     else
-      " colorscheme molokai
-      colorscheme morning
-      hi DiffAdd    cterm=bold ctermfg=10 ctermbg=22
-      hi DiffDelete cterm=bold ctermfg=10 ctermbg=52
-      hi DiffChange cterm=bold ctermfg=10 ctermbg=17
-      hi DiffText   cterm=bold ctermfg=10 ctermbg=21
+      colorscheme molokai
+      " colorscheme morning
+      " hi DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+      " hi DiffDelete cterm=bold ctermfg=10 ctermbg=52
+      " hi DiffChange cterm=bold ctermfg=10 ctermbg=17
+      " hi DiffText   cterm=bold ctermfg=10 ctermbg=21
     endif
   catch
     try | colorscheme molokai | catch | colorscheme desert | endtry
