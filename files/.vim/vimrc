@@ -71,7 +71,7 @@ set list listchars=tab:>-,trail:-  " Visualize character
 set nomodeline
 set matchpairs& matchpairs+=<:>,「:」,【:】,『:』,《:》,〈:〉,（:） " Add support brackets
 set scrolloff=5                 " Keep above and below the cursor
-set spell spelllang=en_us,cjk
+" set spell spelllang=en_us,cjk
 " set synmaxcol=200               " Only highlight the first 200 columns
 set ttimeout timeoutlen=300 ttimeoutlen=50      " Speedup for ESC
 set updatetime=100
@@ -324,7 +324,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " Reference & View
   Plug 'previm/previm',                 {'on': 'PrevimOpen', 'for': ['rst', 'markdown']}
   Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)'], 'for': ['rst', 'markdown']}
-  " Plug 'vim-jp/vimdoc-ja'
+  Plug 'vim-jp/vimdoc-ja'
   " Plug 'mbbill/undotree',               {'on': 'UndotreeToggle'}
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
@@ -579,7 +579,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " if s:installed_plugin('undotree') " {{{
   "   nnoremap <F5> :UndotreeToggle<CR>
   " endif " }}}
-  " 
+
   " if s:installed_plugin('vim-pydocstring') " {{{
   "   nmap <silent> <C-_> <Plug>(pydocstring)
   " endif " }}}
@@ -634,20 +634,11 @@ endif "}}}
 
 " colorscheme {{{
 if !has('gui_running')
-  try
-    if s:is_cmd
-      source ~/.vim/rc/springnight.vim
-    else
-      " colorscheme molokai
-      colorscheme morning
-      hi DiffAdd    cterm=bold ctermfg=10 ctermbg=22
-      hi DiffDelete cterm=bold ctermfg=10 ctermbg=52
-      hi DiffChange cterm=bold ctermfg=10 ctermbg=17
-      hi DiffText   cterm=bold ctermfg=10 ctermbg=21
-    endif
-  catch
-    try | colorscheme molokai | catch | colorscheme desert | endtry
-  endtry
+  colorscheme morning
+  hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
+  hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
+  hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
+  hi DiffText term=reverse cterm=bold ctermbg=LightBlue gui=bold guibg=LightBlue
 endif
 
 " Load local settings
