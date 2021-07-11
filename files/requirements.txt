@@ -1,12 +1,11 @@
 black
 docutils
-flake8-blind-except
 flake8-breakpoint
+flake8-bugbear
 flake8-logging-format
-flake8>=3.8,<3.9
+flake8>=3.9,<4.0
 ipython
 isort
 mypy
 pep8-naming
-pipenv
 poetry

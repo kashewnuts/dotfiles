@@ -1,23 +1,23 @@
 import sys
 from pathlib import Path
 
-
 HOME_DIR = Path.home()
 BASE_DIR = Path(__file__).resolve().parent
 DOT_FILES_DIR = BASE_DIR / "files"
 DOT_FILES = [
     ".ansible.cfg",
+    ".black",
     ".bash_profile",
     ".bashrc",
-    ".hub.bash_completion.sh",
+    ".editorconfig",
     ".git-completion.bash",
     ".git-prompt.sh",
     ".gitconfig",
     ".gitignore",
     ".hgrc",
+    ".hub.bash_completion.sh",
     ".ideavimrc",
     ".inputrc",
-    ".isort.cfg",
     ".ptconfig.toml",
     ".pythonstartup",
     ".tigrc",
@@ -25,7 +25,7 @@ DOT_FILES = [
     ".vim",
 ]
 CONFIG_DIRS = [".cache/tmp", ".config"]
-CONFIG_FILES = ["pep8", "flake8", "pycodestyle", "mypy"]
+CONFIG_FILES = ["flake8", "mypy"]
 
 
 def check_exists_path(fname):

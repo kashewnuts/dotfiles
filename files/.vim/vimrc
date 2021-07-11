@@ -256,7 +256,7 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " elseif executable('grep')
 if executable('grep')
   let s:excludefiles='*tags,*svg,*bundle*js,*png,*jpeg,*jpg,swagger-ui.js,*lock*'
-  let s:excludedirs='*git,*venv*,node_modules,static_files,tmp,dist*,data'
+  let s:excludedirs='*git,*venv*,node_modules,static_files,tmp,dist*,data,build'
   \ . ',*mypy_cache,*tox*,*.pytest_cache,*.serverless,test-results,screenshots,locale'
   let &grepprg='grep -rnIH --exclude-dir={' . s:excludedirs . '} --exclude={' . s:excludefiles .'}'
   set wildignore& wildignore+=s:excludefiles
@@ -303,29 +303,29 @@ if !&diff && isdirectory(expand(s:plug_dir))
   " FileType
   Plug 'neoclide/jsonc.vim',            {'for': 'json'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  Plug 'mechatroner/rainbow_csv'
+  " Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
   " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-  let g:polyglot_disabled = ['markdown', 'python', 'json']
+  let g:polyglot_disabled = ['markdown', 'python', 'json', 'java']
   Plug 'Shougo/context_filetype.vim'    " For vue
-  Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
+  " Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
   Plug 'editorconfig/editorconfig-vim'
   let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
   " Formater
-  Plug 'vim-jp/autofmt'
+  " Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
-  Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
+  " Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
   Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
   Plug 'previm/previm',                 {'on': 'PrevimOpen', 'for': ['rst', 'markdown']}
   Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)'], 'for': ['rst', 'markdown']}
-  Plug 'vim-jp/vimdoc-ja'
-  Plug 'mbbill/undotree',               {'on': 'UndotreeToggle'}
+  " Plug 'vim-jp/vimdoc-ja'
+  " Plug 'mbbill/undotree',               {'on': 'UndotreeToggle'}
   " if executable('ctags')
   "   Plug 'jsfaint/gen_tags.vim'
   " endif
@@ -387,15 +387,15 @@ if !&diff && isdirectory(expand(s:plug_dir))
   endif " }}}
   " }}}
 
-  if s:installed_plugin('gen_tags.vim') " {{{
-    let g:gen_tags#ctags_auto_gen = 1
-    let g:loaded_gentags#gtags = 1
-    let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
-  endif " }}}
+  " if s:installed_plugin('gen_tags.vim') " {{{
+  "   let g:gen_tags#ctags_auto_gen = 1
+  "   let g:loaded_gentags#gtags = 1
+  "   let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
+  " endif " }}}
 
-  if s:installed_plugin('vim-python-pep8-indent') " {{{
-    let g:python_pep8_indent_searchpair_timeout = 0
-  endif " }}}
+  " if s:installed_plugin('vim-python-pep8-indent') " {{{
+  "   let g:python_pep8_indent_searchpair_timeout = 0
+  " endif " }}}
 
   if s:installed_plugin('coc.nvim') && s:is_async && s:executable_nodejs " {{{
     let g:coc_global_extensions = [
@@ -417,6 +417,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-docker',
       \ 'coc-sql',
       \ 'coc-diagnostic',
+      \ 'coc-r-lsp',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
@@ -427,11 +428,13 @@ if !&diff && isdirectory(expand(s:plug_dir))
         \ 'go',
         \ 'html',
         \ 'javascript',
+        \ 'jsx',
         \ 'json',
         \ 'markdown',
         \ 'python',
         \ 'scss',
         \ 'typescript',
+        \ 'typescriptreact',
         \ 'vue',
         \ 'yaml',
         \ 'sql',
@@ -501,7 +504,14 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \ 'python': ['flake8', 'mypy'],
     \ 'terraform': ['tflint'],
     \}
+    let js_fixers = ['prettier', 'eslint']
     let g:ale_fixers = {
+    \ 'javascript': js_fixers,
+    \ 'javascript.jsx': js_fixers,
+    \ 'typescript': js_fixers,
+    \ 'typescriptreact': js_fixers,
+    \ 'css': ['prettier'],
+    \ 'json': ['prettier'],
     \ 'python': ['black', 'isort'],
     \ 'terraform': ['terraform'],
     \ }
@@ -521,10 +531,10 @@ if !&diff && isdirectory(expand(s:plug_dir))
     nnoremap <silent> <Leader>mg :MemoGrep<CR>
   endif " }}}
 
-  if s:installed_plugin('autofmt') " {{{
-    set formatexpr=autofmt#japanese#formatexpr()
-    let autofmt_allow_over_tw=1
-  endif " }}}
+  " if s:installed_plugin('autofmt') " {{{
+  "   set formatexpr=autofmt#japanese#formatexpr()
+  "   let autofmt_allow_over_tw=1
+  " endif " }}}
 
   if s:installed_plugin('caw.vim') " {{{
     function! InitCaw() abort
@@ -566,13 +576,13 @@ if !&diff && isdirectory(expand(s:plug_dir))
     vmap gx <Plug>(openbrowser-smart-search)
   endif " }}}
 
-  if s:installed_plugin('undotree') " {{{
-    nnoremap <F5> :UndotreeToggle<CR>
-  endif " }}}
-
-  if s:installed_plugin('vim-pydocstring') " {{{
-    nmap <silent> <C-_> <Plug>(pydocstring)
-  endif " }}}
+  " if s:installed_plugin('undotree') " {{{
+  "   nnoremap <F5> :UndotreeToggle<CR>
+  " endif " }}}
+  " 
+  " if s:installed_plugin('vim-pydocstring') " {{{
+  "   nmap <silent> <C-_> <Plug>(pydocstring)
+  " endif " }}}
 
   if s:installed_plugin('twitvim') " {{{
     " Basic
@@ -617,12 +627,12 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \ | autocmd! load_insert_snippet_plugins
     augroup END " }}}
   endif
+else
+  filetype plugin indent on       " Load plugins according to detected filetype.
+  syntax on                       " Enable syntax highlight
 endif "}}}
 
-" Others {{{
-" Essential
-filetype plugin indent on       " Load plugins according to detected filetype.
-syntax on                       " Enable syntax highlight
+" colorscheme {{{
 if !has('gui_running')
   try
     if s:is_cmd

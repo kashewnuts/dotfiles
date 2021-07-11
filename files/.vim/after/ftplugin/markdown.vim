@@ -1,4 +1,5 @@
 let g:markdown_fenced_languages = [
+\  'bash',
 \  'sh',
 \  'c',
 \  'cpp',
@@ -7,7 +8,6 @@ let g:markdown_fenced_languages = [
 \  'config',
 \  'help',
 \  'go',
-\  'java',
 \  'javascript',
 \  'js=javascript',
 \  'json=javascript',
@@ -16,3 +16,4 @@ let g:markdown_fenced_languages = [
 \  'vim',
 \]
 " \  'textile',
+" \  'java',

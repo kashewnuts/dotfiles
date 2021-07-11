@@ -21,3 +21,4 @@ Pipfile*
 .local.*vimrc
 docker-compose.override.yml
 settings_override.py
+build/

@@ -12,8 +12,10 @@ case "$OSTYPE" in
   #   vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
   #   alias vi='vim -Nu ~/.vim/minimal.vim'
   # fi
-  alias vim='/usr/local/bin/vim'
-  alias vi='/usr/local/bin/vim -Nu ~/.vim/minimal.vim -c "set laststatus=0" -c "set ruler" -c "set nonumber"'
+  vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
+  alias vi='vim -Nu ~/.vim/minimal.vim'
+  alias vim='vim'
+  # alias vi='/usr/local/bin/vim -Nu ~/.vim/minimal.vim -c "set laststatus=0" -c "set ruler" -c "set nonumber"'
   alias gvim='vim -g'
   export PYTHONUSERBASE=~/.local
   ;;
