@@ -27,13 +27,6 @@ case "$OSTYPE" in
   alias python='winpty python.exe'
   ;;
 
-  linux*microsoft*)   # WSL
-  export LANGUAGE=ja_JP:ja
-  alias vi='vim -Nu ~/.vim/minimal.vim'
-  alias ls='ls --show-control-chars'
-  alias open='explorer'
-  ;;
-
   linux*)   # Linux
   export LANGUAGE=ja_JP:ja
   alias vi='vim -Nu ~/.vim/minimal.vim'
@@ -42,6 +35,7 @@ case "$OSTYPE" in
   if [ -f ~/.Xmodmap ];then
     xmodmap ~/.Xmodmap
   fi
+  ;;
 esac
 alias la='ls -al'
 alias ll='ls -l'

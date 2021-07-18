@@ -634,11 +634,15 @@ endif "}}}
 
 " colorscheme {{{
 if !has('gui_running')
-  colorscheme morning
-  hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
-  hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
-  hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
-  hi DiffText term=reverse cterm=bold ctermbg=LightBlue gui=bold guibg=LightBlue
+  if has('mac')
+    colorscheme morning
+    hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
+    hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
+    hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
+    hi DiffText term=reverse cterm=bold ctermbg=LightBlue gui=bold guibg=LightBlue
+  else
+    colorscheme molokai
+  endif
 endif
 
 " Load local settings

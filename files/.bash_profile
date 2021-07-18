@@ -28,6 +28,7 @@ case "$OSTYPE" in
   if uname -a | grep -q 'Linux.*microsoft'; then  # WSL
     # Docker
     export PATH="$PATH:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin"
+    export PATH="$PATH:$HOME/.windows_commands/"
   fi
 esac
 
