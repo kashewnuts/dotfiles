@@ -112,6 +112,14 @@ if [ -f ~/.fzf.bash ]; then
   if [[ $- == *i* ]]; then # in interactive session
     bind '"\C-r": " \C-e\C-u\C-y\ey\C-u`__fzf_history__`\e\C-e\er\e^"'
   fi
+
+  # fzf-cmd
+  function fzf-cmd() {
+    local cmd=$(find ${HOME}/.commands -type f -not -name "_*" | xargs /bin/cat | fzf)
+    if [ -n "$cmd" ]; then
+      "$cmd"
+    fi
+  }
 fi
 
 # _pipenv_completion() {
