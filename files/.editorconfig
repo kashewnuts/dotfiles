@@ -5,13 +5,13 @@ root = true
 
 # Unix-style newlines with a newline ending every file
 [*]
+charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 
 # Matches multiple files with brace expansion notation
 # Set default charset
-[*.{js,py}]
-charset = utf-8
+[*.{js,jsx,ts,tsx,json,yaml}]
 indent_style = space
 indent_size = 2
 
@@ -26,11 +26,7 @@ include_trailing_comma=true
 [Makefile]
 indent_style = tab
 
-# Matches the exact files either package.json or .travis.yml
-[{package.json,.travis.yml}]
-indent_style = space
-indent_size = 2
-
 [*.md]
+indent_size = 2
 insert_final_newline = false
 trim_trailing_whitespace = false
