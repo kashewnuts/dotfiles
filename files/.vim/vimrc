@@ -254,7 +254,10 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 " elseif executable('jvgrep')
 "   let &grepprg = 'jvgrep -iIR ' . (s:is_cmd ? '' : '-8')
 " elseif executable('grep')
-if executable('grep')
+if executable('rg')
+  let &grepprg='rg --vimgrep --hidden'
+  set grepformat=%f:%l:%c:%m
+elseif executable('grep')
   let s:excludefiles='*tags,*svg,*bundle*js,*png,*jpeg,*jpg,swagger-ui.js,*lock*'
   let s:excludedirs='*git,*venv*,node_modules,static_files,tmp,dist*,data,build'
   \ . ',*mypy_cache,*tox*,*.pytest_cache,*.serverless,test-results,screenshots,locale'
@@ -307,7 +310,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
   " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-  let g:polyglot_disabled = ['markdown', 'python', 'json', 'java']
+  let g:polyglot_disabled = ['markdown', 'python', 'json', 'java', 'csv']
   Plug 'Shougo/context_filetype.vim'    " For vue
   " Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
   Plug 'editorconfig/editorconfig-vim'
@@ -632,18 +635,19 @@ else
   syntax on                       " Enable syntax highlight
 endif "}}}
 
-" colorscheme {{{
-if !has('gui_running')
-  if has('mac')
-    colorscheme morning
-    hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
-    hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
-    hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
-    hi DiffText term=reverse cterm=bold ctermbg=LightBlue gui=bold guibg=LightBlue
-  else
-    colorscheme molokai
-  endif
-endif
+" ColorScheme {{{
+" if !has('gui_running')
+"   colorscheme morning
+"   hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
+"   hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
+"   hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
+"   hi DiffText term=reverse cterm=bold ctermbg=LightBlue gui=bold guibg=LightBlue
+"   hi SpellBad cterm=underline ctermbg=None
+"   hi SpellCap cterm=underline,bold ctermbg=None
+"   hi SpellLocal cterm=underline ctermbg=None
+"   hi SpellRare cterm=underline ctermbg=None
+"   " colorscheme molokai
+" endif
 
 " Load local settings
 if filereadable(expand('~/.vimrc.local'))

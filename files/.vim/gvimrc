@@ -19,20 +19,13 @@ endif
 
 " Colorscheme {{{
 try
-  source ~/.vim/rc/springnight.vim
-  " if has('termguicolors')
-  "   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  "   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  "   set termguicolors
-  " endif
-  " set background=dark
-  " let g:spring_night_kill_italic = 1
-  " let g:spring_night_kill_bold = 1
-  " colorscheme spring-night
-" try
-"   colorscheme molokai
+  colorscheme molokai
 catch
-  try | colorscheme molokai | catch | colorscheme desert | endtry
+  colorscheme morning
+  hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
+  hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
+  hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
+  hi DiffText term=reverse cterm=bold ctermbg=Blue gui=bold guibg=Blue
 endtry " }}}
 
 " Hack #120: Store the location and size of the window by gVim {{{
