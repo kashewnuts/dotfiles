@@ -40,19 +40,27 @@
 [pull]
 	ff = only
 [diff]
-	tool = vimdiff
+	# tool = vimdiff
+	tool = vscode
 [difftool]
 	prompt = false
 	trustExitCode = true	# Be able to abort all diffs with `:cq` or `:cquit`
+	cmd = code --wait --diff $LOCAL $REMOTE
 [merge]
-	tool = vimdiff
+	# tool = vimdiff
+	tool = vscode
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
-	trustExitCode = true
+	# trustExitCode = true
 	keepBackup = false
-[rerere]
-	enabled = true
+[mergetool "vscode"]
+	# cmd = 'VSCodeのパス' \"$MERGED\"
+	# 例：Macの場合
+	cmd = code --wait $MERGED
+	# trustExitCode = false
+# [rerere]
+# 	enabled = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -66,3 +74,5 @@
 [ghq]
 	root = ~/.cache/plugged
 	root = ~/projects  # One written later has primary
+[init]
+	defaultBranch = master

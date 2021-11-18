@@ -95,8 +95,11 @@ if [ -f ~/.fzf.bash ]; then
   fi
 
   export FZF_DEFAULT_COMMAND='find .'
-  if type "pt" > /dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND='pt -g ""'
+  # if type "pt" > /dev/null 2>&1; then
+  #   export FZF_DEFAULT_COMMAND='pt -g ""'
+  # fi
+  if type "rg" > /dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
   fi
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 

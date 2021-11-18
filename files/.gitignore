@@ -9,7 +9,7 @@ node_modules
 *tags
 *.gitkeep
 .idea/
-*.env*
+# *.env*
 *venv*
 *.venv*
 Pipfile*
@@ -22,4 +22,7 @@ Pipfile*
 docker-compose.override.yml
 settings_override.py
 build/
+static
+swagger/
+swagger-ui*.js
 .Trash-1000/
