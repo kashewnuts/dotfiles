@@ -293,6 +293,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'lambdalisue/gina.vim'
   Plug 'mattn/gist-vim',                {'on': 'Gist'}
     \ | Plug 'mattn/webapi-vim',        {'on': 'Gist'}
+  let g:gist_per_page_limit = 100
+  let g:gist_post_private = 1
   " Snippets
   if has('python3') && !has('win32')
     Plug 'SirVer/ultisnips',              {'on': [], 'for': 'go'}
@@ -304,13 +306,13 @@ if !&diff && isdirectory(expand(s:plug_dir))
   endif
   Plug 'dense-analysis/ale'
   " FileType
-  Plug 'neoclide/jsonc.vim',            {'for': 'json'}
+  " Plug 'neoclide/jsonc.vim',            {'for': 'json'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   " Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
   " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-  let g:polyglot_disabled = ['markdown', 'python', 'json', 'java', 'csv']
+  let g:polyglot_disabled = ['markdown', 'python', 'java', 'csv']
   Plug 'Shougo/context_filetype.vim'    " For vue
   " Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
   Plug 'editorconfig/editorconfig-vim'
@@ -500,6 +502,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
 
   if s:installed_plugin('ale') " {{{
     let g:ale_completion_enabled = 0
+    let g:ale_disable_lsp = 1
     let g:ale_lint_on_save = 1
     let g:ale_lint_on_text_changed = 'never'
     let g:ale_linters = {
@@ -507,13 +510,17 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \ 'python': ['flake8', 'mypy'],
     \ 'terraform': ['tflint'],
     \}
-    let js_fixers = ['prettier', 'eslint']
+    let s:js_fixers = ['prettier', 'eslint']
+    let s:style_fixers = ['prettier', 'eslint', 'stylelint']
     let g:ale_fixers = {
-    \ 'javascript': js_fixers,
-    \ 'javascript.jsx': js_fixers,
-    \ 'typescript': js_fixers,
-    \ 'typescriptreact': js_fixers,
-    \ 'css': ['prettier'],
+    \ 'javascript': s:js_fixers,
+    \ 'javascript.jsx': s:js_fixers,
+    \ 'typescript': s:js_fixers,
+    \ 'typescriptreact': s:js_fixers,
+    \ 'vue': s:style_fixers,
+    \ 'scss': s:style_fixers,
+    \ 'css': s:style_fixers,
+    \ 'go': ['gofmt'],
     \ 'json': ['prettier'],
     \ 'python': ['black', 'isort'],
     \ 'terraform': ['terraform'],
