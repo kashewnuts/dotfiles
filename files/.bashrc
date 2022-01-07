@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 export EDITOR=vim
 case "$OSTYPE" in
   darwin*)  # BSD (contains Mac)
@@ -136,3 +136,7 @@ fi
 if [ -f /usr/local/bin/terraform ]; then
   complete -C /usr/local/bin/terraform terraform
 fi
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# END_KITTY_SHELL_INTEGRATION

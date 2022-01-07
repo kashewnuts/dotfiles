@@ -1,35 +1,48 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [ -f ~/.bashrc ]; then
      . ~/.bashrc
 fi
 
-case "$OSTYPE" in
-  darwin*)  # BSD (contains Mac)
+case "$(uname -a)" in
+  Darwin*arm64)  # M1 Mac
+  BREW_PREFIX="/opt/homebrew"
+  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.10/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/node@14/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/curl/bin:${LOCAL_PATH}"
+  LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
+  export PATH="${LOCAL_PATH}:${PATH}"
+  eval "$(${BREW_PREFIX}/bin/brew shellenv)"
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+  # export DOCKER_HOST=unix://$HOME/docker.sock
+  ;;
+
+  Darwin*x86_64)  # Intel Mac
+  BREW_PREFIX="/usr/local"
   LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin"
   LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin"
-  LOCAL_PATH="/usr/local/opt/python@3.7/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/usr/local/opt/python@3.8/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/usr/local/opt/python@3.9/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/usr/local/opt/imagemagick@6/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/usr/local/opt/node@14/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/usr/local/opt/mysql-client@5.7/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.7/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.8/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/imagemagick@6/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/node@14/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/mysql-client@5.7/bin:${LOCAL_PATH}"
   LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
-  LOCAL_PATH="/usr/local/sbin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/sbin:${LOCAL_PATH}"
   export PATH="${LOCAL_PATH}:${PATH}"
-  export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/opt/imagemagick@6/lib/
   export BASH_SILENCE_DEPRECATION_WARNING=1
+  export DYLD_FALLBACK_LIBRARY_PATH="${BREW_PREFIX}/opt/imagemagick@6/lib/"
+  # export DOCKER_HOST=unix://$HOME/docker.sock
+  ;;
 
-  # export PATH="$HOME/.nodenv/bin:$PATH"
-  # eval "$(nodenv init -)"
+  Linux.*microsoft)  # WSL
+  # Docker
+  export PATH="$PATH:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin"
+  export PATH="$PATH:$HOME/.windows_commands/"
   ;;
 
   linux*)   # Linux
   export PATH=$HOME/.local/bin:$PATH
-  if uname -a | grep -q 'Linux.*microsoft'; then  # WSL
-    # Docker
-    export PATH="$PATH:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin"
-    export PATH="$PATH:$HOME/.windows_commands/"
-  fi
 esac
 
 # Golang
