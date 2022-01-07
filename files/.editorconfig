@@ -24,6 +24,7 @@ multi_line_output=3
 include_trailing_comma=true
 
 [Makefile]
+indent_size = 8
 indent_style = tab
 
 [*.md]
