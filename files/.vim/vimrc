@@ -408,7 +408,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-snippets',
       \ 'coc-json',
       \ 'coc-tsserver',
-      \ 'coc-tslint-plugin',
       \ 'coc-eslint',
       \ 'coc-html',
       \ 'coc-css',
@@ -422,13 +421,14 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-docker',
       \ 'coc-sql',
       \ 'coc-diagnostic',
-      \ 'coc-r-lsp',
+      \ 'coc-highlight',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
       let l:coc_filetypes = [
         \ 'Dockerfile',
         \ 'bash',
+        \ 'conf',
         \ 'css',
         \ 'go',
         \ 'html',
@@ -495,6 +495,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       augroup end
 
       command! -nargs=0 Prettier :CocCommand prettier.formatFile
+      command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
     endfunction
     " Explorer
     nnoremap <silent> ge :CocCommand explorer<CR>

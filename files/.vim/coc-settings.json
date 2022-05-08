@@ -12,5 +12,7 @@
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "explorer.file.showHiddenFiles": true,
-  "r.lsp.path": "/usr/local/bin/R"
+  "r.lsp.path": "/usr/local/bin/R",
+  "volar.takeOverMode.enabled": false,
+  "tsserver.enable": true
 }
