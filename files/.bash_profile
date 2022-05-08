@@ -6,13 +6,13 @@ fi
 case "$(uname -a)" in
   Darwin*arm64)  # M1 Mac
   BREW_PREFIX="/opt/homebrew"
+  eval "$(${BREW_PREFIX}/bin/brew shellenv)"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.10/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/node@14/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/node@16/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/curl/bin:${LOCAL_PATH}"
   LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
-  export PATH="${LOCAL_PATH}:${PATH}"
-  eval "$(${BREW_PREFIX}/bin/brew shellenv)"
+  export PATH="${LOCAL_PATH}:$PATH"
   export BASH_SILENCE_DEPRECATION_WARNING=1
   # export DOCKER_HOST=unix://$HOME/docker.sock
   ;;

@@ -3,18 +3,9 @@ export EDITOR=vim
 case "$OSTYPE" in
   darwin*)  # BSD (contains Mac)
   export LANG=ja_JP.UTF-8
-  export GIT_EDITOR='/usr/local/bin/vim'
-  # if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
-  #   export PS1='\[\033[00m\]\$ '
-  #   vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim -c "set laststatus=0 set ruler set nonumber" "$@"; }
-  #   alias vi=vim
-  # else
-  #   vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
-  #   alias vi='vim -Nu ~/.vim/minimal.vim'
-  # fi
   vim() { env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"; }
+  export GIT_EDITOR='vim'
   alias vi='vim -Nu ~/.vim/minimal.vim'
-  alias vim='vim'
   # alias vi='/usr/local/bin/vim -Nu ~/.vim/minimal.vim -c "set laststatus=0" -c "set ruler" -c "set nonumber"'
   alias gvim='vim -g'
   export PYTHONUSERBASE=~/.local
@@ -99,7 +90,7 @@ if [ -f ~/.fzf.bash ]; then
   #   export FZF_DEFAULT_COMMAND='pt -g ""'
   # fi
   if type "rg" > /dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-require-git --glob "!.git/*"'
   fi
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
@@ -140,3 +131,6 @@ fi
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
+
+# pipx
+eval "$(register-python-argcomplete pipx)"
