@@ -3,7 +3,6 @@ from pathlib import Path
 
 HOME_DIR = Path.home()
 BASE_DIR = Path(__file__).resolve().parent
-DOT_FILES_DIR = BASE_DIR / "files"
 DOT_FILES = [
     ".ansible.cfg",
     ".black",
@@ -36,7 +35,7 @@ def put_symbolic_link(fname, parent_dir="", alias=""):
     msg = "Already exists file"
     dst = Path(parent_dir, alias if alias else fname)
     if not check_exists_path(dst):
-        (HOME_DIR / dst).symlink_to(DOT_FILES_DIR / parent_dir / fname)
+        (HOME_DIR / dst).symlink_to(BASE_DIR / parent_dir / fname)
         msg = "Put Symbolic Link"
     print(msg + ": %s" % (alias if alias else fname))
 
