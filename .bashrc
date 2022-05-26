@@ -133,6 +133,6 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integr
 # END_KITTY_SHELL_INTEGRATION
 
 # pipx
-if type "pipx" > /dev/null 2>&1; then
-  eval "$(register-python-argcomplete pipx)"
-fi
+#if type "pipx" > /dev/null 2>&1; then
+#  eval "$(register-python-argcomplete pipx)"
+#fi
