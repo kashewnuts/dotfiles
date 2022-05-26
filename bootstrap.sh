@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 python3 setup.py
-apt-get install -y vim tig
+sudo apt-get install -y vim tig
