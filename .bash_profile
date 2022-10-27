@@ -8,6 +8,7 @@ case "$(uname -a)" in
   BREW_PREFIX="/opt/homebrew"
   eval "$(${BREW_PREFIX}/bin/brew shellenv)"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.10/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.11/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/node@16/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/curl/bin:${LOCAL_PATH}"
