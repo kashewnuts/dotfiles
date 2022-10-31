@@ -5,7 +5,6 @@ autocmd!
 " --- Essential ---
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
-try | colorscheme morning | catch | colorscheme defaults | endtry
 let g:loaded_matchparen = 1
 " --- Indent&Tab ---
 set cindent        " Enables automatic C program indenting.
