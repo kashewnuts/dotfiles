@@ -387,7 +387,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-eslint',
       \ 'coc-html',
       \ 'coc-css',
-      \ 'coc-vetur',
       \ 'coc-jest',
       \ 'coc-explorer',
       \ 'coc-git',
@@ -398,6 +397,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-sql',
       \ 'coc-diagnostic',
       \ 'coc-highlight',
+      \ '@yaegassy/coc-volar',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
     function! s:configure_lsp() abort
