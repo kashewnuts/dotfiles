@@ -619,20 +619,6 @@ else
   syntax on                       " Enable syntax highlight
 endif "}}}
 
-" ColorScheme {{{
-" if !has('gui_running')
-"   colorscheme morning
-"   hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
-"   hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
-"   hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
-"   hi DiffText term=reverse cterm=bold ctermbg=LightBlue gui=bold guibg=LightBlue
-"   hi SpellBad cterm=underline ctermbg=None
-"   hi SpellCap cterm=underline,bold ctermbg=None
-"   hi SpellLocal cterm=underline ctermbg=None
-"   hi SpellRare cterm=underline ctermbg=None
-"   " colorscheme molokai
-" endif
-
 " Load local settings
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
