@@ -292,7 +292,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   endif
   Plug 'dense-analysis/ale'
   " FileType
-  " Plug 'neoclide/jsonc.vim',            {'for': 'json'}
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
   " Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
@@ -317,9 +316,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)'], 'for': ['rst', 'markdown']}
   Plug 'vim-jp/vimdoc-ja'
   " Plug 'mbbill/undotree',               {'on': 'UndotreeToggle'}
-  " if executable('ctags')
-  "   Plug 'jsfaint/gen_tags.vim'
-  " endif
   Plug 'kana/vim-operator-user'
   Plug 'tyru/operator-camelize.vim'
   map ,c <plug>(operator-camelize-toggle)
@@ -377,12 +373,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \   <bang>0)
   endif " }}}
   " }}}
-
-  " if s:installed_plugin('gen_tags.vim') " {{{
-  "   let g:gen_tags#ctags_auto_gen = 1
-  "   let g:loaded_gentags#gtags = 1
-  "   let g:gen_tags#ctags_opts = ['--exclude=*.tox', '--exclude=*.venv', '--exclude=*.mypy_cache']
-  " endif " }}}
 
   " if s:installed_plugin('vim-python-pep8-indent') " {{{
   "   let g:python_pep8_indent_searchpair_timeout = 0
