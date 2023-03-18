@@ -1,10 +1,8 @@
 {
-  "suggest.enablePreview": true,
   "suggest.timeout": 5000,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.displayByAle":true,
-  "diagnostic.signOffset": 100,
   "diagnostic.warningSign": "--",
   "git.addedSign.hlGroup": "GitGutterAdd",
   "git.changedSign.hlGroup": "GitGutterChange",
@@ -13,5 +11,5 @@
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "explorer.file.showHiddenFiles": true,
   "volar.takeOverMode.enabled": true,
-  "tsserver.enable": true
+  "snippets.ultisnips.pythonPrompt": false,
 }
