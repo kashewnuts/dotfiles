@@ -46,8 +46,8 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 # export GIT_PS1_SHOWDIRTYSTATE=true
 # export PS1='$ '
-# export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
-export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[00m\]\$\n'
+export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[31m\]$(__git_ps1)\[\033[00m\]\$\n'
+# export PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[1;34m\]\W\[\033[00m\]\$\n'
 # hub
 if [ -f ~/.hub.bash_completion.sh ]; then
   source ~/.hub.bash_completion.sh
