@@ -386,17 +386,18 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-tsserver',
       \ 'coc-eslint',
       \ 'coc-html',
+      \ 'coc-htmldjango',
       \ 'coc-css',
       \ 'coc-jest',
       \ 'coc-explorer',
       \ 'coc-git',
-      \ 'coc-jedi',
       \ 'coc-sh',
       \ 'coc-go',
       \ 'coc-docker',
       \ 'coc-sql',
       \ 'coc-diagnostic',
       \ 'coc-highlight',
+      \ 'coc-pyright',
       \ '@yaegassy/coc-volar',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
@@ -471,10 +472,15 @@ if !&diff && isdirectory(expand(s:plug_dir))
       augroup end
 
       command! -nargs=0 Prettier :CocCommand prettier.formatFile
+      " Add `:Format` command to format current buffer
+      command! -nargs=0 Format :call CocActionAsync('format')
+      " Add `:OR` command for organize imports of the current buffer
       command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
     endfunction
     " Explorer
     nnoremap <silent> ge :CocCommand explorer<CR>
+    " Use <c-space> to trigger completion.
+    inoremap <silent><expr> <c-space> coc#refresh()
   endif " }}}
 
   " if s:installed_plugin('ale') " {{{

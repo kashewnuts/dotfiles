@@ -2,14 +2,28 @@
   "suggest.timeout": 5000,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.displayByAle":true,
+  "diagnostic.displayByAle": true,
   "diagnostic.warningSign": "--",
   "git.addedSign.hlGroup": "GitGutterAdd",
   "git.changedSign.hlGroup": "GitGutterChange",
   "git.removedSign.hlGroup": "GitGutterDelete",
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "pyright.organizeimports.provider": "ruff",
+  "pyright.testing.provider": "pytest",
+  "python.linting.ruffEnabled": true,
+  "pyright.inlayHints.functionReturnTypes": false,
+  "pyright.inlayHints.variableTypes": false,
   "explorer.file.showHiddenFiles": true,
   "volar.takeOverMode.enabled": true,
   "snippets.ultisnips.pythonPrompt": false,
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }
