@@ -481,6 +481,8 @@ if !&diff && isdirectory(expand(s:plug_dir))
     nnoremap <silent> ge :CocCommand explorer<CR>
     " Use <c-space> to trigger completion.
     inoremap <silent><expr> <c-space> coc#refresh()
+
+    hi CocInlayHint guifg=#e6e6e6e guibg=#505050 ctermbg=LightGray
   endif " }}}
 
   " if s:installed_plugin('ale') " {{{

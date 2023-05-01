@@ -12,8 +12,6 @@
   "pyright.organizeimports.provider": "ruff",
   "pyright.testing.provider": "pytest",
   "python.linting.ruffEnabled": true,
-  "pyright.inlayHints.functionReturnTypes": false,
-  "pyright.inlayHints.variableTypes": false,
   "explorer.file.showHiddenFiles": true,
   "volar.takeOverMode.enabled": true,
   "snippets.ultisnips.pythonPrompt": false,
