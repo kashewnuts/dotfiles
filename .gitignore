@@ -22,7 +22,7 @@ Pipfile*
 docker-compose.override.yml
 settings_override.py
 build/
-static
+# static
 swagger/
 swagger-ui*.js
 .Trash-1000/
@@ -31,3 +31,5 @@ files/.vim/viminfo
 files/.vim/vimwinpos
 files/.vim/.netrwhist
 files/.vim/plugged/
+.vite/
+bun.lockb
