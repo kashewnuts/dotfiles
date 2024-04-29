@@ -20,8 +20,6 @@ case "$(uname -a)" in
 
   Darwin*x86_64)  # Intel Mac
   BREW_PREFIX="/usr/local"
-  LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin"
-  LOCAL_PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.7/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.8/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"

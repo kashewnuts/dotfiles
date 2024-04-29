@@ -13,6 +13,7 @@ let g:markdown_fenced_languages = [
 \  'json=javascript',
 \  'python',
 \  'sh',
+\  'toml',
 \  'vim',
 \  'xml',
 \]
