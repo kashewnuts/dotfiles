@@ -136,3 +136,4 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integr
 #if type "pipx" > /dev/null 2>&1; then
 #  eval "$(register-python-argcomplete pipx)"
 #fi
+source "$HOME/.rye/env"

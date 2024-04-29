@@ -31,8 +31,7 @@
 	uncommit = reset --mixed HEAD~
 	vimdiff = difftool --tool=vimdiff --no-prompt
 	vimp = !git ls-files | fzf | xargs -o vim
-	delete-merged-branches = !git branch --merged | grep -vE '\\*|master$|develop$' | xargs -I % git branch -d %
-	# delete-merged-branches = !git branch --merged | grep -vE '^\*|master$|develop$' | xargs -I % git branch -d %
+	delete-merged-branches = !git branch --merged | grep -vE '\\*|main$|master$|develop$' | xargs -I % git branch -d %
 # [format]
 # 	pretty = %C(red)%h %C(green)%ci %C(bold blue)%an %C(blue)%m %C(yellow)%d %Creset%s
 [fetch]
@@ -55,12 +54,13 @@
 	# trustExitCode = true
 	keepBackup = false
 [mergetool "vscode"]
-	# cmd = 'VSCodeのパス' \"$MERGED\"
-	# 例：Macの場合
-	cmd = code --wait $MERGED
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 	# trustExitCode = false
 # [rerere]
 # 	enabled = true
+[rebase]
+	autoStash = true
+	rebaseMerges = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

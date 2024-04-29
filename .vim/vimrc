@@ -220,6 +220,7 @@ if !exists(':DiffOrig')
 endif
 
 command! -range=% Isort :<line1>,<line2>! isort -
+command! -nargs=0 BlankLineTrim :v/./d
 " }}}
 
 " Remove end of line white space {{{
@@ -308,7 +309,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'tyru/caw.vim',                  {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
   " Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
-  Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
+  " Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
