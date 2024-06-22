@@ -11,12 +11,11 @@ case "$(uname -a)" in
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.11/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.12/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/node@20/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/opt/node@22/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/curl/bin:${LOCAL_PATH}"
   LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
   export PATH="${LOCAL_PATH}:$PATH"
   export BASH_SILENCE_DEPRECATION_WARNING=1
-  # export DOCKER_HOST=unix://$HOME/docker.sock
   ;;
 
   Darwin*x86_64)  # Intel Mac
@@ -32,7 +31,6 @@ case "$(uname -a)" in
   export PATH="${LOCAL_PATH}:${PATH}"
   export BASH_SILENCE_DEPRECATION_WARNING=1
   export DYLD_FALLBACK_LIBRARY_PATH="${BREW_PREFIX}/opt/imagemagick@6/lib/"
-  # export DOCKER_HOST=unix://$HOME/docker.sock
   ;;
 
   Linux.*microsoft)  # WSL
