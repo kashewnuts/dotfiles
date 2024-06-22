@@ -245,7 +245,7 @@ if executable('rg')
   let &grepprg='rg --vimgrep --hidden'
   set grepformat=%f:%l:%c:%m
 elseif executable('grep')
-  let s:excludefiles='*tags,*svg,*bundle*js,*png,*jpeg,*jpg,swagger-ui.js,*lock*'
+  let s:excludefiles='*tags,*svg,*bundle*js,*png,*jpeg,*jpg,swagger-ui.js,*lock*,*.db'
   let s:excludedirs='*git,*venv*,node_modules,static_files,tmp,dist*,data,build'
   \ . ',*mypy_cache,*tox*,*.pytest_cache,*.serverless,test-results,screenshots,locale'
   let &grepprg='grep -rnIH --exclude-dir={' . s:excludedirs . '} --exclude={' . s:excludefiles .'}'
