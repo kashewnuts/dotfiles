@@ -114,26 +114,6 @@ if [ -f ~/.bash_local ]; then
   . ~/.bash_local
 fi
 
-# # tabtab source for serverless package
-# # uninstall by removing these lines or running `tabtab uninstall serverless`
-# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# # tabtab source for sls package
-# # uninstall by removing these lines or running `tabtab uninstall sls`
-# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
-# # tabtab source for slss package
-# # uninstall by removing these lines or running `tabtab uninstall slss`
-# [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
-
 if [ -f /usr/local/bin/terraform ]; then
   complete -C /usr/local/bin/terraform terraform
 fi
-
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
-# END_KITTY_SHELL_INTEGRATION
-
-# pipx
-#if type "pipx" > /dev/null 2>&1; then
-#  eval "$(register-python-argcomplete pipx)"
-#fi
-source "$HOME/.rye/env"
