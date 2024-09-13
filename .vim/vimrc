@@ -242,7 +242,7 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 
 " Grep settings {{{
 if executable('rg')
-  let &grepprg='rg --vimgrep --hidden'
+  let &grepprg='rg --vimgrep --hidden -g "!{**/node_modules/*,**.git/*}"'
   set grepformat=%f:%l:%c:%m
 elseif executable('grep')
   let s:excludefiles='*tags,*svg,*bundle*js,*png,*jpeg,*jpg,swagger-ui.js,*lock*,*.db'
@@ -630,7 +630,16 @@ else
   syntax on                       " Enable syntax highlight
 endif "}}}
 
-" Load local settings
+" Highlights {{{
+if has('gui_running')
+  hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
+  hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
+  hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
+  hi DiffText term=reverse cterm=bold ctermbg=Blue gui=bold guibg=Blue
+  hi Search ctermfg=white ctermbg=blue guifg=#ffffff guibg=#0000ff
+endif " }}}
+
+" Load local settings {{{
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
