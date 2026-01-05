@@ -68,7 +68,7 @@ set helplang=ja,en              " Comma separated list of languages.
 set history=200                 " History
 set iskeyword& iskeyword+=-     " Include '-' to word
 set list listchars=tab:>-,trail:-  " Visualize character
-set nomodeline
+" set nomodeline
 set matchpairs& matchpairs+=<:>,「:」,【:】,『:』,《:》,〈:〉,（:） " Add support brackets
 set scrolloff=5                 " Keep above and below the cursor
 " set spell spelllang=en_us,cjk
@@ -219,8 +219,8 @@ if !exists(':DiffOrig')
     \ | wincmd p | diffthis
 endif
 
-command! -range=% Isort :<line1>,<line2>! isort -
 command! -nargs=0 BlankLineTrim :v/./d
+command! -nargs=+ Grep execute 'grep ' . shellescape(<q-args>)
 " }}}
 
 " Remove end of line white space {{{
@@ -242,7 +242,7 @@ autocmd MyAutoCmd InsertLeave * set iminsert=0 imsearch=-1 nopaste " IME off
 
 " Grep settings {{{
 if executable('rg')
-  let &grepprg='rg --vimgrep --hidden -g "!{**/node_modules/*,**.git/*}"'
+  let &grepprg='rg --vimgrep --hidden --fixed-strings -g "!{**/node_modules/*,**/.git/*,*.db}"'
   set grepformat=%f:%l:%c:%m
 elseif executable('grep')
   let s:excludefiles='*tags,*svg,*bundle*js,*png,*jpeg,*jpg,swagger-ui.js,*lock*,*.db'
@@ -308,7 +308,9 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
   let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
+  " if executable('sqlparse')
   " Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
+  " endif
   " Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
@@ -366,12 +368,14 @@ if !&diff && isdirectory(expand(s:plug_dir))
     function! s:find_git_root()
       return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
     endfunction
-    command! -bang -nargs=* Grep
-    \ call fzf#vim#grep(
-    \   'pt --column --ignore=.git --global-gitignore '.shellescape(<q-args>), 1,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
-    \   <bang>0)
+    " command! -bang -nargs=* Grep
+    "\ call fzf#vim#grep(
+    "\   'rg --column --line-number --no-heading --hidden --smart-case ' .
+    "\   '-g "!**/.git/*" -g "!**/node_modules/*" ' .
+    "\   shellescape(<q-args>), 1,
+    "\   <bang>0 ? fzf#vim#with_preview('up:60%')
+    "\           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
+    "\   <bang>0)
   endif " }}}
   " }}}
 
