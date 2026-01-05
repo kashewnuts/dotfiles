@@ -24,11 +24,12 @@ DOT_FILES = [
     ".vim",
 ]
 CONFIG_DIRS = [".cache/tmp", ".config"]
-CONFIG_FILES = ["flake8", "mypy"]
+CONFIG_ITEMS = ["ghostty"]  # .config/ 以下にリンクするファイル/ディレクトリ
 
 
 def check_exists_path(fname):
-    return (HOME_DIR / fname).exists()
+    path = HOME_DIR / fname
+    return path.exists() or path.is_symlink()
 
 
 def put_symbolic_link(fname, parent_dir="", alias=""):
@@ -82,8 +83,8 @@ def main():
     for fname in DOT_FILES:
         setup_dotfile(fname)
     # setup .config
-    for fname in CONFIG_FILES:
-        put_symbolic_link(fname, parent_dir=".config")
+    for item in CONFIG_ITEMS:
+        put_symbolic_link(item, parent_dir=".config")
 
 
 if __name__ == "__main__":

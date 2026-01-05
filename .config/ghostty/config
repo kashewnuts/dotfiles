@@ -1,0 +1,6 @@
+theme = iTerm2 Solarized Light
+font-size = 14
+font-family = PlemolJP
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = clipboard
