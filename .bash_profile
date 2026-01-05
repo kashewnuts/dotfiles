@@ -7,30 +7,11 @@ case "$(uname -a)" in
   Darwin*arm64)  # M1 Mac
   BREW_PREFIX="/opt/homebrew"
   eval "$(${BREW_PREFIX}/bin/brew shellenv)"
-  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.10/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.11/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.12/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/node@22/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/curl/bin:${LOCAL_PATH}"
   LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
   export PATH="${LOCAL_PATH}:$PATH"
   export BASH_SILENCE_DEPRECATION_WARNING=1
-  ;;
-
-  Darwin*x86_64)  # Intel Mac
-  BREW_PREFIX="/usr/local"
-  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.7/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.8/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/python@3.9/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/imagemagick@6/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/node@14/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/opt/mysql-client@5.7/bin:${LOCAL_PATH}"
-  LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
-  LOCAL_PATH="${BREW_PREFIX}/sbin:${LOCAL_PATH}"
-  export PATH="${LOCAL_PATH}:${PATH}"
-  export BASH_SILENCE_DEPRECATION_WARNING=1
-  export DYLD_FALLBACK_LIBRARY_PATH="${BREW_PREFIX}/opt/imagemagick@6/lib/"
   ;;
 
   Linux.*microsoft)  # WSL
@@ -53,8 +34,6 @@ export PATH=$BUN_INSTALL/bin:$PATH
 
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.bash 2>/dev/null || :
-
-complete -C /usr/local/bin/terraform terraform
 
 # https://qiita.com/key-amb/items/ce39b0c85b30888e1e3b#%E9%87%8D%E8%A4%87%E3%82%92%E9%81%BF%E3%81%91%E3%81%9F%E3%81%84%E6%96%B9%E3%81%B8%E3%82%AA%E3%82%B9%E3%82%B9%E3%83%A1%E3%81%AE%E3%82%84%E3%82%8A%E6%96%B9
 for _p in $(echo "$PATH" | tr ':' ' '); do
