@@ -14,6 +14,7 @@ let g:markdown_fenced_languages = [
 \  'python',
 \  'sh',
 \  'toml',
+\  'yaml',
 \  'vim',
 \  'xml',
 \]
