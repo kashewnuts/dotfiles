@@ -22,7 +22,7 @@ set matchpairs& matchpairs+=<:>,「:」,【:】,『:』,《:》,〈:〉,（:） 
 set noerrorbells novisualbell t_vb= guioptions=M    " Turn off menu & bell
 set noswapfile nobackup nowritebackup       " Doesn't make backup file
 set ttimeout timeoutlen=300 ttimeoutlen=50  " Speedup for ESC
-set wildmenu wildmode=list:full cmdheight=2 " Command-line
+set wildmenu wildmode=longest:full,full cmdheight=2 " Command-line
 set laststatus=2                    " Always display status bar
 let &statusline="%<%F%m%r%h%w%=[%{&ff}][%{&enc}][%{strlen(&ft)?&ft:'no\ ft'}]"
 \ . "%{printf('%'.(len(line('$'))+2).'d/%d',line('.'),line('$'))}%4v\ %P"

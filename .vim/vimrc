@@ -104,7 +104,7 @@ set smartcase      " No ignorecase if Uppercase char present
 
 " Command-line
 set cmdheight=2                 " Command-line height
-set wildmenu wildmode=list:full " Command-line completion
+set wildmenu wildmode=longest:full,full " Command-line completion
 
 " Statusline
 " %F:                             FileName(Relative Pathname)
