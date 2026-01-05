@@ -11,6 +11,8 @@
 	ui = true
 [push]
 	default = simple
+	autoSetupRemote = true
+	followTags = true
 [gui]
 	encoding = utf-8
 [i18n]
@@ -36,6 +38,8 @@
 # 	pretty = %C(red)%h %C(green)%ci %C(bold blue)%an %C(blue)%m %C(yellow)%d %Creset%s
 [fetch]
 	prune = true
+	pruneTags = true
+	all = true
 [pull]
 	ff = only
 [diff]
