@@ -56,6 +56,7 @@ fi
 # Python
 export PYTHONDONTWRITEBYTECODE=1    # disable pyc
 export PYTHONSTARTUP=~/.pythonstartup
+export PYTHONUTF8=1
 export WORKON_HOME=~/.virtualenvs
 export PIPENV_VENV_IN_PROJECT=true
 
@@ -117,3 +118,8 @@ fi
 if [ -f /usr/local/bin/terraform ]; then
   complete -C /usr/local/bin/terraform terraform
 fi
+if type "mise" > /dev/null 2>&1; then
+  eval "$(mise activate bash)"
+fi
+
+alias claude="/Users/kashew/.claude/local/claude"
