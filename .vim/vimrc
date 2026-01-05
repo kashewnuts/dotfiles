@@ -322,9 +322,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   Plug 'kana/vim-operator-user'
   Plug 'tyru/operator-camelize.vim'
   map ,c <plug>(operator-camelize-toggle)
-  " Twitter
-  Plug 'twitvim/twitvim',               {'on': ['SearchTwitter', 'ListTwitter',
-    \ 'PosttoTwitter', 'CPosttoTwitter', 'UserTwitter', 'MentionTwitter']}
 
   " List ends here. Plugins become visible to Vim after this call.
   call plug#end() " }}}
@@ -586,38 +583,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
   "   nmap <silent> <C-_> <Plug>(pydocstring)
   " endif " }}}
 
-  if s:installed_plugin('twitvim') " {{{
-    " Basic
-    let twitvim_browser_cmd = (
-    \ has('win32') ? 'C:/Program Files\Mozilla Firefox\firefox.exe' :
-    \ has('win32unix') ? '/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe' :
-    \ has('mac') ? 'open -a Firefox' :
-    \ '')
-    let twitvim_force_ssl = 1
-    let twitvim_count = 40
-    let twitvim_allow_multiline = 1
-    let twitvim_timestamp_format = '%c'
-    let twitvim_show_header = 0
-    autocmd MyAutoCmd FileType twitvim setlocal wrap
-
-    " Mapping
-    nnoremap <Leader>tp :<C-u>PosttoTwitter<CR>
-    nnoremap <Leader>tc :<C-u>CPosttoTwitter<CR>
-    nnoremap <Leader>tb :<C-u>BPosttoTwitter<CR>
-    nnoremap <Leader>tm :<C-u>MentionsTwitter<CR>
-    nnoremap <Leader>tf :<C-u>FriendsTwitter<CR><C-w>j
-    nnoremap <Leader>tu :<C-u>UserTwitter<CR><C-w>j
-    nnoremap <Leader>tr :<C-u>RepliesTwitter<CR><C-w>j
-    nnoremap <Leader>fn :<C-u>NextTwitter<CR>
-
-    " ListTwitter
-    command! LTCliming ListTwitter climbing
-    command! LTVim ListTwitter vim
-    command! LTPython ListTwitter python-su
-    command! LTJava ListTwitter Ewigkeit java-ja
-    command! LTPyfes ListTwitter takuan_osho pyfes-2010-10
-    command! LTBeProud ListTwitter BeProud
-  endif " }}}
 
   if has('python3') && !has('win32')
     augroup load_insert_snippet_plugins " {{{
