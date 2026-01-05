@@ -390,7 +390,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-html',
       \ 'coc-htmldjango',
       \ 'coc-css',
-      \ 'coc-jest',
       \ 'coc-explorer',
       \ 'coc-git',
       \ 'coc-sh',
@@ -399,7 +398,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       \ 'coc-sql',
       \ 'coc-diagnostic',
       \ 'coc-highlight',
-      \ 'coc-pyright',
+      \ 'coc-basedpyright',
       \ '@yaegassy/coc-volar',
       \ ]
     autocmd MyAutoCmd FileType * call s:configure_lsp()
