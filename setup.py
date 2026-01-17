@@ -25,6 +25,7 @@ DOT_FILES = [
 ]
 CONFIG_DIRS = [".cache/tmp", ".config"]
 CONFIG_ITEMS = ["ghostty"]  # .config/ 以下にリンクするファイル/ディレクトリ
+CLAUDE_ITEMS = ["settings.json", "commands", "skills", "agents"]  # .claude/ 以下にリンクするファイル/ディレクトリ
 
 
 def check_exists_path(fname):
@@ -75,6 +76,31 @@ def prepare_dir(fpath):
     print(msg)
 
 
+def setup_claude():
+    """Claude Code 設定のセットアップ"""
+    claude_dir = HOME_DIR / ".claude"
+
+    # .claude ディレクトリが存在しない場合は作成
+    if not claude_dir.exists():
+        claude_dir.mkdir(parents=True, exist_ok=True)
+        print("Created directory: .claude")
+
+    # 各アイテムのリンク
+    for item in CLAUDE_ITEMS:
+        src = BASE_DIR / ".claude" / item
+        dst = claude_dir / item
+
+        if not src.exists():
+            print(f"Source not found: .claude/{item}")
+            continue
+
+        if dst.exists() or dst.is_symlink():
+            print(f"Already exists: .claude/{item}")
+        else:
+            dst.symlink_to(src)
+            print(f"Put Symbolic Link: .claude/{item}")
+
+
 def main():
     # setup directory for config
     for fpath in CONFIG_DIRS:
@@ -85,6 +111,8 @@ def main():
     # setup .config
     for item in CONFIG_ITEMS:
         put_symbolic_link(item, parent_dir=".config")
+    # setup .claude
+    setup_claude()
 
 
 if __name__ == "__main__":

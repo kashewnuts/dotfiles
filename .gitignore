@@ -34,3 +34,8 @@ files/.vim/.netrwhist
 files/.vim/plugged/
 .vite/
 bun.lockb
+*.db
+# Claude Code
+.claude/settings.local.json
+!.claude/agents/.gitkeep
+.mcp.json
