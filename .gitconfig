@@ -43,23 +43,23 @@
 [pull]
 	ff = only
 [diff]
-	# tool = vimdiff
-	tool = vscode
+	tool = vimdiff
+	# tool = vscode
 [difftool]
 	prompt = false
 	trustExitCode = true	# Be able to abort all diffs with `:cq` or `:cquit`
-	cmd = code --wait --diff $LOCAL $REMOTE
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE	
 [merge]
-	# tool = vimdiff
-	tool = vscode
+	tool = vimdiff
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
-	# trustExitCode = true
+	trustExitCode = true
 	keepBackup = false
 [mergetool "vscode"]
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
-	# trustExitCode = false
+	trustExitCode = false
 # [rerere]
 # 	enabled = true
 [rebase]
@@ -76,6 +76,7 @@
 [github]
 	user = kashewnuts
 [ghq]
+	root = ~/dotfiles
 	root = ~/.cache/plugged
 	root = ~/projects  # One written later has primary
 [init]
