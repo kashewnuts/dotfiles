@@ -152,35 +152,12 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
 
-" Enable Bracketed Paste Mode in vim when using tmux
-if has('patch-8.0.0238')
-  if &term =~# 'screen'
-    let &t_BE = "\e[?2004h"
-    let &t_BD = "\e[?2004l"
-    exec "set t_PS=\e[200~"
-    exec "set t_PE=\e[201~"
-  endif
-else
-  if has('patch-8.0.0210')
-    set t_BE=
-  endif
-
-  if &term =~# 'xterm' || &term =~# 'screen'
-    function! XTermPasteBegin(ret) abort
-      set paste
-      set pastetoggle=<Esc>[201~
-      return a:ret
-    endfunction
-
-    let &t_ti .= "\e[?2004h"
-    let &t_te .= "\e[?2004l"
-
-    noremap <special> <expr> <Esc>[200~ XTermPasteBegin("0i")
-    inoremap <special> <expr> <Esc>[200~ XTermPasteBegin("")
-    vnoremap <special> <expr> <Esc>[200~ XTermPasteBegin("c")
-    cnoremap <special> <Esc>[200~ <nop>
-    cnoremap <special> <Esc>[201~ <nop>
-  endif
+" Enable Bracketed Paste Mode in vim when using tmux (Vim 9.0+ native support)
+if &term =~# 'screen'
+  let &t_BE = "\e[?2004h"
+  let &t_BD = "\e[?2004l"
+  exec "set t_PS=\e[200~"
+  exec "set t_PE=\e[201~"
 endif
 " Windows Subsystem for Linux で、ヤンクでクリップボードにコピー
 if system('uname -a | grep microsoft') != ''
@@ -239,11 +216,11 @@ elseif executable('grep')
   set wildignore& wildignore+=s:excludefiles
 endif " }}}
 
-" v:version >= 704 {{{
-if exists('&undofile') | set undofile undodir=$HOME/.cache/tmp | endif
-if exists('&breakindent') | set breakindent | endif
-if exists('&fixeol') | set nofixeol | endif
-if exists('&signcolumn') | set signcolumn=yes | endif
+" Settings available in Vim 9.0+ {{{
+set undofile undodir=$HOME/.cache/tmp
+set breakindent
+set nofixeol
+set signcolumn=yes
 " }}}
 
 " Plugins List {{{
@@ -348,18 +325,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
     command! -bang -nargs=? -complete=dir GFiles
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-    " https://blog.fakiyer.com/entry/2017/08/06/222936
-    function! s:find_git_root()
-      return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-    endfunction
-    " command! -bang -nargs=* Grep
-    "\ call fzf#vim#grep(
-    "\   'rg --column --line-number --no-heading --hidden --smart-case ' .
-    "\   '-g "!**/.git/*" -g "!**/node_modules/*" ' .
-    "\   shellescape(<q-args>), 1,
-    "\   <bang>0 ? fzf#vim#with_preview('up:60%')
-    "\           : fzf#vim#with_preview({ 'dir': s:find_git_root() }),
-    "\   <bang>0)
   endif " }}}
   " }}}
 
