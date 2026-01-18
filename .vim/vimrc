@@ -125,9 +125,6 @@ let g:mapleader = "\<Space>"
 " Escape automatically according to the situation question and backslash.
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-" To Enable filtering the command history
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
 " Adjust the window size to the window time-division. Shift + arrow key.
 nnoremap <silent> <S-Left>  :5wincmd <<CR>
 nnoremap <silent> <S-Right> :5wincmd ><CR>
