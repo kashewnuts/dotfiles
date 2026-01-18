@@ -9,6 +9,7 @@ case "$(uname -a)" in
   eval "$(${BREW_PREFIX}/bin/brew shellenv)"
   LOCAL_PATH="${BREW_PREFIX}/opt/node@22/bin:${LOCAL_PATH}"
   LOCAL_PATH="${BREW_PREFIX}/opt/curl/bin:${LOCAL_PATH}"
+  LOCAL_PATH="${BREW_PREFIX}/bin:${LOCAL_PATH}"
   LOCAL_PATH="$HOME/.local/bin:${LOCAL_PATH}"
   export PATH="${LOCAL_PATH}:$PATH"
   export BASH_SILENCE_DEPRECATION_WARNING=1
