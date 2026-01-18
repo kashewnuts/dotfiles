@@ -42,20 +42,7 @@ let g:loaded_matchparen        = 1
 " let g:loaded_netrwPlugin       = 1
 " let g:loaded_netrwSettings     = 1
 " let g:loaded_netrwFileHandlers = 1
-
-" Don't read $VIM/(g)vimrc
-if has('kaoriya')
-  function! s:disable_source(vimrc_local, message) abort
-    let l:vimrc_local = expand($VIM . '/' . a:vimrc_local)
-    if !filereadable(l:vimrc_local)
-      execute ':redir! >' . l:vimrc_local
-      silent! echon a:message
-      redir END
-    endif
-  endfunction
-  call s:disable_source('vimrc_local.vim',  'let g:vimrc_local_finish = 1')
-  call s:disable_source('gvimrc_local.vim', 'let g:gvimrc_local_finish = 1')
-endif " }}}
+" }}}
 " }}}
 
 " Misc {{{
@@ -599,13 +586,13 @@ else
 endif "}}}
 
 " Highlights {{{
-if has('gui_running')
-  hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
-  hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
-  hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
-  hi DiffText term=reverse cterm=bold ctermbg=Blue gui=bold guibg=Blue
-  hi Search ctermfg=white ctermbg=blue guifg=#ffffff guibg=#0000ff
-endif " }}}
+" if has('gui_running')
+hi DiffAdd term=bold ctermbg=LightRed guibg=LightRed
+hi DiffChange term=bold ctermbg=LightCyan guibg=LightCyan
+hi DiffDelete term=bold ctermfg=Red ctermbg=LightMagenta gui=bold guifg=Red guibg=LightMagenta
+hi DiffText term=reverse cterm=bold ctermbg=Blue gui=bold guibg=Blue
+hi Search ctermfg=white ctermbg=blue guifg=#ffffff guibg=#0000ff
+" endif " }}}
 
 " Load local settings {{{
 if filereadable(expand('~/.vimrc.local'))
