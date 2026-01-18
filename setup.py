@@ -58,12 +58,6 @@ def setup_dotfile(fname):
         else:
             put_symbolic_link(".gitconfig.unix", alias=".gitconfig.os")
 
-    elif fname == ".tmux.conf":
-        put_symbolic_link(fname)
-        put_symbolic_link(".tmux.conf.osx")
-        put_symbolic_link(".tmux.conf.linux")
-        put_symbolic_link(".tmux.conf.wsl")
-
     else:
         put_symbolic_link(fname)
 
