@@ -252,34 +252,23 @@ if !&diff && isdirectory(expand(s:plug_dir))
   if s:is_async && s:executable_nodejs
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
-  " Plug 'dense-analysis/ale'
   " FileType
   Plug 'thinca/vim-ft-rst_header',      {'for': 'rst'}
-  " Plug 'mechatroner/rainbow_csv'
   Plug 'rhysd/vim-gfm-syntax',          {'for': 'markdown'}
   Plug 'sheerun/vim-polyglot'
-  " Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
   let g:polyglot_disabled = ['markdown', 'python', 'java', 'csv']
   Plug 'Shougo/context_filetype.vim'    " For vue
-  " Plug 'heavenshell/vim-pydocstring',   {'on': '<Plug>(pydocstring)', 'do': 'make clean; make install'}
   Plug 'editorconfig/editorconfig-vim'
   let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
   " Formater
-  " Plug 'vim-jp/autofmt'
   Plug 'junegunn/vim-easy-align',       {'on': '<Plug>(EasyAlign)'}
   Plug 'tyru/caw.vim',                  {'on': ['<Plug>(caw:prefix)', '<Plug>(caw:hatpos:toggle)']}
-  let g:use_user_base = ((has('win32') || has('mac')) ? '' : '--user ')  " Ignore E121, E116
-  " if executable('sqlparse')
-  " Plug 'mattn/vim-sqlfmt', {'on': 'SQLFmt', 'do': 'pip install -U ' . g:use_user_base . 'sqlparse'}
-  " endif
-  " Plug 'vim-scripts/Unicode-RST-Tables',{'for': ['rst', 'md']}
   " Memo
   Plug 'glidenote/memolist.vim',        {'on': ['MemoGrep', 'MemoList', 'MemoNew']}
   " Reference & View
   Plug 'previm/previm',                 {'on': 'PrevimOpen', 'for': ['rst', 'markdown']}
   Plug 'tyru/open-browser.vim',         {'on': ['PrevimOpen', '<Plug>(openbrowser-smart-search)'], 'for': ['rst', 'markdown']}
   Plug 'vim-jp/vimdoc-ja'
-  " Plug 'mbbill/undotree',               {'on': 'UndotreeToggle'}
   Plug 'kana/vim-operator-user'
   Plug 'tyru/operator-camelize.vim'
   map ,c <plug>(operator-camelize-toggle)
@@ -324,10 +313,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
   endif " }}}
   " }}}
-
-  " if s:installed_plugin('vim-python-pep8-indent') " {{{
-  "   let g:python_pep8_indent_searchpair_timeout = 0
-  " endif " }}}
 
   if s:installed_plugin('coc.nvim') && s:is_async && s:executable_nodejs " {{{
     let g:coc_global_extensions = [
@@ -437,36 +422,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
     hi CocInlayHint guifg=#e6e6e6 guibg=#505050 ctermbg=LightRed
   endif " }}}
 
-  " if s:installed_plugin('ale') " {{{
-  "   let g:ale_completion_enabled = 0
-  "   let g:ale_disable_lsp = 1
-  "   let g:ale_lint_on_save = 1
-  "   let g:ale_lint_on_text_changed = 'never'
-  "   let g:ale_linters = {
-  "  \ 'bash': ['shellcheck'],
-  "  \ 'python': ['flake8', 'mypy'],
-  "  \ 'terraform': ['tflint'],
-  "  \}
-  "   let s:js_fixers = ['prettier', 'eslint']
-  "   let s:style_fixers = ['prettier', 'eslint', 'stylelint']
-  "   let g:ale_fixers = {
-  "  \ 'javascript': s:js_fixers,
-  "  \ 'javascript.jsx': s:js_fixers,
-  "  \ 'typescript': s:js_fixers,
-  "  \ 'typescriptreact': s:js_fixers,
-  "  \ 'vue': s:style_fixers,
-  "  \ 'scss': s:style_fixers,
-  "  \ 'css': s:style_fixers,
-  "  \ 'go': ['gofmt'],
-  "  \ 'json': ['prettier'],
-  "  \ 'python': ['black', 'isort'],
-  "  \ 'terraform': ['terraform'],
-  "  \ }
-  "   let g:ale_sh_shellcheck_exclusions = 'SC1090'
-  "   let g:ale_terraform_tflint_options = '-f default'
-  "   nmap <silent> <Leader>x <Plug>(ale_fix)
-  " endif " }}}
-
   if s:installed_plugin('memolist.vim') " {{{
     let s:memo_path = ((has('win32') || has('mac')) ? ' (個人用)' :'')
     let g:memolist_path = '~/Dropbox' . s:memo_path . '/memo'
@@ -477,11 +432,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
     nnoremap <silent> <Leader>mn :MemoNew<CR>
     nnoremap <silent> <Leader>mg :MemoGrep<CR>
   endif " }}}
-
-  " if s:installed_plugin('autofmt') " {{{
-  "   set formatexpr=autofmt#japanese#formatexpr()
-  "   let autofmt_allow_over_tw=1
-  " endif " }}}
 
   if s:installed_plugin('caw.vim') " {{{
     function! InitCaw() abort
@@ -522,15 +472,6 @@ if !&diff && isdirectory(expand(s:plug_dir))
     nmap gx <Plug>(openbrowser-smart-search)
     vmap gx <Plug>(openbrowser-smart-search)
   endif " }}}
-
-  " if s:installed_plugin('undotree') " {{{
-  "   nnoremap <F5> :UndotreeToggle<CR>
-  " endif " }}}
-
-  " if s:installed_plugin('vim-pydocstring') " {{{
-  "   nmap <silent> <C-_> <Plug>(pydocstring)
-  " endif " }}}
-
 
   if has('python3') && !has('win32')
     augroup load_insert_snippet_plugins " {{{
