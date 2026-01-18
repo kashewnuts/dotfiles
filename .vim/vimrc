@@ -392,7 +392,7 @@ if !&diff && isdirectory(expand(s:plug_dir))
       highlight default link GitGutterChangeDelete  NONE
       " Use K to show documentation in preview window
       nnoremap <silent> K :call <SID>show_documentation()<CR>
-      function! s:show_documentation()
+      function! s:show_documentation() abort
         if (index(['vim','help'], &filetype) >= 0)
           execute 'h '.expand('<cword>')
         else
