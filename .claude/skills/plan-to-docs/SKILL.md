@@ -1,3 +1,11 @@
+---
+name: plan-to-docs
+description: プランファイルの内容をプロジェクトのdocs/ディレクトリに整形して出力する
+argument-hint: [output filename]
+disable-model-invocation: true
+allowed-tools: Read, Write, Glob, Bash(ls:*)
+---
+
 # プランを docs に出力
 
 プランファイルの内容をプロジェクトの `docs/` ディレクトリに整形して出力する。

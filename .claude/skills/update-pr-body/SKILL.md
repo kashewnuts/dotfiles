@@ -1,3 +1,11 @@
+---
+name: update-pr-body
+description: GitHub PRのURLを指定して、変更内容に基づいたPR本文を生成・更新する
+argument-hint: <PR URL or PR number>
+disable-model-invocation: true
+allowed-tools: Bash(gh:*)
+---
+
 # PR 本文更新
 
 GitHub PR の URL を指定して、変更内容に基づいた PR 本文を生成・更新する。

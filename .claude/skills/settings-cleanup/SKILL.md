@@ -1,3 +1,11 @@
+---
+name: settings-cleanup
+description: Claude設定ファイルを分析し、不要なエントリを除去して整理する
+argument-hint: [--dry-run | --apply | --global]
+disable-model-invocation: true
+allowed-tools: Read, Write, Bash(ls:*, cp:*)
+---
+
 # Claude 設定ファイル整理
 
 プロジェクトの `.claude/` 設定ファイルを分析し、不要なエントリを除去して整理する。

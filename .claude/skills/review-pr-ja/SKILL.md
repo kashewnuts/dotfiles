@@ -1,3 +1,11 @@
+---
+name: review-pr-ja
+description: GitHub PRをレビューし日本語で構造化された要約を出力する。PRレビュー依頼時に使用。
+argument-hint: <PR URL or PR number>
+disable-model-invocation: true
+allowed-tools: Bash(gh:*)
+---
+
 # PR レビュー（日本語）
 
 GitHub Pull Request をレビューし、日本語で構造化された要約を出力する。
@@ -92,3 +100,14 @@ GitHub Pull Request をレビューし、日本語で構造化された要約を
 - コミットメッセージも参考にする
 - 大規模な PR の場合は、主要な変更に焦点を当てる
 - レビュー済みの場合は、既存のレビューコメントも考慮する
+
+## プロジェクト固有のレビュー
+
+変更内容に応じて、以下の追加レビューを実施すること。
+該当するskillがある場合は自動的に呼び出してチェックを行う。
+
+### connpass-webapp
+
+| 変更パターン | 追加レビュー | skill |
+|-------------|-------------|-------|
+| グループ関連のView/URL変更 (`group/`, `group_urls.py`, `GroupRedirectMixin`) | グループURL設定の妥当性確認 | `/review-group-urls` |

@@ -1,3 +1,11 @@
+---
+name: create-command
+description: カスタムスラッシュコマンドを作成する。コマンド名と目的を指定して新しいコマンドを生成。
+argument-hint: <command-name or description>
+disable-model-invocation: true
+allowed-tools: Bash(mkdir:*), Write, Read
+---
+
 # Create Custom Slash Command
 
 引数で受け取った内容を解釈し、新しいカスタムスラッシュコマンドを作成します。
@@ -17,7 +25,7 @@
    - 意味のある簡潔な名前にする
 
 3. 保存先の決定
-   - デフォルトは個人用: `~/.claude/commands/{command-name}.md`
+   - デフォルトは個人用: `~/.claude/skills/{command-name}/SKILL.md`
    - プロジェクト固有にする場合は明示的に指定
 
 4. コマンドの構造を設計する
@@ -25,7 +33,8 @@
    - 実行すべきステップ
    - エラーハンドリング
 
-5. マークダウンファイルの内容を生成
+5. SKILL.mdファイルの内容を生成
+   - YAMLフロントマターを作成（name, description, argument-hint, disable-model-invocation, allowed-tools）
    - タイトル（# で始まる）
    - 説明文
    - ## 手順 セクション
@@ -33,16 +42,16 @@
    - 必要に応じて$ARGUMENTSプレースホルダーを含める
 
 6. ディレクトリの確認と作成
-   - `ls ~/.claude/commands` でディレクトリの存在を確認
-   - 存在しない場合は `mkdir -p ~/.claude/commands` で作成
+   - `ls ~/.claude/skills` でディレクトリの存在を確認
+   - 存在しない場合は `mkdir -p ~/.claude/skills/{command-name}` で作成
 
-7. マークダウンファイルの作成
+7. SKILL.mdファイルの作成
    - Writeツールを使用してファイルを作成
-   - ファイルパス: `~/.claude/commands/{command-name}.md`
+   - ファイルパス: `~/.claude/skills/{command-name}/SKILL.md`
    - 生成した内容を書き込む
 
 8. 作成完了の確認
-   - `ls ~/.claude/commands/{command-name}.md` でファイルの存在を確認
+   - `ls ~/.claude/skills/{command-name}/SKILL.md` でファイルの存在を確認
    - ファイルの内容を表示して正しく作成されたか確認
    - コマンドが利用可能になったことを通知
 
@@ -53,11 +62,19 @@
 1. コマンド名を決定: `safe-commit`
 2. ディレクトリを確認・作成:
    ```bash
-   mkdir -p ~/.claude/commands
+   mkdir -p ~/.claude/skills/safe-commit
    ```
-3. ファイルを作成: `~/.claude/commands/safe-commit.md`
+3. ファイルを作成: `~/.claude/skills/safe-commit/SKILL.md`
 4. 以下の内容をWriteツールで書き込む:
 ```markdown
+---
+name: safe-commit
+description: Gitのステージング状態を確認してから安全にコミットを行う
+argument-hint: [commit message]
+disable-model-invocation: true
+allowed-tools: Bash(git:*)
+---
+
 # Safe Git Commit
 
 Gitのステージング状態を確認してから安全にコミットを行います。
@@ -72,13 +89,12 @@ Gitのステージング状態を確認してから安全にコミットを行�
 ```
 5. ファイルの作成を確認:
    ```bash
-   ls ~/.claude/commands/safe-commit.md
+   ls ~/.claude/skills/safe-commit/SKILL.md
    ```
 
 ## 注意事項
 
-- プロジェクト固有のコマンドは `.claude/commands/` に保存
-- 個人用のコマンドは `~/.claude/commands/` に保存
+- プロジェクト固有のコマンドは `.claude/skills/` に保存
+- 個人用のコマンドは `~/.claude/skills/` に保存
 - コマンド名にはスペースや特殊文字を使用しない
 - $ARGUMENTSプレースホルダーは追加の引数を受け取る場合に使用
-

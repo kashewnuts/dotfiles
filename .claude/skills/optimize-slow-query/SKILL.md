@@ -1,3 +1,10 @@
+---
+name: optimize-slow-query
+description: 遅いSQLクエリを特定し、パフォーマンス最適化案をドキュメント化する。SQLクエリ最適化が必要な場合に使用。
+argument-hint: <SQL query or query description>
+allowed-tools: Read, Grep, Glob, Write, Bash(docker:*)
+---
+
 # Optimize Slow Query
 
 遅いSQLクエリを特定し、パフォーマンス最適化案を日本語でドキュメント化します。
@@ -50,8 +57,8 @@ $ARGUMENTSにSQLクエリが含まれる場合、そのクエリを最適化対�
 ## 例
 
 ```sql
-SELECT * FROM large_table 
-WHERE status = 'active' 
+SELECT * FROM large_table
+WHERE status = 'active'
 ORDER BY created_at DESC
 ```
 

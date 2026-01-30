@@ -1,3 +1,10 @@
+---
+name: deep-performance-analysis
+description: 特定のビューやテンプレートのパフォーマンス問題を深く調査し、改善案をドキュメント化する。パフォーマンス最適化が必要な場合に使用。
+argument-hint: <view or template path>
+allowed-tools: Read, Grep, Glob, Write
+---
+
 # Deep Performance Analysis
 
 特定のビューやテンプレートのパフォーマンス問題を深く調査し、改善案をドキュメント化します。
