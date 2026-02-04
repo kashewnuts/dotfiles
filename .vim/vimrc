@@ -184,8 +184,6 @@ command! -nargs=0 BlankLineTrim :v/./d
 command! -nargs=+ Grep execute 'grep ' . shellescape(<q-args>)
 " Change to git project root directory
 command! -nargs=0 Root cd `git rev-parse --show-toplevel`
-" Markdown preview (alias for PrevimOpen)
-command! -nargs=0 Preview PrevimOpen
 " }}}
 
 " Remove end of line white space {{{
