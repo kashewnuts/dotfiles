@@ -1,19 +1,119 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "model": "opus",
-  "alwaysThinkingEnabled": true,
-  "language": "日本語",
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
   "permissions": {
-    "allow": [],
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git diff:*)",
+      "Bash(git grep:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git restore:*)",
+      "Bash(git stash:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(git reset:*)",
+      "Bash(git worktree:*)",
+      "Bash(git tag:*)",
+      "Bash(git rm:*)",
+      "Bash(git apply:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git show-ref:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(jq:*)",
+      "Bash(sort:*)",
+      "Bash(du:*)",
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(mv:*)",
+      "Bash(ruff check:*)",
+      "Bash(ruff format:*)",
+      "Bash(uv sync:*)",
+      "Bash(uv lock:*)",
+      "Bash(uv run:*)",
+      "Bash(uv tree:*)",
+      "Bash(pip show:*)",
+      "Bash(npm view:*)",
+      "Bash(npm info:*)",
+      "Bash(shellcheck:*)",
+      "Bash(hadolint:*)",
+      "Bash(actionlint:*)",
+      "Bash(ghalint:*)",
+      "Bash(pandoc:*)",
+      "Bash(msgfmt:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr edit:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh search:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(claude usage:*)",
+      "Bash(claude stats:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:claude.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:docs.github.com)",
+      "WebFetch(domain:pypi.org)",
+      "WebFetch(domain:peps.python.org)",
+      "WebFetch(domain:docs.astral.sh)",
+      "WebFetch(domain:www.djangoproject.com)",
+      "WebFetch(domain:docs.djangoproject.com)",
+      "WebFetch(domain:code.djangoproject.com)",
+      "WebFetch(domain:forum.djangoproject.com)",
+      "WebFetch(domain:django.readthedocs.io)",
+      "WebFetch(domain:docs.datadoghq.com)",
+      "WebFetch(domain:docs.aws.amazon.com)",
+      "WebFetch(domain:aws.amazon.com)",
+      "WebFetch(domain:repost.aws)",
+      "WebFetch(domain:docs.stripe.com)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:zenn.dev)",
+      "WebFetch(domain:dev.classmethod.jp)"
+    ],
     "deny": [
       "Bash(rm -rf:*)",
       "Bash(sudo:*)",
-      "Bash(git push:*)",
       "Read(.env)",
       "Write(.env)"
-    ]
+    ],
+    "ask": [
+      "Bash(git worktree add:*)",
+      "Bash(git checkout -b:*)",
+      "Bash(git switch -c:*)",
+      "EnterWorktree"
+    ],
+    "defaultMode": "auto"
   },
-  "enableAllProjectMcpServers": true,
+  "model": "claude-opus-4-6",
+  "enableAllProjectMcpServers": false,
   "hooks": {
     "Notification": [
       {
@@ -24,6 +124,136 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/prompt_reminder.py\" 2>/dev/null || true",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/.claude/hooks/reference_link_lint.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/git_push_guard.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/external_post_guard.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/pr_comment_lint.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/pr_body_precheck.py\"",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/esa_post_precheck.py\"",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/pr_draft_guard.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/commit_msg_precheck.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/roadwork_apply_guard.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/iac_pr_precheck.sh\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*__slack_send_message|mcp__.*__slack_schedule_message",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/external_post_guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/terraform_changed.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/workflow_changed.py\"",
+            "timeout": 90
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/pr_created_ticket_status.py\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "stripe@claude-plugins-official": true,
+    "pstack@cursor-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "cursor-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "cursor/plugins"
+      }
+    }
+  },
+  "language": "日本語",
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "theme": "light",
+  "editorMode": "vim",
+  "preferredNotifChannel": "iterm2",
+  "agentPushNotifEnabled": true
 }

@@ -12,7 +12,7 @@ GitHub PR の URL を指定して、変更内容に基づいた PR 本文を生�
 
 ## 入力
 
-`$ARGUMENTS` = PR URL (例: `https://github.com/owner/repo/pull/123`) または PR 番号
+`$ARGUMENTS` には PR URL (例: `https://github.com/owner/repo/pull/123`) か PR 番号を指定する
 
 ## 手順
 
@@ -23,7 +23,7 @@ GitHub PR の URL を指定して、変更内容に基づいた PR 本文を生�
 2. **変更内容の分析**
    - `gh pr diff $ARGUMENTS` で差分を取得
    - 変更されたファイルと内容を分析
-   - 変更の種類を分類（機能追加/バグ修正/リファクタリング/ドキュメント等）
+   - 変更の種類を機能追加、バグ修正、リファクタリング、ドキュメントなどに分類
 
 3. **コミット履歴の確認**
    - `gh pr view $ARGUMENTS --json commits` でコミット一覧を取得
@@ -85,6 +85,6 @@ GitHub PR の URL を指定して、変更内容に基づいた PR 本文を生�
 ## 注意事項
 
 - 既存の PR 本文に重要な情報がある場合は保持する
-- 日本語プロジェクトでは日本語で、英語プロジェクトでは英語で記述
+- 日本語プロジェクトでは日本語で、英語プロジェクトでは英語で記述する
 - 機密情報や内部リンクは含めない
-- Close/Fix/Resolve キーワードは関連 Issue がある場合のみ使用
+- Close、Fix、Resolve のキーワードは関連 Issue があるときだけ使う

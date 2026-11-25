@@ -31,9 +31,9 @@ allowed-tools: Read, Grep, Glob, Write, Bash(docker:*)
    - GROUP BYやORDER BYの非効率性
 
 5. 段階的な改善提案を作成
-   - Phase 1: インデックス追加（即効性高、リスク低）
-   - Phase 2: クエリ最適化（中期的改善）
-   - Phase 3: キャッシュ実装（長期的改善）
+   - Phase 1: インデックス追加。すぐ効き、リスクが低い
+   - Phase 2: クエリ最適化。中期的な改善
+   - Phase 3: キャッシュ実装。長期的な改善
 
 6. 具体的な実装例を提供
    - マイグレーションファイルのサンプルコード
@@ -43,7 +43,7 @@ allowed-tools: Read, Grep, Glob, Write, Bash(docker:*)
 7. 期待される効果を数値化
    - 現状の実行時間
    - 各Phaseごとの改善目標
-   - 最終的な目標（10ms以内）
+   - 最終的な目標。実行時間を10ms以内にする
 
 8. ドキュメントをdocsディレクトリに日本語で出力
    - ファイル名: `{機能名}_query_optimization.md`
